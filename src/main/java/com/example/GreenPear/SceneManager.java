@@ -45,6 +45,30 @@ public class SceneManager {
         stage.setScene(scene);
     }
 
+    public void showFormPersonalInformation() throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PersonalInformation.fxml"));
+            Parent root = loader.load();
+            BuyDietFormGraphicController controller = loader.getController();
+            controller.initializePersonalInformationForm();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showFormLifeStyle() throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/LifeStyle.fxml"));
+            Parent root = loader.load();
+            BuyDietFormGraphicController controller = loader.getController();
+            controller.initializeLifeStyleForm();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
