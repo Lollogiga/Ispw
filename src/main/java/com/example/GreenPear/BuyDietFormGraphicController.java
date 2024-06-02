@@ -60,7 +60,7 @@ public class BuyDietFormGraphicController {
     private TextField txtFood;
 
     @FXML
-    private void initialize(){
+    private void initialize(){ //Le inizializzazioni vengono gestite separatamente
     }
 
     //Funzioni di inizializzazione:
