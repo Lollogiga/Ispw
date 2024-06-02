@@ -69,6 +69,18 @@ public class SceneManager {
         }
     }
 
+    public void showFormFoodPreferences() throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/FoodPreferences.fxml"));
+            Parent root = loader.load();
+            BuyDietFormGraphicController controller = loader.getController();
+            controller.initializeFoodPreferenceForm();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

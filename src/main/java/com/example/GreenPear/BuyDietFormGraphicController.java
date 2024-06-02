@@ -4,8 +4,11 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.transform.NonInvertibleTransformException;
 
 import java.io.IOException;
 
@@ -25,18 +28,42 @@ public class BuyDietFormGraphicController {
     private ChoiceBox choiceBoxGender;
 
     //Lifestyle
-    ObservableList<String> SportList = FXCollections.
+    ObservableList<String> sportList = FXCollections.
             observableArrayList("Camminata", "Ciclismo", "Yoga", "Jogging", "Palestra", "Nuoto", "Pilates");
     ObservableList<String> trainingFrequency = FXCollections.observableArrayList();
+
+    ObservableList<String> healthGoalList = FXCollections.
+            observableArrayList("Lose weight", "Gain muscle", "Reduce fat mass", "Maintain weight", "Improve endurance");
 
     @FXML
     private ChoiceBox choiceBoxSport;
     @FXML
     private ChoiceBox choiceBoxTrainingFrequency;
+    @FXML
+    private ChoiceBox choiceBoxHealthGoal;
+
+    //Food preference:
+    @FXML
+    private ChoiceBox choiceBoxDiet;
+    ObservableList<String> dietTypeList = FXCollections.
+            observableArrayList("Omnivore", "Vegetarian", "Vegan", "Keto");
+    @FXML
+    private ListView<String> listViewAllergies;
+    private ObservableList<String> allergiesList;
+    @FXML
+    private ListView<String> listViewFood;
+    private ObservableList<String> foodList;
+
+    @FXML
+    private TextField txtAllergies;
+    @FXML
+    private TextField txtFood;
 
     @FXML
     private void initialize(){
     }
+
+    //Funzioni di inizializzazione:
     public void initializePersonalInformationForm(){
         choiceBoxGender.setItems(GenderList);
     }
@@ -50,8 +77,48 @@ public class BuyDietFormGraphicController {
                 trainingFrequency.add(i + " times a week");
             }
         }
-        choiceBoxSport.setItems(SportList);
+        choiceBoxSport.setItems(sportList);
         choiceBoxTrainingFrequency.setItems(trainingFrequency);
+        choiceBoxHealthGoal.setItems(healthGoalList);
+    }
+
+    public void initializeFoodPreferenceForm(){
+        allergiesList = FXCollections.observableArrayList();
+        foodList = FXCollections.observableArrayList();
+        choiceBoxDiet.setItems(dietTypeList);
+    }
+
+    @FXML
+    public void addAllergies(){
+        allergiesList.add(txtAllergies.getText());
+        listViewAllergies.setItems(allergiesList);
+        txtAllergies.setText("");
+
+    }
+
+    @FXML
+    public void addFood(){
+        foodList.add(txtFood.getText());
+        listViewFood.setItems(foodList);
+        txtFood.setText("");
+    }
+
+    @FXML
+    public void removeAllergies(){
+        try {
+            int selectedAllergies = listViewAllergies.getSelectionModel().getSelectedIndex();
+            if(selectedAllergies == -1){
+                throw new NoSelectionException("Nessun elemento selezionato per la rimozione");
+            }
+            listViewAllergies.getItems().remove(selectedAllergies);
+        }catch (NoSelectionException e){
+        }
+    }
+
+    @FXML
+    public void removeFood(){
+        int selectedFood = listViewFood.getSelectionModel().getSelectedIndex();
+        listViewFood.getItems().remove(selectedFood);
     }
 
     //Gestione cambio di scena:
@@ -65,5 +132,9 @@ public class BuyDietFormGraphicController {
 
     public void goToPersonalInformation() throws IOException{
         this.sceneManager.showFormPersonalInformation();
+    }
+
+    public void goToFoodPreferences() throws IOException{
+        this.sceneManager.showFormFoodPreferences();
     }
 }
