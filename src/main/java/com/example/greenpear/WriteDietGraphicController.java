@@ -26,18 +26,18 @@ public class WriteDietGraphicController {
     @FXML
     private TextArea noteTextArea;
 
-    private ArrayList<String> foodList = new ArrayList<>(
+    private ArrayList<String> listOfFood = new ArrayList<>(
             Arrays.asList("Ananas", "Banana", "Carote", "Datteri", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental",
                     "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental"
                     , "Emmental", "Emmental", "Emmental", "Emmental", "Emmental")
     );
 
-    private ObservableList<String> food_List;
+    private ObservableList<String> foodList;
 
     @FXML
     private void initialize() {
-        food_List = FXCollections.observableArrayList(foodList);
-        listOfAliment.setItems(food_List);
+        foodList = FXCollections.observableArrayList(listOfFood);
+        listOfAliment.setItems(foodList);
     }
 
 
@@ -45,12 +45,12 @@ public class WriteDietGraphicController {
         String searchText = searchFoodTextField.getText();
         if (searchText == null || searchText.isEmpty()) {
             // Se il campo di ricerca è vuoto, mostra tutti gli elementi
-            listOfAliment.setItems(food_List);
+            listOfAliment.setItems(foodList);
         } else {
             // Filtra la lista in base alla stringa di ricerca (case-insensitive)
             String lowerCaseFilter = searchText.toLowerCase();
             ObservableList<String> filteredList = FXCollections.observableArrayList(
-                    foodList.stream()
+                    listOfFood.stream()
                             .filter(item -> item.toLowerCase().startsWith(lowerCaseFilter))
                             .collect(Collectors.toList())
             );
