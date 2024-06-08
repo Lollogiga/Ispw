@@ -1,0 +1,21 @@
+.list-view {
+    -fx-background-color: #2B343B; /* Cambia il colore di sfondo della ListView */
+}
+
+.list-cell {
+    -fx-background-color: #2B343B; /* Rende lo sfondo delle celle trasparente */
+    -fx-border-color:  #6F8A4A; /* Rimuove i bordi delle celle */
+    -fx-text-fill: white;
+}
+
+.list-cell:odd {
+    -fx-background-color:  #2B343B; /* Colore di sfondo per le righe dispari */
+}
+
+.list-cell:even {
+    -fx-background-color: #2B343B; /* Colore di sfondo per le righe pari */
+}
+
+.list-cell:selected {
+    -fx-background-color: #6F8A4A; /* Colore di sfondo per la cella selezionata */
+}

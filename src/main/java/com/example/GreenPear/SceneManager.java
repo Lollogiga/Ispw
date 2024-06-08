@@ -81,6 +81,18 @@ public class SceneManager {
         }
     }
 
+    public void showWriteDiet(String meal) throws IOException{
+        meal = "WriteDiet" + meal + ".fxml";
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/WriteDiet/" + meal));
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 }
