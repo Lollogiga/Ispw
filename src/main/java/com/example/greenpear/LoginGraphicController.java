@@ -1,11 +1,11 @@
-package com.example.greenPear;
+package com.example.greenpear;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class RegisterGraphicController {
+public class LoginGraphicController {
     private final SceneManager sceneManager = SceneManager.getInstance(null);
 
     @FXML
@@ -13,11 +13,12 @@ public class RegisterGraphicController {
     @FXML
     private TextField txtFieldPass;
 
-    public void goToLogin() throws IOException {
-        this.sceneManager.showLogIn();
+    public void goToRegister() throws IOException {
+        this.sceneManager.showRegister();
     }
 
     public void goToRicettario() throws IOException{
         this.sceneManager.showRicettario();
     }
+
 }

@@ -1,4 +1,4 @@
-package com.example.greenPear;
+package com.example.greenpear;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

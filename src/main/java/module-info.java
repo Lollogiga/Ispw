@@ -5,6 +5,6 @@ module com.example.login {
         requires org.controlsfx.controls;
             requires com.dlsc.formsfx;
                         
-    opens com.example.greenPear to javafx.fxml;
-    exports com.example.greenPear;
+    opens com.example.greenpear to javafx.fxml;
+    exports com.example.greenpear;
 }

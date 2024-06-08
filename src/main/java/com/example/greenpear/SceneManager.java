@@ -1,4 +1,4 @@
-package com.example.greenPear;
+package com.example.greenpear;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -82,7 +82,7 @@ public class SceneManager {
     public void showWriteDiet(String meal) throws IOException{
         meal = "WriteDiet" + meal + ".fxml";
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenPear/fxml/WriteDiet/" + meal));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenpear/fxml/WriteDiet/" + meal));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
         } catch (IOException e) {
