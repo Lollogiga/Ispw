@@ -44,50 +44,34 @@ public class SceneManager {
     }
 
     public void showFormPersonalInformation() throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PersonalInformation.fxml"));
-            Parent root = loader.load();
-            BuyDietFormGraphicController controller = loader.getController();
-            controller.initializePersonalInformationForm();
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PersonalInformation.fxml"));
+        Parent root = loader.load();
+        BuyDietFormGraphicController controller = loader.getController();
+        controller.initializePersonalInformationForm();
+        stage.setScene(new Scene(root));
     }
 
     public void showFormLifeStyle() throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/LifeStyle.fxml"));
-            Parent root = loader.load();
-            BuyDietFormGraphicController controller = loader.getController();
-            controller.initializeLifeStyleForm();
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/LifeStyle.fxml"));
+        Parent root = loader.load();
+        BuyDietFormGraphicController controller = loader.getController();
+        controller.initializeLifeStyleForm();
+        stage.setScene(new Scene(root));
     }
 
     public void showFormFoodPreferences() throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/FoodPreferences.fxml"));
-            Parent root = loader.load();
-            BuyDietFormGraphicController controller = loader.getController();
-            controller.initializeFoodPreferenceForm();
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/FoodPreferences.fxml"));
+        Parent root = loader.load();
+        BuyDietFormGraphicController controller = loader.getController();
+        controller.initializeFoodPreferenceForm();
+        stage.setScene(new Scene(root));
     }
 
     public void showWriteDiet(String meal) throws IOException{
         meal = "WriteDiet" + meal + ".fxml";
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenpear/fxml/WriteDiet/" + meal));
-            Parent root = loader.load();
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenpear/fxml/WriteDiet/" + meal));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
     }
 
 
