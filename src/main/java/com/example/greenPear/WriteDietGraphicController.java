@@ -1,4 +1,4 @@
-package com.example.GreenPear;
+package com.example.greenPear;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

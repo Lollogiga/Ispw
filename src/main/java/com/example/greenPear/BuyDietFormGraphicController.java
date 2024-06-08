@@ -1,14 +1,11 @@
-package com.example.GreenPear;
+package com.example.greenPear;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.transform.NonInvertibleTransformException;
 
 import java.io.IOException;
 
@@ -16,7 +13,7 @@ public class BuyDietFormGraphicController {
     private final SceneManager sceneManager = SceneManager.getInstance(null);
 
     //Personal Information
-    ObservableList<String> GenderList = FXCollections.
+    ObservableList<String> genderList = FXCollections.
             observableArrayList("Male", "Female", "Decline to state");
     @FXML
     private TextField txtFieldAge;
@@ -65,7 +62,7 @@ public class BuyDietFormGraphicController {
 
     //Funzioni di inizializzazione:
     public void initializePersonalInformationForm(){
-        choiceBoxGender.setItems(GenderList);
+        choiceBoxGender.setItems(genderList);
     }
 
     public void initializeLifeStyleForm(){
