@@ -56,10 +56,6 @@ public class BuyDietFormGraphicController {
     @FXML
     private TextField txtFood;
 
-    //@FXML
-    //private void initialize(){ //Le inizializzazioni vengono gestite separatamente
-    //}
-
     //Funzioni di inizializzazione:
     public void initializePersonalInformationForm(){
         choiceBoxGender.setItems(genderList);

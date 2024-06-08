@@ -47,13 +47,10 @@ public class WriteDietGraphicController {
             // Se il campo di ricerca è vuoto, mostra tutti gli elementi
             listOfAliment.setItems(foodList);
         } else {
-            // Filtra la lista in base alla stringa di ricerca (case-insensitive)
             String lowerCaseFilter = searchText.toLowerCase();
-            ObservableList<String> filteredList = FXCollections.observableArrayList(
-                    listOfFood.stream()
-                            .filter(item -> item.toLowerCase().startsWith(lowerCaseFilter))
-                            .collect(Collectors.toList())
-            );
+            ObservableList<String> filteredList = foodList.stream()
+                    .filter(item -> item.toLowerCase().startsWith(lowerCaseFilter))
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
             listOfAliment.setItems(filteredList);
         }
     }
