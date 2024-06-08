@@ -104,7 +104,8 @@ public class BuyDietFormGraphicController {
                 throw new NoSelectionException("Nessun elemento selezionato per la rimozione");
             }
             listViewAllergies.getItems().remove(selectedAllergies);
-        }catch (NoSelectionException e){}
+        }catch (NoSelectionException e){
+        System.err.println("Errore: " + e.getMessage());}
     }
 
     @FXML
