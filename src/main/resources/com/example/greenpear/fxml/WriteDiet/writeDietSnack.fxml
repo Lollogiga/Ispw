@@ -36,7 +36,7 @@
             </VBox>
             <VBox layoutX="21.0" layoutY="219.0" prefHeight="153.0" prefWidth="143.0">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#goToBreakfast" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: transparent; -fx-border-width: 1; -fx-border-color: #6F8A4A;" text="Breakfast" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                  <Button mnemonicParsing="false" onMouseClicked="#goToBreakfast" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: #2B343B; -fx-border-width: 1; -fx-border-color: #6F8A4A;" text="Breakfast" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
@@ -52,7 +52,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#goToLaunch" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: transaperent; -fx-border-width: 1; -fx-border-color: #6F8A4A;" text="Launch" textFill="WHITE" textOverrun="CLIP">
+                  <Button mnemonicParsing="false" onMouseClicked="#goToLaunch" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: #2B343B; -fx-border-width: 1; -fx-border-color: #6F8A4A;" text="Launch" textFill="WHITE" textOverrun="CLIP">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
@@ -60,7 +60,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#goToDinner" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: transaperent; -fx-border-width: 1; -fx-border-color: #6F8A4A;" text="Dinner" textFill="WHITE" textOverrun="CLIP">
+                  <Button mnemonicParsing="false" onMouseClicked="#goToDinner" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: #2B343B; -fx-border-width: 1; -fx-border-color: #6F8A4A;" text="Dinner" textFill="WHITE" textOverrun="CLIP">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
@@ -74,7 +74,7 @@
                <children>
                   <HBox>
                      <children>
-                        <TextField style="-fx-background-color: transparent;" stylesheets="@../../css/texfieldtransparent.css" text="Add note:">
+                        <TextField style="-fx-background-color: #2B343B;" stylesheets="@../../css/texfieldtransparent.css" text="Add note:">
                            <font>
                               <Font name="System Italic" size="12.0" />
                            </font>
