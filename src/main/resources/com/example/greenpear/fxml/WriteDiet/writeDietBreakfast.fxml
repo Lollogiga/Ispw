@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.WriteDietGraphicController">
+<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.WriteDietGraphicController">
    <children>
       <Pane layoutX="72.0" layoutY="76.0" prefHeight="589.0" prefWidth="700.0" style="-fx-border-width: 10; -fx-border-color: #6F8A4A;">
          <children>
@@ -87,7 +87,12 @@
                   <Region prefHeight="44.0" prefWidth="341.0" />
                   <HBox>
                      <children>
-                        <Region prefHeight="34.0" prefWidth="236.0" />
+                        <Button mnemonicParsing="false" onMouseClicked="#deleteAliment" prefHeight="34.0" prefWidth="117.0" style="-fx-background-color: red; -fx-border-width: 1; -fx-border-color: #6F8A4A;" text="Delete" textFill="WHITE" textOverrun="CLIP">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Button>
+                        <Region prefHeight="34.0" prefWidth="172.0" />
                         <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="117.0" style="-fx-background-color: #6F8A4A; -fx-border-width: 1; -fx-border-color: #6F8A4A;" text="Submit" textFill="WHITE" textOverrun="CLIP">
                            <font>
                               <Font name="System Italic" size="15.0" />

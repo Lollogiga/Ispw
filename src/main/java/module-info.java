@@ -4,7 +4,12 @@ module com.example.login {
             
         requires org.controlsfx.controls;
             requires com.dlsc.formsfx;
-                        
+    requires java.sql;
+
     opens com.example.greenpear to javafx.fxml;
     exports com.example.greenpear;
+    exports com.example.greenpear.controllergrafico;
+    opens com.example.greenpear.controllergrafico to javafx.fxml;
+    exports com.example.greenpear.exception;
+    opens com.example.greenpear.exception to javafx.fxml;
 }

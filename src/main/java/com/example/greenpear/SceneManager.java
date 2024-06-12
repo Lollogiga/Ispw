@@ -1,4 +1,5 @@
 package com.example.greenpear;
+import com.example.greenpear.controllergrafico.BuyDietFormGraphicController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

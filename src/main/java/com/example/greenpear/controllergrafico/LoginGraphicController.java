@@ -1,5 +1,6 @@
-package com.example.greenpear;
+package com.example.greenpear.controllergrafico;
 
+import com.example.greenpear.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 

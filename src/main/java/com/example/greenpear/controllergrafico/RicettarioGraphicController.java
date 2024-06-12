@@ -1,4 +1,4 @@
-package com.example.greenpear;
+package com.example.greenpear.controllergrafico;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;

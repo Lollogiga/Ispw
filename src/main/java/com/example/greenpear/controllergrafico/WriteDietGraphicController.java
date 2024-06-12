@@ -1,28 +1,34 @@
-package com.example.greenpear;
+package com.example.greenpear.controllergrafico;
 
+import com.example.greenpear.SceneManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class WriteDietGraphicController {
 
     private final SceneManager sceneManager = SceneManager.getInstance(null);
 
-    //Commom elements:
+    //Common elements:
     @FXML
     private TextField searchFoodTextField;
     @FXML
-    private ListView listOfAliment;
+    private ListView<String> listOfAliment;
     @FXML
-    private ListView selectedAliment;
+    private ListView<String> selectedAliment;
     @FXML
     private TextArea noteTextArea;
 
@@ -33,14 +39,28 @@ public class WriteDietGraphicController {
     );
 
     private ObservableList<String> foodList;
+    private ObservableList<String> selectedFoodList;
+
 
     @FXML
     private void initialize() {
         foodList = FXCollections.observableArrayList(listOfFood);
+        selectedFoodList = FXCollections.observableArrayList();
+
         listOfAliment.setItems(foodList);
+        selectedAliment.setItems(selectedFoodList);
+
+        listOfAliment.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                String selectedItem = listOfAliment.getSelectionModel().getSelectedItem();
+                if (selectedItem != null) {
+                    selectedFoodList.add(selectedItem);
+                }
+            }
+        });
     }
 
-
+    //Mettere nel controllo applicativo
     public void searchList(){
         String searchText = searchFoodTextField.getText();
         if (searchText == null || searchText.isEmpty()) {
@@ -54,8 +74,14 @@ public class WriteDietGraphicController {
             listOfAliment.setItems(filteredList);
         }
     }
+
+    public void deleteAliment(){
+        int selectedFood = selectedAliment.getSelectionModel().getSelectedIndex();
+        selectedAliment.getItems().remove(selectedFood);
+    }
     public void goToLaunch() throws IOException {
         this.sceneManager.showWriteDiet("Launch");
+
     }
 
     public void goToBreakfast() throws IOException {
@@ -69,7 +95,5 @@ public class WriteDietGraphicController {
     public void goToSnack() throws IOException {
         this.sceneManager.showWriteDiet("Snack");
     }
-
-
 
 }

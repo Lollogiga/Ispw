@@ -1,5 +1,7 @@
-package com.example.greenpear;
+package com.example.greenpear.controllergrafico;
 
+import com.example.greenpear.exception.NoSelectionException;
+import com.example.greenpear.SceneManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
