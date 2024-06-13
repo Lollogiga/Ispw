@@ -1,6 +1,5 @@
 package com.example.greenpear.entities;
 
-import java.util.Currency;
 
 //Decidere se gestire il logout
 //Decidere se aggiungere i metodi Get per gli attributi di userProfile
