@@ -55,6 +55,7 @@ public class RegisterGraphicController {
 
             //Invio le bean al contoller applicativo che gestirà la registrazione:
             registrationController.registerNewUser(registerBean);
+            errorLabel.setText("Account created\n");
 
 
         } catch (CredentialException | SQLException e) {
@@ -63,7 +64,7 @@ public class RegisterGraphicController {
             errorLabel.setText(e.getMessage());
         }
 
-        //errorLabel.setText("Account created\n");
+
     }
 
 
