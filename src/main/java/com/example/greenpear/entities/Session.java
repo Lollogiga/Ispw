@@ -10,6 +10,9 @@ public class Session {
     private static Session session = null;
     private UserProfile userProfile = null;
 
+    private Session() {
+    }
+
     //Otteniamo la sessione corrente:
     public static Session getInstance(){
         if(Session.session == null){
@@ -20,7 +23,7 @@ public class Session {
 
     //Scriviamo l'utente in sessione:
     public void setUserProfile(UserProfile user){
-            if(this.session == null){
+            if(session == null){
                 this.userProfile = user;
             }
     }
