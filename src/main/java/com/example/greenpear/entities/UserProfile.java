@@ -1,16 +1,15 @@
 package com.example.greenpear.entities;
 
-import com.example.greenpear.controllerapplicativo.RegistrationController;
 import com.example.greenpear.utils.Role;
 
-//Poi implementare stile visto con abstract:
-public class Registration {
+//TODO Valutare se eliminare passowrd e alla Dao passare password
+public class UserProfile {
     private String username;
     private String email;
     private String password;
     private Role role;
 
-    public Registration(String username, String email, String password, Role role){
+    public UserProfile(String username, String email,String password, Role role){
         this.setUsername(username);
         this.setEmail(email);
         this.setPassword(password);

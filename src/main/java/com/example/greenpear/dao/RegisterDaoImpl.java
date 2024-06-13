@@ -1,6 +1,6 @@
 package com.example.greenpear.dao;
 
-import com.example.greenpear.entities.Registration;
+import com.example.greenpear.entities.UserProfile;
 import com.example.greenpear.utils.query.*;
 
 import javax.security.auth.login.CredentialException;
@@ -22,7 +22,7 @@ public class RegisterDaoImpl implements RegisterDao{
         connection = SingletonConnection.getInstance();
     }
     @Override
-    public void registerNewUser(Registration newUser) throws SQLException, CredentialException {
+    public void registerNewUser(UserProfile newUser) throws SQLException, CredentialException {
         //Prima di registrare un nuovo utente devo verificare se l'email esiste già
         if(emailExists(newUser.getEmail()) == false){
             //Se non esiste, lo registro:
