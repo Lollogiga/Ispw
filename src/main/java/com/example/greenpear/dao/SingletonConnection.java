@@ -35,12 +35,12 @@ public class SingletonConnection {
         }
     }
 
-    public static Connection getInstance(){
+    public static Connection getInstance() throws SQLException {
         if(connection == null){
             try{
                 new SingletonConnection();
             }catch (DatabaseConnectionException e){
-                throw new RuntimeException(e);
+                throw new SQLException("Impossibile connettersi al DB");
             }
         }
         return connection;
