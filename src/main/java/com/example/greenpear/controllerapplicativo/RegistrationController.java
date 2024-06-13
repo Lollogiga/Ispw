@@ -35,15 +35,4 @@ public class RegistrationController {
             throw new CredentialException(e.getMessage());
         }
     }
-
-    /*private void registration(Registration newUser) throws  SQLException, CredentialException{
-        //Devo usare una dao per ottenere la connessione e registrare l'utente nel sistema:
-        RegisterDaoImpl registerDao = new RegisterDaoImpl();
-
-        if(!registerDao.registerNewUser(newUser)){
-            //La registrazione ha avuto esisto negativo:
-            throw new CredentialException("Email alredy Exists");
-        }
-        //Altrimenti è andata a buon fine
-    }*/
 }

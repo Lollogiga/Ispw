@@ -17,14 +17,14 @@ public class RegisterDaoImpl implements RegisterDao{
     //Valore di ritorno query
     private ResultSet resultSet;
 
-    public RegisterDaoImpl() throws SQLException{
+    public RegisterDaoImpl() throws SQLException {
         //Apro una nuova connessione o prendo quella già esistente
         connection = SingletonConnection.getInstance();
     }
     @Override
     public void registerNewUser(UserProfile newUser) throws SQLException, CredentialException {
         //Prima di registrare un nuovo utente devo verificare se l'email esiste già
-        if(emailExists(newUser.getEmail()) == false){
+        if(!emailExists(newUser.getEmail())){
             //Se non esiste, lo registro:
             preparedStatement = connection.prepareStatement(RegistrationQuery.addUser());
             preparedStatement.setString(1, newUser.getUsername());
@@ -40,7 +40,7 @@ public class RegisterDaoImpl implements RegisterDao{
     }
 
     @Override
-    public boolean emailExists(String email) throws SQLException, CredentialException {
+    public boolean emailExists(String email) throws SQLException {
         preparedStatement = connection.prepareStatement(RegistrationQuery.verifyEmailExists());
         preparedStatement.setString(1,email);
         resultSet = preparedStatement.executeQuery();
