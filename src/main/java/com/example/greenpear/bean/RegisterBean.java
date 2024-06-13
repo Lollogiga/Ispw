@@ -72,13 +72,9 @@ public class RegisterBean {
         this.role = role;
     }
 
-    private boolean checkEmail(String email) throws CredentialException{
+    private boolean checkEmail(String email){
         String emailRegex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
-        if (!Pattern.compile(emailRegex).matcher(email).matches()){
-            return false;
-        }else{
-            return true;
-        }
+        return Pattern.compile(emailRegex).matcher(email).matches();
     }
 
 
