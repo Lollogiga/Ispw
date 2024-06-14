@@ -25,7 +25,7 @@ public class RegisterBean {
 
     //Setter Username:
     public void setUsername(String username) throws CredentialException {
-        if (username != null) {
+        if (!username.trim().isEmpty()) {
             this.username = username;
         } else {
             throw new CredentialException("Insert username");

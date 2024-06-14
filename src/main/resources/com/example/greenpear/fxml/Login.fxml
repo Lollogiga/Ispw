@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="-Infinity" onMouseClicked="#goToRegister" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.LoginGraphicController">
+<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.LoginGraphicController">
    <children>
       <TilePane alignment="CENTER" layoutX="247.0" layoutY="171.0" prefHeight="357.0" prefWidth="353.0" style="-fx-border-color: #6F8A4A; -fx-border-width: 10;" styleClass="-fx-">
          <children>
@@ -63,7 +63,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Label text="Email" textFill="WHITE">
+                  <Label text="Username" textFill="WHITE">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
