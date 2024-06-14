@@ -24,7 +24,12 @@ public class RegisterDaoImpl implements RegisterDao{
     @Override
     public void registerNewUser(UserProfile newUser) throws SQLException, CredentialException {
         //Prima di registrare un nuovo utente devo verificare se l'email esiste già
-        if(!emailExists(newUser.getEmail())){
+        if(emailExists(newUser.getEmail())) {
+            throw new CredentialException("Email alredy exists");
+        }else if(usernameExist(newUser.getUsername())) {
+            throw new CredentialException("Username alredy exists");
+        }else{
+
             //Se non esiste, lo registro:
             preparedStatement = connection.prepareStatement(RegistrationQuery.addUser());
             preparedStatement.setString(1, newUser.getUsername());
@@ -33,10 +38,14 @@ public class RegisterDaoImpl implements RegisterDao{
             preparedStatement.setInt(4, newUser.getRole().getId());
             preparedStatement.executeUpdate();
         }
-        else{
-            //L'utente esiste, genero eccezione:
-            throw new CredentialException("Email alredy exists");
-        }
+    }
+
+    private boolean usernameExist(String username) throws SQLException{
+        preparedStatement = connection.prepareStatement(RegistrationQuery.verifyUsernameExists());
+        preparedStatement.setString(1, username);
+        resultSet = preparedStatement.executeQuery();
+        //IsBeforeFirst ritorna true se l'email esiste già:
+        return resultSet.isBeforeFirst();
     }
 
     @Override
