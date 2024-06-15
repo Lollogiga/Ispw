@@ -1,6 +1,5 @@
 package com.example.greenpear.dao;
 
-import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.entities.UserProfile;
 import com.example.greenpear.utils.Role;
 import com.example.greenpear.utils.query.LoginQuery;

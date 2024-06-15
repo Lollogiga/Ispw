@@ -13,8 +13,6 @@ import java.io.IOException;
 
 public class BuyDietFormGraphicController extends GraphicControllerGeneric {
 
-    //private final SceneManager sceneManager = SceneManager.getInstance(null);
-
     //Personal Information
     ObservableList<String> genderList = FXCollections.
             observableArrayList("Male", "Female", "Decline to state");
