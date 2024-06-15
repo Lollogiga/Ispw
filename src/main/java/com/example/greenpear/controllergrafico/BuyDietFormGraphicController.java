@@ -11,8 +11,9 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class BuyDietFormGraphicController {
-    private final SceneManager sceneManager = SceneManager.getInstance(null);
+public class BuyDietFormGraphicController extends GraphicControllerGeneric {
+
+    //private final SceneManager sceneManager = SceneManager.getInstance(null);
 
     //Personal Information
     ObservableList<String> genderList = FXCollections.
@@ -117,9 +118,6 @@ public class BuyDietFormGraphicController {
     }
 
     //Gestione cambio di scena:
-    public void goToRicettario() throws IOException {
-        this.sceneManager.showRicettario();
-    }
 
     public void goToLifeStyle() throws IOException {
         this.sceneManager.showFormLifeStyle();

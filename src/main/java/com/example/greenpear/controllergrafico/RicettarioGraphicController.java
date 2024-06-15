@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
-public class RicettarioGraphicController {
+public class RicettarioGraphicController extends GraphicControllerGeneric{
     @FXML
     private Circle colazioneImage;
     @FXML

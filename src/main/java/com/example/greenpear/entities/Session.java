@@ -6,7 +6,7 @@ package com.example.greenpear.entities;
 
 //Utilizziamo il pattern Singleton. L'applicazione deve essere monoutente:
 public class Session {
-    private static Session session = null;
+    private static Session instance = null;
     private UserProfile userProfile = null;
 
     private Session() {
@@ -14,15 +14,15 @@ public class Session {
 
     //Otteniamo la sessione corrente:
     public static Session getInstance(){
-        if(Session.session == null){
-            Session.session = new Session();
+        if(instance == null){
+            instance = new Session();
         }
-        return session;
+        return instance;
     }
 
     //Scriviamo l'utente in sessione:
     public void setUserProfile(UserProfile user){
-            if(session == null){
+            if(userProfile == null){
                 this.userProfile = user;
             }
     }

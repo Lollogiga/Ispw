@@ -2,12 +2,13 @@ package com.example.greenpear.controllergrafico;
 
 import com.example.greenpear.SceneManager;
 import com.example.greenpear.bean.LoginBean;
-import com.example.greenpear.bean.RegisterBean;
 import com.example.greenpear.controllerapplicativo.LoginController;
-import com.example.greenpear.controllerapplicativo.RegistrationController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
 
 import javax.security.auth.login.CredentialException;
 import java.io.IOException;
@@ -34,18 +35,28 @@ public class LoginGraphicController {
             LoginController loginController = new LoginController();
             loginController.loginUser(loginBean);
             //Se tutto è andatoa  buon fine:
+
             errorLabel.setText("logged as: " + loginBean.getRole());
 
         } catch (CredentialException | SQLException e) {
+            errorLabel.setStyle("-fx-border-color: red;" + // Impostiamo il colore del bordo a rosso
+                    "-fx-border-width: 2px;");
             errorLabel.setText(e.getMessage());
         }
+
+        // Mostra l'errore solo per 2 secondi
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(2),
+                ae-> {
+                    errorLabel.setStyle("");
+                    errorLabel.setText("");
+                }
+
+        ));
+        timeline.play();
     }
     public void goToRegister() throws IOException {
         this.sceneManager.showRegister();
-    }
-
-    public void goToRicettario() throws IOException{
-        this.sceneManager.showRicettario();
     }
 
 }

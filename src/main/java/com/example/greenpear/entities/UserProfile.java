@@ -2,7 +2,6 @@ package com.example.greenpear.entities;
 
 import com.example.greenpear.utils.Role;
 
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 
 //TODO Valutare se eliminare passowrd e alla Dao passare password
 public class UserProfile {

@@ -38,7 +38,7 @@ public class LoginDaoImpl implements LoginDao{
             user.setEmail(email);
             user.setRole(Role.valueOf(role));
         }else{
-            throw new CredentialException("Account dosen't exists");
+            throw new CredentialException("The username or password is wrong");
         }
         return user;
     }

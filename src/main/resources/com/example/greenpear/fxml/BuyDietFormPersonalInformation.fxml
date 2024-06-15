@@ -119,7 +119,7 @@
                   <Font name="System Italic" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#goToRicettario" style="-fx-background-color: #6F8A4A;" text="Ricette" textFill="WHITE">
+            <Button mnemonicParsing="false" onMouseClicked="#goToRecipes" style="-fx-background-color: #6F8A4A;" text="Recipes" textFill="WHITE">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>

@@ -33,7 +33,7 @@ public class SceneManager {
         stage.setScene(scene);
     }
 
-    public void showRicettario() throws IOException{
+    public void showRecipes() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/Ricettario.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
