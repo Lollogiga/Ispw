@@ -22,14 +22,14 @@ public class BuyDietController {
 
     //Metodi Restore e Store
     public void restorePersonalInformation(PersonalInformationBean personalInformationBean) throws InformationErrorException {
-        if(!initializePersonalInformation){ //Potremo inserire un attributo detto initialize e verificare se è true o false:
-            //Se anche uno dei 4 campi è vuoto, vuol dire che non vi è nulla di cui fare il restore
-        }else {
+        if(initializePersonalInformation){
+            //Faccio il restore, in quanto ho giò inizializzato i dati:
             personalInformationBean.setAge(age);
             personalInformationBean.setGender(gender);
             personalInformationBean.setWeight(weight);
             personalInformationBean.setHeight(height);
         }
+        //Altrimenti non faccio il restore
     }
 
     public void storePersonalInformation(PersonalInformationBean personalInformation){
@@ -41,15 +41,12 @@ public class BuyDietController {
     }
 
     public void restoreLifeStyle(LifeStyleBean lifeStyleBean) {
-        if(!initializeLifeStyle){
-
-        }else {
+        if(initializeLifeStyle){
             lifeStyleBean.setSport(sport);
             lifeStyleBean.setFrequency(frequency);
             lifeStyleBean.setHealthGoal(healthGoal);
             lifeStyleBean.setDrunker(drunker);
             lifeStyleBean.setSmoker(smoker);
-
         }
     }
 
