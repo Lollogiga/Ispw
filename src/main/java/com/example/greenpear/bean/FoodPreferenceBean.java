@@ -34,7 +34,9 @@ public class FoodPreferenceBean {
     }
 
     public void setFoodPreference(ObservableList<String> foodPreference) {
-        this.foodPreference = foodPreference;
+        if(foodPreference != null) {
+            this.foodPreference = foodPreference;
+        }
     }
 
     public ObservableList<String> getAllergies() {
@@ -42,6 +44,8 @@ public class FoodPreferenceBean {
     }
 
     public void setAllergies(ObservableList<String> allergies) {
-        this.allergies = allergies;
+        if(allergies != null) {
+            this.allergies = allergies;
+        }
     }
 }

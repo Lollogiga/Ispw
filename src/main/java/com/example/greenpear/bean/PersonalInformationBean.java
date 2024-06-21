@@ -23,7 +23,7 @@ public class PersonalInformationBean {
     }
 
     public void setAge(String age) throws InformationErrorException {
-        if(!age.trim().isEmpty()){
+        if( age != null && !age.trim().isEmpty()){
             this.age = age;
         }
         else{
@@ -44,7 +44,7 @@ public class PersonalInformationBean {
     }
 
     public void setWeight(String weight) throws InformationErrorException {
-        if(!weight.trim().isEmpty()) {
+        if(weight != null && !weight.trim().isEmpty()) {
             this.weight = weight;
         }else {
             throw new InformationErrorException("Insert weight");
@@ -56,7 +56,7 @@ public class PersonalInformationBean {
     }
 
     public void setHeight(String height) throws InformationErrorException {
-        if(!height.trim().isEmpty()) {
+        if(height != null && !height.trim().isEmpty()) {
             this.height = height;
         }else{
             throw new InformationErrorException("Insert height");

@@ -11,8 +11,8 @@ public class MainClass extends Application {
         SceneManager sceneManager = SceneManager.getInstance(stage);
         stage.setResizable(false);
 
-        sceneManager.showRecipes();
-
+        //sceneManager.showRecipes();
+        sceneManager.showFormFoodPreferences();
         stage.show();
     }
     public static void main(String[] args) {

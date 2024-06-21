@@ -64,8 +64,14 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
         //Restore:
         buyDietController.restoreFoodPreference(foodPreferenceBean);
         choiceBoxDiet.setValue(foodPreferenceBean.getDietType());
-        listViewFood.setItems(foodPreferenceBean.getFoodPreference());
-        listViewAllergies.setItems(foodPreferenceBean.getAllergies());
+        if(foodPreferenceBean.getFoodPreference() != null){
+            foodList = foodPreferenceBean.getFoodPreference();
+            listViewFood.setItems(foodPreferenceBean.getFoodPreference());
+        }
+        if(foodPreferenceBean.getAllergies() != null) {
+            allergiesList = foodPreferenceBean.getAllergies();
+            listViewAllergies.setItems(foodPreferenceBean.getAllergies());
+        }
     }
 
     @FXML
