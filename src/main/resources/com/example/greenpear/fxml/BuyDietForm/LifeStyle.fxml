@@ -19,11 +19,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.BuyDietFormGraphicController">
+<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.LifeStyleFormGraphicController">
    <children>
-      <TilePane alignment="CENTER" layoutX="145.0" layoutY="124.0" prefHeight="452.0" prefWidth="560.0" style="-fx-border-color: #6F8A4A; -fx-border-width: 10;" styleClass="-fx-">
+      <TilePane alignment="CENTER" layoutX="144.0" layoutY="124.0" prefHeight="452.0" prefWidth="560.0" style="-fx-border-color: #6F8A4A; -fx-border-width: 10;" styleClass="-fx-">
          <children>
-            <VBox alignment="CENTER_LEFT" prefHeight="287.0" prefWidth="283.0">
+            <VBox alignment="CENTER_LEFT" prefHeight="340.0" prefWidth="283.0">
                <children>
                   <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="161.0" text="Fill out the form" textFill="#6f8a4a">
                      <font>
@@ -80,10 +80,13 @@
                                     <Insets right="10.0" />
                                  </HBox.margin>
                                  <toggleGroup>
-                                    <ToggleGroup fx:id="Alcohol" />
+                                    <ToggleGroup fx:id="alcohol" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton mnemonicParsing="false" text="No" textFill="WHITE" toggleGroup="$Alcohol" />
+                              <RadioButton mnemonicParsing="false" text="No" textFill="WHITE">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="Alcohol" />
+                                 </toggleGroup></RadioButton>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -120,6 +123,14 @@
                         <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#goToFoodPreferences" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Next" textFill="WHITE" />
                      </children>
                   </HBox>
+                  <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="283.0" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="10.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
             </VBox>
          </children>

@@ -1,6 +1,7 @@
 package com.example.greenpear;
-import com.example.greenpear.controllergrafico.BuyDietFormGraphicController;
-import com.example.greenpear.controllergrafico.BuyDietFormGraphicControllerSingleton;
+import com.example.greenpear.controllergrafico.FoodPreferenceFormGraphicController;
+import com.example.greenpear.controllergrafico.LifeStyleFormGraphicController;
+import com.example.greenpear.controllergrafico.PersonalInformationFormGraphicController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -44,24 +45,18 @@ public class SceneManager {
     public void showFormPersonalInformation() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PersonalInformation.fxml"));
         Parent root = loader.load();
-        BuyDietFormGraphicController controller = BuyDietFormGraphicControllerSingleton.getInstance();
-        controller.initializePersonalInformationForm();
         stage.setScene(new Scene(root));
     }
 
     public void showFormLifeStyle() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/LifeStyle.fxml"));
         Parent root = loader.load();
-        BuyDietFormGraphicController controller = BuyDietFormGraphicControllerSingleton.getInstance();
-        controller.initializeLifeStyleForm();
         stage.setScene(new Scene(root));
     }
 
     public void showFormFoodPreferences() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/FoodPreferences.fxml"));
         Parent root = loader.load();
-        BuyDietFormGraphicController controller = BuyDietFormGraphicControllerSingleton.getInstance();
-        controller.initializeFoodPreferenceForm();
         stage.setScene(new Scene(root));
     }
 

@@ -1,6 +1,8 @@
 package com.example.greenpear.controllergrafico;
 
 import com.example.greenpear.SceneManager;
+import com.example.greenpear.controllerapplicativo.BuyDietController;
+import com.example.greenpear.controllerapplicativo.BuyDietControllerSingleton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -44,6 +46,7 @@ public class WriteDietGraphicController {
 
     @FXML
     private void initialize() {
+
         foodList = FXCollections.observableArrayList(listOfFood);
         selectedFoodList = FXCollections.observableArrayList();
 
@@ -79,6 +82,8 @@ public class WriteDietGraphicController {
         int selectedFood = selectedAliment.getSelectionModel().getSelectedIndex();
         selectedAliment.getItems().remove(selectedFood);
     }
+
+
     public void goToLaunch() throws IOException {
         this.sceneManager.showWriteDiet("Launch");
 

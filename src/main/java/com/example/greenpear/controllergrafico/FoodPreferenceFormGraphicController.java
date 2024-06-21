@@ -1,35 +1,18 @@
 package com.example.greenpear.controllergrafico;
 
-import com.example.greenpear.bean.PersonalInformationBean;
-import com.example.greenpear.exception.InformationErrorException;
-import com.example.greenpear.exception.NoSelectionException;
 import com.example.greenpear.SceneManager;
+import com.example.greenpear.exception.NoSelectionException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-import javax.security.auth.login.CredentialException;
 import java.io.IOException;
-import java.sql.SQLException;
 
-public class BuyDietFormGraphicController extends GraphicControllerGeneric {
-
-    //Personal Information
-    ObservableList<String> genderList = FXCollections.
-            observableArrayList("Male", "Female", "Decline to state");
-    @FXML
-    private TextField txtFieldAge;
-    @FXML
-    private TextField txtFieldWeight;
-    @FXML
-    private TextField txtFieldHeight;
-    @FXML
-    private ChoiceBox choiceBoxGender;
-
-    //Lifestyle
+public class FoodPreferenceFormGraphicController extends GraphicControllerGeneric {
     ObservableList<String> sportList = FXCollections.
             observableArrayList("Camminata", "Ciclismo", "Yoga", "Jogging", "Palestra", "Nuoto", "Pilates");
     ObservableList<String> trainingFrequency = FXCollections.observableArrayList();
@@ -60,29 +43,13 @@ public class BuyDietFormGraphicController extends GraphicControllerGeneric {
     private TextField txtAllergies;
     @FXML
     private TextField txtFood;
+    @FXML
+    private Label errorLabel;
 
     //Funzioni di inizializzazione:
 
-
-    public void initializePersonalInformationForm(){
-        choiceBoxGender.setItems(genderList);
-    }
-
-    public void initializeLifeStyleForm(){
-        // Aggiungi le frequenze di allenamento fino a 7 volte a settimana
-        for (int i = 0; i <= 7; i++) {
-            if( i == 1){
-                trainingFrequency.add(i + " time a week");
-            }else{
-                trainingFrequency.add(i + " times a week");
-            }
-        }
-        choiceBoxSport.setItems(sportList);
-        choiceBoxTrainingFrequency.setItems(trainingFrequency);
-        choiceBoxHealthGoal.setItems(healthGoalList);
-    }
-
-    public void initializeFoodPreferenceForm(){
+    @FXML
+    public void initialize(){
         allergiesList = FXCollections.observableArrayList();
         foodList = FXCollections.observableArrayList();
         choiceBoxDiet.setItems(dietTypeList);
@@ -112,7 +79,7 @@ public class BuyDietFormGraphicController extends GraphicControllerGeneric {
             }
             listViewAllergies.getItems().remove(selectedAllergies);
         }catch (NoSelectionException e){
-        System.err.println("Errore: " + e.getMessage());}
+            System.err.println("Errore: " + e.getMessage());}
     }
 
     @FXML
@@ -121,34 +88,7 @@ public class BuyDietFormGraphicController extends GraphicControllerGeneric {
         listViewFood.getItems().remove(selectedFood);
     }
 
-    //Gestione cambio di scena:
-
-    public void goToLifeStyle() throws IOException, InformationErrorException {
-        int age = Integer.parseInt(txtFieldAge.getText());
-        String gender = (String) choiceBoxGender.getValue();
-        if(gender == null){
-            throw new InformationErrorException("Select gender");
-        }
-        int weight = Integer.parseInt(txtFieldWeight.getText());
-        int height = Integer.parseInt(txtFieldAge.getText());
-
-        /*try{
-            PersonalInformationBean personalInformationBean = new PersonalInformationBean(age, gender, weight, height);
-            //Ora le bean dovranno essere passate al controller applicativo che le renderà disponibili
-
-        }catch (//todo){
-            //todo
-        }
-
-         */
+    public void goToLifeStyle() throws IOException {
         this.sceneManager.showFormLifeStyle();
-    }
-
-    public void goToPersonalInformation() throws IOException{
-        this.sceneManager.showFormPersonalInformation();
-    }
-
-    public void goToFoodPreferences() throws IOException{
-        this.sceneManager.showFormFoodPreferences();
     }
 }
