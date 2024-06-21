@@ -3,6 +3,7 @@ package com.example.greenpear.controllergrafico;
 import com.example.greenpear.SceneManager;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.controllerapplicativo.LoginController;
+import com.example.greenpear.utils.Role;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -13,6 +14,8 @@ import javafx.util.Duration;
 import javax.security.auth.login.CredentialException;
 import java.io.IOException;
 import java.sql.SQLException;
+
+import static java.lang.System.exit;
 
 public class LoginGraphicController {
     private final SceneManager sceneManager = SceneManager.getInstance(null);
@@ -37,11 +40,17 @@ public class LoginGraphicController {
             //Se tutto è andatoa  buon fine:
 
             errorLabel.setText("logged as: " + loginBean.getRole());
+            if(loginBean.getRole() == Role.PATIENT){
+                this.sceneManager.showRecipes();
+
+            }
 
         } catch (CredentialException | SQLException e) {
             errorLabel.setStyle("-fx-border-color: red;" + // Impostiamo il colore del bordo a rosso
                     "-fx-border-width: 2px;");
             errorLabel.setText(e.getMessage());
+        } catch (IOException e) {
+            exit(-1);
         }
 
         // Mostra l'errore solo per 2 secondi

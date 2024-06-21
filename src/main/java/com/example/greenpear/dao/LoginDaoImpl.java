@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-//TODO verificare se posso popolare user in questo modo:
 public class LoginDaoImpl implements LoginDao{
     private Connection connection = null;
     private PreparedStatement preparedStatement;

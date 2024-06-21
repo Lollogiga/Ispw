@@ -10,7 +10,9 @@ public class MainClass extends Application {
     public void start(Stage stage) throws IOException {
         SceneManager sceneManager = SceneManager.getInstance(stage);
         stage.setResizable(false);
-        sceneManager.showRegister();
+
+        sceneManager.showLogIn();
+
         stage.show();
     }
     public static void main(String[] args) {

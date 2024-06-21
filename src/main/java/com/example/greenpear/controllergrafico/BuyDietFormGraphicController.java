@@ -1,5 +1,7 @@
 package com.example.greenpear.controllergrafico;
 
+import com.example.greenpear.bean.PersonalInformationBean;
+import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.NoSelectionException;
 import com.example.greenpear.SceneManager;
 import javafx.collections.FXCollections;
@@ -9,7 +11,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import javax.security.auth.login.CredentialException;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class BuyDietFormGraphicController extends GraphicControllerGeneric {
 
@@ -58,6 +62,8 @@ public class BuyDietFormGraphicController extends GraphicControllerGeneric {
     private TextField txtFood;
 
     //Funzioni di inizializzazione:
+
+
     public void initializePersonalInformationForm(){
         choiceBoxGender.setItems(genderList);
     }
@@ -117,7 +123,24 @@ public class BuyDietFormGraphicController extends GraphicControllerGeneric {
 
     //Gestione cambio di scena:
 
-    public void goToLifeStyle() throws IOException {
+    public void goToLifeStyle() throws IOException, InformationErrorException {
+        int age = Integer.parseInt(txtFieldAge.getText());
+        String gender = (String) choiceBoxGender.getValue();
+        if(gender == null){
+            throw new InformationErrorException("Select gender");
+        }
+        int weight = Integer.parseInt(txtFieldWeight.getText());
+        int height = Integer.parseInt(txtFieldAge.getText());
+
+        /*try{
+            PersonalInformationBean personalInformationBean = new PersonalInformationBean(age, gender, weight, height);
+            //Ora le bean dovranno essere passate al controller applicativo che le renderà disponibili
+
+        }catch (//todo){
+            //todo
+        }
+
+         */
         this.sceneManager.showFormLifeStyle();
     }
 
