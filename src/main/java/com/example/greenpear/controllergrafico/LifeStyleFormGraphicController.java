@@ -122,7 +122,7 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
                 smoker = false;
             }
             //Possiamo a questo punto creare una bean:
-            LifeStyleBean lifeStyleBean = new LifeStyleBean(sport, frequency, healthGoal, drunker, smoker);
+            lifeStyleBean = new LifeStyleBean(sport, frequency, healthGoal, drunker, smoker);
             //Se tutto è andato a buon fine, possiamo settare i campi all'interno del controller applicativo
             this.buyDietController.storeLifeStyle(lifeStyleBean);
             this.sceneManager.showFormFoodPreferences();

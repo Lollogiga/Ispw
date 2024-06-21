@@ -56,7 +56,7 @@ public class PersonalInformationFormGraphicController extends GraphicControllerG
             String weight = txtFieldWeight.getText();
             String height = txtFieldHeight.getText();
 
-            PersonalInformationBean personalInformationBean = new PersonalInformationBean(age, gender, weight, height);
+            personalInformationBean = new PersonalInformationBean(age, gender, weight, height);
             //Ora le bean dovranno essere passate al controller applicativo che le renderà disponibili
 
             this.buyDietController.storePersonalInformation(personalInformationBean);
