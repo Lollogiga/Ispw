@@ -38,7 +38,7 @@ public class PersonalInformationFormGraphicController extends GraphicControllerG
         personalInformationBean = new PersonalInformationBean();
 
         choiceBoxGender.setItems(genderList);
-        buyDietController.RestorePersonalInformation(personalInformationBean);
+        buyDietController.restorePersonalInformation(personalInformationBean);
         txtFieldAge.setText(personalInformationBean.getAge());
         choiceBoxGender.setValue(personalInformationBean.getGender());
         txtFieldHeight.setText(personalInformationBean.getHeight());

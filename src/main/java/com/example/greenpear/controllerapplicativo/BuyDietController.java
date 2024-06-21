@@ -21,7 +21,7 @@ public class BuyDietController {
     private boolean initializeLifeStyle = false;
 
     //Metodi Restore e Store
-    public void RestorePersonalInformation(PersonalInformationBean personalInformationBean) throws InformationErrorException {
+    public void restorePersonalInformation(PersonalInformationBean personalInformationBean) throws InformationErrorException {
         if(!initializePersonalInformation){ //Potremo inserire un attributo detto initialize e verificare se è true o false:
             //Se anche uno dei 4 campi è vuoto, vuol dire che non vi è nulla di cui fare il restore
         }else {
@@ -40,7 +40,7 @@ public class BuyDietController {
         initializePersonalInformation = true;
     }
 
-    public void RestoreLifeStyle(LifeStyleBean lifeStyleBean) {
+    public void restoreLifeStyle(LifeStyleBean lifeStyleBean) {
         if(!initializeLifeStyle){
 
         }else {
@@ -53,7 +53,7 @@ public class BuyDietController {
         }
     }
 
-    public void StoreLifeStyle(LifeStyleBean lifeStyleBean) {
+    public void storeLifeStyle(LifeStyleBean lifeStyleBean) {
         sport = lifeStyleBean.getSport();
         frequency = lifeStyleBean.getFrequency();
         healthGoal = lifeStyleBean.getHealthGoal();

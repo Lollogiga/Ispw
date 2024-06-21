@@ -69,7 +69,7 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
         choiceBoxHealthGoal.setItems(healthGoalList);
 
         //Gestiamo il restore dei dati:
-        buyDietController.RestoreLifeStyle(lifeStyleBean);
+        buyDietController.restoreLifeStyle(lifeStyleBean);
         choiceBoxSport.setValue(lifeStyleBean.getSport());
         choiceBoxHealthGoal.setValue(lifeStyleBean.getHealthGoal());
         choiceBoxTrainingFrequency.setValue(lifeStyleBean.getFrequency());
@@ -124,7 +124,7 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
             //Possiamo a questo punto creare una bean:
             LifeStyleBean lifeStyleBean = new LifeStyleBean(sport, frequency, healthGoal, drunker, smoker);
             //Se tutto è andato a buon fine, possiamo settare i campi all'interno del controller applicativo
-            this.buyDietController.StoreLifeStyle(lifeStyleBean);
+            this.buyDietController.storeLifeStyle(lifeStyleBean);
             this.sceneManager.showFormFoodPreferences();
 
         } catch (InformationErrorException e) {
