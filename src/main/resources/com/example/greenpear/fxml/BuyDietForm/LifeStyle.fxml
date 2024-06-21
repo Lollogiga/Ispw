@@ -75,7 +75,7 @@
                         <ChoiceBox fx:id="choiceBoxSport" prefHeight="29.0" prefWidth="179.0" GridPane.columnIndex="1" />
                         <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <children>
-                              <RadioButton mnemonicParsing="false" text="yes" textFill="WHITE">
+                              <RadioButton fx:id="yesAlcohol" mnemonicParsing="false" text="yes" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
@@ -83,15 +83,12 @@
                                     <ToggleGroup fx:id="alcohol" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton mnemonicParsing="false" text="No" textFill="WHITE">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="Alcohol" />
-                                 </toggleGroup></RadioButton>
+                              <RadioButton fx:id="noAlcohol" mnemonicParsing="false" text="No" textFill="WHITE" toggleGroup="$alcohol" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <children>
-                              <RadioButton mnemonicParsing="false" text="yes" textFill="WHITE">
+                              <RadioButton fx:id="yesSmoker" mnemonicParsing="false" text="yes" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
@@ -99,7 +96,7 @@
                                     <ToggleGroup fx:id="smoke" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton mnemonicParsing="false" text="No" textFill="WHITE" toggleGroup="$smoke" />
+                              <RadioButton fx:id="noSmoker" mnemonicParsing="false" text="No" textFill="WHITE" toggleGroup="$smoke" />
                            </children>
                         </HBox>
                         <Label text="Health Goal:" textFill="WHITE" GridPane.rowIndex="2">

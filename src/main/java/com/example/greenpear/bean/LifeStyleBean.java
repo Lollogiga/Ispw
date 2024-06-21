@@ -1,17 +1,16 @@
 package com.example.greenpear.bean;
 
-import com.example.greenpear.exception.InformationErrorException;
-
 public class LifeStyleBean {
     private String sport;
     private String frequency;
     private String healthGoal;
-    private String drunker;
-    private String smoker;
+    private boolean drunker;
+    private boolean smoker;
+
     public LifeStyleBean() {
     }
 
-    public LifeStyleBean(String sport, String frequency, String healthGoal, String drunker, String smoker){
+    public LifeStyleBean(String sport, String frequency, String healthGoal, boolean drunker, boolean smoker){
         this.setSport(sport);
         this.setFrequency(frequency);
         this.setHealthGoal(healthGoal);
@@ -20,7 +19,7 @@ public class LifeStyleBean {
     }
 
     public String getSport() {
-        return sport;
+        return this.sport;
     }
 
     public void setSport(String sport) {
@@ -36,26 +35,26 @@ public class LifeStyleBean {
     }
 
     public String getHealthGoal() {
-        return healthGoal;
+        return this.healthGoal;
     }
 
     public void setHealthGoal(String healthGoal) {
         this.healthGoal = healthGoal;
     }
 
-    public String getDrunker() {
-        return drunker;
+    public boolean getDrunker() {
+        return this.drunker;
     }
 
-    public void setDrunker(String drunker) {
+    public void setDrunker(boolean drunker) {
         this.drunker = drunker;
     }
 
-    public String getSmoker() {
-        return smoker;
+    public boolean getSmoker() {
+        return this.smoker;
     }
 
-    public void setSmoker(String smoker) {
+    public void setSmoker(boolean smoker) {
         this.smoker = smoker;
     }
 }

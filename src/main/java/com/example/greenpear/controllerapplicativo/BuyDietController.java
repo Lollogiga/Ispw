@@ -5,11 +5,22 @@ import com.example.greenpear.bean.PersonalInformationBean;
 import com.example.greenpear.exception.InformationErrorException;
 
 public class BuyDietController {
+    //Personal Information
     private String age;
     private String gender;
     private String weight;
     private String height;
     private boolean initializePersonalInformation = false;
+
+    //LifeStyle:
+    private String sport;
+    private String frequency;
+    private String healthGoal;
+    private boolean drunker;
+    private boolean smoker;
+    private boolean initializeLifeStyle = false;
+
+    //Metodi Restore e Store
     public void RestorePersonalInformation(PersonalInformationBean personalInformationBean) throws InformationErrorException {
         if(!initializePersonalInformation){ //Potremo inserire un attributo detto initialize e verificare se è true o false:
             //Se anche uno dei 4 campi è vuoto, vuol dire che non vi è nulla di cui fare il restore
@@ -22,13 +33,34 @@ public class BuyDietController {
     }
 
     public void storePersonalInformation(PersonalInformationBean personalInformation){
-        age = String.valueOf(personalInformation.getAge());
+        age = personalInformation.getAge();
         gender = personalInformation.getGender();
-        weight = String.valueOf(personalInformation.getWeight());
-        height = String.valueOf(personalInformation.getHeight());
+        weight = personalInformation.getWeight();
+        height = personalInformation.getHeight();
         initializePersonalInformation = true;
     }
 
     public void RestoreLifeStyle(LifeStyleBean lifeStyleBean) {
+        if(!initializeLifeStyle){
+
+        }else {
+            lifeStyleBean.setSport(sport);
+            lifeStyleBean.setFrequency(frequency);
+            lifeStyleBean.setHealthGoal(healthGoal);
+            lifeStyleBean.setDrunker(drunker);
+            lifeStyleBean.setSmoker(smoker);
+
+        }
     }
+
+    public void StoreLifeStyle(LifeStyleBean lifeStyleBean) {
+        sport = lifeStyleBean.getSport();
+        frequency = lifeStyleBean.getFrequency();
+        healthGoal = lifeStyleBean.getHealthGoal();
+        drunker = lifeStyleBean.getDrunker();
+        smoker = lifeStyleBean.getSmoker();
+        initializeLifeStyle = true;
+    }
+
+
 }

@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
 import java.io.IOException;
@@ -36,7 +37,17 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
     private ToggleGroup alcohol;
     @FXML
     private ToggleGroup smoke;
+    @FXML
+    private RadioButton yesAlcohol;
+    @FXML
+    private RadioButton yesSmoker;
+    @FXML
+    private RadioButton noAlcohol;
+    @FXML
+    private RadioButton noSmoker;
 
+    private boolean drunker;
+    private boolean smoker;
 
     private BuyDietController buyDietController;
     private LifeStyleBean lifeStyleBean;
@@ -59,6 +70,19 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
 
         //Gestiamo il restore dei dati:
         buyDietController.RestoreLifeStyle(lifeStyleBean);
+        choiceBoxSport.setValue(lifeStyleBean.getSport());
+        choiceBoxHealthGoal.setValue(lifeStyleBean.getHealthGoal());
+        choiceBoxTrainingFrequency.setValue(lifeStyleBean.getFrequency());
+        if(lifeStyleBean.getSmoker()){
+            yesSmoker.setSelected(true);
+        }else {
+            noSmoker.setSelected(true);
+        }
+        if(lifeStyleBean.getDrunker()){
+            yesAlcohol.setSelected(true);
+        }else {
+            noAlcohol.setSelected(true);
+        }
 
     }
 
@@ -85,10 +109,22 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
             }
             if(alcohol.getSelectedToggle() == null){
                 throw new InformationErrorException("Select whether you drink alcohol or not");
+            } else if (yesAlcohol.isSelected()) {
+                drunker = true;
+            }else {
+                drunker = false;
             }
             if(smoke.getSelectedToggle() == null){
                 throw new InformationErrorException("Select whether you smoke or not");
+            } else if (yesSmoker.isSelected()) {
+                smoker = true;
+            }else {
+                smoker = false;
             }
+            //Possiamo a questo punto creare una bean:
+            LifeStyleBean lifeStyleBean = new LifeStyleBean(sport, frequency, healthGoal, drunker, smoker);
+            //Se tutto è andato a buon fine, possiamo settare i campi all'interno del controller applicativo
+            this.buyDietController.StoreLifeStyle(lifeStyleBean);
             this.sceneManager.showFormFoodPreferences();
 
         } catch (InformationErrorException e) {
