@@ -1,8 +1,13 @@
 package com.example.greenpear.controllerapplicativo;
 
+import com.example.greenpear.bean.FoodPreferenceBean;
 import com.example.greenpear.bean.LifeStyleBean;
 import com.example.greenpear.bean.PersonalInformationBean;
 import com.example.greenpear.exception.InformationErrorException;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
+
+import java.util.List;
 
 public class BuyDietController {
     //Personal Information
@@ -19,6 +24,12 @@ public class BuyDietController {
     private boolean drunker;
     private boolean smoker;
     private boolean initializeLifeStyle = false;
+
+    //FoodPreference
+    private String dietType;
+    private ObservableList<String> foodPreference;
+    private ObservableList<String> allergies;
+    private boolean initializeFoodPreference = false;
 
     //Metodi Restore e Store
     public void restorePersonalInformation(PersonalInformationBean personalInformationBean) throws InformationErrorException {
@@ -57,6 +68,21 @@ public class BuyDietController {
         drunker = lifeStyleBean.getDrunker();
         smoker = lifeStyleBean.getSmoker();
         initializeLifeStyle = true;
+    }
+
+    public void storeFoodPreference(FoodPreferenceBean foodPreferenceBean){
+        this.dietType = foodPreferenceBean.getDietType();
+        this.foodPreference = foodPreferenceBean.getFoodPreference();
+        this.allergies = foodPreferenceBean.getAllergies();
+        initializeFoodPreference = true;
+    }
+
+    public void restoreFoodPreference(FoodPreferenceBean foodPreferenceBean){
+        if(initializeFoodPreference){
+            foodPreferenceBean.setDietType(dietType);
+            foodPreferenceBean.setFoodPreference(foodPreference);
+            foodPreferenceBean.setAllergies(allergies);
+        }
     }
 
 

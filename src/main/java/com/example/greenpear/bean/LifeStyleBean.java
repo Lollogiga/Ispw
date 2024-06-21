@@ -23,7 +23,9 @@ public class LifeStyleBean {
     }
 
     public void setSport(String sport) {
-        this.sport = sport;
+        if(sport != null) {
+            this.sport = sport;
+        }
     }
 
     public String getFrequency() {
@@ -31,7 +33,9 @@ public class LifeStyleBean {
     }
 
     public void setFrequency(String frequency) {
-        this.frequency = frequency;
+        if(frequency != null) {
+            this.frequency = frequency;
+        }
     }
 
     public String getHealthGoal() {
@@ -39,7 +43,9 @@ public class LifeStyleBean {
     }
 
     public void setHealthGoal(String healthGoal) {
-        this.healthGoal = healthGoal;
+        if(healthGoal != null) {
+            this.healthGoal = healthGoal;
+        }
     }
 
     public boolean getDrunker() {

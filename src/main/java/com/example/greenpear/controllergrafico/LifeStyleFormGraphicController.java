@@ -89,6 +89,15 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
     //Gestione cambio di scena:
 
     public void goToPersonalInformation() throws IOException{
+        //Devo salvare le informazioni ottenute:
+        String sport = (String) choiceBoxSport.getValue();
+        String frequency = (String) choiceBoxTrainingFrequency.getValue();
+        String healthGoal = (String) choiceBoxHealthGoal.getValue();
+        boolean drunker = yesAlcohol.isSelected();
+        boolean smoker = yesSmoker.isSelected();
+        lifeStyleBean = new LifeStyleBean(sport, frequency, healthGoal, drunker, smoker);
+        //Se tutto è andato a buon fine, possiamo settare i campi all'interno del controller applicativo
+        this.buyDietController.storeLifeStyle(lifeStyleBean);
         this.sceneManager.showFormPersonalInformation();
     }
 

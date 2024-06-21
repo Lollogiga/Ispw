@@ -1,6 +1,9 @@
 package com.example.greenpear.controllergrafico;
 
-import com.example.greenpear.SceneManager;
+import com.example.greenpear.bean.FoodPreferenceBean;
+import com.example.greenpear.controllerapplicativo.BuyDietController;
+import com.example.greenpear.controllerapplicativo.BuyDietControllerSingleton;
+import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.NoSelectionException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +32,7 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
 
     //Food preference:
     @FXML
-    private ChoiceBox choiceBoxDiet;
+    private ChoiceBox<String> choiceBoxDiet;
     ObservableList<String> dietTypeList = FXCollections.
             observableArrayList("Omnivore", "Vegetarian", "Vegan", "Keto");
     @FXML
@@ -47,16 +50,26 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
     private Label errorLabel;
 
     //Funzioni di inizializzazione:
+    BuyDietController buyDietController;
+    FoodPreferenceBean foodPreferenceBean;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
+        buyDietController = BuyDietControllerSingleton.getInstance();
         allergiesList = FXCollections.observableArrayList();
         foodList = FXCollections.observableArrayList();
         choiceBoxDiet.setItems(dietTypeList);
+
+        foodPreferenceBean = new FoodPreferenceBean();
+        //Restore:
+        buyDietController.restoreFoodPreference(foodPreferenceBean);
+        choiceBoxDiet.setValue(foodPreferenceBean.getDietType());
+        listViewFood.setItems(foodPreferenceBean.getFoodPreference());
+        listViewAllergies.setItems(foodPreferenceBean.getAllergies());
     }
 
     @FXML
-    public void addAllergies(){
+    public void addAllergies() {
         allergiesList.add(txtAllergies.getText());
         listViewAllergies.setItems(allergiesList);
         txtAllergies.setText("");
@@ -64,31 +77,52 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
     }
 
     @FXML
-    public void addFood(){
+    public void addFood() {
         foodList.add(txtFood.getText());
         listViewFood.setItems(foodList);
         txtFood.setText("");
     }
 
     @FXML
-    public void removeAllergies(){
+    public void removeAllergies() {
         try {
             int selectedAllergies = listViewAllergies.getSelectionModel().getSelectedIndex();
-            if(selectedAllergies == -1){
+            if (selectedAllergies == -1) {
                 throw new NoSelectionException("Nessun elemento selezionato per la rimozione");
             }
             listViewAllergies.getItems().remove(selectedAllergies);
-        }catch (NoSelectionException e){
-            System.err.println("Errore: " + e.getMessage());}
+        } catch (NoSelectionException e) {
+            errorLabel.setText(e.getMessage());
+        }
     }
 
     @FXML
-    public void removeFood(){
+    public void removeFood() {
         int selectedFood = listViewFood.getSelectionModel().getSelectedIndex();
         listViewFood.getItems().remove(selectedFood);
     }
 
     public void goToLifeStyle() throws IOException {
+        //Quando vado indietro, non devo avere necessariamente tutti i campi settati
+        String dietType = (String) choiceBoxDiet.getValue();
+        foodPreferenceBean = new FoodPreferenceBean(dietType, foodList, allergiesList);
+        buyDietController.storeFoodPreference(foodPreferenceBean);
         this.sceneManager.showFormLifeStyle();
+    }
+
+    public void goToPayment() {
+        //A differenza dei metodi precedenti, ora è ammesso che gli array siano vuoti, l'unico controllo è sul tipo di dieta
+        try {
+            String dietType = (String) choiceBoxDiet.getValue();
+            if (dietType == null || dietType.isEmpty()) {
+                throw new InformationErrorException("Select type of diet");
+            }
+            foodPreferenceBean = new FoodPreferenceBean(dietType, foodList, allergiesList);
+            //Li passo al controller grafico:
+            buyDietController.storeFoodPreference(foodPreferenceBean);
+            errorLabel.setText("Done");
+        } catch (InformationErrorException e) {
+            errorLabel.setText(e.getMessage());
+        }
     }
 }

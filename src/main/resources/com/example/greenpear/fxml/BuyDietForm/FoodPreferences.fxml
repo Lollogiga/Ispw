@@ -140,8 +140,20 @@
                      <children>
                         <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#goToLifeStyle" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Prev" textFill="WHITE" />
                         <Region prefHeight="27.0" prefWidth="270.0" />
-                        <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Submit" textFill="WHITE" />
+                        <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#goToPayment" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Submit" textFill="WHITE" />
                      </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="15.0" prefWidth="288.0">
+                     <children>
+                        <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="256.0" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Italic" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>
