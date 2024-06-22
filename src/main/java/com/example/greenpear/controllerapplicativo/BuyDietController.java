@@ -5,17 +5,12 @@ import com.example.greenpear.bean.FoodPreferenceBean;
 import com.example.greenpear.bean.LifeStyleBean;
 import com.example.greenpear.bean.PersonalInformationBean;
 import com.example.greenpear.dao.BuyDietDao;
-import com.example.greenpear.dao.LoginDaoImpl;
 import com.example.greenpear.entities.Dietitian;
-import com.example.greenpear.entities.Session;
 import com.example.greenpear.exception.InformationErrorException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BuyDietController {
     //Personal Information
@@ -45,9 +40,8 @@ public class BuyDietController {
 
         try{
             BuyDietDao buyDietDao = new BuyDietDao();
-            buyDietDao.GetDietitian(dietitians);
+            buyDietDao.getDietitian(dietitians);
             for(Dietitian dietitian : dietitians){
-                System.out.println("Username" + dietitian.getDietitianUsername());
                 dietitianBeans.add(new DietitianBean(dietitian.getDietitianUsername()));
             }
         } catch (SQLException e) {

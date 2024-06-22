@@ -8,8 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BuyDietDao {
 
@@ -23,7 +21,7 @@ public class BuyDietDao {
         connection = SingletonConnection.getInstance();
     }
 
-    public void GetDietitian(ObservableList<Dietitian> dietitians) throws SQLException{
+    public void getDietitian(ObservableList<Dietitian> dietitians) throws SQLException{
         preparedStatement = connection.prepareStatement(BuyDietQuery.getDietitian());
         resultSet=preparedStatement.executeQuery();
 
