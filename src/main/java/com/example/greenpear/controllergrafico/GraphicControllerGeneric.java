@@ -12,8 +12,7 @@ public abstract class GraphicControllerGeneric {
         this.sceneManager.showRecipes();
     }
 
-    //TODO cambiare poi con la pagina inizale di BuyDiet
     public void goToBuyDiet() throws IOException{
-        this.sceneManager.showFormPersonalInformation();
+        this.sceneManager.showBuyDiet();
     }
 }

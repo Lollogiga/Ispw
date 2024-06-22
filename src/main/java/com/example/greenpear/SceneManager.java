@@ -2,6 +2,7 @@ package com.example.greenpear;
 import com.example.greenpear.controllergrafico.FoodPreferenceFormGraphicController;
 import com.example.greenpear.controllergrafico.LifeStyleFormGraphicController;
 import com.example.greenpear.controllergrafico.PersonalInformationFormGraphicController;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -42,6 +43,11 @@ public class SceneManager {
         stage.setScene(scene);
     }
 
+    public void showBuyDiet() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDiet.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+    }
     public void showFormPersonalInformation() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PersonalInformation.fxml"));
         Parent root = loader.load();

@@ -1,12 +1,20 @@
 package com.example.greenpear.controllerapplicativo;
 
+import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.bean.FoodPreferenceBean;
 import com.example.greenpear.bean.LifeStyleBean;
 import com.example.greenpear.bean.PersonalInformationBean;
+import com.example.greenpear.dao.BuyDietDao;
+import com.example.greenpear.dao.LoginDaoImpl;
+import com.example.greenpear.entities.Dietitian;
+import com.example.greenpear.entities.Session;
 import com.example.greenpear.exception.InformationErrorException;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BuyDietController {
@@ -30,6 +38,23 @@ public class BuyDietController {
     private ObservableList<String> foodPreference;
     private ObservableList<String> allergies;
     private boolean initializeFoodPreference = false;
+
+    //Lista di tutti i dietologi:
+    public void setListDietitian(ObservableList<DietitianBean> dietitianBeans) throws SQLException {
+        ObservableList<Dietitian> dietitians = FXCollections.observableArrayList();
+
+        try{
+            BuyDietDao buyDietDao = new BuyDietDao();
+            buyDietDao.GetDietitian(dietitians);
+            for(Dietitian dietitian : dietitians){
+                System.out.println("Username" + dietitian.getDietitianUsername());
+                dietitianBeans.add(new DietitianBean(dietitian.getDietitianUsername()));
+            }
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
+
 
     //Metodi Restore e Store
     public void restorePersonalInformation(PersonalInformationBean personalInformationBean) throws InformationErrorException {

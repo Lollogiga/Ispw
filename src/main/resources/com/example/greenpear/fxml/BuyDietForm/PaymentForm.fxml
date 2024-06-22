@@ -118,7 +118,7 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="63.0" prefWidth="191.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #6F8A4A;" text="Submit Order" />
+                              <Button fx:id="submitButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #6F8A4A;" text="Submit Order" />
                               <Label contentDisplay="CENTER" text="-------or-------" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets bottom="5.0" top="5.0" />
