@@ -1,6 +1,5 @@
 package com.example.greenpear.utils.query;
 
-import com.example.greenpear.dao.BuyDietDao;
 
 public class BuyDietQuery {
     private BuyDietQuery(){}
