@@ -60,6 +60,12 @@ public class SceneManager {
         stage.setScene(new Scene(root));
     }
 
+    public void showPaymentForm() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentForm.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+    }
+
     public void showWriteDiet(String meal) throws IOException{
         meal = "WriteDiet" + meal + ".fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenpear/fxml/WriteDiet/" + meal));
