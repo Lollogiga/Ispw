@@ -13,6 +13,9 @@ import javafx.collections.ObservableList;
 import java.sql.SQLException;
 
 public class BuyDietController {
+    //Dietitian:
+    private String dietitian;
+
     //Personal Information
     private String age;
     private String gender;
@@ -42,15 +45,19 @@ public class BuyDietController {
             BuyDietDao buyDietDao = new BuyDietDao();
             buyDietDao.getDietitian(dietitians);
             for(Dietitian dietitian : dietitians){
-                dietitianBeans.add(new DietitianBean(dietitian.getDietitianUsername()));
+                dietitianBeans.add(new DietitianBean(dietitian.getDietitianUsername(), dietitian.getPrice()));
             }
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
     }
 
+    public void storeDietitian(DietitianBean selectedDietitianBean) {
+        this.dietitian = selectedDietitianBean.getDietitian().get();
+    }
 
     //Metodi Restore e Store
+
     public void restorePersonalInformation(PersonalInformationBean personalInformationBean) throws InformationErrorException {
         if(initializePersonalInformation){
             //Faccio il restore, in quanto ho giò inizializzato i dati:
@@ -103,6 +110,7 @@ public class BuyDietController {
             foodPreferenceBean.setAllergies(allergies);
         }
     }
+
 
 
 }

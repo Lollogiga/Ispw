@@ -23,7 +23,7 @@
                   <Insets left="15.0" right="-10.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" style="-fx-background-color: #6F8A4A;" text="Home" textFill="WHITE">
+            <Button mnemonicParsing="false" onMouseClicked="#goToHome" style="-fx-background-color: #6F8A4A;" text="Home" textFill="WHITE">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
@@ -48,9 +48,10 @@
             </Button>
          </children>
       </HBox>
-      <TableView fx:id="tableViewDietitian" layoutX="66.0" layoutY="71.0" prefHeight="587.0" prefWidth="718.0" style="-fx-background-color: #2B343B;">
+      <TableView fx:id="tableViewDietitian" layoutX="66.0" layoutY="56.0" prefHeight="587.0" prefWidth="718.0" style="-fx-background-color: #2B343B;">
         <columns>
-            <TableColumn fx:id="dietitian" prefWidth="717.1428691319057" text="Dietitian" />
+            <TableColumn fx:id="dietitian" prefWidth="517.7142715454102" text="Dietitian" />
+            <TableColumn fx:id="price" prefWidth="198.857177734375" text="Price" />
         </columns>
       </TableView>
    </children>

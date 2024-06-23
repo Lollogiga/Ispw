@@ -26,8 +26,9 @@ public class BuyDietDao {
         resultSet=preparedStatement.executeQuery();
 
         while (resultSet.next()){
-            String username = resultSet.getString("username");
-            dietitians.add(new Dietitian(username));
+            String username = resultSet.getString("dietitianUsername");
+            int price = resultSet.getInt("price");
+            dietitians.add(new Dietitian(username, price));
         }
 
     }

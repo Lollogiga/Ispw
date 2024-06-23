@@ -126,9 +126,15 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
             foodPreferenceBean = new FoodPreferenceBean(dietType, foodList, allergiesList);
             //Li passo al controller grafico:
             buyDietController.storeFoodPreference(foodPreferenceBean);
-            errorLabel.setText("Done");
-        } catch (InformationErrorException e) {
+
+            //Vado alla prossima schermata:
+            goToSubmit();
+        } catch (InformationErrorException | IOException e) {
             errorLabel.setText(e.getMessage());
         }
+    }
+
+    public void goToSubmit() throws IOException {
+        this.sceneManager.showPaymentForm();
     }
 }

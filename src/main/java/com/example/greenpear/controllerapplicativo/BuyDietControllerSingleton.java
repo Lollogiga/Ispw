@@ -12,4 +12,10 @@ public class BuyDietControllerSingleton {
         }
         return instance;
     }
+
+    public static void resetInstance(){
+        if(instance != null){
+            instance = null;
+        }
+    }
 }

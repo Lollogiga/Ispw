@@ -24,5 +24,8 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
         submitButton.setPrefWidth(payPalButton.getPrefWidth());
     }
 
+    public void submitDietRequest(){
+        
+    }
 
 }

@@ -3,6 +3,8 @@ package com.example.greenpear.controllergrafico;
 import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllerapplicativo.BuyDietControllerSingleton;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,6 +24,8 @@ public class BuyDietGraphicController extends GraphicControllerGeneric{
     private TableView<DietitianBean> tableViewDietitian;
     @FXML
     private TableColumn<DietitianBean, String> dietitian;
+    @FXML
+    private TableColumn<DietitianBean, Integer> price;
 
     private BuyDietController buyDietController;
     private ObservableList dietitianBeans = FXCollections.observableArrayList();
@@ -35,8 +39,11 @@ public class BuyDietGraphicController extends GraphicControllerGeneric{
         //Se tutto è andato a buon fine, ora ho una lista di bean contenente tutti i dietologi nel sistema:
 
        dietitian.setCellValueFactory(cellData -> cellData.getValue().dietitianUsernameProperty());
+       price.setCellValueFactory(cellData -> {
+           IntegerProperty property = cellData.getValue().priceProperty();
+           return new SimpleIntegerProperty(property.getValue()).asObject();
+       });
        tableViewDietitian.setItems((ObservableList<DietitianBean>) dietitianBeans);
-
         tableViewDietitian.setRowFactory(tv -> {
             TableRow<DietitianBean> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -44,13 +51,16 @@ public class BuyDietGraphicController extends GraphicControllerGeneric{
                     DietitianBean selectedDietitian = row.getItem();
                     if (selectedDietitian != null) {
                         String dietitianUsername = selectedDietitian.getDietitian().get();
+                        int dietitianPrice = selectedDietitian.getPrice();
                         //TODO Passo l'informazione al controller applicativo tramite una bean:
+                        DietitianBean selectedDietitianBean = new DietitianBean(dietitianUsername, dietitianPrice);
+                        buyDietController.storeDietitian(selectedDietitianBean);
                         try {
                             goToPersonalInformationForm();
                         } catch (IOException e) {
                             System.out.println("Errore");
                         }
-                        System.out.println("Doppio clic su: " + dietitianUsername);
+                        System.out.println("Doppio clic su: " + dietitianUsername + " Costo " + dietitianPrice);
                     }
                 }
             });

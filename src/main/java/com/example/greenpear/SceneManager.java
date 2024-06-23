@@ -43,6 +43,13 @@ public class SceneManager {
         stage.setScene(scene);
     }
 
+    public void showHome() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/Home.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+    }
+
     public void showBuyDiet() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDiet.fxml"));
         Parent root = loader.load();

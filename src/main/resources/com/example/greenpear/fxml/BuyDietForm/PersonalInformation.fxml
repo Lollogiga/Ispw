@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
@@ -92,17 +93,6 @@
                         <Insets />
                      </VBox.margin>
                   </GridPane>
-                  <HBox alignment="TOP_RIGHT" prefHeight="27.0" prefWidth="147.0">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                     <children>
-                        <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#goToLifeStyle" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Next" textFill="WHITE">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin></Button>
-                     </children>
-                  </HBox>
                   <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="283.0" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Italic" size="10.0" />
@@ -111,6 +101,13 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Label>
+                  <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="147.0">
+                     <children>
+                        <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#goToBuyDiet" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Prev" textFill="WHITE" />
+                        <Region prefHeight="27.0" prefWidth="165.0" />
+                        <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#goToLifeStyle" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Next" textFill="WHITE" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>
@@ -125,7 +122,7 @@
                   <Insets left="15.0" right="-10.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" style="-fx-background-color: #6F8A4A;" text="Home" textFill="WHITE">
+            <Button mnemonicParsing="false" onMouseClicked="#goToHome" style="-fx-background-color: #6F8A4A;" text="Home" textFill="WHITE">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
