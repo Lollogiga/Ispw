@@ -22,6 +22,11 @@
          <children>
             <VBox alignment="CENTER_LEFT" prefHeight="492.0" prefWidth="392.0">
                <children>
+                  <HBox alignment="BASELINE_RIGHT">
+                     <children>
+                        <Button contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: #2B343B; -fx-border-width: 3; -fx-border-color: #6F8A4A; -fx-border-radius: 15;" text="X" textFill="WHITE" />
+                     </children>
+                  </HBox>
                   <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="155.0" text="Payment Methods" textFill="#6f8a4a">
                      <font>
                         <Font name="System Italic" size="15.0" />

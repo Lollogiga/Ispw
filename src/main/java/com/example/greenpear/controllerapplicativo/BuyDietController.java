@@ -5,10 +5,7 @@ import com.example.greenpear.bean.FoodPreferenceBean;
 import com.example.greenpear.bean.LifeStyleBean;
 import com.example.greenpear.bean.PersonalInformationBean;
 import com.example.greenpear.dao.BuyDietDao;
-import com.example.greenpear.entities.Dietitian;
-import com.example.greenpear.entities.FoodPreference;
-import com.example.greenpear.entities.LifeStyle;
-import com.example.greenpear.entities.PersonalInformation;
+import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -111,7 +108,18 @@ public class BuyDietController {
     }
 
     //Dobbiamo gestire la creazione
-    public void manageRequest() {
+    public void manageRequest() throws SQLException {
+        //Dato che la transazione è stata eseguita correttamente, possiamo andare a salvare le varie informazioni sulle diverse tabelle:
+        //Salviamo le informazioni sull'utente:
+        Session currentUser = Session.getInstance();
+        try{
+            BuyDietDao buyDietDao = new BuyDietDao();
+            buyDietDao.setUser(currentUser, personalInformationEntity);
+            buyDietDao.setLifeStyle(lifeStyleEntity);
+            buyDietDao.setFoodPreference(foodPreferenceEntity);
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        }
 
     }
 }

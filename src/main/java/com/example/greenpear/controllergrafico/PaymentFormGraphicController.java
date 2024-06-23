@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.sql.SQLException;
+
 public class PaymentFormGraphicController extends GraphicControllerGeneric {
     @FXML
     private Button payPalButton;
@@ -27,12 +29,12 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
         submitButton.setPrefWidth(payPalButton.getPrefWidth());
     }
 
-    public void submitDietRequest(){
+    public void submitDietRequest() throws SQLException {
         //TODO controllo transazione eseguita correttamente
         createRequest();
     }
 
-    private void createRequest(){
+    private void createRequest() throws SQLException {
         //Dobbiamo passare il controllo al controller applicativo, che si occuperà di creare la richiesta
         buyDietController.manageRequest();
     }
