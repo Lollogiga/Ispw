@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 public class BuyDietController {
     //Dietitian:
-    private String dietitian;
+    private String dietitianSelected;
 
     //Personal Information
     private String age;
@@ -53,7 +53,7 @@ public class BuyDietController {
     }
 
     public void storeDietitian(DietitianBean selectedDietitianBean) {
-        this.dietitian = selectedDietitianBean.getDietitian().get();
+        this.dietitianSelected = selectedDietitianBean.getDietitian().get();
     }
 
     //Metodi Restore e Store
