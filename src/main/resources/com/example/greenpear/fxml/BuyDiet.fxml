@@ -48,10 +48,10 @@
             </Button>
          </children>
       </HBox>
-      <TableView fx:id="tableViewDietitian" layoutX="66.0" layoutY="56.0" prefHeight="587.0" prefWidth="718.0" style="-fx-background-color: #2B343B;">
+      <TableView fx:id="tableViewDietitian" layoutX="65.0" layoutY="79.0" prefHeight="587.0" prefWidth="718.0" style="-fx-background-color: #2B343B;">
         <columns>
-            <TableColumn fx:id="dietitian" prefWidth="517.7142715454102" text="Dietitian" />
-            <TableColumn fx:id="price" prefWidth="198.857177734375" text="Price" />
+            <TableColumn fx:id="dietitian" prefWidth="517.7142715454102" resizable="false" text="Dietitian" />
+            <TableColumn fx:id="price" prefWidth="198.857177734375" resizable="false" text="Price" />
         </columns>
       </TableView>
    </children>

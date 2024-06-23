@@ -1,18 +1,19 @@
 package com.example.greenpear.entities;
 
 public class PersonalInformation {
-    private int age;
+    private String age;
 
     private String gender;
 
-    private int weight;
-    private int height;
+    private String weight;
+    private String height;
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
+
         this.age = age;
     }
 
@@ -24,19 +25,19 @@ public class PersonalInformation {
         this.gender = gender;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 }

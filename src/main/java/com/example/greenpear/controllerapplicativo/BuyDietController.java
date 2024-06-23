@@ -6,6 +6,9 @@ import com.example.greenpear.bean.LifeStyleBean;
 import com.example.greenpear.bean.PersonalInformationBean;
 import com.example.greenpear.dao.BuyDietDao;
 import com.example.greenpear.entities.Dietitian;
+import com.example.greenpear.entities.FoodPreference;
+import com.example.greenpear.entities.LifeStyle;
+import com.example.greenpear.entities.PersonalInformation;
 import com.example.greenpear.exception.InformationErrorException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,27 +17,18 @@ import java.sql.SQLException;
 
 public class BuyDietController {
     //Dietitian:
-    private String dietitianSelected;
+    private Dietitian dietitianEntity;
 
     //Personal Information
-    private String age;
-    private String gender;
-    private String weight;
-    private String height;
+    private PersonalInformation personalInformationEntity;
     private boolean initializePersonalInformation = false;
 
     //LifeStyle:
-    private String sport;
-    private String frequency;
-    private String healthGoal;
-    private boolean drunker;
-    private boolean smoker;
+    private LifeStyle lifeStyleEntity;
     private boolean initializeLifeStyle = false;
 
     //FoodPreference
-    private String dietType;
-    private ObservableList<String> foodPreference;
-    private ObservableList<String> allergies;
+    private FoodPreference foodPreferenceEntity;
     private boolean initializeFoodPreference = false;
 
     //Lista di tutti i dietologi:
@@ -53,64 +47,71 @@ public class BuyDietController {
     }
 
     public void storeDietitian(DietitianBean selectedDietitianBean) {
-        this.dietitianSelected = selectedDietitianBean.getDietitian().get();
+        dietitianEntity = new Dietitian(selectedDietitianBean.getDietitian().get(), selectedDietitianBean.getPrice());
     }
 
     //Metodi Restore e Store
 
+    public void storePersonalInformation(PersonalInformationBean personalInformation){
+        personalInformationEntity = new PersonalInformation();
+        personalInformationEntity.setAge(personalInformation.getAge());
+        personalInformationEntity.setGender(personalInformation.getGender());
+        personalInformationEntity.setWeight(personalInformation.getWeight());
+        personalInformationEntity.setHeight(personalInformation.getHeight());
+        initializePersonalInformation = true;
+    }
+
     public void restorePersonalInformation(PersonalInformationBean personalInformationBean) throws InformationErrorException {
         if(initializePersonalInformation){
             //Faccio il restore, in quanto ho giò inizializzato i dati:
-            personalInformationBean.setAge(age);
-            personalInformationBean.setGender(gender);
-            personalInformationBean.setWeight(weight);
-            personalInformationBean.setHeight(height);
+            personalInformationBean.setAge(personalInformationEntity.getAge());
+            personalInformationBean.setGender(personalInformationEntity.getGender());
+            personalInformationBean.setWeight(personalInformationEntity.getWeight());
+            personalInformationBean.setHeight(personalInformationEntity.getHeight());
         }
         //Altrimenti non faccio il restore
     }
 
-    public void storePersonalInformation(PersonalInformationBean personalInformation){
-        age = personalInformation.getAge();
-        gender = personalInformation.getGender();
-        weight = personalInformation.getWeight();
-        height = personalInformation.getHeight();
-        initializePersonalInformation = true;
+    public void storeLifeStyle(LifeStyleBean lifeStyleBean) {
+        lifeStyleEntity = new LifeStyle();
+        //Set information:
+        lifeStyleEntity.setSport(lifeStyleBean.getSport());
+        lifeStyleEntity.setFrequency(lifeStyleBean.getFrequency());
+        lifeStyleEntity.setHealthGoal(lifeStyleBean.getHealthGoal());
+        lifeStyleEntity.setDrunker(lifeStyleBean.getDrunker());
+        lifeStyleEntity.setSmoker(lifeStyleBean.getSmoker());
+        initializeLifeStyle = true;
     }
 
     public void restoreLifeStyle(LifeStyleBean lifeStyleBean) {
         if(initializeLifeStyle){
-            lifeStyleBean.setSport(sport);
-            lifeStyleBean.setFrequency(frequency);
-            lifeStyleBean.setHealthGoal(healthGoal);
-            lifeStyleBean.setDrunker(drunker);
-            lifeStyleBean.setSmoker(smoker);
+            lifeStyleBean.setSport(lifeStyleEntity.getSport());
+            lifeStyleBean.setFrequency(lifeStyleEntity.getFrequency());
+            lifeStyleBean.setHealthGoal(lifeStyleEntity.getHealthGoal());
+            lifeStyleBean.setDrunker(lifeStyleEntity.isDrunker());
+            lifeStyleBean.setSmoker(lifeStyleEntity.isSmoker());
         }
     }
 
-    public void storeLifeStyle(LifeStyleBean lifeStyleBean) {
-        sport = lifeStyleBean.getSport();
-        frequency = lifeStyleBean.getFrequency();
-        healthGoal = lifeStyleBean.getHealthGoal();
-        drunker = lifeStyleBean.getDrunker();
-        smoker = lifeStyleBean.getSmoker();
-        initializeLifeStyle = true;
-    }
-
     public void storeFoodPreference(FoodPreferenceBean foodPreferenceBean){
-        this.dietType = foodPreferenceBean.getDietType();
-        this.foodPreference = foodPreferenceBean.getFoodPreference();
-        this.allergies = foodPreferenceBean.getAllergies();
+        foodPreferenceEntity = new FoodPreference();
+        //Set food preferece:
+        foodPreferenceEntity.setDietType(foodPreferenceBean.getDietType());
+        foodPreferenceEntity.setFoodPreference(foodPreferenceBean.getFoodPreference());
+        foodPreferenceEntity.setAllergies(foodPreferenceBean.getAllergies());
         initializeFoodPreference = true;
     }
 
     public void restoreFoodPreference(FoodPreferenceBean foodPreferenceBean){
         if(initializeFoodPreference){
-            foodPreferenceBean.setDietType(dietType);
-            foodPreferenceBean.setFoodPreference(foodPreference);
-            foodPreferenceBean.setAllergies(allergies);
+            foodPreferenceBean.setDietType(foodPreferenceEntity.getDietType());
+            foodPreferenceBean.setFoodPreference(foodPreferenceEntity.getFoodPreference());
+            foodPreferenceBean.setAllergies(foodPreferenceEntity.getAllergies());
         }
     }
 
+    //Dobbiamo gestire la creazione
+    public void manageRequest() {
 
-
+    }
 }

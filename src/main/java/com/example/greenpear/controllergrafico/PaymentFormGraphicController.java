@@ -1,5 +1,7 @@
 package com.example.greenpear.controllergrafico;
 
+import com.example.greenpear.controllerapplicativo.BuyDietController;
+import com.example.greenpear.controllerapplicativo.BuyDietControllerSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -10,9 +12,10 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
     private Button payPalButton;
     @FXML
     private Button submitButton;
-
+    BuyDietController buyDietController;
     @FXML
     public void initialize(){
+        buyDietController = BuyDietControllerSingleton.getInstance();
         Image image = new Image(getClass().getResource("/com/example/greenpear/images/PayPal.png").toExternalForm());
         ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
@@ -25,7 +28,13 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
     }
 
     public void submitDietRequest(){
-        
+        //TODO controllo transazione eseguita correttamente
+        createRequest();
+    }
+
+    private void createRequest(){
+        //Dobbiamo passare il controllo al controller applicativo, che si occuperà di creare la richiesta
+        buyDietController.manageRequest();
     }
 
 }
