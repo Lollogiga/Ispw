@@ -69,9 +69,9 @@ public class BuyDietDao {
 
     private void setDislikedFood(int foodPreferenceId, FoodPreference foodPreferenceEntity) throws SQLException {
         preparedStatement = connection.prepareStatement(BuyDietQuery.setDislikeDFood());
+        preparedStatement.setInt(2, foodPreferenceId);
         for(String food : foodPreferenceEntity.getFoodDisliked()){
             preparedStatement.setString(1, food);
-            preparedStatement.setInt(2, foodPreferenceId);
             preparedStatement.addBatch();
         }
         preparedStatement.executeBatch();
@@ -79,9 +79,9 @@ public class BuyDietDao {
 
     private void setAllergies(int foodPreferenceId, FoodPreference foodPreferenceEntity) throws SQLException {
         preparedStatement = connection.prepareStatement(BuyDietQuery.setAllergies());
+        preparedStatement.setInt(2, foodPreferenceId);
         for(String allergies : foodPreferenceEntity.getAllergies()){
             preparedStatement.setString(1, allergies);
-            preparedStatement.setInt(2, foodPreferenceId);
             preparedStatement.addBatch();
         }
         preparedStatement.executeBatch(); //Eseguiamo tutte le query nel batch
