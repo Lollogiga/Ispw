@@ -4,10 +4,7 @@ import com.example.greenpear.entities.*;
 import com.example.greenpear.utils.query.BuyDietQuery;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class BuyDietDao {
 
@@ -55,7 +52,7 @@ public class BuyDietDao {
     }
 
     public void setFoodPreference(FoodPreference foodPreferenceEntity) throws SQLException {
-        preparedStatement = connection.prepareStatement(BuyDietQuery.setFoodPreference(), PreparedStatement.RETURN_GENERATED_KEYS);
+        preparedStatement = connection.prepareStatement(BuyDietQuery.setFoodPreference(), Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, foodPreferenceEntity.getDietType());
         preparedStatement.executeUpdate();
         resultSet = preparedStatement.getGeneratedKeys();
