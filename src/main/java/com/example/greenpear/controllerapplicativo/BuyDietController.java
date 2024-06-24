@@ -94,7 +94,7 @@ public class BuyDietController {
         foodPreferenceEntity = new FoodPreference();
         //Set food preferece:
         foodPreferenceEntity.setDietType(foodPreferenceBean.getDietType());
-        foodPreferenceEntity.setFoodPreference(foodPreferenceBean.getFoodPreference());
+        foodPreferenceEntity.setFoodDisliked(foodPreferenceBean.getFoodPreference());
         foodPreferenceEntity.setAllergies(foodPreferenceBean.getAllergies());
         initializeFoodPreference = true;
     }
@@ -102,7 +102,7 @@ public class BuyDietController {
     public void restoreFoodPreference(FoodPreferenceBean foodPreferenceBean){
         if(initializeFoodPreference){
             foodPreferenceBean.setDietType(foodPreferenceEntity.getDietType());
-            foodPreferenceBean.setFoodPreference(foodPreferenceEntity.getFoodPreference());
+            foodPreferenceBean.setFoodPreference(foodPreferenceEntity.getFoodDisliked());
             foodPreferenceBean.setAllergies(foodPreferenceEntity.getAllergies());
         }
     }

@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 
 public class FoodPreference {
     private String dietType;
-    private ObservableList<String> foodPreference;
+    private ObservableList<String> foodDisliked;
     private ObservableList<String> allergies;
 
     public String getDietType() {
@@ -15,12 +15,12 @@ public class FoodPreference {
         this.dietType = dietType;
     }
 
-    public ObservableList<String> getFoodPreference() {
-        return foodPreference;
+    public ObservableList<String> getFoodDisliked() {
+        return foodDisliked;
     }
 
-    public void setFoodPreference(ObservableList<String> foodPreference) {
-        this.foodPreference = foodPreference;
+    public void setFoodDisliked(ObservableList<String> foodDisliked) {
+        this.foodDisliked = foodDisliked;
     }
 
     public ObservableList<String> getAllergies() {

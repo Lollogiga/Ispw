@@ -2,8 +2,6 @@ package com.example.greenpear.entities;
 
 import com.example.greenpear.utils.Role;
 
-
-//TODO Valutare se eliminare passowrd e alla Dao passare password
 public class UserProfile {
     private String username;
     private String email;
