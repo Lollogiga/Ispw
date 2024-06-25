@@ -28,6 +28,12 @@ public class BuyDietController {
     private FoodPreference foodPreferenceEntity;
     private boolean initializeFoodPreference = false;
 
+    //Generate Request:
+    private Request request;
+
+    public BuyDietController() {
+    }
+
     //Lista di tutti i dietologi:
     public void setListDietitian(ObservableList<DietitianBean> dietitianBeans) throws SQLException {
         ObservableList<Dietitian> dietitians = FXCollections.observableArrayList();
@@ -112,11 +118,15 @@ public class BuyDietController {
         //Dato che la transazione è stata eseguita correttamente, possiamo andare a salvare le varie informazioni sulle diverse tabelle:
         //Salviamo le informazioni sull'utente:
         Session currentUser = Session.getInstance();
+        request = new Request(currentUser.getUserProfile().getUsername(), dietitianEntity.getDietitianUsername());
         try{
+            //Salvo le informazioni nelle varie tabelle:
             BuyDietDao buyDietDao = new BuyDietDao();
-            buyDietDao.setUser(currentUser, personalInformationEntity);
-            buyDietDao.setLifeStyle(lifeStyleEntity);
-            buyDietDao.setFoodPreference(foodPreferenceEntity);
+            buyDietDao.setUser(currentUser, personalInformationEntity, request);
+            buyDietDao.setLifeStyle(lifeStyleEntity, request);
+            buyDietDao.setFoodPreference(foodPreferenceEntity, request);
+            //Infine genero la richiesta:
+            buyDietDao.setRequest(request);
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }

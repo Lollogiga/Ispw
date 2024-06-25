@@ -3,7 +3,6 @@ package com.example.greenpear.controllergrafico;
 import com.example.greenpear.bean.LifeStyleBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.exception.InformationErrorException;
-import com.example.greenpear.controllerapplicativo.BuyDietControllerSingleton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -51,10 +50,11 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
 
     private BuyDietController buyDietController;
     private LifeStyleBean lifeStyleBean;
+
     @FXML
-    public void initialize(){
-        buyDietController = BuyDietControllerSingleton.getInstance();
+    public void initialize(BuyDietController buyDietController){
         lifeStyleBean = new LifeStyleBean();
+        this.buyDietController = buyDietController;
 
         // Aggiungi le frequenze di allenamento fino a 7 volte a settimana
         for (int i = 0; i <= 7; i++) {
@@ -69,7 +69,7 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
         choiceBoxHealthGoal.setItems(healthGoalList);
 
         //Gestiamo il restore dei dati:
-        buyDietController.restoreLifeStyle(lifeStyleBean);
+        this.buyDietController.restoreLifeStyle(lifeStyleBean);
         choiceBoxSport.setValue(lifeStyleBean.getSport());
         choiceBoxHealthGoal.setValue(lifeStyleBean.getHealthGoal());
         choiceBoxTrainingFrequency.setValue(lifeStyleBean.getFrequency());
@@ -83,7 +83,6 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
         }else {
             noAlcohol.setSelected(true);
         }
-
     }
 
     //Gestione cambio di scena:
@@ -98,7 +97,7 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
         lifeStyleBean = new LifeStyleBean(sport, frequency, healthGoal, drunker, smoker);
         //Se tutto è andato a buon fine, possiamo settare i campi all'interno del controller applicativo
         this.buyDietController.storeLifeStyle(lifeStyleBean);
-        this.sceneManager.showFormPersonalInformation();
+        this.sceneManager.showFormPersonalInformation(buyDietController);
     }
 
     public void goToFoodPreferences() throws IOException{
@@ -134,11 +133,10 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
             lifeStyleBean = new LifeStyleBean(sport, frequency, healthGoal, drunker, smoker);
             //Se tutto è andato a buon fine, possiamo settare i campi all'interno del controller applicativo
             this.buyDietController.storeLifeStyle(lifeStyleBean);
-            this.sceneManager.showFormFoodPreferences();
+            this.sceneManager.showFormFoodPreferences(buyDietController);
 
         } catch (InformationErrorException e) {
             errorLabel.setText(e.getMessage());
         }
     }
-
 }

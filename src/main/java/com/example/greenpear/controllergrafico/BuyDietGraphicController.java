@@ -2,7 +2,7 @@ package com.example.greenpear.controllergrafico;
 
 import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
-import com.example.greenpear.controllerapplicativo.BuyDietControllerSingleton;
+import com.example.greenpear.exception.InformationErrorException;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -33,7 +33,7 @@ public class BuyDietGraphicController extends GraphicControllerGeneric{
     public void initialize() throws SQLException {
 
         dietitian.setStyle("-fx-alignment: CENTER");
-        buyDietController = BuyDietControllerSingleton.getInstance();
+        buyDietController = new BuyDietController();
 
         buyDietController.setListDietitian(dietitianBeans);
         //Se tutto è andato a buon fine, ora ho una lista di bean contenente tutti i dietologi nel sistema:
@@ -52,15 +52,16 @@ public class BuyDietGraphicController extends GraphicControllerGeneric{
                     if (selectedDietitian != null) {
                         String dietitianUsername = selectedDietitian.getDietitian().get();
                         int dietitianPrice = selectedDietitian.getPrice();
-                        //TODO Passo l'informazione al controller applicativo tramite una bean:
                         DietitianBean selectedDietitianBean = new DietitianBean(dietitianUsername, dietitianPrice);
                         buyDietController.storeDietitian(selectedDietitianBean);
                         try {
                             goToPersonalInformationForm();
                         } catch (IOException e) {
                             System.out.println("Errore");
+                        } catch (InformationErrorException e) {
+                            throw new RuntimeException(e);
                         }
-                        System.out.println("Doppio clic su: " + dietitianUsername + " Costo " + dietitianPrice);
+                        //System.out.println("Doppio clic su: " + dietitianUsername + " Costo " + dietitianPrice);
                     }
                 }
             });
@@ -69,8 +70,8 @@ public class BuyDietGraphicController extends GraphicControllerGeneric{
 
     }
 
-    private void goToPersonalInformationForm() throws IOException {
-        this.sceneManager.showFormPersonalInformation();
+    private void goToPersonalInformationForm() throws IOException, InformationErrorException {
+        this.sceneManager.showFormPersonalInformation(buyDietController);
     }
 
 }

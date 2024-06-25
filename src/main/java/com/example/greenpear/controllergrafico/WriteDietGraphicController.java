@@ -2,7 +2,6 @@ package com.example.greenpear.controllergrafico;
 
 import com.example.greenpear.SceneManager;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
-import com.example.greenpear.controllerapplicativo.BuyDietControllerSingleton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

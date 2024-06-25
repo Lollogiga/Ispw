@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.FoodPreferenceFormGraphicController">
+   <children>
+      <TilePane alignment="CENTER" layoutX="143.0" layoutY="93.0" prefHeight="512.0" prefWidth="564.0" style="-fx-border-color: #6F8A4A; -fx-border-width: 10;" styleClass="-fx-">
+         <children>
+            <VBox alignment="CENTER_LEFT" prefHeight="492.0" prefWidth="392.0">
+               <children>
+                  <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="112.0" text="Fill out the form" textFill="#6f8a4a">
+                     <font>
+                        <Font name="System Italic" size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Food Preference" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <GridPane prefHeight="374.0" prefWidth="392.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints fillHeight="false" maxHeight="63.0" minHeight="10.0" prefHeight="47.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints fillHeight="false" maxHeight="200.0" minHeight="10.0" prefHeight="160.71426391601562" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints fillHeight="false" maxHeight="203.57146562848772" minHeight="10.0" prefHeight="167.57145036969865" valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label contentDisplay="RIGHT" prefHeight="73.0" prefWidth="102.0" text="Diet Type:" textFill="WHITE">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" text="Allergies:" textFill="WHITE" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="Disliked Foods:" textFill="WHITE" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="choiceBoxDiet" prefHeight="25.0" prefWidth="137.0" GridPane.columnIndex="1" />
+                        <VBox alignment="BOTTOM_RIGHT" fillWidth="false" prefHeight="201.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <TextField fx:id="txtAllergies" prefHeight="25.0" prefWidth="119.0" promptText="Add allergies">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="System Italic" size="12.0" />
+                                       </font>
+                                    </TextField>
+                                    <Button mnemonicParsing="false" onMouseClicked="#addAllergies" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #6F8A4A;" text="Add" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Italic" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Region prefHeight="5.0" prefWidth="196.0" />
+                              <ListView fx:id="listViewAllergies" editable="true" prefHeight="95.0" prefWidth="196.0" style="-fx-background-color: #2B343B; -fx-border-color: #6F8A4A; -fx-border-width: 3;" />
+                              <HBox nodeOrientation="LEFT_TO_RIGHT">
+                                 <children>
+                                    <Button mnemonicParsing="false" onMouseClicked="#removeAllergies" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: red;" text="Remove" textFill="#fffbfb">
+                                       <HBox.margin>
+                                          <Insets top="2.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="BOTTOM_RIGHT" fillWidth="false" prefHeight="150.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <children>
+                              <HBox prefHeight="0.0" prefWidth="196.0">
+                                 <children>
+                                    <TextField fx:id="txtFood" prefHeight="25.0" prefWidth="118.0" promptText="Add disliked food">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="System Italic" size="12.0" />
+                                       </font>
+                                    </TextField>
+                                    <Button mnemonicParsing="false" onMouseClicked="#addFood" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #6F8A4A;" text="Add" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Italic" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Region prefHeight="9.0" prefWidth="196.0" />
+                              <ListView fx:id="listViewFood" editable="true" prefHeight="99.0" prefWidth="196.0" style="-fx-background-color: #2B343B; -fx-border-color: #6F8A4A; -fx-border-width: 3;" />
+                              <HBox>
+                                 <VBox.margin>
+                                    <Insets top="2.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <Button mnemonicParsing="false" onMouseClicked="#removeFood" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: red;" text="Remove" textFill="#fffbfb" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </GridPane>
+                  <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="147.0">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <children>
+                        <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#goToLifeStyle" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Prev" textFill="WHITE" />
+                        <Region prefHeight="27.0" prefWidth="270.0" />
+                        <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#goToPayment" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Submit" textFill="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="15.0" prefWidth="288.0">
+                     <children>
+                        <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="256.0" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Italic" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </TilePane>
+      <HBox accessibleRole="CONTEXT_MENU" alignment="CENTER_LEFT" layoutX="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="850.0" style="-fx-background-color: #6F8A4A;">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" rotate="25.06">
+               <image>
+                  <Image url="@../../images/logo.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="15.0" right="-10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Button mnemonicParsing="false" onMouseClicked="#goToHome" style="-fx-background-color: #6F8A4A;" text="Home" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#goToRecipes" style="-fx-background-color: #6F8A4A;" text="Recipes" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: #6F8A4A;" text="About" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#goToBuyDiet" style="-fx-background-color: #5C6D35;" text="Buy diet" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -2,7 +2,6 @@ package com.example.greenpear.controllergrafico;
 
 import com.example.greenpear.bean.FoodPreferenceBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
-import com.example.greenpear.controllerapplicativo.BuyDietControllerSingleton;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.NoSelectionException;
 import javafx.collections.FXCollections;
@@ -50,19 +49,21 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
     private Label errorLabel;
 
     //Funzioni di inizializzazione:
-    BuyDietController buyDietController;
-    FoodPreferenceBean foodPreferenceBean;
+    private BuyDietController buyDietController;
+    private FoodPreferenceBean foodPreferenceBean;
+
 
     @FXML
-    public void initialize() {
-        buyDietController = BuyDietControllerSingleton.getInstance();
+    public void initialize(BuyDietController buyDietController) {
+        this.buyDietController = buyDietController;
+
         allergiesList = FXCollections.observableArrayList();
         foodList = FXCollections.observableArrayList();
         choiceBoxDiet.setItems(dietTypeList);
 
         foodPreferenceBean = new FoodPreferenceBean();
         //Restore:
-        buyDietController.restoreFoodPreference(foodPreferenceBean);
+        this.buyDietController.restoreFoodPreference(foodPreferenceBean);
         choiceBoxDiet.setValue(foodPreferenceBean.getDietType());
         if(foodPreferenceBean.getFoodPreference() != null){
             foodList = foodPreferenceBean.getFoodPreference();
@@ -113,7 +114,7 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
         String dietType = (String) choiceBoxDiet.getValue();
         foodPreferenceBean = new FoodPreferenceBean(dietType, foodList, allergiesList);
         buyDietController.storeFoodPreference(foodPreferenceBean);
-        this.sceneManager.showFormLifeStyle();
+        this.sceneManager.showFormLifeStyle(buyDietController);
     }
 
     public void goToPayment() {
@@ -135,6 +136,6 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
     }
 
     public void goToSubmit() throws IOException {
-        this.sceneManager.showPaymentForm();
+        this.sceneManager.showPaymentForm(buyDietController);
     }
 }

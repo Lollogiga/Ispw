@@ -2,7 +2,6 @@ package com.example.greenpear.controllergrafico;
 
 import com.example.greenpear.bean.PersonalInformationBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
-import com.example.greenpear.controllerapplicativo.BuyDietControllerSingleton;
 import com.example.greenpear.exception.InformationErrorException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,19 +32,23 @@ public class PersonalInformationFormGraphicController extends GraphicControllerG
     private BuyDietController buyDietController;
     private PersonalInformationBean personalInformationBean;
     @FXML
-    public void initialize() throws InformationErrorException {
-        buyDietController = BuyDietControllerSingleton.getInstance();
-        personalInformationBean = new PersonalInformationBean();
+    public void initialize(BuyDietController buyDietController){
+        try {
+            personalInformationBean = new PersonalInformationBean();
+            this.buyDietController = buyDietController;
 
-        choiceBoxGender.setItems(genderList);
-        buyDietController.restorePersonalInformation(personalInformationBean);
-        txtFieldAge.setText(personalInformationBean.getAge());
-        choiceBoxGender.setValue(personalInformationBean.getGender());
-        txtFieldHeight.setText(personalInformationBean.getHeight());
-        txtFieldWeight.setText(personalInformationBean.getWeight());
+            choiceBoxGender.setItems(genderList);
+            buyDietController.restorePersonalInformation(personalInformationBean);
+            txtFieldAge.setText(personalInformationBean.getAge());
+            choiceBoxGender.setValue(personalInformationBean.getGender());
+            txtFieldHeight.setText(personalInformationBean.getHeight());
+            txtFieldWeight.setText(personalInformationBean.getWeight());
+        }catch (InformationErrorException e){
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void goToLifeStyle() throws IOException, InformationErrorException {
+    public void goToLifeStyle() throws IOException {
 
         try{
             String age = txtFieldAge.getText();
@@ -60,10 +63,12 @@ public class PersonalInformationFormGraphicController extends GraphicControllerG
             //Ora le bean dovranno essere passate al controller applicativo che le renderà disponibili
 
             this.buyDietController.storePersonalInformation(personalInformationBean);
-            this.sceneManager.showFormLifeStyle();
+            this.sceneManager.showFormLifeStyle(buyDietController);
         }catch (InformationErrorException e){
             errorLabel.setText(e.getMessage());
         }
 
     }
+
+
 }

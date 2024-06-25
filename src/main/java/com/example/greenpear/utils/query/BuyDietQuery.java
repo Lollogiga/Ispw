@@ -17,6 +17,7 @@ public class BuyDietQuery {
 
     static final String QUERIES_ADD_ALLERGIES = "INSERT INTO allergies (Allergies, foodPreference_idFoodPreference) VALUES (?,?);";
 
+    static final String QUERIES_ADD_REQUEST = "INSERT INTO request (foodPreference_idFoodPreference, Dietitian_dietitianUsername, patient_patientUsername, infoSport_idSport) VALUES (?,?,?,?);";
     public static final String getDietitian(){
         return QUERIES_GET_DIETITIANS;
     }
@@ -33,5 +34,8 @@ public class BuyDietQuery {
     }
 
     public static String setAllergies() { return QUERIES_ADD_ALLERGIES;
+    }
+
+    public static String setRequest() { return QUERIES_ADD_REQUEST;
     }
 }

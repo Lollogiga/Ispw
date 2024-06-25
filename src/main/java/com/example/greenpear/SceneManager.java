@@ -1,8 +1,10 @@
 package com.example.greenpear;
+import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllergrafico.FoodPreferenceFormGraphicController;
 import com.example.greenpear.controllergrafico.LifeStyleFormGraphicController;
+import com.example.greenpear.controllergrafico.PaymentFormGraphicController;
 import com.example.greenpear.controllergrafico.PersonalInformationFormGraphicController;
-import javafx.fxml.FXML;
+import com.example.greenpear.exception.InformationErrorException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -55,27 +57,39 @@ public class SceneManager {
         Parent root = loader.load();
         stage.setScene(new Scene(root));
     }
-    public void showFormPersonalInformation() throws IOException {
+    public void showFormPersonalInformation(BuyDietController buyDietController){
+    try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PersonalInformation.fxml"));
         Parent root = loader.load();
+        PersonalInformationFormGraphicController controller = loader.getController();
+        controller.initialize(buyDietController);
         stage.setScene(new Scene(root));
+    }catch (IOException e){
+        System.out.println(e.getMessage());
+    }
     }
 
-    public void showFormLifeStyle() throws IOException {
+    public void showFormLifeStyle(BuyDietController buyDietController) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/LifeStyle.fxml"));
         Parent root = loader.load();
+        LifeStyleFormGraphicController controller = loader.getController();
+        controller.initialize(buyDietController);
         stage.setScene(new Scene(root));
     }
 
-    public void showFormFoodPreferences() throws IOException {
+    public void showFormFoodPreferences(BuyDietController buyDietController) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/FoodPreferences.fxml"));
         Parent root = loader.load();
+        FoodPreferenceFormGraphicController controller = loader.getController();
+        controller.initialize(buyDietController);
         stage.setScene(new Scene(root));
     }
 
-    public void showPaymentForm() throws IOException {
+    public void showPaymentForm(BuyDietController buyDietController) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentForm.fxml"));
         Parent root = loader.load();
+        PaymentFormGraphicController controller = loader.getController();
+        controller.initialize(buyDietController);
         stage.setScene(new Scene(root));
     }
 
