@@ -1,4 +1,4 @@
-package com.example.greenpear.controllergrafico.buyDietGraphicController;
+package com.example.greenpear.controllergrafico.buydietcontrollergrafico;
 
 import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;

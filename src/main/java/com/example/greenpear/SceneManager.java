@@ -1,12 +1,11 @@
 package com.example.greenpear;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
-import com.example.greenpear.controllergrafico.buyDietGraphicController.FoodPreferenceFormGraphicController;
-import com.example.greenpear.controllergrafico.buyDietGraphicController.LifeStyleFormGraphicController;
-import com.example.greenpear.controllergrafico.buyDietGraphicController.PaymentFormGraphicController;
-import com.example.greenpear.controllergrafico.buyDietGraphicController.PersonalInformationFormGraphicController;
+import com.example.greenpear.controllergrafico.buydietcontrollergrafico.FoodPreferenceFormGraphicController;
+import com.example.greenpear.controllergrafico.buydietcontrollergrafico.LifeStyleFormGraphicController;
+import com.example.greenpear.controllergrafico.buydietcontrollergrafico.PaymentFormGraphicController;
+import com.example.greenpear.controllergrafico.buydietcontrollergrafico.PersonalInformationFormGraphicController;
 import com.example.greenpear.exception.LoadSceneException;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.LoadException;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

@@ -1,4 +1,4 @@
-package com.example.greenpear.controllergrafico.buyDietGraphicController;
+package com.example.greenpear.controllergrafico.buydietcontrollergrafico;
 
 import com.example.greenpear.bean.FoodPreferenceBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
@@ -13,8 +13,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-
-import java.io.IOException;
 
 public class FoodPreferenceFormGraphicController extends GraphicControllerGeneric {
     ObservableList<String> sportList = FXCollections.

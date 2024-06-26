@@ -1,4 +1,4 @@
-package com.example.greenpear.controllergrafico.buyDietGraphicController;
+package com.example.greenpear.controllergrafico.buydietcontrollergrafico;
 
 import com.example.greenpear.bean.LifeStyleBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
@@ -12,8 +12,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-
-import java.io.IOException;
 
 public class LifeStyleFormGraphicController extends GraphicControllerGeneric {
 

@@ -1,4 +1,4 @@
-package com.example.greenpear.controllergrafico.buyDietGraphicController;
+package com.example.greenpear.controllergrafico.buydietcontrollergrafico;
 
 import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
@@ -15,10 +15,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
 import java.sql.SQLException;
-
-import static java.lang.System.exit;
 
 public class BuyDietGraphicController extends GraphicControllerGeneric {
     @FXML
