@@ -1,6 +1,10 @@
 package com.example.greenpear.utils;
 
 public class Printer {
+
+    private Printer(){
+    }
+
     // Codice di escape per il colore rosso:
     public static final String ANSI_RED = "\u001B[31m";
 
@@ -9,7 +13,7 @@ public class Printer {
 
 
 
-    public static void genericPrint(String message, String color){
+    private static void genericPrint(String message, String color){
         System.out.println(color + message);
     }
 
