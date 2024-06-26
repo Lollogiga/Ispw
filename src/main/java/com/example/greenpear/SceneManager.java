@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class SceneManager {
@@ -30,7 +31,7 @@ public class SceneManager {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-        }catch (IOException e){
+        }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();
         }
     }
@@ -41,7 +42,7 @@ public class SceneManager {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-        }catch (IOException e){
+        }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();
         }
     }
@@ -52,7 +53,7 @@ public class SceneManager {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-        }catch (IOException e){
+        }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();
         }
     }
@@ -63,17 +64,17 @@ public class SceneManager {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-        }catch (IOException e){
+        }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();
         }
     }
 
     public void showBuyDiet() throws LoadSceneException{
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDiet.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDie.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
-        }catch (IOException e){
+        }catch (IOException | IllegalStateException e ){
             throw new LoadSceneException("Can't upload scene");
         }
     }
@@ -84,7 +85,7 @@ public class SceneManager {
         PersonalInformationFormGraphicController controller = loader.getController();
         controller.initialize(buyDietController);
         stage.setScene(new Scene(root));
-    }catch (IOException e){
+    }catch (IOException | IllegalStateException e){
         throw new LoadSceneException();
     }
     }
@@ -96,7 +97,7 @@ public class SceneManager {
             LifeStyleFormGraphicController controller = loader.getController();
             controller.initialize(buyDietController);
             stage.setScene(new Scene(root));
-        }catch (IOException e){
+        }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();
         }
     }
@@ -108,7 +109,7 @@ public class SceneManager {
             FoodPreferenceFormGraphicController controller = loader.getController();
             controller.initialize(buyDietController);
             stage.setScene(new Scene(root));
-        }catch (IOException e){
+        }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();
         }
     }
@@ -121,19 +122,18 @@ public class SceneManager {
             PaymentFormGraphicController controller = loader.getController();
             controller.initialize(buyDietController);
             stage.setScene(new Scene(root));
-        }catch (IOException e){
+        }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();
         }
     }
 
     public void showWriteDiet(String meal) throws LoadSceneException{
         try {
-
             meal = "WriteDiet" + meal + ".fxml";
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenpear/fxml/WriteDiet/" + meal));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
-        }catch (IOException e){
+        }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();
         }
     }
