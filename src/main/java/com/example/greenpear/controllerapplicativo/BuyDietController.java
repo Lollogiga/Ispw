@@ -31,8 +31,6 @@ public class BuyDietController {
     //Generate Request:
     private Request request;
 
-    public BuyDietController() {
-    }
 
     //Lista di tutti i dietologi:
     public void setListDietitian(ObservableList<DietitianBean> dietitianBeans) throws SQLException {

@@ -22,13 +22,6 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
     ObservableList<String> healthGoalList = FXCollections.
             observableArrayList("Lose weight", "Gain muscle", "Reduce fat mass", "Maintain weight", "Improve endurance");
 
-    @FXML
-    private ChoiceBox choiceBoxSport;
-    @FXML
-    private ChoiceBox choiceBoxTrainingFrequency;
-    @FXML
-    private ChoiceBox choiceBoxHealthGoal;
-
     //Food preference:
     @FXML
     private ChoiceBox<String> choiceBoxDiet;

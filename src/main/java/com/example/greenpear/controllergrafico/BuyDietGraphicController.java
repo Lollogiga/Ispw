@@ -13,6 +13,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,49 +29,58 @@ public class BuyDietGraphicController extends GraphicControllerGeneric{
     private TableColumn<DietitianBean, Integer> price;
 
     private BuyDietController buyDietController;
-    private ObservableList dietitianBeans = FXCollections.observableArrayList();
+    private ObservableList<DietitianBean> dietitianBeans = FXCollections.observableArrayList();
+
     @FXML
     public void initialize() throws SQLException {
-
-        dietitian.setStyle("-fx-alignment: CENTER");
         buyDietController = new BuyDietController();
-
         buyDietController.setListDietitian(dietitianBeans);
-        //Se tutto è andato a buon fine, ora ho una lista di bean contenente tutti i dietologi nel sistema:
-
-       dietitian.setCellValueFactory(cellData -> cellData.getValue().dietitianUsernameProperty());
-       price.setCellValueFactory(cellData -> {
-           IntegerProperty property = cellData.getValue().priceProperty();
-           return new SimpleIntegerProperty(property.getValue()).asObject();
-       });
-       tableViewDietitian.setItems((ObservableList<DietitianBean>) dietitianBeans);
-        tableViewDietitian.setRowFactory(tv -> {
-            TableRow<DietitianBean> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && !row.isEmpty()) {
-                    DietitianBean selectedDietitian = row.getItem();
-                    if (selectedDietitian != null) {
-                        String dietitianUsername = selectedDietitian.getDietitian().get();
-                        int dietitianPrice = selectedDietitian.getPrice();
-                        DietitianBean selectedDietitianBean = new DietitianBean(dietitianUsername, dietitianPrice);
-                        buyDietController.storeDietitian(selectedDietitianBean);
-                        try {
-                            goToPersonalInformationForm();
-                        } catch (IOException e) {
-                            System.out.println("Errore");
-                        } catch (InformationErrorException e) {
-                            throw new RuntimeException(e);
-                        }
-                        //System.out.println("Doppio clic su: " + dietitianUsername + " Costo " + dietitianPrice);
-                    }
-                }
-            });
-            return row;
-        });
-
+        configureTableColumns();
+        configureTableView();
+        setRowFactory();
     }
 
-    private void goToPersonalInformationForm() throws IOException, InformationErrorException {
+    private void configureTableColumns() {
+        dietitian.setStyle("-fx-alignment: CENTER");
+        dietitian.setCellValueFactory(cellData -> cellData.getValue().dietitianUsernameProperty());
+        price.setCellValueFactory(cellData -> {
+            IntegerProperty property = cellData.getValue().priceProperty();
+            return new SimpleIntegerProperty(property.getValue()).asObject();
+        });
+    }
+
+    private void configureTableView() {
+        tableViewDietitian.setItems(dietitianBeans);
+    }
+
+    private void handleRowClick(MouseEvent event, TableRow<DietitianBean> row) {
+        if (event.getClickCount() == 2 && !row.isEmpty()) {
+            DietitianBean selectedDietitian = row.getItem();
+            if (selectedDietitian != null) {
+                String dietitianUsername = selectedDietitian.getDietitian().get();
+                int dietitianPrice = selectedDietitian.getPrice();
+                DietitianBean selectedDietitianBean = new DietitianBean(dietitianUsername, dietitianPrice);
+                buyDietController.storeDietitian(selectedDietitianBean);
+                try {
+                    System.out.println("Dietologo: " + selectedDietitianBean.getDietitian().get() + " Costo " + selectedDietitianBean.getPrice());
+                    goToPersonalInformationForm();
+                } catch (IOException e) {
+                    System.out.println("Errore");
+                }
+            }
+        }
+    }
+
+    private void setRowFactory() {
+        tableViewDietitian.setRowFactory(tv -> {
+            TableRow<DietitianBean> row = new TableRow<>();
+            row.setOnMouseClicked(event -> handleRowClick(event, row));
+            return row;
+        });
+    }
+
+
+    private void goToPersonalInformationForm() throws IOException {
         this.sceneManager.showFormPersonalInformation(buyDietController);
     }
 
