@@ -1,8 +1,10 @@
-package com.example.greenpear.controllergrafico;
+package com.example.greenpear.controllergrafico.buyDietGraphicController;
 
 import com.example.greenpear.bean.FoodPreferenceBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
+import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.exception.NoSelectionException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -102,15 +104,19 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
         listViewFood.getItems().remove(selectedFood);
     }
 
-    public void goToLifeStyle() throws IOException {
+    public void goToLifeStyle() throws LoadSceneException {
         //Quando vado indietro, non devo avere necessariamente tutti i campi settati
         String dietType = (String) choiceBoxDiet.getValue();
         foodPreferenceBean = new FoodPreferenceBean(dietType, foodList, allergiesList);
         buyDietController.storeFoodPreference(foodPreferenceBean);
-        this.sceneManager.showFormLifeStyle(buyDietController);
+        try {
+            this.sceneManager.showFormLifeStyle(buyDietController);
+        }catch (LoadSceneException e){
+            throw new LoadSceneException(e.getMessage());
+        }
     }
 
-    public void goToPayment() {
+    public void goToPayment() throws LoadSceneException {
         //A differenza dei metodi precedenti, ora è ammesso che gli array siano vuoti, l'unico controllo è sul tipo di dieta
         try {
             String dietType = (String) choiceBoxDiet.getValue();
@@ -123,12 +129,18 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
 
             //Vado alla prossima schermata:
             goToSubmit();
-        } catch (InformationErrorException | IOException e) {
+        } catch (InformationErrorException e) {
             errorLabel.setText(e.getMessage());
+        } catch (LoadSceneException e){
+            throw new LoadSceneException(e.getMessage());
         }
     }
 
-    public void goToSubmit() throws IOException {
-        this.sceneManager.showPaymentForm(buyDietController);
+    public void goToSubmit() throws LoadSceneException {
+        try {
+            this.sceneManager.showPaymentForm(buyDietController);
+        }catch (LoadSceneException e){
+            throw new LoadSceneException(e.getMessage());
+        }
     }
 }

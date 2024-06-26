@@ -1,8 +1,10 @@
-package com.example.greenpear.controllergrafico;
+package com.example.greenpear.controllergrafico.buyDietGraphicController;
 
 import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
-import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
+import com.example.greenpear.exception.LoadSceneException;
+import com.example.greenpear.utils.Printer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -11,16 +13,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class BuyDietGraphicController extends GraphicControllerGeneric{
+import static java.lang.System.exit;
+
+public class BuyDietGraphicController extends GraphicControllerGeneric {
     @FXML
     private TableView<DietitianBean> tableViewDietitian;
     @FXML
@@ -62,10 +62,10 @@ public class BuyDietGraphicController extends GraphicControllerGeneric{
                 DietitianBean selectedDietitianBean = new DietitianBean(dietitianUsername, dietitianPrice);
                 buyDietController.storeDietitian(selectedDietitianBean);
                 try {
-                    System.out.println("Dietologo: " + selectedDietitianBean.getDietitian().get() + " Costo " + selectedDietitianBean.getPrice());
+                    Printer.print("Dietologo: " + selectedDietitianBean.getDietitian().get() + " Costo " + selectedDietitianBean.getPrice());
                     goToPersonalInformationForm();
-                } catch (IOException e) {
-                    System.out.println("Errore");
+                } catch (LoadSceneException e) {
+                    Printer.printError(e.getMessage());
                 }
             }
         }
@@ -80,9 +80,12 @@ public class BuyDietGraphicController extends GraphicControllerGeneric{
     }
 
 
-    private void goToPersonalInformationForm() throws IOException{
-        this.sceneManager.showFormPersonalInformation(buyDietController);
+    private void goToPersonalInformationForm() throws LoadSceneException {
+        try {
+            this.sceneManager.showFormPersonalInformation(buyDietController);
+        } catch (LoadSceneException e) {
+            throw new LoadSceneException(e.getMessage());
+        }
     }
-
 }
 

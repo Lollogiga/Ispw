@@ -30,7 +30,7 @@ public class BuyDietDao {
 
     }
 
-    public void setUser(Session currentUser, PersonalInformation personalInformationEntity, Request request) throws SQLException {
+    public void setUser(Session currentUser, PersonalInformation personalInformationEntity) throws SQLException {
         preparedStatement = connection.prepareStatement(BuyDietQuery.setPatient());
         preparedStatement.setString(1, currentUser.getUserProfile().getUsername());
         preparedStatement.setInt(2, Integer.parseInt(personalInformationEntity.getAge()));

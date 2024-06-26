@@ -3,10 +3,13 @@ package com.example.greenpear.controllergrafico;
 import com.example.greenpear.SceneManager;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.controllerapplicativo.LoginController;
+import com.example.greenpear.exception.LoadSceneException;
+import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.LoadException;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
@@ -28,11 +31,11 @@ public class LoginGraphicController {
     private Label errorLabel;
 
 
-    public void onLogin(){
+    public void onLogin() {
         String usernameField = this.txtFieldUsername.getText();
         String passwordField = this.txtFieldPassword.getText();
-        
-        try{
+
+        try {
             LoginBean loginBean = new LoginBean(usernameField, passwordField);
 
             LoginController loginController = new LoginController();
@@ -40,7 +43,7 @@ public class LoginGraphicController {
             //Se tutto è andatoa  buon fine:
 
             errorLabel.setText("logged as: " + loginBean.getRole());
-            if(loginBean.getRole() == Role.PATIENT){
+            if (loginBean.getRole() == Role.PATIENT) {
                 this.sceneManager.showHome();
             }
 
@@ -48,14 +51,14 @@ public class LoginGraphicController {
             errorLabel.setStyle("-fx-border-color: red;" + // Impostiamo il colore del bordo a rosso
                     "-fx-border-width: 2px;");
             errorLabel.setText(e.getMessage());
-        } catch (IOException e) {
-            exit(-1);
+        } catch (LoadSceneException e) {
+            Printer.printError(e.getMessage());
         }
 
         // Mostra l'errore solo per 2 secondi
         Timeline timeline = new Timeline(new KeyFrame(
                 Duration.seconds(2),
-                ae-> {
+                ae -> {
                     errorLabel.setStyle("");
                     errorLabel.setText("");
                 }
@@ -63,8 +66,12 @@ public class LoginGraphicController {
         ));
         timeline.play();
     }
-    public void goToRegister() throws IOException {
-        this.sceneManager.showRegister();
-    }
 
+    public void goToRegister() throws LoadSceneException {
+        try {
+            this.sceneManager.showRegister();
+        } catch (LoadSceneException e) {
+            throw new LoadSceneException(e.getMessage());
+        }
+    }
 }

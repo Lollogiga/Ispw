@@ -7,6 +7,7 @@ import com.example.greenpear.bean.PersonalInformationBean;
 import com.example.greenpear.dao.BuyDietDao;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -62,13 +63,17 @@ public class BuyDietController {
         initializePersonalInformation = true;
     }
 
-    public void restorePersonalInformation(PersonalInformationBean personalInformationBean) throws InformationErrorException {
+    public void restorePersonalInformation(PersonalInformationBean personalInformationBean) {
+        //Faccio il restore, in quanto ho giò inizializzato i dati:
         if(initializePersonalInformation){
-            //Faccio il restore, in quanto ho giò inizializzato i dati:
-            personalInformationBean.setAge(personalInformationEntity.getAge());
-            personalInformationBean.setGender(personalInformationEntity.getGender());
-            personalInformationBean.setWeight(personalInformationEntity.getWeight());
-            personalInformationBean.setHeight(personalInformationEntity.getHeight());
+            try {
+                personalInformationBean.setAge(personalInformationEntity.getAge());
+                personalInformationBean.setGender(personalInformationEntity.getGender());
+                personalInformationBean.setWeight(personalInformationEntity.getWeight());
+                personalInformationBean.setHeight(personalInformationEntity.getHeight());
+            }catch (InformationErrorException e){
+                Printer.printError(e.getMessage());
+            }
         }
         //Altrimenti non faccio il restore
     }
@@ -120,7 +125,7 @@ public class BuyDietController {
         try{
             //Salvo le informazioni nelle varie tabelle:
             BuyDietDao buyDietDao = new BuyDietDao();
-            buyDietDao.setUser(currentUser, personalInformationEntity, request);
+            buyDietDao.setUser(currentUser, personalInformationEntity);
             buyDietDao.setLifeStyle(lifeStyleEntity, request);
             buyDietDao.setFoodPreference(foodPreferenceEntity, request);
             //Infine genero la richiesta:

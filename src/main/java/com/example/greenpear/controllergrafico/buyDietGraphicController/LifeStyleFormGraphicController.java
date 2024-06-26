@@ -1,8 +1,10 @@
-package com.example.greenpear.controllergrafico;
+package com.example.greenpear.controllergrafico.buyDietGraphicController;
 
 import com.example.greenpear.bean.LifeStyleBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
+import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.exception.LoadSceneException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +15,7 @@ import javafx.scene.control.ToggleGroup;
 
 import java.io.IOException;
 
-public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
+public class LifeStyleFormGraphicController extends GraphicControllerGeneric {
 
 
     //Lifestyle
@@ -87,7 +89,7 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
 
     //Gestione cambio di scena:
 
-    public void goToPersonalInformation() throws IOException{
+    public void goToPersonalInformation() throws LoadSceneException {
         //Devo salvare le informazioni ottenute:
         String sport = (String) choiceBoxSport.getValue();
         String frequency = (String) choiceBoxTrainingFrequency.getValue();
@@ -100,7 +102,7 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
         this.sceneManager.showFormPersonalInformation(buyDietController);
     }
 
-    public void goToFoodPreferences() throws IOException{
+    public void goToFoodPreferences() throws LoadSceneException {
 
         try{
             String sport = (String) choiceBoxSport.getValue();
@@ -137,6 +139,8 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric{
 
         } catch (InformationErrorException e) {
             errorLabel.setText(e.getMessage());
+        }catch (LoadSceneException e){
+            throw new LoadSceneException(e.getMessage());
         }
     }
 }

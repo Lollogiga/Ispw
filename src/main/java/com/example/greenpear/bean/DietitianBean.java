@@ -10,7 +10,7 @@ public class DietitianBean {
     private IntegerProperty price;
 
     public DietitianBean(){
-   }
+    }
 
    public DietitianBean(String dietitian, Integer price){
        this.dietitianUsername = new SimpleStringProperty();

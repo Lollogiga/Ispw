@@ -1,8 +1,10 @@
-package com.example.greenpear.controllergrafico;
+package com.example.greenpear.controllergrafico.buyDietGraphicController;
 
 import com.example.greenpear.bean.PersonalInformationBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
+import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.exception.LoadSceneException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,7 +14,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class PersonalInformationFormGraphicController extends GraphicControllerGeneric{
+public class PersonalInformationFormGraphicController extends GraphicControllerGeneric {
 
     //Attributi:
     ObservableList<String> genderList = FXCollections.
@@ -33,22 +35,19 @@ public class PersonalInformationFormGraphicController extends GraphicControllerG
     private PersonalInformationBean personalInformationBean;
     @FXML
     public void initialize(BuyDietController buyDietController){
-        try {
-            personalInformationBean = new PersonalInformationBean();
-            this.buyDietController = buyDietController;
+        personalInformationBean = new PersonalInformationBean();
+        this.buyDietController = buyDietController;
 
-            choiceBoxGender.setItems(genderList);
-            buyDietController.restorePersonalInformation(personalInformationBean);
-            txtFieldAge.setText(personalInformationBean.getAge());
-            choiceBoxGender.setValue(personalInformationBean.getGender());
-            txtFieldHeight.setText(personalInformationBean.getHeight());
-            txtFieldWeight.setText(personalInformationBean.getWeight());
-        }catch (InformationErrorException e){
-            System.out.println(e.getMessage());
-        }
+        choiceBoxGender.setItems(genderList);
+        buyDietController.restorePersonalInformation(personalInformationBean);
+        txtFieldAge.setText(personalInformationBean.getAge());
+        choiceBoxGender.setValue(personalInformationBean.getGender());
+        txtFieldHeight.setText(personalInformationBean.getHeight());
+        txtFieldWeight.setText(personalInformationBean.getWeight());
+
     }
 
-    public void goToLifeStyle() throws IOException {
+    public void goToLifeStyle() throws LoadSceneException {
 
         try{
             String age = txtFieldAge.getText();
@@ -66,6 +65,8 @@ public class PersonalInformationFormGraphicController extends GraphicControllerG
             this.sceneManager.showFormLifeStyle(buyDietController);
         }catch (InformationErrorException e){
             errorLabel.setText(e.getMessage());
+        } catch (LoadSceneException e) {
+            throw new LoadSceneException(e.getMessage());
         }
 
     }

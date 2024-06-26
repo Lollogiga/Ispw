@@ -3,10 +3,12 @@ package com.example.greenpear.controllergrafico;
 import com.example.greenpear.SceneManager;
 import com.example.greenpear.bean.RegisterBean;
 import com.example.greenpear.controllerapplicativo.RegistrationController;
+import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Role;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.LoadException;
 import javafx.scene.control.*;
 import javafx.util.Duration;
 
@@ -80,8 +82,12 @@ public class RegisterGraphicController {
 
 
     }
-    public void goToLogin() throws IOException {
-        this.sceneManager.showLogIn();
+    public void goToLogin() throws LoadSceneException {
+        try {
+            this.sceneManager.showLogIn();
+        }catch (LoadSceneException e){
+            throw new LoadSceneException(e.getMessage());
+        }
     }
 
 }

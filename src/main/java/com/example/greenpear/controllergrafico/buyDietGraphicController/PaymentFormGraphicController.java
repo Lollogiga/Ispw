@@ -1,6 +1,7 @@
-package com.example.greenpear.controllergrafico;
+package com.example.greenpear.controllergrafico.buyDietGraphicController;
 
 import com.example.greenpear.controllerapplicativo.BuyDietController;
+import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;

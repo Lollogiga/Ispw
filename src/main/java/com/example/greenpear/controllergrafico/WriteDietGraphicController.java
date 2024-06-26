@@ -2,6 +2,7 @@ package com.example.greenpear.controllergrafico;
 
 import com.example.greenpear.SceneManager;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
+import com.example.greenpear.exception.LoadSceneException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -83,20 +84,20 @@ public class WriteDietGraphicController {
     }
 
 
-    public void goToLaunch() throws IOException {
+    public void goToLaunch() throws LoadSceneException {
         this.sceneManager.showWriteDiet("Launch");
 
     }
 
-    public void goToBreakfast() throws IOException {
+    public void goToBreakfast() throws LoadSceneException {
         this.sceneManager.showWriteDiet("Breakfast");
     }
 
-    public void goToDinner() throws IOException {
+    public void goToDinner() throws LoadSceneException {
         this.sceneManager.showWriteDiet("Dinner");
     }
 
-    public void goToSnack() throws IOException {
+    public void goToSnack() throws LoadSceneException {
         this.sceneManager.showWriteDiet("Snack");
     }
 
