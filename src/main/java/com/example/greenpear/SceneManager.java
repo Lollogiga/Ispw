@@ -57,7 +57,7 @@ public class SceneManager {
         Parent root = loader.load();
         stage.setScene(new Scene(root));
     }
-    public void showFormPersonalInformation(BuyDietController buyDietController){
+    public void showFormPersonalInformation(BuyDietController buyDietController) throws IOException {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PersonalInformation.fxml"));
         Parent root = loader.load();
@@ -65,7 +65,7 @@ public class SceneManager {
         controller.initialize(buyDietController);
         stage.setScene(new Scene(root));
     }catch (IOException e){
-        System.out.println(e.getMessage());
+        throw new IOException(e);
     }
     }
 

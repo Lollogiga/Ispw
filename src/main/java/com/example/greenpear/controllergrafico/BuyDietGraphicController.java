@@ -80,7 +80,7 @@ public class BuyDietGraphicController extends GraphicControllerGeneric{
     }
 
 
-    private void goToPersonalInformationForm() throws IOException {
+    private void goToPersonalInformationForm() throws IOException{
         this.sceneManager.showFormPersonalInformation(buyDietController);
     }
 
