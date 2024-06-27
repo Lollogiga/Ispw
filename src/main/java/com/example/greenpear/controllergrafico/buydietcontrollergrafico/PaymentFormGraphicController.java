@@ -1,5 +1,6 @@
 package com.example.greenpear.controllergrafico.buydietcontrollergrafico;
 
+import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import javafx.fxml.FXML;
@@ -14,9 +15,12 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
     private Button payPalButton;
     @FXML
     private Button submitButton;
-    BuyDietController buyDietController;
+    private BuyDietController buyDietController;
+
+
     @FXML
-    public void initialize(BuyDietController buyDietController){
+    public void initialize(BuyDietController buyDietController, LoginBean patientBean){
+        this.userBean = patientBean;
         this.buyDietController = buyDietController;
 
         Image image = new Image(getClass().getResource("/com/example/greenpear/images/PayPal.png").toExternalForm());
@@ -37,7 +41,7 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
 
     private void createRequest() throws SQLException {
         //Dobbiamo passare il controllo al controller applicativo, che si occuperà di creare la richiesta
-        buyDietController.manageRequest();
+        buyDietController.manageRequest(this.userBean);
     }
 
 }

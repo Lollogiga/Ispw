@@ -39,12 +39,12 @@ public class LoginGraphicController {
             LoginBean loginBean = new LoginBean(usernameField, passwordField);
 
             LoginController loginController = new LoginController();
-            loginController.loginUser(loginBean);
+            loginBean = loginController.loginUser(loginBean);
             //Se tutto è andatoa  buon fine:
 
             errorLabel.setText("logged as: " + loginBean.getRole());
             if (loginBean.getRole() == Role.PATIENT) {
-                this.sceneManager.showHome();
+                this.sceneManager.showHome(loginBean);
             }
 
         } catch (CredentialException | SQLException e) {

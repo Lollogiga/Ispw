@@ -1,6 +1,7 @@
 package com.example.greenpear.controllergrafico.buydietcontrollergrafico;
 
 import com.example.greenpear.bean.DietitianBean;
+import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.LoadSceneException;
@@ -29,10 +30,16 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
     private ObservableList<DietitianBean> dietitianBeans = FXCollections.observableArrayList();
 
     @FXML
-    public void initialize() throws SQLException {
+    public void initialize(LoginBean patientBean) {
+
+        this.userBean = patientBean;
         buyDietController = new BuyDietController();
         //Recuperiamo le informazioni dal controller applicativo:
-        dietitianBeans = buyDietController.setListDietitian(dietitianBeans);
+        try {
+            dietitianBeans = buyDietController.setListDietitian(dietitianBeans);
+        }catch (SQLException e){
+            Printer.printError(e.getMessage());
+        }
         configureTableColumns();
         configureTableView();
         setRowFactory();
@@ -80,7 +87,7 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
 
     private void goToPersonalInformationForm() throws LoadSceneException {
         try {
-            this.sceneManager.showFormPersonalInformation(buyDietController);
+            this.sceneManager.showFormPersonalInformation(buyDietController, this.userBean);
         } catch (LoadSceneException e) {
             throw new LoadSceneException(e.getMessage());
         }

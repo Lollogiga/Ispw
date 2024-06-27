@@ -2,7 +2,6 @@ package com.example.greenpear.controllerapplicativo;
 
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.dao.LoginDaoImpl;
-import com.example.greenpear.entities.Session;
 import com.example.greenpear.entities.UserProfile;
 import com.example.greenpear.utils.Role;
 
@@ -15,7 +14,7 @@ public class LoginController {
 
     private Role role;
 
-    public void loginUser(LoginBean bean) throws SQLException, CredentialException{
+    public LoginBean loginUser(LoginBean bean) throws SQLException, CredentialException{
 
         UserProfile userProfile = null;
 
@@ -31,10 +30,7 @@ public class LoginController {
 
             //Se tutto va a buon fine l'utente è loggato e possiamo creare una sessione:
             bean.setRole(userProfile.getRole()); //Il graphic controller deve coscere il ruolo
-            Session session = Session.getInstance();
-            session.setUserProfile(userProfile);
-
-
+            return bean;
         }catch (SQLException e){
             throw new SQLException(e.getMessage());
         }catch (CredentialException e){

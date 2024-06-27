@@ -1,19 +1,15 @@
 package com.example.greenpear.entities;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
-public class Request {
+public class RequestId {
     private int foodPreferenceID;
     private String dietitianUsername;
     private String patientUsername;
     private Integer infoSportId;
     private Boolean requestHandled;
 
+    public RequestId(){}
 
-    public Request(String patientUsername, String dietitianUsername){
+    public RequestId(String patientUsername, String dietitianUsername){
         this.setPatientUsername(patientUsername);
         this.setDietitianUsername(dietitianUsername);
 

@@ -1,6 +1,7 @@
 package com.example.greenpear.controllergrafico.buydietcontrollergrafico;
 
 import com.example.greenpear.bean.LifeStyleBean;
+import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
@@ -53,7 +54,8 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric {
     private LifeStyleBean lifeStyleBean;
 
     @FXML
-    public void initialize(BuyDietController buyDietController){
+    public void initialize(BuyDietController buyDietController, LoginBean patientBean){
+        this.userBean = patientBean;
         this.buyDietController = buyDietController;
 
         // Aggiungi le frequenze di allenamento fino a 7 volte a settimana
@@ -99,7 +101,7 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric {
         //Se tutto è andato a buon fine, possiamo settare i campi all'interno del controller applicativo
         this.buyDietController.storeLifeStyle(lifeStyleBean);
         try {
-            this.sceneManager.showFormPersonalInformation(buyDietController);
+            this.sceneManager.showFormPersonalInformation(buyDietController, userBean);
         }catch (LoadSceneException e){
             Printer.printError(e.getMessage());
         }
@@ -138,7 +140,7 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric {
             lifeStyleBean = new LifeStyleBean(sport, frequency, healthGoal, drunker, smoker);
             //Se tutto è andato a buon fine, possiamo settare i campi all'interno del controller applicativo
             this.buyDietController.storeLifeStyle(lifeStyleBean);
-            this.sceneManager.showFormFoodPreferences(buyDietController);
+            this.sceneManager.showFormFoodPreferences(buyDietController, userBean);
 
         } catch (InformationErrorException e) {
            Printer.printGraphicError(errorLabel, e.getMessage());

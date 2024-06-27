@@ -1,5 +1,6 @@
 package com.example.greenpear.controllergrafico.buydietcontrollergrafico;
 
+import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.PersonalInformationBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
@@ -33,9 +34,11 @@ public class PersonalInformationFormGraphicController extends GraphicControllerG
     private BuyDietController buyDietController;
     private PersonalInformationBean personalInformationBean;
     @FXML
-    public void initialize(BuyDietController buyDietController){
+    public void initialize(BuyDietController buyDietController, LoginBean patientBean){
+        this.userBean = patientBean;
         this.buyDietController = buyDietController;
         choiceBoxGender.setItems(genderList);
+
         //Recuperiamo, se ci sono le informazioni sul controller applicativo:
         personalInformationBean = buyDietController.restorePersonalInformation();
         txtFieldAge.setText(personalInformationBean.getAge());
@@ -60,7 +63,7 @@ public class PersonalInformationFormGraphicController extends GraphicControllerG
             //Ora le bean dovranno essere passate al controller applicativo che le renderà disponibili
 
             this.buyDietController.storePersonalInformation(personalInformationBean);
-            this.sceneManager.showFormLifeStyle(buyDietController);
+            this.sceneManager.showFormLifeStyle(buyDietController, userBean);
         }catch (InformationErrorException e){
             Printer.printGraphicError(errorLabel, e.getMessage());
         } catch (LoadSceneException e) {

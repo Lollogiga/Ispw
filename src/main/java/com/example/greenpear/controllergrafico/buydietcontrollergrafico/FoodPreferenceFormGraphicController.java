@@ -1,6 +1,7 @@
 package com.example.greenpear.controllergrafico.buydietcontrollergrafico;
 
 import com.example.greenpear.bean.FoodPreferenceBean;
+import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
@@ -48,7 +49,8 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
 
 
     @FXML
-    public void initialize(BuyDietController buyDietController) {
+    public void initialize(BuyDietController buyDietController, LoginBean patientBean) {
+        this.userBean = patientBean;
         this.buyDietController = buyDietController;
 
         allergiesList = FXCollections.observableArrayList();
@@ -114,7 +116,7 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
         foodPreferenceBean = new FoodPreferenceBean(dietType, foodList, allergiesList);
         buyDietController.storeFoodPreference(foodPreferenceBean);
         try {
-            this.sceneManager.showFormLifeStyle(buyDietController);
+            this.sceneManager.showFormLifeStyle(buyDietController, userBean);
         }catch (LoadSceneException e){
             Printer.printError(e.getMessage());
         }
@@ -142,7 +144,7 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
 
     public void goToSubmit() throws LoadSceneException {
         try {
-            this.sceneManager.showPaymentForm(buyDietController);
+            this.sceneManager.showPaymentForm(buyDietController, userBean);
         }catch (LoadSceneException e){
             throw new LoadSceneException(e.getMessage());
         }

@@ -1,9 +1,8 @@
 package com.example.greenpear;
+import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
-import com.example.greenpear.controllergrafico.buydietcontrollergrafico.FoodPreferenceFormGraphicController;
-import com.example.greenpear.controllergrafico.buydietcontrollergrafico.LifeStyleFormGraphicController;
-import com.example.greenpear.controllergrafico.buydietcontrollergrafico.PaymentFormGraphicController;
-import com.example.greenpear.controllergrafico.buydietcontrollergrafico.PersonalInformationFormGraphicController;
+import com.example.greenpear.controllergrafico.HomeGraphicController;
+import com.example.greenpear.controllergrafico.buydietcontrollergrafico.*;
 import com.example.greenpear.exception.LoadSceneException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +14,7 @@ public class SceneManager {
     private static Stage stage;
     private static SceneManager sceneManager = null;
 
+
     public static SceneManager getInstance(Stage newStage){
         if(sceneManager==null){
             sceneManager=new SceneManager();
@@ -22,6 +22,7 @@ public class SceneManager {
         }
         return sceneManager;
     }
+
 
     public void showRegister() throws LoadSceneException {
         try {
@@ -45,7 +46,7 @@ public class SceneManager {
         }
     }
 
-    public void showRecipes() throws LoadSceneException{
+    public void showRecipes(LoginBean userBean) throws LoadSceneException{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/Ricettario.fxml"));
             Parent root = loader.load();
@@ -56,69 +57,73 @@ public class SceneManager {
         }
     }
 
-    public void showHome() throws LoadSceneException {
+    public void showHome(LoginBean userBean) throws LoadSceneException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/Home.fxml"));
             Parent root = loader.load();
+            HomeGraphicController controller = loader.getController();
+            controller.initialize(userBean);
             Scene scene = new Scene(root);
             stage.setScene(scene);
         }catch (IOException | IllegalStateException e){
-            throw new LoadSceneException();
+            throw new LoadSceneException("Can't upload scene\n" + e.getMessage());
         }
     }
 
-    public void showBuyDiet() throws LoadSceneException{
+    public void showBuyDiet(LoginBean userBean) throws LoadSceneException{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDiet.fxml"));
             Parent root = loader.load();
+            BuyDietGraphicController controller = loader.getController();
+            controller.initialize(userBean);
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e ){
             throw new LoadSceneException("Can't upload scene");
         }
     }
-    public void showFormPersonalInformation(BuyDietController buyDietController) throws LoadSceneException {
+    public void showFormPersonalInformation(BuyDietController buyDietController, LoginBean userBean) throws LoadSceneException {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PersonalInformation.fxml"));
         Parent root = loader.load();
         PersonalInformationFormGraphicController controller = loader.getController();
-        controller.initialize(buyDietController);
+        controller.initialize(buyDietController, userBean);
         stage.setScene(new Scene(root));
     }catch (IOException | IllegalStateException e){
         throw new LoadSceneException();
     }
     }
 
-    public void showFormLifeStyle(BuyDietController buyDietController) throws LoadSceneException {
+    public void showFormLifeStyle(BuyDietController buyDietController, LoginBean userBean) throws LoadSceneException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/LifeStyle.fxml"));
             Parent root = loader.load();
             LifeStyleFormGraphicController controller = loader.getController();
-            controller.initialize(buyDietController);
+            controller.initialize(buyDietController, userBean);
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();
         }
     }
 
-    public void showFormFoodPreferences(BuyDietController buyDietController) throws LoadSceneException {
+    public void showFormFoodPreferences(BuyDietController buyDietController, LoginBean userBean) throws LoadSceneException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/FoodPreferences.fxml"));
             Parent root = loader.load();
             FoodPreferenceFormGraphicController controller = loader.getController();
-            controller.initialize(buyDietController);
+            controller.initialize(buyDietController, userBean);
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();
         }
     }
 
-    public void showPaymentForm(BuyDietController buyDietController) throws LoadSceneException {
+    public void showPaymentForm(BuyDietController buyDietController, LoginBean userBean) throws LoadSceneException {
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentForm.fxml"));
             Parent root = loader.load();
             PaymentFormGraphicController controller = loader.getController();
-            controller.initialize(buyDietController);
+            controller.initialize(buyDietController, userBean);
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();

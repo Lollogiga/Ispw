@@ -1,9 +1,6 @@
 package com.example.greenpear.controllerapplicativo;
 
-import com.example.greenpear.bean.DietitianBean;
-import com.example.greenpear.bean.FoodPreferenceBean;
-import com.example.greenpear.bean.LifeStyleBean;
-import com.example.greenpear.bean.PersonalInformationBean;
+import com.example.greenpear.bean.*;
 import com.example.greenpear.dao.BuyDietDao;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
@@ -30,7 +27,7 @@ public class BuyDietController {
     private boolean initializeFoodPreference = false;
 
     //Generate Request:
-    private Request request;
+    private RequestId requestId;
 
 
     //Lista di tutti i dietologi:
@@ -113,19 +110,19 @@ public class BuyDietController {
     }
 
     //Dobbiamo gestire la creazione
-    public void manageRequest() throws SQLException {
+    public void manageRequest(LoginBean patientBean) throws SQLException {
         //Dato che la transazione è stata eseguita correttamente, possiamo andare a salvare le varie informazioni sulle diverse tabelle:
         //Salviamo le informazioni sull'utente:
-        Session currentUser = Session.getInstance();
-        request = new Request(currentUser.getUserProfile().getUsername(), dietitianEntity.getDietitianUsername());
+        UserProfile currentUser = new UserProfile(patientBean.getUsername());
+        requestId = new RequestId(currentUser.getUsername(), dietitianEntity.getDietitianUsername());
         try{
             //Salvo le informazioni nelle varie tabelle:
             BuyDietDao buyDietDao = new BuyDietDao();
             buyDietDao.setUser(currentUser, personalInformationEntity);
-            buyDietDao.setLifeStyle(lifeStyleEntity, request);
-            buyDietDao.setFoodPreference(foodPreferenceEntity, request);
+            buyDietDao.setLifeStyle(lifeStyleEntity, requestId);
+            buyDietDao.setFoodPreference(foodPreferenceEntity, requestId);
             //Infine genero la richiesta:
-            buyDietDao.setRequest(request);
+            buyDietDao.setRequest(requestId);
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }

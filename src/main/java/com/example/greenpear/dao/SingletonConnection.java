@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 
 
-
+//TODO verificare che sia singleton
 
 public class SingletonConnection {
     private static Connection connection;
