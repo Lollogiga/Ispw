@@ -9,8 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class SceneManager {
@@ -71,7 +69,7 @@ public class SceneManager {
 
     public void showBuyDiet() throws LoadSceneException{
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDie.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDiet.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e ){

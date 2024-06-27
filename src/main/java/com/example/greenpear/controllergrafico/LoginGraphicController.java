@@ -48,24 +48,12 @@ public class LoginGraphicController {
             }
 
         } catch (CredentialException | SQLException e) {
-            errorLabel.setStyle("-fx-border-color: red;" + // Impostiamo il colore del bordo a rosso
-                    "-fx-border-width: 2px;");
-            errorLabel.setText(e.getMessage());
+            Printer.printGraphicError(errorLabel, e.getMessage());
         } catch (LoadSceneException e) {
             Printer.printError(e.getMessage());
         }
-
-        // Mostra l'errore solo per 2 secondi
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(2),
-                ae -> {
-                    errorLabel.setStyle("");
-                    errorLabel.setText("");
-                }
-
-        ));
-        timeline.play();
     }
+
 
     public void goToRegister() throws LoadSceneException {
         try {

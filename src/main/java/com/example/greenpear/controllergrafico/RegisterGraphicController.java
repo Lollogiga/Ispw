@@ -4,6 +4,7 @@ import com.example.greenpear.SceneManager;
 import com.example.greenpear.bean.RegisterBean;
 import com.example.greenpear.controllerapplicativo.RegistrationController;
 import com.example.greenpear.exception.LoadSceneException;
+import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -64,20 +65,8 @@ public class RegisterGraphicController {
 
 
         } catch (CredentialException | SQLException e) {
-            errorLabel.setStyle("-fx-border-color: red;" + // Impostiamo il colore del bordo a rosso
-                                "-fx-border-width: 2px;");
+            Printer.printGraphicError(errorLabel, e.getMessage());
             errorLabel.setText(e.getMessage());
-
-            // Mostra l'errore solo per 2 secondi
-            Timeline timeline = new Timeline(new KeyFrame(
-                    Duration.seconds(2),
-                    ae-> {
-                        errorLabel.setStyle("");
-                        errorLabel.setText("");
-                    }
-
-            ));
-            timeline.play();
         }
 
 

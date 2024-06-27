@@ -34,7 +34,7 @@ public class BuyDietController {
 
 
     //Lista di tutti i dietologi:
-    public void setListDietitian(ObservableList<DietitianBean> dietitianBeans) throws SQLException {
+    public ObservableList<DietitianBean> setListDietitian(ObservableList<DietitianBean> dietitianBeans) throws SQLException {
         ObservableList<Dietitian> dietitians = FXCollections.observableArrayList();
 
         try{
@@ -43,6 +43,7 @@ public class BuyDietController {
             for(Dietitian dietitian : dietitians){
                 dietitianBeans.add(new DietitianBean(dietitian.getDietitianUsername(), dietitian.getPrice()));
             }
+            return dietitianBeans;
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
@@ -63,20 +64,19 @@ public class BuyDietController {
         initializePersonalInformation = true;
     }
 
-    public void restorePersonalInformation(PersonalInformationBean personalInformationBean) {
+    public PersonalInformationBean restorePersonalInformation() {
         //Faccio il restore, in quanto ho giò inizializzato i dati:
         if(initializePersonalInformation){
             try {
-                personalInformationBean.setAge(personalInformationEntity.getAge());
-                personalInformationBean.setGender(personalInformationEntity.getGender());
-                personalInformationBean.setWeight(personalInformationEntity.getWeight());
-                personalInformationBean.setHeight(personalInformationEntity.getHeight());
+                return new PersonalInformationBean(personalInformationEntity.getAge(),personalInformationEntity.getGender(),personalInformationEntity.getWeight(),personalInformationEntity.getHeight());
             }catch (InformationErrorException e){
                 Printer.printError(e.getMessage());
             }
         }
-        //Altrimenti non faccio il restore
+        //Altrimenti non faccio il restore, torno una bean vuota:
+        return new PersonalInformationBean();
     }
+
 
     public void storeLifeStyle(LifeStyleBean lifeStyleBean) {
         lifeStyleEntity = new LifeStyle();
@@ -89,14 +89,11 @@ public class BuyDietController {
         initializeLifeStyle = true;
     }
 
-    public void restoreLifeStyle(LifeStyleBean lifeStyleBean) {
+    public LifeStyleBean restoreLifeStyle() {
         if(initializeLifeStyle){
-            lifeStyleBean.setSport(lifeStyleEntity.getSport());
-            lifeStyleBean.setFrequency(lifeStyleEntity.getFrequency());
-            lifeStyleBean.setHealthGoal(lifeStyleEntity.getHealthGoal());
-            lifeStyleBean.setDrunker(lifeStyleEntity.isDrunker());
-            lifeStyleBean.setSmoker(lifeStyleEntity.isSmoker());
+            return new LifeStyleBean(lifeStyleEntity.getSport(), lifeStyleEntity.getFrequency(),lifeStyleEntity.getHealthGoal(), lifeStyleEntity.isDrunker(), lifeStyleEntity.isSmoker());
         }
+        return new LifeStyleBean();
     }
 
     public void storeFoodPreference(FoodPreferenceBean foodPreferenceBean){
@@ -108,12 +105,11 @@ public class BuyDietController {
         initializeFoodPreference = true;
     }
 
-    public void restoreFoodPreference(FoodPreferenceBean foodPreferenceBean){
+    public FoodPreferenceBean restoreFoodPreference(){
         if(initializeFoodPreference){
-            foodPreferenceBean.setDietType(foodPreferenceEntity.getDietType());
-            foodPreferenceBean.setFoodPreference(foodPreferenceEntity.getFoodDisliked());
-            foodPreferenceBean.setAllergies(foodPreferenceEntity.getAllergies());
+            return new FoodPreferenceBean(foodPreferenceEntity.getDietType(), foodPreferenceEntity.getFoodDisliked(), foodPreferenceEntity.getAllergies());
         }
+        return new FoodPreferenceBean();
     }
 
     //Dobbiamo gestire la creazione

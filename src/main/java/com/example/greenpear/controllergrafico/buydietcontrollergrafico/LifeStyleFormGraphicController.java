@@ -5,6 +5,7 @@ import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
+import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -53,7 +54,6 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric {
 
     @FXML
     public void initialize(BuyDietController buyDietController){
-        lifeStyleBean = new LifeStyleBean();
         this.buyDietController = buyDietController;
 
         // Aggiungi le frequenze di allenamento fino a 7 volte a settimana
@@ -68,8 +68,8 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric {
         choiceBoxTrainingFrequency.setItems(trainingFrequency);
         choiceBoxHealthGoal.setItems(healthGoalList);
 
-        //Gestiamo il restore dei dati:
-        this.buyDietController.restoreLifeStyle(lifeStyleBean);
+        //Gestiamo il restore dei dati, prendendo i dati (se esistono) dall'istanza del controller applicativo associata all'utente corrente:
+        lifeStyleBean = this.buyDietController.restoreLifeStyle();
         choiceBoxSport.setValue(lifeStyleBean.getSport());
         choiceBoxHealthGoal.setValue(lifeStyleBean.getHealthGoal());
         choiceBoxTrainingFrequency.setValue(lifeStyleBean.getFrequency());
@@ -94,10 +94,15 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric {
         String healthGoal = (String) choiceBoxHealthGoal.getValue();
         drunker = yesAlcohol.isSelected();
         smoker = yesSmoker.isSelected();
+        //Non faccio controlli, mi va bene che ci siano campi vuoti
         lifeStyleBean = new LifeStyleBean(sport, frequency, healthGoal, drunker, smoker);
         //Se tutto è andato a buon fine, possiamo settare i campi all'interno del controller applicativo
         this.buyDietController.storeLifeStyle(lifeStyleBean);
-        this.sceneManager.showFormPersonalInformation(buyDietController);
+        try {
+            this.sceneManager.showFormPersonalInformation(buyDietController);
+        }catch (LoadSceneException e){
+            Printer.printError(e.getMessage());
+        }
     }
 
     public void goToFoodPreferences() throws LoadSceneException {
@@ -136,9 +141,9 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric {
             this.sceneManager.showFormFoodPreferences(buyDietController);
 
         } catch (InformationErrorException e) {
-            errorLabel.setText(e.getMessage());
+           Printer.printGraphicError(errorLabel, e.getMessage());
         }catch (LoadSceneException e){
-            throw new LoadSceneException(e.getMessage());
+            Printer.printError(e.getMessage());
         }
     }
 }

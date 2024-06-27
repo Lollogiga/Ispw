@@ -6,6 +6,7 @@ import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.exception.NoSelectionException;
+import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -54,9 +55,8 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
         foodList = FXCollections.observableArrayList();
         choiceBoxDiet.setItems(dietTypeList);
 
-        foodPreferenceBean = new FoodPreferenceBean();
-        //Restore:
-        this.buyDietController.restoreFoodPreference(foodPreferenceBean);
+        //Restore dal controller applicativo:
+        foodPreferenceBean = this.buyDietController.restoreFoodPreference();
         choiceBoxDiet.setValue(foodPreferenceBean.getDietType());
         if(foodPreferenceBean.getFoodPreference() != null){
             foodList = foodPreferenceBean.getFoodPreference();
@@ -70,39 +70,45 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
 
     @FXML
     public void addAllergies() {
-        allergiesList.add(txtAllergies.getText());
-        listViewAllergies.setItems(allergiesList);
-        txtAllergies.setText("");
-
-    }
-
-    @FXML
-    public void addFood() {
-        foodList.add(txtFood.getText());
-        listViewFood.setItems(foodList);
-        txtFood.setText("");
-    }
-
-    @FXML
-    public void removeAllergies() {
-        try {
-            int selectedAllergies = listViewAllergies.getSelectionModel().getSelectedIndex();
-            if (selectedAllergies == -1) {
-                throw new NoSelectionException("Nessun elemento selezionato per la rimozione");
-            }
-            listViewAllergies.getItems().remove(selectedAllergies);
-        } catch (NoSelectionException e) {
-            errorLabel.setText(e.getMessage());
+        if (!txtAllergies.getText().isEmpty()){
+            allergiesList.add(txtAllergies.getText());
+            listViewAllergies.setItems(allergiesList);
+            txtAllergies.setText("");
         }
     }
 
     @FXML
-    public void removeFood() {
-        int selectedFood = listViewFood.getSelectionModel().getSelectedIndex();
-        listViewFood.getItems().remove(selectedFood);
+    public void addFood() {
+        if (!txtFood.getText().isEmpty()){
+            foodList.add(txtFood.getText());
+            listViewFood.setItems(foodList);
+            txtFood.setText("");
+        }
     }
 
-    public void goToLifeStyle() throws LoadSceneException {
+    @FXML
+    public void removeAllergies() {
+        verifySelection(listViewAllergies);
+    }
+
+    @FXML
+    public void removeFood() {
+        verifySelection(listViewFood);
+    }
+
+    private void verifySelection(ListView<String> listView) {
+        try {
+            int selectedFood = listView.getSelectionModel().getSelectedIndex();
+            if(selectedFood == -1){
+                throw new NoSelectionException("Select an item!");
+            }
+            listView.getItems().remove(selectedFood);
+        }catch (NoSelectionException e){
+            Printer.printGraphicError(errorLabel, e.getMessage());
+        }
+    }
+
+    public void goToLifeStyle(){
         //Quando vado indietro, non devo avere necessariamente tutti i campi settati
         String dietType = (String) choiceBoxDiet.getValue();
         foodPreferenceBean = new FoodPreferenceBean(dietType, foodList, allergiesList);
@@ -110,11 +116,11 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
         try {
             this.sceneManager.showFormLifeStyle(buyDietController);
         }catch (LoadSceneException e){
-            throw new LoadSceneException(e.getMessage());
+            Printer.printError(e.getMessage());
         }
     }
 
-    public void goToPayment() throws LoadSceneException {
+    public void goToPayment() {
         //A differenza dei metodi precedenti, ora è ammesso che gli array siano vuoti, l'unico controllo è sul tipo di dieta
         try {
             String dietType = (String) choiceBoxDiet.getValue();
@@ -128,9 +134,9 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
             //Vado alla prossima schermata:
             goToSubmit();
         } catch (InformationErrorException e) {
-            errorLabel.setText(e.getMessage());
+            Printer.printGraphicError(errorLabel, e.getMessage());
         } catch (LoadSceneException e){
-            throw new LoadSceneException(e.getMessage());
+            Printer.printError(e.getMessage());
         }
     }
 

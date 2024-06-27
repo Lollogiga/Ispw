@@ -2,6 +2,10 @@ package com.example.greenpear.controllergrafico;
 
 import com.example.greenpear.SceneManager;
 import com.example.greenpear.exception.LoadSceneException;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.scene.control.Label;
+import javafx.util.Duration;
 
 
 import java.io.IOException;
@@ -33,4 +37,5 @@ public abstract class GraphicControllerGeneric {
             throw new LoadSceneException(e.getMessage());
         }
     }
+
 }

@@ -31,7 +31,8 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
     @FXML
     public void initialize() throws SQLException {
         buyDietController = new BuyDietController();
-        buyDietController.setListDietitian(dietitianBeans);
+        //Recuperiamo le informazioni dal controller applicativo:
+        dietitianBeans = buyDietController.setListDietitian(dietitianBeans);
         configureTableColumns();
         configureTableView();
         setRowFactory();

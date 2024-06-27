@@ -5,6 +5,7 @@ import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
+import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,11 +34,10 @@ public class PersonalInformationFormGraphicController extends GraphicControllerG
     private PersonalInformationBean personalInformationBean;
     @FXML
     public void initialize(BuyDietController buyDietController){
-        personalInformationBean = new PersonalInformationBean();
         this.buyDietController = buyDietController;
-
         choiceBoxGender.setItems(genderList);
-        buyDietController.restorePersonalInformation(personalInformationBean);
+        //Recuperiamo, se ci sono le informazioni sul controller applicativo:
+        personalInformationBean = buyDietController.restorePersonalInformation();
         txtFieldAge.setText(personalInformationBean.getAge());
         choiceBoxGender.setValue(personalInformationBean.getGender());
         txtFieldHeight.setText(personalInformationBean.getHeight());
@@ -45,7 +45,7 @@ public class PersonalInformationFormGraphicController extends GraphicControllerG
 
     }
 
-    public void goToLifeStyle() throws LoadSceneException {
+    public void goToLifeStyle(){
 
         try{
             String age = txtFieldAge.getText();
@@ -62,9 +62,9 @@ public class PersonalInformationFormGraphicController extends GraphicControllerG
             this.buyDietController.storePersonalInformation(personalInformationBean);
             this.sceneManager.showFormLifeStyle(buyDietController);
         }catch (InformationErrorException e){
-            errorLabel.setText(e.getMessage());
+            Printer.printGraphicError(errorLabel, e.getMessage());
         } catch (LoadSceneException e) {
-            throw new LoadSceneException(e.getMessage());
+            Printer.printError(e.getMessage());
         }
 
     }
