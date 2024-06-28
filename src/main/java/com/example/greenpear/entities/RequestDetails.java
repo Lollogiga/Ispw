@@ -15,12 +15,3 @@ public class RequestDetails extends RequestId{
         this.foodPreferenceRequest = foodPreferenceRequest;
     }
 }
-    /*public String getTypeOfDiet() {
-        return typeOfDiet;
-    }
-
-    public void setTypeOfDiet(String typeOfDiet) {
-        this.typeOfDiet = typeOfDiet;
-    }
-
-     */

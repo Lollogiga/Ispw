@@ -74,7 +74,6 @@ public class RegisterGraphicController {
             pause.play();
         } catch (CredentialException | SQLException e) {
             Printer.printGraphicError(errorLabel, e.getMessage());
-            //errorLabel.setText(e.getMessage());
         }
 
 
