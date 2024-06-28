@@ -3,7 +3,6 @@ package com.example.greenpear.dao;
 import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.UserProfile;
 import com.example.greenpear.utils.query.RequestQuery;
-import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +19,7 @@ public class HomeDao {
     public HomeDao() throws SQLException{
         connection = SingletonConnection.getInstance();
     }
-    public List<RequestDetails> GetRequest(UserProfile currentUser) throws SQLException {
+    public List<RequestDetails> getRequest(UserProfile currentUser) throws SQLException {
         List<RequestDetails> requestList = new ArrayList<RequestDetails>();
         try {
             preparedStatement = connection.prepareStatement(RequestQuery.getRequest());

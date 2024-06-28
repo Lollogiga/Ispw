@@ -2,7 +2,6 @@ package com.example.greenpear.controllerapplicativo;
 
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.RequestBean;
-import com.example.greenpear.dao.BuyDietDao;
 import com.example.greenpear.dao.HomeDao;
 import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.UserProfile;
@@ -20,9 +19,9 @@ public class HomeController {
         String message;
         try{
             HomeDao homeDao = new HomeDao();
-            requestDetails = homeDao.GetRequest(currentUser);
+            requestDetails = homeDao.getRequest(currentUser);
             for(RequestDetails request : requestDetails){
-                if(request.getRequestHandled()){
+                if(Boolean.TRUE.equals(request.getRequestHandled())){
                     message = "Request Manage";
                 }else{
                     message = "Request not Manage";

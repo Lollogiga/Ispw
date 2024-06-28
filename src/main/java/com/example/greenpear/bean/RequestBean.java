@@ -1,12 +1,10 @@
 package com.example.greenpear.bean;
 
-import javafx.scene.control.Button;
-
 public class RequestBean {
     private String requestStatus;
     private String link;
     private String typeOfDiet;
-    private String Dietitian;
+    private String dietitian;
 
     public RequestBean(String requestHandled, String typeOfDiet, String dietitianUsername) {
         this.setRequestStatus(requestHandled);
@@ -39,10 +37,10 @@ public class RequestBean {
     }
 
     public String getDietitian() {
-        return Dietitian;
+        return dietitian;
     }
 
     public void setDietitian(String dietitian) {
-        Dietitian = dietitian;
+        this.dietitian = dietitian;
     }
 }

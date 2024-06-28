@@ -1,5 +1,7 @@
 package com.example.greenpear.controllergrafico;
 
+import com.example.greenpear.bean.LoginBean;
+import com.example.greenpear.entities.UserProfile;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -20,7 +22,9 @@ public class RicettarioGraphicController extends GraphicControllerGeneric{
     private Circle biscottiImage;
 
     @FXML
-    public void initialize(){
+    public void initialize(LoginBean userBean){
+        this.userBean = userBean;
+
         Image colazioneJPG = new Image(getClass().getResource("/com/example/greenpear/images/imagesRicette/colazione.jpg").toExternalForm());
         colazioneImage.setFill(new ImagePattern(colazioneJPG));
 

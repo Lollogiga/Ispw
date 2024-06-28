@@ -1,7 +1,6 @@
 package com.example.greenpear.controllergrafico;
 
 import com.example.greenpear.bean.LoginBean;
-import com.example.greenpear.bean.RegisterBean;
 import com.example.greenpear.bean.RequestBean;
 import com.example.greenpear.controllerapplicativo.HomeController;
 import com.example.greenpear.utils.Printer;
@@ -16,8 +15,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HomeGraphicController extends GraphicControllerGeneric{
