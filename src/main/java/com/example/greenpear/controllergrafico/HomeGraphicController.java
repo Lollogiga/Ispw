@@ -78,7 +78,7 @@ public class HomeGraphicController extends GraphicControllerGeneric{
                 RequestBean request = cellData.getValue();
                 // Azioni da eseguire quando il bottone viene premuto
                 // Ad esempio:
-                System.out.println("Hai cliccato il link per la richiesta: ");
+                Printer.print("Hai cliccato il link per la richiesta: ");
             });
             return new SimpleObjectProperty<>(button);
         });
