@@ -103,9 +103,15 @@
                   </Label>
                   <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="147.0">
                      <children>
-                        <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#goToBuyDiet" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Prev" textFill="WHITE" />
+                        <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#goToBuyDiet" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Prev" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                         <Region prefHeight="27.0" prefWidth="165.0" />
-                        <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#goToLifeStyle" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Next" textFill="WHITE" />
+                        <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#goToLifeStyle" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Next" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </HBox>
                </children>
@@ -126,6 +132,9 @@
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button mnemonicParsing="false" onMouseClicked="#goToRecipes" style="-fx-background-color: #6F8A4A;" text="Recipes" textFill="WHITE">
                <font>
@@ -139,11 +148,17 @@
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button mnemonicParsing="false" onMouseClicked="#goToBuyDiet" style="-fx-background-color: #5C6D35;" text="Buy diet" textFill="WHITE">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </HBox>

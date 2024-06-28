@@ -120,13 +120,19 @@ public class SceneManager {
         }
     }
 
-    public void showPaymentForm(BuyDietController buyDietController, LoginBean userBean) throws LoadSceneException {
+    public void showPaymentForm(BuyDietController buyDietController, LoginBean userBean, String paymentType) throws LoadSceneException {
+        FXMLLoader loader;
         try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentForm.fxml"));
+            if(paymentType == "CreditCard") {
+                loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentForm.fxml"));
+            }else if(paymentType == "PayPal"){
+                loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentFormPayPal.fxml"));
+            } else {
+                throw new LoadSceneException("Set correct paymentType");
+            }
             Parent root = loader.load();
             PaymentFormGraphicController controller = loader.getController();
-            controller.initialize(buyDietController, userBean);
+            controller.initialize(buyDietController, userBean, paymentType);
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();

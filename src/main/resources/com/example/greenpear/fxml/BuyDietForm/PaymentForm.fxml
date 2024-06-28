@@ -48,7 +48,7 @@
                      <children>
                         <VBox>
                            <children>
-                              <TextField prefHeight="25.0" prefWidth="162.0" />
+                              <TextField fx:id="nameTextField" prefHeight="25.0" prefWidth="162.0" />
                               <Label text="First Name" textFill="#b4b4b4">
                                  <font>
                                     <Font name="System Italic" size="11.0" />
@@ -61,7 +61,7 @@
                         </VBox>
                         <VBox GridPane.columnIndex="1">
                            <children>
-                              <TextField prefHeight="25.0" prefWidth="162.0" />
+                              <TextField fx:id="surnameTextField" prefHeight="25.0" prefWidth="162.0" />
                               <Label text="Last Name" textFill="#b4b4b4">
                                  <font>
                                     <Font name="System Italic" size="11.0" />
@@ -74,7 +74,7 @@
                         </VBox>
                         <VBox GridPane.rowIndex="1">
                            <children>
-                              <TextField prefHeight="25.0" prefWidth="162.0" promptText="●●●● ●●●● ●●●● ●●●●" />
+                              <TextField fx:id="cardTextField" prefHeight="25.0" prefWidth="162.0" promptText="●●●● ●●●● ●●●● ●●●●" />
                               <Label text="Credit Card Number" textFill="#b4b4b4">
                                  <font>
                                     <Font name="System Italic" size="11.0" />
@@ -87,7 +87,7 @@
                         </VBox>
                         <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <TextField prefHeight="25.0" prefWidth="162.0" promptText="CVC" />
+                              <TextField fx:id="cvcTextField" prefHeight="25.0" prefWidth="162.0" promptText="CVC" />
                               <Label text="Security Code" textFill="#b4b4b4">
                                  <font>
                                     <Font name="System Italic" size="11.0" />
@@ -100,7 +100,7 @@
                         </VBox>
                         <VBox GridPane.rowIndex="2">
                            <children>
-                              <TextField prefHeight="25.0" prefWidth="162.0" promptText="MM / YY" />
+                              <TextField fx:id="expirationDateTextField" prefHeight="25.0" prefWidth="162.0" promptText="MM / YY" />
                               <Label text="Card Expiration" textFill="#b4b4b4">
                                  <font>
                                     <Font name="System Italic" size="11.0" />
@@ -123,13 +123,19 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="63.0" prefWidth="191.0">
                            <children>
-                              <Button fx:id="submitButton" mnemonicParsing="false" onMouseClicked="#submitDietRequest" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #6F8A4A;" text="Submit Order" />
+                              <Button fx:id="submitButton" mnemonicParsing="false" onMouseClicked="#submitDietRequest" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #6F8A4A;" text="Submit Order">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></Button>
                               <Label contentDisplay="CENTER" text="-------or-------" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets bottom="5.0" top="5.0" />
                                  </VBox.margin>
                               </Label>
-                              <Button fx:id="payPalButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: gold;" />
+                              <Button fx:id="payPalButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: gold;">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></Button>
                            </children>
                         </VBox>
                      </children>
@@ -164,6 +170,9 @@
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button mnemonicParsing="false" onMouseClicked="#goToRecipes" style="-fx-background-color: #6F8A4A;" text="Recipes" textFill="WHITE">
                <font>
@@ -177,11 +186,17 @@
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button mnemonicParsing="false" onMouseClicked="#goToBuyDiet" style="-fx-background-color: #5C6D35;" text="Buy diet" textFill="WHITE">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </HBox>

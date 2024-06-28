@@ -5,6 +5,7 @@ import com.example.greenpear.dao.BuyDietDao;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
+import javafx.animation.Transition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -127,5 +128,16 @@ public class BuyDietController {
             throw new SQLException(e.getMessage());
         }
 
+    }
+
+    public void createTransaction(PaymentBean paymentBean) throws SQLException {
+        Transaction transaction = new Transaction(paymentBean,dietitianEntity);
+        try{
+            BuyDietDao buyDietDao = new BuyDietDao();
+            buyDietDao.setTransaction(transaction);
+
+        }catch (SQLException e){
+            throw new SQLException(e.getMessage());
+        }
     }
 }

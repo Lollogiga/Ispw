@@ -27,6 +27,9 @@
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button mnemonicParsing="false" onMouseClicked="#goToRecipes" style="-fx-background-color: #6F8A4A;" text="Recipes" textFill="WHITE">
                <font>
@@ -40,11 +43,17 @@
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button mnemonicParsing="false" style="-fx-background-color: #5C6D35;" text="Buy diet" textFill="WHITE">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </HBox>

@@ -2,6 +2,7 @@ package com.example.greenpear.dao;
 
 import com.example.greenpear.entities.*;
 import com.example.greenpear.utils.query.BuyDietQuery;
+import com.example.greenpear.utils.query.RequestQuery;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
@@ -88,11 +89,22 @@ public class BuyDietDao {
     }
 
     public void setRequest(RequestId requestId) throws SQLException {
-        preparedStatement = connection.prepareStatement(BuyDietQuery.setRequest());
+        preparedStatement = connection.prepareStatement(RequestQuery.setRequest());
         preparedStatement.setInt(1, requestId.getFoodPreferenceID());
         preparedStatement.setString(2, requestId.getDietitianUsername());
         preparedStatement.setString(3, requestId.getPatientUsername());
         preparedStatement.setInt(4, requestId.getInfoSportId());
+        preparedStatement.executeUpdate();
+    }
+
+    public void setTransaction(Transaction transaction) throws SQLException{
+        preparedStatement = connection.prepareStatement(BuyDietQuery.setTransaction());
+        preparedStatement.setString(1, transaction.getName());
+        preparedStatement.setString(2, transaction.getSurname());
+        preparedStatement.setString(3,transaction.getCardNumber());
+        preparedStatement.setString(4, transaction.getCvc());
+        preparedStatement.setString(5, transaction.getTypePayment());
+        preparedStatement.setInt(6, transaction.getPrice());
         preparedStatement.executeUpdate();
     }
 }

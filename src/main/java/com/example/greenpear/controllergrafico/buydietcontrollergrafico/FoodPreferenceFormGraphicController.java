@@ -144,7 +144,7 @@ public class FoodPreferenceFormGraphicController extends GraphicControllerGeneri
 
     public void goToSubmit() throws LoadSceneException {
         try {
-            this.sceneManager.showPaymentForm(buyDietController, userBean);
+            this.sceneManager.showPaymentForm(buyDietController, userBean, "CreditCard");
         }catch (LoadSceneException e){
             throw new LoadSceneException(e.getMessage());
         }
