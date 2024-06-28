@@ -35,9 +35,7 @@ public class WriteDietGraphicController {
     private TextArea noteTextArea;
 
     private ArrayList<String> listOfFood = new ArrayList<>(
-            Arrays.asList("Ananas", "Banana", "Carote", "Datteri", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental",
-                    "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental", "Emmental"
-                    , "Emmental", "Emmental", "Emmental", "Emmental", "Emmental")
+            Arrays.asList("Ananas", "Banana", "Carote", "Datteri", "Emmental")
     );
 
     private ObservableList<String> foodList;
