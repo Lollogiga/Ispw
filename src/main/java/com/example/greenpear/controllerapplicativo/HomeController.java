@@ -26,7 +26,7 @@ public class HomeController {
                 }else{
                     message = "Request not Manage";
                 }
-                requestBeans.add(new RequestBean(message, request.getTypeOfDiet(), request.getDietitianUsername()));
+                requestBeans.add(new RequestBean(message, request.getFoodPreferenceRequest().getDietType(), request.getDietitianUsername()));
             }
             return requestBeans;
         } catch (SQLException e) {

@@ -1,5 +1,6 @@
 package com.example.greenpear.dao;
 
+import com.example.greenpear.entities.FoodPreference;
 import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.UserProfile;
 import com.example.greenpear.utils.query.RequestQuery;
@@ -26,11 +27,10 @@ public class HomeDao {
             preparedStatement.setString(1, currentUser.getUsername());
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                //todo: Posso sostituire con un costruttore!:
-                RequestDetails requestDetails = new RequestDetails();
+                RequestDetails requestDetails = new RequestDetails(new FoodPreference());
                 requestDetails.setDietitianUsername(resultSet.getString("dietitianUsername"));
                 requestDetails.setRequestHandled(resultSet.getBoolean("requestStatus"));
-                requestDetails.setTypeOfDiet(resultSet.getString("dietType"));
+                requestDetails.getFoodPreferenceRequest().setDietType(resultSet.getString("dietType"));
                 requestList.add(requestDetails);
             }
             return requestList;

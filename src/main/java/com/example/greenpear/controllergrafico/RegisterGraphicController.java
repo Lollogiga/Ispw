@@ -6,16 +6,17 @@ import com.example.greenpear.controllerapplicativo.RegistrationController;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.LoadException;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.util.Duration;
 
 import javax.security.auth.login.CredentialException;
-import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Timer;
 
 public class RegisterGraphicController {
     private final SceneManager sceneManager = SceneManager.getInstance(null);
@@ -61,12 +62,19 @@ public class RegisterGraphicController {
 
             //Invio le bean al contoller applicativo che gestirà la registrazione:
             registrationController.registerNewUser(registerBean);
-            errorLabel.setText("Account created\n");
-
-
+            errorLabel.setText("Registration complete");
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> {
+                try {
+                    goToLogin();
+                } catch (LoadSceneException e) {
+                    Printer.printError(e.getMessage());
+                }
+            });
+            pause.play();
         } catch (CredentialException | SQLException e) {
             Printer.printGraphicError(errorLabel, e.getMessage());
-            errorLabel.setText(e.getMessage());
+            //errorLabel.setText(e.getMessage());
         }
 
 
