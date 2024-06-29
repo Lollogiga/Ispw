@@ -43,13 +43,13 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
     private BuyDietController buyDietController;
     private PaymentBean paymentBean;
     private String paymentType;
-    private static final String cardType = "CreditCard";
+    private static final String CARDTYPE = "CreditCard";
     @FXML
     public void initialize(BuyDietController buyDietController, LoginBean patientBean, String paymentType){
         this.userBean = patientBean;
         this.buyDietController = buyDietController;
         this.paymentType = paymentType;
-        if(paymentType.equals(cardType)) {
+        if(paymentType.equals(CARDTYPE)) {
             Image image = new Image(getClass().getResource("/com/example/greenpear/images/PayPal.png").toExternalForm());
             ImageView imageView = new ImageView(image);
             imageView.setPreserveRatio(true);
@@ -66,7 +66,7 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
     public void submitDietRequest() {
         //TODO controllo transazione eseguita correttamente
         try{
-            if(paymentType.equals(cardType)) {
+            if(paymentType.equals(CARDTYPE)) {
                 paymentBean = new PaymentBean(nameTextField.getText(),
                         surnameTextField.getText(),
                         cardTextField.getText(),
@@ -107,7 +107,7 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
 
     public void goToCreditCard() {
         try {
-            this.sceneManager.showPaymentForm(buyDietController, userBean, cardType);
+            this.sceneManager.showPaymentForm(buyDietController, userBean, CARDTYPE);
         }catch (LoadSceneException e){
             Printer.printError(e.getMessage());
         }
