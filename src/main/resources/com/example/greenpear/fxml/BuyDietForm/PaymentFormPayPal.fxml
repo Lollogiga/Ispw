@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.buydietcontrollergrafico.PaymentFormGraphicController">
+   <children>
+      <TilePane alignment="CENTER" layoutX="186.0" layoutY="122.0" prefHeight="493.0" prefWidth="478.0" style="-fx-border-color: #6F8A4A; -fx-border-width: 10;" styleClass="-fx-">
+         <children>
+            <VBox alignment="CENTER_LEFT" prefHeight="492.0" prefWidth="392.0">
+               <children>
+                  <HBox alignment="BASELINE_RIGHT">
+                     <children>
+                        <Button contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#goToFoodPreference" style="-fx-background-color: #2B343B; -fx-border-width: 3; -fx-border-color: #6F8A4A; -fx-border-radius: 15;" text="X" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                     </children>
+                  </HBox>
+                  <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="155.0" text="Payment Methods" textFill="#6f8a4a">
+                     <font>
+                        <Font name="System Italic" size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="19.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <ImageView fitHeight="53.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/PayPal.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <VBox alignment="CENTER" fillWidth="false" prefHeight="255.0" prefWidth="360.0">
+                     <children>
+                        <HBox />
+                        <VBox prefHeight="91.0" prefWidth="202.0">
+                           <children>
+                              <Label text="E-mail" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Italic" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtFieldUsername" prefHeight="29.0" prefWidth="223.0" promptText="Username">
+                                 <font>
+                                    <Font name="System Italic" size="13.0" />
+                                 </font>
+                              </TextField>
+                              <Label text="Password" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Italic" size="15.0" />
+                                 </font>
+                              </Label>
+                              <PasswordField fx:id="txtFieldPassword" prefHeight="30.0" prefWidth="169.0" promptText="password">
+                                 <font>
+                                    <Font name="System Italic" size="13.0" />
+                                 </font>
+                              </PasswordField>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label fx:id="errorLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="206.0" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Italic" size="10.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Button fx:id="payPalButton" mnemonicParsing="false" onMouseClicked="#submitDietRequest" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: gold;" text="Submit order" textFill="#0004ff">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Label contentDisplay="CENTER" text="-------or-------" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Button fx:id="submitButton" mnemonicParsing="false" onMouseClicked="#goToCreditCard" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #6F8A4A;" text="Credit Card">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="15.0" prefWidth="288.0">
+                     <children>
+                        <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="256.0" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Italic" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </TilePane>
+      <HBox accessibleRole="CONTEXT_MENU" alignment="CENTER_LEFT" layoutX="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="850.0" style="-fx-background-color: #6F8A4A;">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" rotate="25.06">
+               <image>
+                  <Image url="@../../images/logo.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="15.0" right="-10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Button mnemonicParsing="false" onMouseClicked="#goToHome" style="-fx-background-color: #6F8A4A;" text="Home" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#goToRecipes" style="-fx-background-color: #6F8A4A;" text="Recipes" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: #6F8A4A;" text="About" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#goToBuyDiet" style="-fx-background-color: #5C6D35;" text="Buy diet" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

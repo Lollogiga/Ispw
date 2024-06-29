@@ -6,6 +6,7 @@ public class PaymentBean {
     private String name;
     private String surname;
     private String email;
+    private String password;
     private String cardNumber;
     private String cvc;
     private String expirationDate;
@@ -23,12 +24,11 @@ public class PaymentBean {
         this.setPaymentType(paymentType);
     }
 
-    public PaymentBean(String email) throws InformationErrorException {
+    public PaymentBean(String email, String password, String paymentType) throws InformationErrorException {
         this.setEmail(email);
+        this.setPassword(password);
+        this.setPaymentType(paymentType);
     }
-
-
-
 
     // Getter e Setter con validazione
 
@@ -43,6 +43,16 @@ public class PaymentBean {
         } else{
             throw new InformationErrorException("Set Email");
         }
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) throws InformationErrorException {
+        if(!password.isEmpty()){
+            this.password = password;
+        }else throw new InformationErrorException("Set Password");
     }
 
     public String getPaymentType() {

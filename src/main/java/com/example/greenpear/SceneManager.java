@@ -124,9 +124,9 @@ public class SceneManager {
         FXMLLoader loader;
         try {
             if(paymentType.equals("CreditCard")) {
-                loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentForm.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentForm1.fxml"));
             }else if(paymentType.equals("PayPal")){
-                loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentFormPayPal.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentFormPayPal1.fxml"));
             } else {
                 throw new LoadSceneException("Set correct paymentType");
             }
