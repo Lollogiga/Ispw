@@ -50,7 +50,7 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
         this.userBean = patientBean;
         this.buyDietController = buyDietController;
         this.paymentType = paymentType;
-        if(paymentType == "CreditCard") {
+        if(paymentType.equals("CreditCard")) {
             Image image = new Image(getClass().getResource("/com/example/greenpear/images/PayPal.png").toExternalForm());
             ImageView imageView = new ImageView(image);
             imageView.setPreserveRatio(true);
@@ -67,7 +67,7 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
     public void submitDietRequest() {
         //TODO controllo transazione eseguita correttamente
         try{
-            if(paymentType == "CreditCard") {
+            if(paymentType.equals("CreditCard")) {
                 paymentBean = new PaymentBean(nameTextField.getText(),
                         surnameTextField.getText(),
                         cardTextField.getText(),
