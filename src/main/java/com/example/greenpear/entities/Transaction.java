@@ -5,6 +5,7 @@ import com.example.greenpear.bean.PaymentBean;
 public class Transaction {
     private String name;
     private String surname;
+    private String email;
     private String cardNumber;
     private String cvc;
     private String typePayment;
@@ -13,6 +14,7 @@ public class Transaction {
     public Transaction(PaymentBean paymentBean, Dietitian dietitianEntity) {
         this.setName(paymentBean.getName());
         this.setSurname(paymentBean.getSurname());
+        this.setEmail(paymentBean.getEmail());
         this.setCardNumber(paymentBean.getCardNumber());
         this.setCvc(paymentBean.getCvc());
         this.setTypePayment(paymentBean.getPaymentType());
@@ -33,6 +35,14 @@ public class Transaction {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getCardNumber() {
@@ -66,4 +76,5 @@ public class Transaction {
     public void setPrice(int price) {
         this.price = price;
     }
+
 }

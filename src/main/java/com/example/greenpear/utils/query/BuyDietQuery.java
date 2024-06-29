@@ -17,7 +17,7 @@ public class BuyDietQuery {
 
     static final String QUERIES_ADD_ALLERGIES = "INSERT INTO allergies (Allergies, foodPreference_idFoodPreference) VALUES (?,?);";
 
-    static final String QUERIES_ADD_TRANSACTION = "INSERT INTO transaction (name, surname,creditNumber, cvc, typePayment, price) VALUES (?,?,?,?,?,?);";
+    static final String QUERIES_ADD_TRANSACTION = "INSERT INTO transaction (name, surname, email, creditNumber, cvc, typePayment, price) VALUES (?,?,?,?,?,?, ?);";
     public static final String getDietitian(){
         return QUERIES_GET_DIETITIANS;
     }

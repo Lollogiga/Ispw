@@ -6,6 +6,7 @@ import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -40,7 +41,6 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
         this.userBean = patientBean;
         this.buyDietController = buyDietController;
         this.paymentType = paymentType;
-
         Image image = new Image(getClass().getResource("/com/example/greenpear/images/PayPal.png").toExternalForm());
         ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
@@ -51,6 +51,7 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
         submitButton.setPrefHeight(payPalButton.getPrefHeight());
         submitButton.setPrefWidth(payPalButton.getPrefWidth());
     }
+
 
     public void submitDietRequest() {
         //TODO controllo transazione eseguita correttamente
@@ -63,7 +64,7 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
                                             paymentType
             );
             buyDietController.createTransaction(paymentBean);
-            createRequest();
+            //createRequest();
         }catch (InformationErrorException e){
             Printer.printGraphicError(errorLabel, e.getMessage());
         } catch (SQLException e){

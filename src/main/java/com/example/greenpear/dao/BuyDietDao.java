@@ -98,13 +98,14 @@ public class BuyDietDao {
     }
 
     public void setTransaction(Transaction transaction) throws SQLException{
-        preparedStatement = connection.prepareStatement(BuyDietQuery.setTransaction());
-        preparedStatement.setString(1, transaction.getName());
-        preparedStatement.setString(2, transaction.getSurname());
-        preparedStatement.setString(3,transaction.getCardNumber());
-        preparedStatement.setString(4, transaction.getCvc());
-        preparedStatement.setString(5, transaction.getTypePayment());
-        preparedStatement.setInt(6, transaction.getPrice());
-        preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement(BuyDietQuery.setTransaction());
+            preparedStatement.setString(1, transaction.getName());
+            preparedStatement.setString(2, transaction.getSurname());
+            preparedStatement.setString(3, transaction.getEmail());
+            preparedStatement.setString(4, transaction.getCardNumber());
+            preparedStatement.setString(5, transaction.getCvc());
+            preparedStatement.setString(6, transaction.getTypePayment());
+            preparedStatement.setInt(7, transaction.getPrice());
+            preparedStatement.executeUpdate();
     }
 }
