@@ -64,7 +64,7 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
                                             paymentType
             );
             buyDietController.createTransaction(paymentBean);
-            //createRequest();
+            createRequest();
         }catch (InformationErrorException e){
             Printer.printGraphicError(errorLabel, e.getMessage());
         } catch (SQLException e){

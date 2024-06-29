@@ -9,7 +9,7 @@ public class PaymentBean {
     private String cardNumber;
     private String cvc;
     private String expirationDate;
-    private String PaymentType;
+    private String paymentType;
 
     // Costruttore
 
@@ -46,11 +46,11 @@ public class PaymentBean {
     }
 
     public String getPaymentType() {
-        return PaymentType;
+        return paymentType;
     }
 
     public void setPaymentType(String paymentType) {
-        PaymentType = paymentType;
+        this.paymentType = paymentType;
     }
 
     public String getName() {
