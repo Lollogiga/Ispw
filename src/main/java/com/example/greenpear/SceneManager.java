@@ -123,9 +123,9 @@ public class SceneManager {
     public void showPaymentForm(BuyDietController buyDietController, LoginBean userBean, String paymentType) throws LoadSceneException {
         FXMLLoader loader;
         try {
-            if(paymentType == "CreditCard") {
+            if(paymentType.equals("CreditCard")) {
                 loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentForm.fxml"));
-            }else if(paymentType == "PayPal"){
+            }else if(paymentType.equals("PayPal")){
                 loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentFormPayPal.fxml"));
             } else {
                 throw new LoadSceneException("Set correct paymentType");
