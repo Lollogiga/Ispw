@@ -5,7 +5,7 @@ public class BuyDietQuery {
 
     private BuyDietQuery(){}
 
-    static final String QUERIES_GET_DIETITIANS = "SELECT * FROM dietitian";
+    static final String QUERIES_GET_DIETITIANS = "SELECT * FROM dietitian WHERE available = 1 ";
     static final String QUERIES_ADD_PATIENT = "INSERT INTO patient(patientUsername, age, height, weight, gender) VALUES (?,?,?, ?, ?)" +
                                                 "ON DUPLICATE KEY UPDATE age = VALUES(age), height = VALUES(height), weight = VALUES(weight), gender = VALUES(gender);";
 

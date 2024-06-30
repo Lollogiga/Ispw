@@ -39,6 +39,13 @@ public class Printer {
         setTimerError(errorLabel);
     }
 
+    public static void printGraphic(Label errorLabel, String message){
+        errorLabel.setStyle("-fx-border-color: white;" + // Impostiamo il colore del bordo a rosso
+                "-fx-border-width: 2px;");
+        errorLabel.setText(message);
+        setTimerError(errorLabel);
+    }
+
     private static void setTimerError(Label errorLabel) {
         // Mostra l'errore solo per 2 secondi
         Timeline timeline = new Timeline(new KeyFrame(

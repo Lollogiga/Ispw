@@ -1,8 +1,10 @@
 package com.example.greenpear.controllerapplicativo;
 
+import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.RequestBean;
 import com.example.greenpear.dao.HomeDao;
+import com.example.greenpear.entities.Dietitian;
 import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.UserProfile;
 
@@ -29,6 +31,37 @@ public class HomeController {
                 requestBeans.add(new RequestBean(message, request.getFoodPreferenceRequest().getDietType(), request.getDietitianUsername()));
             }
             return requestBeans;
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
+
+    public DietitianBean restoreDietitianInfo(LoginBean userBean) throws SQLException {
+        UserProfile currentUser = new UserProfile(userBean.getUsername());
+        Dietitian dietitian = new Dietitian();
+        DietitianBean dietitianBean;
+        dietitian.setDietitianUsername(currentUser.getUsername());
+        try{
+            HomeDao homeDao = new HomeDao();
+            dietitian = homeDao.getDietitianInfo(dietitian);
+            if(dietitian != null) {
+                dietitianBean = new DietitianBean(dietitian.getDietitianUsername(),
+                        dietitian.getPrice(),
+                        dietitian.getAvailable(),
+                        dietitian.getPersonalEducation(),
+                        dietitian.getWorkExperience());
+                return dietitianBean;
+            }else { return null;}
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
+
+    public void storeDietitianInfo(DietitianBean dietitianBean) throws SQLException {
+        Dietitian dietitian = new Dietitian(dietitianBean.getDietitian().get(), dietitianBean.getPrice(),dietitianBean.getAvailable(), dietitianBean.getPersonalEducation(), dietitianBean.getWorkExperience());
+        try{
+            HomeDao homeDao = new HomeDao();
+            homeDao.setDietitianInfo(dietitian);
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }

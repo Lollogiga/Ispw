@@ -43,9 +43,7 @@ public class LoginGraphicController {
             //Se tutto è andatoa  buon fine:
 
             errorLabel.setText("logged as: " + loginBean.getRole());
-            if (loginBean.getRole() == Role.PATIENT) {
-                this.sceneManager.showHome(loginBean);
-            }
+            this.sceneManager.showHome(loginBean);
 
         } catch (CredentialException | SQLException e) {
             Printer.printGraphicError(errorLabel, e.getMessage());

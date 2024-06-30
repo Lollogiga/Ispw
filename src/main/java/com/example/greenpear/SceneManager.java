@@ -5,6 +5,7 @@ import com.example.greenpear.controllergrafico.HomeGraphicController;
 import com.example.greenpear.controllergrafico.RicettarioGraphicController;
 import com.example.greenpear.controllergrafico.buydietcontrollergrafico.*;
 import com.example.greenpear.exception.LoadSceneException;
+import com.example.greenpear.utils.Role;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -62,7 +63,12 @@ public class SceneManager {
 
     public void showHome(LoginBean userBean) throws LoadSceneException {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/Home.fxml"));
+            FXMLLoader loader;
+            if(userBean.getRole() == Role.PATIENT) {
+                loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/Home.fxml"));
+            }else{
+                loader = new FXMLLoader((getClass().getResource("/com/example/GreenPear/fxml/HomeD.fxml")));
+            }
             Parent root = loader.load();
             HomeGraphicController controller = loader.getController();
             controller.initialize(userBean);
