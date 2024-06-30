@@ -79,7 +79,7 @@ public class HomeGraphicController extends GraphicControllerGeneric{
                 textAreaEducational.setText(dietitianBean.getPersonalEducation());
                 textAreaWork.setText(dietitianBean.getWorkExperience());
                 textFieldPrice.setText(dietitianBean.getPrice().toString());
-                if(dietitianBean.getAvailable()){
+                if(Boolean.TRUE.equals(dietitianBean.getAvailable())){
                     radioButtonAvailable.setSelected(true);
                 }else{
                     radioButtonUnavailable.setSelected(true);

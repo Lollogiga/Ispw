@@ -1,6 +1,9 @@
 package com.example.greenpear.utils.query;
 
+import com.example.greenpear.dao.InfoDietitianDao;
+
 public class InfoDietitianQuery {
+    private InfoDietitianQuery(){}
     static final String QUERIES_GET_DIETITIANS_INFO = "SELECT * FROM dietitian WHERE  dietitianUsername = ?";
 
     static final String QUERIES_SET_DIETITIAN_INFO = "INSERT INTO dietitian(dietitianUsername, price, available, personalEducation, workExperience) VALUES (?,?,?, ?, ?)" +
