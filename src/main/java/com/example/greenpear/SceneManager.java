@@ -99,7 +99,6 @@ public class SceneManager {
             controller.initialize(buyDietController, userBean);
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e){
-            e.printStackTrace();
             throw new LoadSceneException("Can't upload scene" + e.getMessage());
         }
     }
