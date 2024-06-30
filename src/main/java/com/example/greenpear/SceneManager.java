@@ -87,7 +87,7 @@ public class SceneManager {
             controller.initialize(userBean);
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e ){
-            throw new LoadSceneException("Can't upload scene");
+            throw new LoadSceneException("Can't upload scene" + e.getMessage());
         }
     }
 
@@ -98,8 +98,9 @@ public class SceneManager {
             DietitianInfoGraphicController controller = loader.getController();
             controller.initialize(buyDietController, userBean);
             stage.setScene(new Scene(root));
-        }catch (IOException | IllegalStateException e ){
-            throw new LoadSceneException("Can't upload scene");
+        }catch (IOException | IllegalStateException e){
+            e.printStackTrace();
+            throw new LoadSceneException("Can't upload scene" + e.getMessage());
         }
     }
     public void showFormPersonalInformation(BuyDietController buyDietController, LoginBean userBean) throws LoadSceneException {
@@ -142,9 +143,9 @@ public class SceneManager {
         FXMLLoader loader;
         try {
             if(paymentType.equals("CreditCard")) {
-                loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentForm1.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentForm.fxml"));
             }else if(paymentType.equals("PayPal")){
-                loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentFormPayPal1.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PaymentFormPayPal.fxml"));
             } else {
                 throw new LoadSceneException("Set correct paymentType");
             }

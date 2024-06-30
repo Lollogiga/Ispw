@@ -35,6 +35,15 @@ public class DietitianBean {
         this.setWorkExperience(workExperience);
    }
 
+    public DietitianBean(String dietitianUsername, int price, String personalEducation, String workExperience) {
+        this.dietitianUsername = new SimpleStringProperty();
+        this.price = new SimpleIntegerProperty();
+        this.setDietitian(dietitianUsername);
+        this.setPrice(price);
+        this.setPersonalEducation(personalEducation);
+        this.setWorkExperience(workExperience);
+    }
+
     public StringProperty getDietitian() {
         return this.dietitianUsername;
     }

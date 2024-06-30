@@ -1,11 +1,9 @@
 package com.example.greenpear.dao;
 
-import com.example.greenpear.entities.Dietitian;
 import com.example.greenpear.entities.FoodPreference;
 import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.UserProfile;
 import com.example.greenpear.utils.query.RequestQuery;
-import com.example.greenpear.utils.query.HomeQuery;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

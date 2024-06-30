@@ -107,7 +107,7 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric {
         }
     }
 
-    public void goToFoodPreferences() throws LoadSceneException {
+    public void goToFoodPreferences() {
 
         try{
             String sport = (String) choiceBoxSport.getValue();

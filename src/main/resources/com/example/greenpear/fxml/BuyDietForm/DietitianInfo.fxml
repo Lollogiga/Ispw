@@ -126,7 +126,7 @@
                         <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="249.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <children>
                               <Region prefHeight="61.0" prefWidth="137.0" />
-                              <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#goToPersonalnformation" prefHeight="27.0" prefWidth="98.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Confirm choice" textFill="WHITE">
+                              <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#goToPersonalInformation" prefHeight="27.0" prefWidth="98.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Confirm choice" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

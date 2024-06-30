@@ -54,19 +54,16 @@ public class BuyDietController {
     }
 
 
-    //TODO verificare se posso fare merge con funzione in homeController:
-    public DietitianBean restoreDietitianInfo(LoginBean userBean) throws SQLException {
-        UserProfile currentUser = new UserProfile(userBean.getUsername());
-        Dietitian dietitian = new Dietitian();
+    //TODO verificare se posso fare merge con funzione in homeController (Ora è stato aggiunto un costruttore):
+    public DietitianBean restoreDietitianInfo() throws SQLException {
         DietitianBean dietitianBean;
-        dietitian.setDietitianUsername(currentUser.getUsername());
+        Dietitian dietitian;
         try{
             InfoDietitianDao infoDietitianDao = new InfoDietitianDao();
-            dietitian = infoDietitianDao.getDietitianInfo(dietitian);
+            dietitian = infoDietitianDao.getDietitianInfo(dietitianEntity);
             if(dietitian != null) {
                 dietitianBean = new DietitianBean(dietitian.getDietitianUsername(),
                         dietitian.getPrice(),
-                        dietitian.getAvailable(),
                         dietitian.getPersonalEducation(),
                         dietitian.getWorkExperience());
                 return dietitianBean;

@@ -61,8 +61,8 @@ public class HomeController {
     public void storeDietitianInfo(DietitianBean dietitianBean) throws SQLException {
         Dietitian dietitian = new Dietitian(dietitianBean.getDietitian().get(), dietitianBean.getPrice(),dietitianBean.getAvailable(), dietitianBean.getPersonalEducation(), dietitianBean.getWorkExperience());
         try{
-            HomeDao homeDao = new HomeDao();
-            homeDao.setDietitianInfo(dietitian);
+            InfoDietitianDao infoDietitianDao = new InfoDietitianDao();
+            infoDietitianDao.setDietitianInfo(dietitian);
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }

@@ -68,7 +68,7 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
                 buyDietController.storeDietitian(selectedDietitianBean);
                 try {
                     Printer.print("Dietologo: " + selectedDietitianBean.getDietitian().get() + " Costo " + selectedDietitianBean.getPrice());
-                    goToPersonalInformationForm();
+                    goToDietitianInformation();
                 } catch (LoadSceneException e) {
                     Printer.printError(e.getMessage());
                 }
@@ -85,9 +85,9 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
     }
 
 
-    private void goToPersonalInformationForm() throws LoadSceneException {
+    private void goToDietitianInformation() throws LoadSceneException {
         try {
-            this.sceneManager.showFormPersonalInformation(buyDietController, this.userBean);
+            this.sceneManager.showDietitianInfo(buyDietController, this.userBean);
         } catch (LoadSceneException e) {
             throw new LoadSceneException(e.getMessage());
         }

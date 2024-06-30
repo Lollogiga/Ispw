@@ -1,7 +1,7 @@
 package com.example.greenpear.dao;
 
 import com.example.greenpear.entities.Dietitian;
-import com.example.greenpear.utils.query.HomeQuery;
+import com.example.greenpear.utils.query.InfoDietitianQuery;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ public class InfoDietitianDao {
         connection = SingletonConnection.getInstance();
     }
     public Dietitian getDietitianInfo(Dietitian dietitian) throws SQLException {
-        preparedStatement = connection.prepareStatement(HomeQuery.getDietitianInfo());
+        preparedStatement = connection.prepareStatement(InfoDietitianQuery.getDietitianInfo());
         preparedStatement.setString(1, dietitian.getDietitianUsername());
         resultSet = preparedStatement.executeQuery();
         //Se ci sono risultati, li inserisco all'interno dell'entity:
@@ -33,7 +33,7 @@ public class InfoDietitianDao {
     }
 
     public void setDietitianInfo(Dietitian dietitian) throws SQLException {
-        preparedStatement = connection.prepareStatement(HomeQuery.setDietitianInfo());
+        preparedStatement = connection.prepareStatement(InfoDietitianQuery.setDietitianInfo());
         preparedStatement.setString(1, dietitian.getDietitianUsername());
         preparedStatement.setInt(2, dietitian.getPrice());
         preparedStatement.setBoolean(3, dietitian.getAvailable());
