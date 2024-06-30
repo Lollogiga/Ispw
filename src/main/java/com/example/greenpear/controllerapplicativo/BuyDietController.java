@@ -2,6 +2,8 @@ package com.example.greenpear.controllerapplicativo;
 
 import com.example.greenpear.bean.*;
 import com.example.greenpear.dao.BuyDietDao;
+import com.example.greenpear.dao.HomeDao;
+import com.example.greenpear.dao.InfoDietitianDao;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
@@ -49,6 +51,29 @@ public class BuyDietController {
 
     public void storeDietitian(DietitianBean selectedDietitianBean) {
         dietitianEntity = new Dietitian(selectedDietitianBean.getDietitian().get(), selectedDietitianBean.getPrice());
+    }
+
+
+    //TODO verificare se posso fare merge con funzione in homeController:
+    public DietitianBean restoreDietitianInfo(LoginBean userBean) throws SQLException {
+        UserProfile currentUser = new UserProfile(userBean.getUsername());
+        Dietitian dietitian = new Dietitian();
+        DietitianBean dietitianBean;
+        dietitian.setDietitianUsername(currentUser.getUsername());
+        try{
+            InfoDietitianDao infoDietitianDao = new InfoDietitianDao();
+            dietitian = infoDietitianDao.getDietitianInfo(dietitian);
+            if(dietitian != null) {
+                dietitianBean = new DietitianBean(dietitian.getDietitianUsername(),
+                        dietitian.getPrice(),
+                        dietitian.getAvailable(),
+                        dietitian.getPersonalEducation(),
+                        dietitian.getWorkExperience());
+                return dietitianBean;
+            }else { return null;}
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        }
     }
 
     //Metodi Restore e Store

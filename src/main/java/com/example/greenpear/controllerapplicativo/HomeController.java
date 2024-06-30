@@ -4,6 +4,7 @@ import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.RequestBean;
 import com.example.greenpear.dao.HomeDao;
+import com.example.greenpear.dao.InfoDietitianDao;
 import com.example.greenpear.entities.Dietitian;
 import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.UserProfile;
@@ -42,8 +43,8 @@ public class HomeController {
         DietitianBean dietitianBean;
         dietitian.setDietitianUsername(currentUser.getUsername());
         try{
-            HomeDao homeDao = new HomeDao();
-            dietitian = homeDao.getDietitianInfo(dietitian);
+            InfoDietitianDao infoDietitianDao = new InfoDietitianDao();
+            dietitian = infoDietitianDao.getDietitianInfo(dietitian);
             if(dietitian != null) {
                 dietitianBean = new DietitianBean(dietitian.getDietitianUsername(),
                         dietitian.getPrice(),

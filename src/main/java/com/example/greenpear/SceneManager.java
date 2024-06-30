@@ -90,6 +90,18 @@ public class SceneManager {
             throw new LoadSceneException("Can't upload scene");
         }
     }
+
+    public void showDietitianInfo(BuyDietController buyDietController, LoginBean userBean) throws LoadSceneException{
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/DietitianInfo.fxml"));
+            Parent root = loader.load();
+            DietitianInfoGraphicController controller = loader.getController();
+            controller.initialize(buyDietController, userBean);
+            stage.setScene(new Scene(root));
+        }catch (IOException | IllegalStateException e ){
+            throw new LoadSceneException("Can't upload scene");
+        }
+    }
     public void showFormPersonalInformation(BuyDietController buyDietController, LoginBean userBean) throws LoadSceneException {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/GreenPear/fxml/BuyDietForm/PersonalInformation.fxml"));

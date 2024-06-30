@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.HomeGraphicController">
+   <children>
+      <HBox accessibleRole="CONTEXT_MENU" alignment="CENTER_LEFT" layoutX="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="850.0" style="-fx-background-color: #6F8A4A;">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" rotate="25.06">
+               <image>
+                  <Image url="@../images/logo.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="15.0" right="-10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Button mnemonicParsing="false" onMouseClicked="#goToHome" style="-fx-background-color: #5C6D35;" text="Home" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#goToRecipes" style="-fx-background-color: #6F8A4A;" text="Recipes" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: #6F8A4A;" text="About" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#goToBuyDiet" style="-fx-background-color: #6F8A4A;" text="Request diet" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+      <Pane layoutX="124.0" layoutY="124.0" prefHeight="510.0" prefWidth="602.0" style="-fx-border-color: #6F8A4A; -fx-border-width: 10;">
+         <children>
+            <HBox alignment="CENTER_LEFT" layoutX="202.0" layoutY="42.0">
+               <children>
+                  <Label prefHeight="46.0" prefWidth="75.0" text="Hello, " textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="textFieldName" prefHeight="46.0" prefWidth="137.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label layoutX="14.0" layoutY="88.0" prefHeight="31.0" prefWidth="69.0" text="Profile:" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="18.0" />
+               </font>
+            </Label>
+            <VBox layoutX="83.0" layoutY="138.0" prefHeight="305.0" prefWidth="473.0">
+               <children>
+                  <HBox />
+                  <GridPane prefHeight="298.0" prefWidth="473.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="201.0" text="Education and training:" textFill="WHITE">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="textAreaEducational" prefHeight="75.0" prefWidth="213.0" promptText="Enter your education" style="-fx-border-color: black;" text="&#10;" GridPane.columnIndex="1" />
+                        <Label layoutX="10.0" layoutY="37.0" prefHeight="21.0" prefWidth="154.0" text="Work experience:" textFill="WHITE" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="textAreaWork" prefHeight="75.0" prefWidth="213.0" promptText="Enter your education" style="-fx-background-color: black;" text="&#10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label layoutX="10.0" layoutY="111.0" prefHeight="21.0" prefWidth="184.0" text="Avaible to write dietes:" textFill="WHITE" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <children>
+                              <RadioButton fx:id="radioButtonAvailable" mnemonicParsing="false" text="Available" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Italic" size="15.0" />
+                                 </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="writeDietToggleGroup" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="radioButtonUnavailable" mnemonicParsing="false" text="Unavailable" textFill="WHITE" toggleGroup="$writeDietToggleGroup">
+                                 <font>
+                                    <Font name="System Italic" size="15.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </RadioButton>
+                           </children>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </HBox>
+                        <Label prefHeight="21.0" prefWidth="184.0" text="price:" textFill="WHITE" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="textFieldPrice" prefHeight="25.0" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                     </children>
+                  </GridPane>
+               </children>
+            </VBox>
+            <Button layoutX="437.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#saveDietitianInfo" prefHeight="31.0" prefWidth="105.0" style="-fx-background-color: #6F8A4A;" text="Save" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <HBox alignment="CENTER" layoutX="210.0" layoutY="468.0">
+               <children>
+                  <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="154.0" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
