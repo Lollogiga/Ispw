@@ -4,8 +4,8 @@ public class Dietitian {
     private String dietitianUsername;
     private int price;
     private Boolean available;
-    private String personalEducation;
-    private String workExperience;
+    private String education;
+    private String work;
 
     public Dietitian(){
     }
@@ -16,12 +16,12 @@ public class Dietitian {
         this.setPrice(price);
     }
 
-    public Dietitian(String dietitianUsername, int price, Boolean available, String personalEducation, String workExperience) {
+    public Dietitian(String dietitianUsername, int price, Boolean available, String education, String work) {
         this.setDietitianUsername(dietitianUsername);
         this.setPrice(price);
         this.setAvailable(available);
-        this.setPersonalEducation(personalEducation);
-        this.setWorkExperience(workExperience);
+        this.setEducation(education);
+        this.setWork(work);
     }
 
     public String getDietitianUsername() {
@@ -48,19 +48,19 @@ public class Dietitian {
         this.available = available;
     }
 
-    public String getPersonalEducation() {
-        return personalEducation;
+    public String getEducation() {
+        return education;
     }
 
-    public void setPersonalEducation(String personalEducation) {
-        this.personalEducation = personalEducation;
+    public void setEducation(String education) {
+        this.education = education;
     }
 
-    public String getWorkExperience() {
-        return workExperience;
+    public String getWork() {
+        return work;
     }
 
-    public void setWorkExperience(String workExperience) {
-        this.workExperience = workExperience;
+    public void setWork(String work) {
+        this.work = work;
     }
 }

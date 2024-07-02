@@ -37,8 +37,8 @@ public class InfoDietitianDao {
         preparedStatement.setString(1, dietitian.getDietitianUsername());
         preparedStatement.setInt(2, dietitian.getPrice());
         preparedStatement.setBoolean(3, dietitian.getAvailable());
-        preparedStatement.setString(4, dietitian.getPersonalEducation());
-        preparedStatement.setString(5, dietitian.getWorkExperience());
+        preparedStatement.setString(4, dietitian.getEducation());
+        preparedStatement.setString(5, dietitian.getWork());
         preparedStatement.executeUpdate();
     }
 }

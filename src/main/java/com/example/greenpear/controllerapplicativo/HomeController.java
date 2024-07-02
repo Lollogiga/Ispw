@@ -49,8 +49,8 @@ public class HomeController {
                 dietitianBean = new DietitianBean(dietitian.getDietitianUsername(),
                         dietitian.getPrice(),
                         dietitian.getAvailable(),
-                        dietitian.getPersonalEducation(),
-                        dietitian.getWorkExperience());
+                        dietitian.getEducation(),
+                        dietitian.getWork());
                 return dietitianBean;
             }else { return null;}
         } catch (SQLException e) {

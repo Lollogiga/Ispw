@@ -2,12 +2,10 @@ package com.example.greenpear.controllerapplicativo;
 
 import com.example.greenpear.bean.*;
 import com.example.greenpear.dao.BuyDietDao;
-import com.example.greenpear.dao.HomeDao;
 import com.example.greenpear.dao.InfoDietitianDao;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
-import javafx.animation.Transition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -64,8 +62,8 @@ public class BuyDietController {
             if(dietitian != null) {
                 dietitianBean = new DietitianBean(dietitian.getDietitianUsername(),
                         dietitian.getPrice(),
-                        dietitian.getPersonalEducation(),
-                        dietitian.getWorkExperience());
+                        dietitian.getEducation(),
+                        dietitian.getWork());
                 return dietitianBean;
             }else { return null;}
         } catch (SQLException e) {
