@@ -36,7 +36,7 @@ public class DietitianInfoGraphicController extends GraphicControllerGeneric {
         try {
             dietitianBean = buyDietController.restoreDietitianInfo();
             if(dietitianBean != null){
-                textFieldName.setText(dietitianBean.getDietitian().get());
+                textFieldName.setText(dietitianBean.getDietitianUsername());
                 textAreaEducational.setText(dietitianBean.getPersonalEducation());
                 textAreaWork.setText(dietitianBean.getWorkExperience());
                 textFieldPrice.setText(dietitianBean.getPrice().toString());

@@ -1,28 +1,25 @@
 package com.example.greenpear.bean;
 
+import com.example.greenpear.exception.InformationErrorException;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class DietitianBean {
-    private StringProperty dietitianUsername;
-    private IntegerProperty price;
+    private String dietitianUsername;
+    private Integer price;
     private Boolean available;
     private String personalEducation;
     private String workExperience;
 
     public DietitianBean(String dietitian, Integer price){
-       this.dietitianUsername = new SimpleStringProperty();
-       this.price = new SimpleIntegerProperty();
-       this.setDietitian(dietitian);
+       this.setDietitianUsername(dietitian);
        this.setPrice(price);
    }
 
    public DietitianBean(String dietitian, Integer price, Boolean available, String personalEducation, String workExperience) {
-        this.dietitianUsername = new SimpleStringProperty();
-        this.price = new SimpleIntegerProperty();
-        this.setDietitian(dietitian);
+        this.setDietitianUsername(dietitian);
         this.setPrice(price);
         this.setAvailable(available);
         this.setPersonalEducation(personalEducation);
@@ -30,34 +27,26 @@ public class DietitianBean {
    }
 
     public DietitianBean(String dietitianUsername, int price, String personalEducation, String workExperience) {
-        this.dietitianUsername = new SimpleStringProperty();
-        this.price = new SimpleIntegerProperty();
-        this.setDietitian(dietitianUsername);
+        this.setDietitianUsername(dietitianUsername);
         this.setPrice(price);
         this.setPersonalEducation(personalEducation);
         this.setWorkExperience(workExperience);
     }
 
-    public StringProperty getDietitian() {
-        return this.dietitianUsername;
+    public String getDietitianUsername() {
+        return dietitianUsername;
     }
 
-    public void setDietitian(String dietitian) {
-       if(dietitian != null) {
-           this.dietitianUsername.setValue(dietitian);
-       }
+    public void setDietitianUsername(String dietitianUsername) {
+        this.dietitianUsername = dietitianUsername;
     }
 
     public Integer getPrice() {
-        return price.get();
-    }
-
-    public IntegerProperty priceProperty() {
         return price;
     }
 
     public void setPrice(Integer price) {
-        this.price.set(price);
+        this.price = price;
     }
 
     public Boolean getAvailable() {
@@ -84,8 +73,4 @@ public class DietitianBean {
         this.workExperience = workExperience;
     }
 
-    //Property Values:
-    public StringProperty dietitianUsernameProperty(){
-       return dietitianUsername;
-    }
 }

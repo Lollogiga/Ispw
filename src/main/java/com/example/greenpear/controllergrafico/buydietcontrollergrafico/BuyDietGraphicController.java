@@ -8,6 +8,7 @@ import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -47,12 +48,16 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
 
     private void configureTableColumns() {
         dietitian.setStyle("-fx-alignment: CENTER");
-        dietitian.setCellValueFactory(cellData -> cellData.getValue().dietitianUsernameProperty());
+        dietitian.setCellValueFactory(cellData -> {
+            String dietitianUsername = cellData.getValue().getDietitianUsername();
+            return new SimpleStringProperty(dietitianUsername);
+        });
         price.setCellValueFactory(cellData -> {
-            IntegerProperty property = cellData.getValue().priceProperty();
-            return new SimpleIntegerProperty(property.getValue()).asObject();
+            int dietitianPrice = cellData.getValue().getPrice();
+            return new SimpleIntegerProperty(dietitianPrice).asObject();
         });
     }
+
 
     private void configureTableView() {
         tableViewDietitian.setItems(dietitianBeans);
@@ -62,12 +67,12 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
         if (event.getClickCount() == 2 && !row.isEmpty()) {
             DietitianBean selectedDietitian = row.getItem();
             if (selectedDietitian != null) {
-                String dietitianUsername = selectedDietitian.getDietitian().get();
+                String dietitianUsername = selectedDietitian.getDietitianUsername();
                 int dietitianPrice = selectedDietitian.getPrice();
                 DietitianBean selectedDietitianBean = new DietitianBean(dietitianUsername, dietitianPrice);
                 buyDietController.storeDietitian(selectedDietitianBean);
                 try {
-                    Printer.print("Dietologo: " + selectedDietitianBean.getDietitian().get() + " Costo " + selectedDietitianBean.getPrice());
+                    Printer.print("Dietologo: " + selectedDietitianBean.getDietitianUsername() + " Costo " + selectedDietitianBean.getPrice());
                     goToDietitianInformation();
                 } catch (LoadSceneException e) {
                     Printer.printError(e.getMessage());
@@ -75,6 +80,7 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
             }
         }
     }
+
 
     private void setRowFactory() {
         tableViewDietitian.setRowFactory(tv -> {

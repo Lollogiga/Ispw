@@ -50,7 +50,7 @@ public class BuyDietController {
     }
 
     public void storeDietitian(DietitianBean selectedDietitianBean) {
-        dietitianEntity = new Dietitian(selectedDietitianBean.getDietitian().get(), selectedDietitianBean.getPrice());
+        dietitianEntity = new Dietitian(selectedDietitianBean.getDietitianUsername(), selectedDietitianBean.getPrice());
     }
 
 
