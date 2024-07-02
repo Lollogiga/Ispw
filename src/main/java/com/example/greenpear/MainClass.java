@@ -16,7 +16,7 @@ public class MainClass extends Application {
 
             SceneManager sceneManager = SceneManager.getInstance(stage);
             stage.setResizable(false);
-            sceneManager.showBuyDiet(null);
+            sceneManager.showLogIn();
             stage.show();
         }catch (LoadSceneException e){
             Printer.printError(e.getMessage());

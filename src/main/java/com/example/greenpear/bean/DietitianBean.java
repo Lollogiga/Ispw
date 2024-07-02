@@ -1,12 +1,9 @@
 package com.example.greenpear.bean;
 
-import com.example.greenpear.exception.InformationErrorException;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
-import java.util.function.BinaryOperator;
 
 public class DietitianBean {
     private StringProperty dietitianUsername;
@@ -15,10 +12,7 @@ public class DietitianBean {
     private String personalEducation;
     private String workExperience;
 
-    public DietitianBean(){
-    }
-
-   public DietitianBean(String dietitian, Integer price){
+    public DietitianBean(String dietitian, Integer price){
        this.dietitianUsername = new SimpleStringProperty();
        this.price = new SimpleIntegerProperty();
        this.setDietitian(dietitian);
