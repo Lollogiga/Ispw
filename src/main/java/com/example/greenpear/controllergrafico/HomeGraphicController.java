@@ -103,7 +103,15 @@ public class HomeGraphicController extends GraphicControllerGeneric{
             if (available && price.isEmpty()) {
                 throw new InformationErrorException("Set price!");
             }
-            Integer priceNumber = Integer.parseInt(price);
+            int priceNumber;
+            if(!price.isEmpty()) {
+                 priceNumber = Integer.parseInt(price);
+                 if(priceNumber <= 0){
+                     throw new InformationErrorException("Set valid price!");
+                 }
+            }else{
+                priceNumber = 0;
+            }
             dietitianBean = new DietitianBean(userBean.getUsername(), priceNumber, available, educational, work);
             homeController.storeDietitianInfo(dietitianBean);
             Printer.printGraphic(errorLabel, "Saved");

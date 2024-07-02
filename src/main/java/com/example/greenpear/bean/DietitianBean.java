@@ -1,11 +1,5 @@
 package com.example.greenpear.bean;
 
-import com.example.greenpear.exception.InformationErrorException;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 public class DietitianBean {
     private String dietitianUsername;
     private Integer price;
@@ -46,7 +40,9 @@ public class DietitianBean {
     }
 
     public void setPrice(Integer price) {
-        this.price = price;
+        if(price == null || price >= 0){
+            this.price = price;
+        }else{ throw new IllegalArgumentException("Price must be greater than 0");}
     }
 
     public Boolean getAvailable() {
