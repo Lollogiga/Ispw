@@ -80,7 +80,7 @@ public class WriteDietPatientInfoGraphicController extends GraphicControllerGene
                 listViewAllergies.setItems(foodPreferenceBean.getAllergies());
             }
         }catch (SQLException | InformationErrorException e){
-            e.printStackTrace();
+            Printer.printError(e.getMessage());
         }
 
 

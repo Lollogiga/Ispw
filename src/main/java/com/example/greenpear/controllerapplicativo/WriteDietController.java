@@ -6,7 +6,6 @@ import com.example.greenpear.entities.Dietitian;
 import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.exception.InformationErrorException;
-import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -26,7 +25,7 @@ public class WriteDietController {
             RequestDao requestDao = new RequestDao();
             List<RequestId> requests = requestDao.getRequest(dietitian);
             for(RequestId requestId : requests){
-                patientBeans.add(new PatientBean(requestId.getPatientUsername(), requestId.getRequestId()));
+                patientBeans.add(new PatientBean(requestId.getPatientUsername(), requestId.getIdRequest()));
             }
             return patientBeans;
         } catch (SQLException e) {
@@ -39,7 +38,7 @@ public class WriteDietController {
     public void storeDietitian(PatientBean selectedPatientBean) {
         requestEntity = new RequestId();
         requestEntity.setPatientUsername(selectedPatientBean.getPatientUsername());
-        requestEntity.setRequestId(selectedPatientBean.getRequestPatient());
+        requestEntity.setIdRequest(selectedPatientBean.getRequestPatient());
     }
 
     public PatientBean restorePatientInformation() throws SQLException, InformationErrorException {

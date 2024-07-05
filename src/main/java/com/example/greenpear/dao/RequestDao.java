@@ -32,7 +32,7 @@ public class RequestDao {
             while (resultSet.next()) {
                 RequestId requestId = new RequestId();
                 requestId.setPatientUsername(resultSet.getString("patient_patientUsername"));
-                requestId.setRequestId(resultSet.getInt("idRequest"));
+                requestId.setIdRequest(resultSet.getInt("idRequest"));
                 requestList.add(requestId);
             }
             return requestList;
@@ -44,7 +44,7 @@ public class RequestDao {
     public RequestDetails getRequestDetails(RequestId requestEntity) throws SQLException {
         try{
             preparedStatement = connection.prepareStatement(RequestQuery.getRequestDetails());
-            preparedStatement.setInt(1, requestEntity.getRequestId());
+            preparedStatement.setInt(1, requestEntity.getIdRequest());
             resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 //Estraiamo le informazioni perosnali:

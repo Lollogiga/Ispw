@@ -1,7 +1,7 @@
 package com.example.greenpear.entities;
 
 public class RequestId {
-    private int requestId;
+    private int idRequest;
     private int foodPreferenceID;
     private int infoSportId;
     private String dietitianUsername;
@@ -16,12 +16,12 @@ public class RequestId {
 
     }
 
-    public int getRequestId() {
-        return requestId;
+    public int getIdRequest() {
+        return idRequest;
     }
 
-    public void setRequestId(int requestId) {
-        this.requestId = requestId;
+    public void setIdRequest(int idRequest) {
+        this.idRequest = idRequest;
     }
 
     public int getFoodPreferenceID() {

@@ -1,7 +1,5 @@
 package com.example.greenpear.entities;
 
-import com.example.greenpear.exception.InformationErrorException;
-
 public class Food {
     private String meal;
     private String foodName;

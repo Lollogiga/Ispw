@@ -1,4 +1,4 @@
-/*package com.example.greenpear.controllergrafico;
+package com.example.greenpear.controllergrafico;
 
 import com.example.greenpear.SceneManager;
 import com.example.greenpear.bean.FoodBean;
@@ -45,17 +45,6 @@ public class WriteDietGraphicControllerForm {
 
     @FXML
     private void initialize(String meal) {
-
-        WriteDietController writeDietController = new WriteDietController();
-
-        //Andiamo innanzitutto a prendere le informazioni
-        try {
-            FoodBean foodBean = new FoodBean(meal);
-            ArrayList<FoodBean> foodBeanList = writeDietController.getFoodList(foodBean);
-        }catch (InformationErrorException e){
-            Printer.printGraphicError(errorLabel,e.getMessage());
-        }
-
 
         foodList = FXCollections.observableArrayList(listOfFood);
         selectedFoodList = FXCollections.observableArrayList();
@@ -113,4 +102,3 @@ public class WriteDietGraphicControllerForm {
 
 }
 
- */
