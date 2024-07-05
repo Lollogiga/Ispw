@@ -1,11 +1,8 @@
-package com.example.greenpear.controllergrafico;
+package com.example.greenpear.controllergrafico.writedietcontrollergrafico;
 
 import com.example.greenpear.SceneManager;
-import com.example.greenpear.bean.FoodBean;
 import com.example.greenpear.controllerapplicativo.WriteDietController;
-import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
-import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
