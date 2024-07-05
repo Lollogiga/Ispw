@@ -23,7 +23,7 @@ public class HomeDao {
     public List<RequestDetails> getRequest(UserProfile currentUser) throws SQLException {
         List<RequestDetails> requestList = new ArrayList<RequestDetails>();
         try {
-            preparedStatement = connection.prepareStatement(RequestQuery.getRequest());
+            preparedStatement = connection.prepareStatement(RequestQuery.getRequestFromPatient());
             preparedStatement.setString(1, currentUser.getUsername());
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

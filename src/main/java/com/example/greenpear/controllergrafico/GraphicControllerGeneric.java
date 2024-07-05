@@ -31,4 +31,12 @@ public abstract class GraphicControllerGeneric {
         }
     }
 
+    public void goToWriteDiet() throws LoadSceneException{
+        try{
+            this.sceneManager.showWriteDiet(userBean);
+        }catch (LoadSceneException e){
+            throw new LoadSceneException(e.getMessage());
+        }
+    }
+
 }
