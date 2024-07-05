@@ -18,7 +18,7 @@ import java.io.IOException;
 public class SceneManager {
     private static Stage stage;
     private static SceneManager sceneManager = null;
-
+    private static final String SCENE_ERROR_MESSAGE = "Can't upload scene";
 
     public static SceneManager getInstance(Stage newStage){
         if(sceneManager==null){
@@ -78,7 +78,7 @@ public class SceneManager {
             Scene scene = new Scene(root);
             stage.setScene(scene);
         }catch (IOException | IllegalStateException e){
-            throw new LoadSceneException("Can't upload scene\n" + e.getMessage());
+            throw new LoadSceneException(SCENE_ERROR_MESSAGE + e.getMessage());
         }
     }
 
@@ -90,7 +90,7 @@ public class SceneManager {
             controller.initialize(userBean);
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e ){
-            throw new LoadSceneException("Can't upload scene" + e.getMessage());
+            throw new LoadSceneException(SCENE_ERROR_MESSAGE + e.getMessage());
         }
     }
 
@@ -102,7 +102,7 @@ public class SceneManager {
             controller.initialize(buyDietController, userBean);
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e){
-            throw new LoadSceneException("Can't upload scene" + e.getMessage());
+            throw new LoadSceneException(SCENE_ERROR_MESSAGE + e.getMessage());
         }
     }
     public void showFormPersonalInformation(BuyDietController buyDietController, LoginBean userBean) throws LoadSceneException {
@@ -160,7 +160,7 @@ public class SceneManager {
         }
     }
 
-    /*public void showWriteDiet(String meal) throws LoadSceneException{
+    public void showWriteDiet(String meal) throws LoadSceneException{
         try {
             meal = "WriteDiet" + meal + ".fxml";
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenpear/fxml/WriteDiet/" + meal));
@@ -169,7 +169,7 @@ public class SceneManager {
         }catch (IOException | IllegalStateException e){
             throw new LoadSceneException();
         }
-    }*/
+    }
 
 
     public void showWriteDiet(LoginBean userBean) throws LoadSceneException{
@@ -180,7 +180,7 @@ public class SceneManager {
             controller.initialize(userBean);
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e ){
-            throw new LoadSceneException("Can't upload scene" + e.getMessage());
+            throw new LoadSceneException(SCENE_ERROR_MESSAGE + e.getMessage());
         }
     }
 
@@ -192,8 +192,7 @@ public class SceneManager {
             controller.initialize(userBean, writeDietController);
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e ){
-            //throw new LoadSceneException("Can't upload scene" + e.getMessage());
-            e.printStackTrace();
+            throw new LoadSceneException(SCENE_ERROR_MESSAGE + e.getMessage());
         }
     }
 
