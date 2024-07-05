@@ -7,6 +7,14 @@ public class LifeStyle {
     private boolean drunker;
     private boolean smoker;
 
+    public LifeStyle() {}
+    public LifeStyle(String sport, String frequency, String healthGoal, boolean drunker, boolean smoker) {
+        this.setSport(sport);
+        this.setFrequency(frequency);
+        this.setHealthGoal(healthGoal);
+        this.setDrunker(drunker);
+        this.setSmoker(smoker);
+    }
     public String getSport() {
         return sport;
     }

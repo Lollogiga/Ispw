@@ -1,10 +1,12 @@
 package com.example.greenpear;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
+import com.example.greenpear.controllerapplicativo.WriteDietController;
 import com.example.greenpear.controllergrafico.HomeGraphicController;
 import com.example.greenpear.controllergrafico.RicettarioGraphicController;
 import com.example.greenpear.controllergrafico.WriteDietGraphicController;
 import com.example.greenpear.controllergrafico.buydietcontrollergrafico.*;
+import com.example.greenpear.controllergrafico.writedietcontrollergrafico.WriteDietPatientInfoGraphicController;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Role;
 import javafx.fxml.FXMLLoader;
@@ -182,7 +184,18 @@ public class SceneManager {
         }
     }
 
-
+    public void showWriteDietPatientInfo(LoginBean userBean, WriteDietController writeDietController) throws LoadSceneException{
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenpear/fxml/WriteDiet/WriteDietInfoPatient.fxml"));
+            Parent root = loader.load();
+            WriteDietPatientInfoGraphicController controller = loader.getController();
+            controller.initialize(userBean, writeDietController);
+            stage.setScene(new Scene(root));
+        }catch (IOException | IllegalStateException e ){
+            //throw new LoadSceneException("Can't upload scene" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
 
 }

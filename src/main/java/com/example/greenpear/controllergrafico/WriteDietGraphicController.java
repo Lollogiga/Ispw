@@ -4,6 +4,7 @@ import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.PatientBean;
 import com.example.greenpear.controllerapplicativo.WriteDietController;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -31,7 +32,7 @@ public class WriteDietGraphicController extends GraphicControllerGeneric {
     public void initialize(LoginBean userBean) {
 
         this.userBean = userBean;
-        WriteDietController writeDietController = new WriteDietController();
+        writeDietController = new WriteDietController();
 
         //Recuperiamo le informazioni dal controller applicativo:
         try {
@@ -62,12 +63,13 @@ public class WriteDietGraphicController extends GraphicControllerGeneric {
            PatientBean selectedPatient = row.getItem();
             if (selectedPatient != null) {
                 String patientUsername = selectedPatient.getPatientUsername();
+                int requestId = selectedPatient.getRequestPatient();
                 try {
-                    PatientBean selectdPatientBean = new PatientBean(patientUsername);
-                    //writeDietController.storeDietitian(selectedPatient);
-                    Printer.print("Patient: " + selectdPatientBean.getPatientUsername());
-                    //goToPatientInformation();
-                } catch (InformationErrorException e) {
+                    PatientBean selectdPatientBean = new PatientBean(patientUsername, requestId);
+                    writeDietController.storeDietitian(selectedPatient);
+                    Printer.print("Patient: " + selectdPatientBean.getPatientUsername() + "IdRequest: " + selectdPatientBean.getRequestPatient());
+                    this.sceneManager.showWriteDietPatientInfo(userBean, writeDietController);
+                } catch (InformationErrorException |LoadSceneException e) {
                     Printer.printError(e.getMessage());
                 }
             }

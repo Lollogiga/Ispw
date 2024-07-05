@@ -15,4 +15,6 @@ module com.example.login {
     opens com.example.greenpear.exception to javafx.fxml;
     exports com.example.greenpear.controllergrafico.buydietcontrollergrafico;
     opens com.example.greenpear.controllergrafico.buydietcontrollergrafico to javafx.fxml;
+    exports com.example.greenpear.controllergrafico.writedietcontrollergrafico;
+    opens com.example.greenpear.controllergrafico.writedietcontrollergrafico to javafx.fxml;
 }

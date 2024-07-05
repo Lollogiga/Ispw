@@ -8,6 +8,15 @@ public class PersonalInformation {
     private String weight;
     private String height;
 
+    public PersonalInformation() {
+    }
+
+    public PersonalInformation(String age, String gender, String weight, String height) {
+        this.setAge(age);
+        this.setGender(gender);
+        this.setWeight(weight);
+        this.setHeight(height);
+    }
     public String getAge() {
         return age;
     }
