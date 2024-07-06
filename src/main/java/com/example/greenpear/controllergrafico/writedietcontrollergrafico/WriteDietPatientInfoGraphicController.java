@@ -39,7 +39,8 @@ public class WriteDietPatientInfoGraphicController extends GraphicControllerGene
     private ListView<String> listViewAllergies;
     @FXML
     private ListView<String> listViewDislikedFood;
-
+    @FXML
+    private Label errorLabel;
 
 
     private WriteDietController writeDietController;
@@ -81,7 +82,7 @@ public class WriteDietPatientInfoGraphicController extends GraphicControllerGene
                 listViewAllergies.setItems(foodPreferenceBean.getAllergies());
             }
         }catch (SQLException | InformationErrorException e){
-            Printer.printError(e.getMessage());
+            Printer.printGraphicError(errorLabel, e.getMessage());
         }
 
 

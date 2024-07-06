@@ -8,6 +8,12 @@ public class Food {
     private float fat;
     private float carbohydrates;
 
+    public Food(){}
+
+    public Food(String FoodName){
+        this.setFoodName(FoodName);
+    }
+
     public String getMeal() {
         return meal;
     }

@@ -10,9 +10,7 @@ public class FoodBean {
     private float fat;
     private float carbohydrates;
 
-    public String getMeal() {
-        return meal;
-    }
+    public FoodBean(){}
 
     public FoodBean(String meal) throws InformationErrorException {
         this.setMeal(meal);
@@ -27,9 +25,13 @@ public class FoodBean {
     }
 
     public void setMeal(String meal) throws InformationErrorException {
-        if(!meal.isEmpty()){
+        if(meal != null){
             this.meal = meal;
         }else throw new InformationErrorException("Error identifying meal type");
+    }
+
+    public String getMeal() {
+        return meal;
     }
 
     public String getFoodName() {
@@ -37,9 +39,9 @@ public class FoodBean {
     }
 
     public void setFoodName(String foodName) throws InformationErrorException {
-        if(!foodName.isEmpty()){
+        if(foodName != null){
             this.foodName = foodName;
-        }else throw new InformationErrorException("Error identifying meal");
+        }else throw new InformationErrorException("Error identifying food");
     }
 
     public float getCalories() {

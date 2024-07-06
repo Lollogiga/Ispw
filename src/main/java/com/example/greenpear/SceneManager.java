@@ -163,8 +163,8 @@ public class SceneManager {
 
     public void showWriteDiet(String meal, LoginBean userBean, WriteDietController writeDietController) throws LoadSceneException{
         try {
-            meal = "WriteDiet" + meal + ".fxml";
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenpear/fxml/WriteDiet/" + meal));
+            String mealPath = "WriteDiet" + meal + ".fxml";
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenpear/fxml/WriteDiet/" + mealPath));
             Parent root = loader.load();
             WriteDietFormGraphicController controller = loader.getController();
             controller.initialize(meal, userBean, writeDietController);

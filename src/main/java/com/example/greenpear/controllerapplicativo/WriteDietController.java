@@ -8,6 +8,7 @@ import com.example.greenpear.entities.Food;
 import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -17,6 +18,16 @@ import java.util.List;
 
 public class WriteDietController {
     private RequestId requestEntity;
+
+    //Breakfast:
+    private List<Food> foodEntityBreakfast;
+    //Launch:
+    private List<Food> foodEntityLunch;
+    //Dinner:
+    private List<Food> foodEntityDinner;
+    //Snack
+    private List<Food> foodEntitySnack;
+
 
 
     //Lista di tutti i pazienti:
@@ -84,7 +95,7 @@ public class WriteDietController {
 
     }
 
-    public List<FoodBean> getAllFood() throws SQLException {
+    public List<FoodBean> getAllFood() throws SQLException, InformationErrorException {
         List<FoodBean> foodBeans = new ArrayList<>();
         try{
             FoodDao foodDao = new FoodDao();
@@ -98,7 +109,60 @@ public class WriteDietController {
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         } catch (InformationErrorException e) {
-            throw new RuntimeException(e);
+            throw new InformationErrorException(e.getMessage());
         }
+    }
+
+    public List<FoodBean> resetFood(FoodBean foodBean) throws InformationErrorException {
+        List<FoodBean> foodBeans;
+        String meal = foodBean.getMeal();
+        Printer.print(meal);
+        try{
+            foodBeans = switch (meal) {
+                case "Breakfast" -> resetFood(foodEntityBreakfast);
+                case "Launch" -> resetFood(foodEntityLunch);
+                case "Dinner" -> resetFood(foodEntityDinner);
+                case "Snack" -> resetFood(foodEntitySnack);
+                default -> throw new InformationErrorException("Meal not recognized");
+            };
+            return foodBeans;
+        } catch (InformationErrorException e) {
+            throw new InformationErrorException(e.getMessage());
+        }
+    }
+
+    private List<FoodBean> resetFood(List<Food> foodEntity) throws InformationErrorException {
+        List<FoodBean> foodBeans = new ArrayList<>();
+        try {
+            if(foodEntity != null) {
+                for (Food food : foodEntity) {
+                    FoodBean foodBean = new FoodBean();
+                    Printer.print(food.getFoodName());
+                    foodBean.setFoodName(food.getFoodName());
+                    foodBeans.add(foodBean);
+                }
+                return foodBeans;
+            }else return null;
+        }catch (InformationErrorException e){
+            throw new InformationErrorException(e.getMessage());
+        }
+    }
+
+    public void setFood(List<FoodBean> foodBeanList, FoodBean foodBean) throws InformationErrorException {
+        List<Food> foodMealEntity = new ArrayList<>();
+        for (FoodBean food : foodBeanList) {
+            Food foodStore = new Food(food.getFoodName());
+            Printer.print(food.getFoodName());
+            foodMealEntity.add(foodStore);
+
+        }
+        switch (foodBean.getMeal()) {
+            case "Breakfast" -> foodEntityBreakfast = foodMealEntity;
+            case "Launch" -> foodEntityLunch = foodMealEntity;
+            case "Dinner" -> foodEntityDinner = foodMealEntity;
+            case "Snack" -> foodEntitySnack = foodMealEntity;
+            default -> throw new InformationErrorException("Meal not recognized");
+        };
+
     }
 }

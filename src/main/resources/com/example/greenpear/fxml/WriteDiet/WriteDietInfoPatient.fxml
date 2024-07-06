@@ -306,7 +306,9 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Region prefHeight="33.0" prefWidth="676.0" />
+                  <Region prefHeight="33.0" prefWidth="260.0" />
+                  <Label fx:id="errorLabel" prefHeight="24.0" prefWidth="95.0" textFill="WHITE" />
+                  <Region prefHeight="33.0" prefWidth="284.0" />
                   <Button mnemonicParsing="false" onMouseClicked="#goToWriteDietForm" prefHeight="24.0" prefWidth="95.0" style="-fx-background-color: #6F8A4A;" text="Write diet" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
