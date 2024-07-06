@@ -18,12 +18,12 @@ public class BuyDietQuery {
     static final String QUERIES_ADD_ALLERGIES = "INSERT INTO allergies (Allergies, foodPreference_idFoodPreference) VALUES (?,?);";
 
     static final String QUERIES_ADD_TRANSACTION = "INSERT INTO transaction (name, surname, email, creditNumber, cvc, typePayment, price) VALUES (?,?,?,?,?,?, ?);";
-    public static final String getDietitian(){
+    public static String getDietitian(){
         return QUERIES_GET_DIETITIANS;
     }
-    public static final String setPatient(){ return QUERIES_ADD_PATIENT;}
+    public static String setPatient(){ return QUERIES_ADD_PATIENT;}
 
-    public static final String setLifeStyle() {
+    public static String setLifeStyle() {
         return QUERIES_ADD_INFO_SPORT;
     }
 

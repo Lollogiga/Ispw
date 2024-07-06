@@ -1,8 +1,10 @@
 package com.example.greenpear.controllerapplicativo;
 
 import com.example.greenpear.bean.*;
+import com.example.greenpear.dao.FoodDao;
 import com.example.greenpear.dao.RequestDao;
 import com.example.greenpear.entities.Dietitian;
+import com.example.greenpear.entities.Food;
 import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.exception.InformationErrorException;
@@ -10,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WriteDietController {
@@ -79,5 +82,23 @@ public class WriteDietController {
             throw new InformationErrorException(e.getMessage());
         }
 
+    }
+
+    public List<FoodBean> getAllFood() throws SQLException {
+        List<FoodBean> foodBeans = new ArrayList<>();
+        try{
+            FoodDao foodDao = new FoodDao();
+            List<Food> foodList = foodDao.getFoodList();
+            //Dobbiamo ora inserirle in una bean:
+            for (Food food : foodList) {
+                FoodBean foodBean = new FoodBean(food.getFoodName(), food.getCalories(), food.getProtein(), food.getFat(), food.getCarbohydrates());
+                foodBeans.add(foodBean);
+            }
+            return foodBeans;
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        } catch (InformationErrorException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

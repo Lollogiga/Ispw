@@ -4,6 +4,7 @@ import com.example.greenpear.bean.*;
 import com.example.greenpear.controllerapplicativo.WriteDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -84,5 +85,13 @@ public class WriteDietPatientInfoGraphicController extends GraphicControllerGene
         }
 
 
+    }
+
+    public void goToWriteDietForm() {
+        try {
+            this.sceneManager.showWriteDiet("Breakfast", userBean, writeDietController);
+        }catch (LoadSceneException e){
+            Printer.printError(e.getMessage());
+        }
     }
 }

@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -65,7 +66,7 @@
       </HBox>
       <Pane layoutY="45.0" prefHeight="655.0" prefWidth="850.0">
          <children>
-            <VBox fillWidth="false" layoutX="14.0" prefHeight="655.0" prefWidth="836.0">
+            <VBox fillWidth="false" layoutX="14.0" layoutY="2.0" prefHeight="593.0" prefWidth="844.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="836.0">
                      <children>
@@ -252,7 +253,7 @@
                         <Font name="System Bold Italic" size="18.0" />
                      </font>
                   </Label>
-                  <GridPane prefHeight="190.0" prefWidth="349.0">
+                  <GridPane prefHeight="169.0" prefWidth="349.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="303.0" minWidth="10.0" prefWidth="173.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="388.0" minWidth="10.0" prefWidth="205.0" />
@@ -292,6 +293,33 @@
                   </GridPane>
                </children>
             </VBox>
+            <HBox alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="608.0" prefHeight="33.0" prefWidth="856.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#goToWriteDiet" prefHeight="24.0" prefWidth="95.0" style="-fx-background-color: #6F8A4A;" text="Go back" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Region prefHeight="33.0" prefWidth="676.0" />
+                  <Button mnemonicParsing="false" onMouseClicked="#goToWriteDietForm" prefHeight="24.0" prefWidth="95.0" style="-fx-background-color: #6F8A4A;" text="Write diet" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </Pane>
    </children>

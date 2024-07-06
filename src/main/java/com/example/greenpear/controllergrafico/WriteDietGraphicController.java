@@ -84,4 +84,6 @@ public class WriteDietGraphicController extends GraphicControllerGeneric {
             return row;
         });
     }
+
+
 }

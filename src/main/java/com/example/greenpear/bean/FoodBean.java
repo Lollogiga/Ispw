@@ -18,6 +18,14 @@ public class FoodBean {
         this.setMeal(meal);
     }
 
+    public FoodBean(String foodName, float calories, float protein, float fat, float carbohydrates) throws InformationErrorException {
+        this.setFoodName(foodName);
+        this.setCalories(calories);
+        this.setProtein(protein);
+        this.setFat(fat);
+        this.setCarbohydrates(carbohydrates);
+    }
+
     public void setMeal(String meal) throws InformationErrorException {
         if(!meal.isEmpty()){
             this.meal = meal;
@@ -39,7 +47,7 @@ public class FoodBean {
     }
 
     public void setCalories(float calories) throws InformationErrorException {
-        if(calories > 0){
+        if(calories >= 0){
             this.calories = calories;
         }else throw new InformationErrorException("Calories can't be <= 0");
     }
@@ -49,7 +57,7 @@ public class FoodBean {
     }
 
     public void setProtein(float protein) throws InformationErrorException {
-        if(protein > 0){
+        if(protein >= 0){
             this.protein = protein;
         }else throw new InformationErrorException("Protein can't be <= 0");
     }
@@ -59,7 +67,7 @@ public class FoodBean {
     }
 
     public void setFat(float fat) throws InformationErrorException {
-        if(fat > 0){
+        if(fat >= 0){
             this.fat = fat;
         }else throw new InformationErrorException("Fat can't be <= 0");
     }
@@ -69,7 +77,7 @@ public class FoodBean {
     }
 
     public void setCarbohydrates(float carbohydrates) throws InformationErrorException {
-        if(carbohydrates > 0){
+        if(carbohydrates >= 0){
             this.carbohydrates = carbohydrates;
         }else throw new InformationErrorException("Carbohydrates can't be <= 0");
     }
