@@ -10,8 +10,8 @@ public class Food {
 
     public Food(){}
 
-    public Food(String FoodName){
-        this.setFoodName(FoodName);
+    public Food(String foodName){
+        this.setFoodName(foodName);
     }
 
     public String getMeal() {

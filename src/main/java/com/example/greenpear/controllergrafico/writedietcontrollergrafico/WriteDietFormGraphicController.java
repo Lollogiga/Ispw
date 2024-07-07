@@ -1,11 +1,9 @@
 package com.example.greenpear.controllergrafico.writedietcontrollergrafico;
 
-import com.example.greenpear.SceneManager;
 import com.example.greenpear.bean.FoodBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.controllerapplicativo.WriteDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
-import com.example.greenpear.entities.Food;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
@@ -20,7 +18,6 @@ import javafx.scene.input.MouseButton;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -113,18 +110,18 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
     }
 
     private void storeFoodMeal() throws InformationErrorException {
-        List<FoodBean> FoodBeanList = new ArrayList<>();
+        List<FoodBean> foodBeanList = new ArrayList<>();
         for(String food : selectedFoodList){
             try {
                 FoodBean storeBean = new FoodBean();
                 storeBean.setFoodName(food);
-                FoodBeanList.add(storeBean);
+                foodBeanList.add(storeBean);
             }catch (InformationErrorException e){
                 e.printStackTrace();
                 throw new InformationErrorException("Store failed" + e.getMessage());
             }
         }
-        writeDietController.setFood(FoodBeanList, foodBean);
+        writeDietController.setFood(foodBeanList, foodBean);
     }
 
     public void deleteAliment(){

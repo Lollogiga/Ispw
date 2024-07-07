@@ -142,7 +142,7 @@ public class WriteDietController {
                     foodBeans.add(foodBean);
                 }
                 return foodBeans;
-            }else return null;
+            }return foodBeans; //Ritorno una bean senza valori istanziati
         }catch (InformationErrorException e){
             throw new InformationErrorException(e.getMessage());
         }
@@ -154,7 +154,6 @@ public class WriteDietController {
             Food foodStore = new Food(food.getFoodName());
             Printer.print(food.getFoodName());
             foodMealEntity.add(foodStore);
-
         }
         switch (foodBean.getMeal()) {
             case "Breakfast" -> foodEntityBreakfast = foodMealEntity;
@@ -162,7 +161,6 @@ public class WriteDietController {
             case "Dinner" -> foodEntityDinner = foodMealEntity;
             case "Snack" -> foodEntitySnack = foodMealEntity;
             default -> throw new InformationErrorException("Meal not recognized");
-        };
-
+        }
     }
 }
