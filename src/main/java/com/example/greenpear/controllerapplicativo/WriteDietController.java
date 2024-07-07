@@ -152,7 +152,6 @@ public class WriteDietController {
         List<Food> foodMealEntity = new ArrayList<>();
         for (FoodBean food : foodBeanList) {
             Food foodStore = new Food(food.getFoodName());
-            Printer.print(food.getFoodName());
             foodMealEntity.add(foodStore);
         }
         switch (foodBean.getMeal()) {

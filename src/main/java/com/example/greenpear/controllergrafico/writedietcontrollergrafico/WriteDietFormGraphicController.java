@@ -49,7 +49,6 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
         selectedFoodList = FXCollections.observableArrayList();
         try {
             this.foodBean = new FoodBean(meal);
-            //Printer.print(foodBean.getMeal());
             //Dobbiamo inizialmente andare a recuperare la lista dei cibi dal database:
             List<FoodBean> foodBeanList = writeDietController.getAllFood();
             List<String> foodNameList = foodBeanList.stream()
@@ -117,7 +116,6 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
                 storeBean.setFoodName(food);
                 foodBeanList.add(storeBean);
             }catch (InformationErrorException e){
-                e.printStackTrace();
                 throw new InformationErrorException("Store failed" + e.getMessage());
             }
         }
@@ -134,7 +132,6 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
         try {
             storeFoodMeal();
         }catch (InformationErrorException e){
-            e.printStackTrace();
             Printer.printError(e.getMessage());
         }
         this.sceneManager.showWriteDiet("Launch", userBean, writeDietController);
@@ -145,7 +142,6 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
         try {
             storeFoodMeal();
         }catch (InformationErrorException e){
-            e.printStackTrace();
             Printer.printGraphicError(errorLabel, e.getMessage());
         }
         this.sceneManager.showWriteDiet("Breakfast", userBean, writeDietController);
@@ -155,7 +151,6 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
         try {
             storeFoodMeal();
         }catch (InformationErrorException e){
-            e.printStackTrace();
             Printer.printGraphicError(errorLabel, e.getMessage());
         }
         this.sceneManager.showWriteDiet("Dinner", userBean, writeDietController);
@@ -165,7 +160,6 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
         try {
             storeFoodMeal();
         }catch (InformationErrorException e){
-            e.printStackTrace();
             Printer.printGraphicError(errorLabel, e.getMessage());
         }
         this.sceneManager.showWriteDiet("Snack", userBean, writeDietController);
