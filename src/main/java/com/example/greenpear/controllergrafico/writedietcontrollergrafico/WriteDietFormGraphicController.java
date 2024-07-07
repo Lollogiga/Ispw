@@ -76,7 +76,6 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
         }catch (SQLException e){
             Printer.printError(e.getMessage());
         } catch (InformationErrorException e) {
-            e.printStackTrace();
             Printer.printGraphicError(errorLabel, e.getMessage());
         }
     }
