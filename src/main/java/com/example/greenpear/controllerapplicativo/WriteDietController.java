@@ -3,10 +3,7 @@ package com.example.greenpear.controllerapplicativo;
 import com.example.greenpear.bean.*;
 import com.example.greenpear.dao.FoodDao;
 import com.example.greenpear.dao.RequestDao;
-import com.example.greenpear.entities.Dietitian;
-import com.example.greenpear.entities.Food;
-import com.example.greenpear.entities.RequestDetails;
-import com.example.greenpear.entities.RequestId;
+import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
@@ -18,7 +15,7 @@ import java.util.List;
 
 public class WriteDietController {
     private RequestId requestEntity;
-
+    private RequestDetails requestDetails;
     //Breakfast:
     private List<Food> foodEntityBreakfast;
     //Launch:
@@ -58,12 +55,13 @@ public class WriteDietController {
     public PatientBean restorePatientInformation() throws SQLException, InformationErrorException {
         //A partire dal paziente selezionato, salvato all'interno di requestEntity, dobbiamo andare a prendere tutte le informazioni del paziente:
 
-        ObservableList<String> foodDislikedList = FXCollections.observableArrayList();
-        ObservableList<String> allergiesList = FXCollections.observableArrayList();
+        ObservableList<String> foodDislikedList;
+        ObservableList<String> allergiesList;
         try{
             RequestDao requestDao = new RequestDao();
-            RequestDetails requestDetails = requestDao.getRequestDetails(requestEntity);
-
+            if(requestDetails == null) {
+                requestDetails = requestDao.getRequestDetails(requestEntity);
+            }
             //Dobbiamo ora inserire le informazioni nella bean:
             //Personal Information:
             String age = requestDetails.getPersonalInformation().getAge();
@@ -160,6 +158,25 @@ public class WriteDietController {
             case "Dinner" -> foodEntityDinner = foodMealEntity;
             case "Snack" -> foodEntitySnack = foodMealEntity;
             default -> throw new InformationErrorException("Meal not recognized");
+        }
+    }
+    //Todo chiedere parere sulla logica:
+    public void storeDiet() throws InformationErrorException, SQLException {
+        //Per prima cosa verifichiamo che in tutte le schermate ci siano dati:
+        if(foodEntityBreakfast != null && foodEntityLunch != null && foodEntityDinner != null && foodEntitySnack != null) {
+            //Andiamo a salvare i valori dentro un'entità meal:
+            Meal meal = new Meal(foodEntityBreakfast, foodEntityLunch, foodEntityDinner, foodEntitySnack);
+            try {
+                FoodDao foodDao = new FoodDao();
+                foodDao.setMeal(requestEntity, meal);
+                //Fatto ciò andiamo ad aggiornare la richiesta, settandola a 1:
+                RequestDao requestDao = new RequestDao();
+                requestDao.requestManage(requestEntity);
+            }catch (SQLException e){
+                throw new SQLException(e.getMessage());
+            }
+        }else{
+            throw new InformationErrorException("Must compile every meal");
         }
     }
 }

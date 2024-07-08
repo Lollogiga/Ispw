@@ -62,7 +62,7 @@ public class RegisterGraphicController {
 
             //Invio le bean al contoller applicativo che gestirà la registrazione:
             registrationController.registerNewUser(registerBean);
-            errorLabel.setText("Registration complete");
+            Printer.printGraphic(errorLabel, "Registration complete");
             PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(event -> {
                 try {

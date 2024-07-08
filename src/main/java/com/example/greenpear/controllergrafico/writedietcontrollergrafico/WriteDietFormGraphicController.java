@@ -7,6 +7,7 @@ import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,13 +16,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
+import javafx.util.Duration;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WriteDietFormGraphicController extends GraphicControllerGeneric{
+public class WriteDietFormGraphicController extends GraphicControllerGeneric {
 
     //Common elements:
     @FXML
@@ -42,7 +44,7 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
     private FoodBean foodBean;
 
     @FXML
-    public void initialize(String meal, LoginBean userBean, WriteDietController writeDietController){
+    public void initialize(String meal, LoginBean userBean, WriteDietController writeDietController) {
         this.userBean = userBean;
         this.writeDietController = writeDietController;
         foodList = FXCollections.observableArrayList();
@@ -60,7 +62,7 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
             selectedAliment.setItems(selectedFoodList);
 
             ObservableList<String> foodListRecovery = recoveryList();
-            if(foodListRecovery != null){
+            if (foodListRecovery != null) {
                 selectedFoodList.addAll(foodListRecovery);
                 selectedAliment.setItems(selectedFoodList);
             }
@@ -73,7 +75,7 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
                     }
                 }
             });
-        }catch (SQLException e){
+        } catch (SQLException e) {
             Printer.printError(e.getMessage());
         } catch (InformationErrorException e) {
             Printer.printGraphicError(errorLabel, e.getMessage());
@@ -84,16 +86,16 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
         List<String> foodNameList;
         //Dobbiamo ora recuperare i dati salvati su ciascuna schermata:
         List<FoodBean> foodInList = writeDietController.resetFood(this.foodBean);
-        if(foodInList != null) {
+        if (foodInList != null) {
             foodNameList = foodInList.stream()
                     .map(FoodBean::getFoodName)
                     .toList();
             return FXCollections.observableArrayList(foodNameList);
-        }else return null;
+        } else return null;
     }
 
 
-    public void searchList(){
+    public void searchList() {
         String searchText = searchFoodTextField.getText();
         if (searchText == null || searchText.isEmpty()) {
             // Se il campo di ricerca è vuoto, mostra tutti gli elementi
@@ -109,19 +111,19 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
 
     private void storeFoodMeal() throws InformationErrorException {
         List<FoodBean> foodBeanList = new ArrayList<>();
-        for(String food : selectedFoodList){
+        for (String food : selectedFoodList) {
             try {
                 FoodBean storeBean = new FoodBean();
                 storeBean.setFoodName(food);
                 foodBeanList.add(storeBean);
-            }catch (InformationErrorException e){
+            } catch (InformationErrorException e) {
                 throw new InformationErrorException("Store failed" + e.getMessage());
             }
         }
         writeDietController.setFood(foodBeanList, foodBean);
     }
 
-    public void deleteAliment(){
+    public void deleteAliment() {
         int selectedFood = selectedAliment.getSelectionModel().getSelectedIndex();
         selectedAliment.getItems().remove(selectedFood);
     }
@@ -130,7 +132,7 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
     public void goToLaunch() throws LoadSceneException {
         try {
             storeFoodMeal();
-        }catch (InformationErrorException e){
+        } catch (InformationErrorException e) {
             Printer.printError(e.getMessage());
         }
         this.sceneManager.showWriteDiet("Launch", userBean, writeDietController);
@@ -140,7 +142,7 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
     public void goToBreakfast() throws LoadSceneException {
         try {
             storeFoodMeal();
-        }catch (InformationErrorException e){
+        } catch (InformationErrorException e) {
             Printer.printGraphicError(errorLabel, e.getMessage());
         }
         this.sceneManager.showWriteDiet("Breakfast", userBean, writeDietController);
@@ -149,7 +151,7 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
     public void goToDinner() throws LoadSceneException {
         try {
             storeFoodMeal();
-        }catch (InformationErrorException e){
+        } catch (InformationErrorException e) {
             Printer.printGraphicError(errorLabel, e.getMessage());
         }
         this.sceneManager.showWriteDiet("Dinner", userBean, writeDietController);
@@ -158,11 +160,46 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric{
     public void goToSnack() throws LoadSceneException {
         try {
             storeFoodMeal();
-        }catch (InformationErrorException e){
+        } catch (InformationErrorException e) {
             Printer.printGraphicError(errorLabel, e.getMessage());
         }
         this.sceneManager.showWriteDiet("Snack", userBean, writeDietController);
     }
 
+    public void goToPatientInfo() throws LoadSceneException {
+        try {
+            storeFoodMeal();
+            this.sceneManager.showWriteDietPatientInfo(userBean, writeDietController);
+        } catch (LoadSceneException e) {
+            Printer.printError(e.getMessage());
+        } catch (InformationErrorException e) {
+            Printer.printGraphicError(errorLabel, e.getMessage());
+        }
+    }
+
+    public void goToSubmit() {
+        try {
+            // Andiamo a salvare le ultime modifiche:
+            storeFoodMeal();
+
+            // Dobbiamo andare a salvare il tutto sul database:
+            writeDietController.storeDiet();
+
+            Printer.printGraphic(errorLabel, "Diet created successfully");
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> {
+                try {
+                    this.sceneManager.showWriteDiet(userBean);
+                } catch (LoadSceneException e) {
+                    Printer.printError(e.getMessage());
+                }
+            });
+            pause.play();
+        } catch (InformationErrorException e) {
+            Printer.printGraphicError(errorLabel, e.getMessage());
+        } catch (SQLException e) {
+            Printer.printError(e.getMessage());
+        }
+    }
 }
 

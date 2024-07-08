@@ -1,8 +1,9 @@
-package com.example.greenpear.controllergrafico;
+package com.example.greenpear.controllergrafico.writedietcontrollergrafico;
 
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.PatientBean;
 import com.example.greenpear.controllerapplicativo.WriteDietController;
+import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;

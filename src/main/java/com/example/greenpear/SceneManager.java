@@ -4,7 +4,7 @@ import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllerapplicativo.WriteDietController;
 import com.example.greenpear.controllergrafico.HomeGraphicController;
 import com.example.greenpear.controllergrafico.RicettarioGraphicController;
-import com.example.greenpear.controllergrafico.WriteDietGraphicController;
+import com.example.greenpear.controllergrafico.writedietcontrollergrafico.WriteDietGraphicController;
 import com.example.greenpear.controllergrafico.buydietcontrollergrafico.*;
 import com.example.greenpear.controllergrafico.writedietcontrollergrafico.WriteDietFormGraphicController;
 import com.example.greenpear.controllergrafico.writedietcontrollergrafico.WriteDietPatientInfoGraphicController;

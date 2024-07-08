@@ -58,6 +58,7 @@ public class RequestQuery {
             "    allergies a ON r.idRequest = a.idRequest " +
             "WHERE " +
             "    r.idRequest = ?";
+    static final String QUERIES_REQUEST_MANAGED = "UPDATE request SET requestStatus = 1 WHERE idRequest = ?;";
 
     public static String getRequestFromPatient() {
         return QUERIES_GET_REQUEST_FROM_PATIENT;
@@ -71,5 +72,10 @@ public class RequestQuery {
 
     public static String getRequestDetails(){
         return QUERIES_GET_REQUEST_DETAILS;
+    }
+
+    public static String requestManage() {
+        return QUERIES_REQUEST_MANAGED;
+
     }
 }

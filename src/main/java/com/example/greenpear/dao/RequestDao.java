@@ -95,4 +95,14 @@ public class RequestDao {
             throw new SQLException(e.getMessage());
         }
     }
+
+    public void requestManage(RequestId requestEntity) throws SQLException {
+        try{
+            preparedStatement = connection.prepareStatement(RequestQuery.requestManage());
+            preparedStatement.setInt(1, requestEntity.getIdRequest());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        }
+    }
 }
