@@ -2,7 +2,6 @@ package com.example.greenpear.dao;
 
 import com.example.greenpear.entities.Food;
 import com.example.greenpear.entities.Meal;
-import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.utils.query.FoodQuery;
 
@@ -57,10 +56,10 @@ public class FoodDao {
     }
 
     private void insertMealFoods(PreparedStatement preparedStatement, int requestId, List<Food> foodList, String typeOfMeal) throws SQLException {
+        preparedStatement.setInt(1, requestId);
+        preparedStatement.setString(2, typeOfMeal);
         for (Food food : foodList) {
-            preparedStatement.setInt(1, requestId);
-            preparedStatement.setString(2, typeOfMeal);
-            preparedStatement.setString(3, food.getFoodName()); 
+            preparedStatement.setString(3, food.getFoodName());
             preparedStatement.addBatch();
         }
     }
