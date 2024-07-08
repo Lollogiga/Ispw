@@ -114,7 +114,6 @@ public class WriteDietController {
     public List<FoodBean> resetFood(FoodBean foodBean) throws InformationErrorException {
         List<FoodBean> foodBeans;
         String meal = foodBean.getMeal();
-        Printer.print(meal);
         try{
             foodBeans = switch (meal) {
                 case "Breakfast" -> resetFood(foodEntityBreakfast);
@@ -135,7 +134,6 @@ public class WriteDietController {
             if(foodEntity != null) {
                 for (Food food : foodEntity) {
                     FoodBean foodBean = new FoodBean();
-                    Printer.print(food.getFoodName());
                     foodBean.setFoodName(food.getFoodName());
                     foodBeans.add(foodBean);
                 }

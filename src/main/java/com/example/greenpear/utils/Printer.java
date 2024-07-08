@@ -31,7 +31,6 @@ public class Printer {
     }
 
     //Printer a schermo:
-    //todo VERIFICARE CHE POSSA RIMANERE QUI:
     public static void printGraphicError(Label errorLabel, String message){
         errorLabel.setStyle("-fx-border-color: red;" + // Impostiamo il colore del bordo a rosso
                 "-fx-border-width: 2px;");
