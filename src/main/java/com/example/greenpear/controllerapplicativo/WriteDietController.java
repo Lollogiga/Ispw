@@ -5,6 +5,7 @@ import com.example.greenpear.dao.FoodDao;
 import com.example.greenpear.dao.RequestDao;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.observer.DietPublisher;
 import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,7 +47,7 @@ public class WriteDietController {
     }
     }
 
-    public void storeDietitian(PatientBean selectedPatientBean) {
+    public void storePatient(PatientBean selectedPatientBean) {
         requestEntity = new RequestId();
         requestEntity.setPatientUsername(selectedPatientBean.getPatientUsername());
         requestEntity.setIdRequest(selectedPatientBean.getRequestPatient());
@@ -170,6 +171,11 @@ public class WriteDietController {
                 //Fatto ciò andiamo ad aggiornare la richiesta, settandola a 1:
                 RequestDao requestDao = new RequestDao();
                 requestDao.requestManage(requestEntity);
+
+                //Ora dobbiamo inviare una notifica alla richiesta specifica:
+                DietPublisher dietPublisher = DietPublisher.getInstance();
+                dietPublisher.submitDiet(requestEntity);
+
             }catch (SQLException e){
                 throw new SQLException(e.getMessage());
             }

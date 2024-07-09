@@ -4,7 +4,10 @@ import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.RequestBean;
 import com.example.greenpear.controllerapplicativo.HomeController;
+import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.observer.DietPublisher;
+import com.example.greenpear.observer.Observer;
 import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
 import javafx.beans.property.SimpleObjectProperty;
@@ -17,7 +20,7 @@ import javafx.scene.control.*;
 import java.sql.SQLException;
 import java.util.List;
 
-public class HomeGraphicController extends GraphicControllerGeneric{
+public class HomeGraphicController extends GraphicControllerGeneric implements Observer {
     //Home paziente:
     @FXML
     private TableView<RequestBean> tableViewRequestDiet;
@@ -60,7 +63,12 @@ public class HomeGraphicController extends GraphicControllerGeneric{
         //Gestiamo la view dell
         this.userBean = userBean;
         homeController = new HomeController();
-        
+
+        DietPublisher dietPublisher = DietPublisher.getInstance();
+        dietPublisher.attach(this);
+        Printer.print(dietPublisher.toString());
+
+
         if(userBean.getRole() == Role.PATIENT){
             initializePatient();
         }else{
@@ -175,6 +183,14 @@ public class HomeGraphicController extends GraphicControllerGeneric{
         } catch (SQLException e) {
             Printer.printError(e.getMessage());
         }
+    }
+
+
+    @Override
+    public void update(RequestId requestId) {
+        //Ricevo una richiesta gestista dal dietologo. RequestId è un model, la invio all'applicativo per una traduzione da model a bean
+        //Passerò requestId al controller applicativo, che si occuperà di gestire la notifica:
+        homeController.manageUpdate(this.userBean, requestId);
     }
 }
 
