@@ -1,11 +1,6 @@
 package com.example.greenpear.observer;
 
-import com.example.greenpear.controllergrafico.DietGraphicController;
 import com.example.greenpear.entities.RequestId;
-import com.example.greenpear.utils.Printer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /* Rappresenta il soggetto da osservare(Il publisher). Quando un dietologo scrive una dieta per un relativo paziente
  * questo deve inviare una notifica ad uno specifico observer.

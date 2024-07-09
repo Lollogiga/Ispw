@@ -9,7 +9,6 @@ import com.example.greenpear.entities.Dietitian;
 import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.entities.UserProfile;
-import com.example.greenpear.observer.Observer;
 import com.example.greenpear.utils.Printer;
 
 import java.sql.SQLException;
