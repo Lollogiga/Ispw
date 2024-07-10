@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public abstract class GenericCli {
     boolean continueRunning = true;
+    protected static final String NOTVALIDCHOICE = "Invalid choice";
     protected final Scanner scanner = new Scanner(System.in);
 
     protected int getCliCommand() {

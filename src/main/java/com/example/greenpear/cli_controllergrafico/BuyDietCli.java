@@ -60,17 +60,94 @@ public class BuyDietCli extends GenericCli{
         }
 
         DietitianBean selectedDietitian = dietitianBeans.get(selectedIndex - 1);
-        Printer.print("Hai selezionato: " + selectedDietitian.getDietitianUsername());
+        buyDietController.storeDietitian(selectedDietitian);
 
         //Una volta selezionato il dietologo, vado a compilare il form:
+        personalInformationForm();
+        lifeStyleForm();
+        foodPreferenceForm();
         try {
-            personalInformationForm();
-            lifeStyleForm();
-            foodPreferenceForm();
-        }catch (InformationErrorException e){
+            paymentForm();
+            //Se tutto è andato a buon fine, genero la richiesta:
+            buyDietController.manageRequest(this.userBean);
+        }catch (SQLException e){
             Printer.printError(e.getMessage());
         }
+
         scanner.nextLine();
+    }
+
+    private void paymentForm() throws SQLException {
+        PaymentBean paymentBean = null;
+        Printer.print("Select payment method:");
+        Printer.print("1: Credit card");
+        Printer.print("2:  PayPal");
+        int choice = getCliCommand();
+        switch (choice) {
+            case 1:
+                paymentBean = creditCardPayment();
+                break;
+            case 2:
+                paymentBean = paypalPayment();
+                break;
+            default:
+                Printer.printError(NOTVALIDCHOICE);
+
+        }
+        buyDietController.createTransaction(paymentBean);
+    }
+
+    private PaymentBean paypalPayment() {
+        Scanner scanner = new Scanner(System.in);
+        PaymentBean paymentBean = null;
+
+        while(continueRunning){
+            try{
+                Printer.print("Insert email: ");
+                String email = scanner.nextLine();
+
+                Printer.print("Insert password: ");
+                String password = scanner.nextLine();
+
+                paymentBean = new PaymentBean(email, password, "PayPal");
+            }catch (InformationErrorException e){
+                Printer.printError(e.getMessage());
+            }
+            continueRunning = false;
+        }
+        continueRunning = true;
+        return paymentBean;
+    }
+
+    private PaymentBean creditCardPayment() {
+        Scanner scanner = new Scanner(System.in);
+        PaymentBean paymentBean = null;
+
+        while (continueRunning){
+         try {
+             Printer.print("Insert cardholder name: ");
+             String cardholderName = scanner.nextLine();
+
+             Printer.print("\nInsert cardholder surname: ");
+             String cardholderSurname = scanner.nextLine();
+
+             Printer.print("\nInsert Card Number: ");
+             String cardNumber = scanner.nextLine();
+
+             Printer.print("\nInsert CVC: ");
+             String cvc = scanner.nextLine();
+
+             Printer.print("\nInsert Expiry Date: ");
+             String expiryDate = scanner.nextLine();
+
+             paymentBean = new PaymentBean(cardholderName, cardholderSurname, cardNumber, cvc, expiryDate, "CreditCard");
+         }catch (InformationErrorException e){
+             Printer.printError(e.getMessage());
+         }
+         continueRunning = false;
+        }
+        continueRunning = true;
+        return paymentBean;
     }
 
     private void foodPreferenceForm() {
@@ -186,7 +263,7 @@ public class BuyDietCli extends GenericCli{
     }
 
 
-    private void personalInformationForm() throws InformationErrorException {
+    private void personalInformationForm() {
         Scanner scanner = new Scanner(System.in);
         String age;
         String gender = null;
@@ -234,7 +311,7 @@ public class BuyDietCli extends GenericCli{
                 buyDietController.storePersonalInformation(personalInformationBean);
                 continueRunning = false;
             } catch (InformationErrorException e) {
-                throw new InformationErrorException(e.getMessage());
+               Printer.printError(e.getMessage());
             }
         }
         Printer.print("\n --------PersonalInformation stored --------\n");

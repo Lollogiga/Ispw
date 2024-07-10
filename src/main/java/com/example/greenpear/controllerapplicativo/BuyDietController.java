@@ -54,7 +54,6 @@ public class BuyDietController {
     }
 
 
-    //TODO verificare se posso fare merge con funzione in homeController (Ora è stato aggiunto un costruttore):
     public DietitianBean restoreDietitianInfo() throws SQLException, InformationErrorException {
         DietitianBean dietitianBean;
         Dietitian dietitian;
