@@ -93,7 +93,7 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
                     radioButtonUnavailable.setSelected(true);
                 }
             }
-        }catch (SQLException e){
+        }catch (SQLException | InformationErrorException e){
             Printer.printError(e.getMessage());
         }
 

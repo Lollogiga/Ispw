@@ -9,6 +9,7 @@ import com.example.greenpear.entities.Dietitian;
 import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.entities.UserProfile;
+import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
 
 import java.sql.SQLException;
@@ -40,7 +41,7 @@ public class HomeController {
         }
     }
 
-    public DietitianBean restoreDietitianInfo(LoginBean userBean) throws SQLException {
+    public DietitianBean restoreDietitianInfo(LoginBean userBean) throws SQLException, InformationErrorException {
         UserProfile currentUser = new UserProfile(userBean.getUsername());
         Dietitian dietitian = new Dietitian();
         DietitianBean dietitianBean;
@@ -58,6 +59,8 @@ public class HomeController {
             }else { return null;}
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
+        } catch (InformationErrorException e) {
+            throw new InformationErrorException(e.getMessage());
         }
     }
 

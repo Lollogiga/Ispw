@@ -1,5 +1,7 @@
 package com.example.greenpear.bean;
 
+import com.example.greenpear.exception.InformationErrorException;
+
 public class DietitianBean {
     private String dietitianUsername;
     private Integer price;
@@ -7,12 +9,12 @@ public class DietitianBean {
     private String personalEducation;
     private String workExperience;
 
-    public DietitianBean(String dietitian, Integer price){
+    public DietitianBean(String dietitian, Integer price) throws InformationErrorException {
        this.setDietitianUsername(dietitian);
        this.setPrice(price);
    }
 
-   public DietitianBean(String dietitian, Integer price, Boolean available, String personalEducation, String workExperience) {
+   public DietitianBean(String dietitian, Integer price, Boolean available, String personalEducation, String workExperience) throws InformationErrorException {
         this.setDietitianUsername(dietitian);
         this.setPrice(price);
         this.setAvailable(available);
@@ -20,7 +22,7 @@ public class DietitianBean {
         this.setWorkExperience(workExperience);
    }
 
-    public DietitianBean(String dietitianUsername, int price, String personalEducation, String workExperience) {
+    public DietitianBean(String dietitianUsername, int price, String personalEducation, String workExperience) throws InformationErrorException {
         this.setDietitianUsername(dietitianUsername);
         this.setPrice(price);
         this.setPersonalEducation(personalEducation);
@@ -39,10 +41,10 @@ public class DietitianBean {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Integer price) throws InformationErrorException {
         if(price == null || price >= 0){
             this.price = price;
-        }else{ throw new IllegalArgumentException("Price must be greater than 0");}
+        }else{ throw new InformationErrorException("Price must be greater than 0");}
     }
 
     public Boolean getAvailable() {

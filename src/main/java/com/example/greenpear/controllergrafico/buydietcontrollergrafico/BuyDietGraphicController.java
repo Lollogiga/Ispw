@@ -4,6 +4,7 @@ import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
+import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
 import javafx.beans.property.IntegerProperty;
@@ -38,7 +39,7 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
         //Recuperiamo le informazioni dal controller applicativo:
         try {
             dietitianBeans = buyDietController.setListDietitian(dietitianBeans);
-        }catch (SQLException e){
+        }catch (SQLException | InformationErrorException e){
             Printer.printError(e.getMessage());
         }
         configureTableColumns();
@@ -63,7 +64,7 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
         tableViewDietitian.setItems(dietitianBeans);
     }
 
-    private void handleRowClick(MouseEvent event, TableRow<DietitianBean> row) {
+    private void handleRowClick(MouseEvent event, TableRow<DietitianBean> row) throws InformationErrorException {
         if (event.getClickCount() == 2 && !row.isEmpty()) {
             DietitianBean selectedDietitian = row.getItem();
             if (selectedDietitian != null) {
@@ -85,7 +86,13 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
     private void setRowFactory() {
         tableViewDietitian.setRowFactory(tv -> {
             TableRow<DietitianBean> row = new TableRow<>();
-            row.setOnMouseClicked(event -> handleRowClick(event, row));
+            row.setOnMouseClicked(event -> {
+                try {
+                    handleRowClick(event, row);
+                } catch (InformationErrorException e) {
+                    Printer.print(e.getMessage());
+                }
+            });
             return row;
         });
     }

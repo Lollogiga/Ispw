@@ -32,7 +32,7 @@ public class BuyDietController {
 
 
     //Lista di tutti i dietologi:
-    public ObservableList<DietitianBean> setListDietitian(ObservableList<DietitianBean> dietitianBeans) throws SQLException {
+    public ObservableList<DietitianBean> setListDietitian(ObservableList<DietitianBean> dietitianBeans) throws SQLException, InformationErrorException {
         ObservableList<Dietitian> dietitians = FXCollections.observableArrayList();
 
         try{
@@ -44,6 +44,8 @@ public class BuyDietController {
             return dietitianBeans;
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
+        } catch (InformationErrorException e) {
+            throw new InformationErrorException(e.getMessage());
         }
     }
 
@@ -68,6 +70,8 @@ public class BuyDietController {
             }else { return null;}
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
+        } catch (InformationErrorException e) {
+            throw new RuntimeException(e);
         }
     }
 

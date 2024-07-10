@@ -4,7 +4,6 @@ import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.utils.Printer;
 
 import java.util.ArrayList;
-import java.util.PrimitiveIterator;
 
 /* Subject è una classe astratta che fornisce interfacce per registrare o rimuovere dinamicamente gli observer.
  * Attach: Aggiunge un ConcreteObserver alla lista delle classi da notificare.
