@@ -23,77 +23,68 @@ public class BuyDietCli extends GenericCli{
 
         try {
             dietitianBeans = buyDietController.setListDietitian(dietitianBeans);
-        } catch (SQLException | InformationErrorException e) {
-            Printer.printError(e.getMessage());
-        }
 
-        Printer.print("\n -------BuyDiet --------\n");
-        boolean confirmChoice = false;
+            Printer.print("\n -------BuyDiet --------\n");
+            boolean confirmChoice = false;
 
-        while(!confirmChoice) {
-            Scanner scanner = new Scanner(System.in);
+            while(!confirmChoice) {
+                Scanner scanner = new Scanner(System.in);
 
-            String format = "%-20s %-10s%n"; // Formato aggiornato per l'intero prezzo
-            Printer.print("Select a dietitian: ");
-            Printer.print(String.format(format, "Name", "Price"));
+                String format = "%-20s %-10s%n"; // Formato aggiornato per l'intero prezzo
+                Printer.print("Select a dietitian: ");
+                Printer.print(String.format(format, "Name", "Price"));
 
-            int count = 1;
-            format = "%d. %-20s %-10d%n"; // Formato aggiornato per l'intero prezzo
+                int count = 1;
+                format = "%d. %-20s %-10d%n"; // Formato aggiornato per l'intero prezzo
 
-            for (DietitianBean dietitianBean : dietitianBeans) {
-                Printer.print(String.format(format, count, dietitianBean.getDietitianUsername(), dietitianBean.getPrice()));
-                count++;
-            }
-
-            // Richiedi l'input dell'utente
-            int selectedIndex = -1;
-
-            while (selectedIndex < 1 || selectedIndex > dietitianBeans.size()) {
-                Printer.print("Insert number of selected dietitian: ");
-
-                if (scanner.hasNextInt()) {
-                    selectedIndex = scanner.nextInt();
-
-                    if (selectedIndex < 1 || selectedIndex > dietitianBeans.size()) {
-                        Printer.printError("Index not valid");
-                    }
-                } else {
-                    Printer.printError("Input not valid.");
-                    scanner.next(); // Consuma l'input non valido
+                for (DietitianBean dietitianBean : dietitianBeans) {
+                    Printer.print(String.format(format, count, dietitianBean.getDietitianUsername(), dietitianBean.getPrice()));
+                    count++;
                 }
-            }
 
-            DietitianBean selectedDietitian = dietitianBeans.get(selectedIndex - 1);
-            buyDietController.storeDietitian(selectedDietitian);
+                // Richiedi l'input dell'utente
+                int selectedIndex = -1;
 
-            try{
+                while (selectedIndex < 1 || selectedIndex > dietitianBeans.size()) {
+                    Printer.print("Insert number of selected dietitian: ");
+
+                    if (scanner.hasNextInt()) {
+                        selectedIndex = scanner.nextInt();
+
+                        if (selectedIndex < 1 || selectedIndex > dietitianBeans.size()) {
+                            Printer.printError("Index not valid");
+                        }
+                    } else {
+                        Printer.printError("Input not valid.");
+                        scanner.next(); // Consuma l'input non valido
+                    }
+                }
+
+                DietitianBean selectedDietitian = dietitianBeans.get(selectedIndex - 1);
+                buyDietController.storeDietitian(selectedDietitian);
+
                 DietitianBean dietitianBean = buyDietController.restoreDietitianInfo();
                 Printer.print("\n ------- Dietitian Information --------\n");
                 Printer.print("Dietitian: " + dietitianBean.getDietitianUsername());
                 Printer.print("Education and training: " + dietitianBean.getPersonalEducation());
                 Printer.print("Work experience: " + dietitianBean.getWorkExperience());
-                Printer.print("Price: "  + dietitianBean.getPrice());
+                Printer.print("Price: " + dietitianBean.getPrice());
                 Printer.print("\nConfirm choice?");
                 boolean choice = userChoice();
-                if(choice){
+                if (choice) {
                     confirmChoice = true;
                 }
-            }catch (SQLException | InformationErrorException e){
-                Printer.printError(e.getMessage());
             }
-        }
-        //Una volta selezionato il dietologo, vado a compilare il form:
-        personalInformationForm();
-        lifeStyleForm();
-        foodPreferenceForm();
-        try {
+            //Una volta selezionato il dietologo, vado a compilare il form:
+            personalInformationForm();
+            lifeStyleForm();
+            foodPreferenceForm();
             paymentForm();
             //Se tutto è andato a buon fine, genero la richiesta:
             buyDietController.manageRequest(this.userBean);
-        }catch (SQLException e){
-            Printer.printError(e.getMessage());
-        }
-        scanner.nextLine();
+        }catch (SQLException | InformationErrorException e){
+                Printer.printError(e.getMessage());
+            }
     }
 
     private void paymentForm() throws SQLException {
