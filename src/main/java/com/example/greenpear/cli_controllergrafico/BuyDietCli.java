@@ -45,16 +45,16 @@ public class BuyDietCli extends GenericCli{
         int selectedIndex = -1;
 
         while (selectedIndex < 1 || selectedIndex > dietitianBeans.size()) {
-            System.out.print("Insert number of selected dietitian: ");
+            Printer.print("Insert number of selected dietitian: ");
 
             if (scanner.hasNextInt()) {
                 selectedIndex = scanner.nextInt();
 
                 if (selectedIndex < 1 || selectedIndex > dietitianBeans.size()) {
-                    System.out.println("Index not valid");
+                    Printer.printError("Index not valid");
                 }
             } else {
-                System.out.println("Input not valid.");
+                Printer.printError("Input not valid.");
                 scanner.next(); // Consuma l'input non valido
             }
         }
@@ -136,7 +136,7 @@ public class BuyDietCli extends GenericCli{
 
     }
 
-    private void lifeStyleForm() throws InformationErrorException {
+    private void lifeStyleForm(){
         Scanner scanner = new Scanner(System.in);
         String sport;
         String frequency;

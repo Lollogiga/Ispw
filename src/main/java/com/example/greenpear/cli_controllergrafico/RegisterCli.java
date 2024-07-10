@@ -12,9 +12,9 @@ import java.util.Scanner;
 import static java.lang.System.exit;
 
 public class RegisterCli extends GenericCli{
-    private final Scanner scanner = new Scanner(System.in);
 
     public void start(){
+        Scanner scanner = new Scanner(System.in);
         RegistrationController registrationController = new RegistrationController();
         RegisterBean registerBean;
 

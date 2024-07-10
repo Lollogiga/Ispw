@@ -8,8 +8,8 @@ import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
 
+import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,7 +32,11 @@ public class HomePageCli extends GenericCli{
 
     private void startPatient() {
         while (continueRunning){
-            printMenu(Role.PATIENT);
+            try {
+                printMenu(Role.PATIENT);
+            }catch (InformationErrorException e) {
+                Printer.printError(e.getMessage());
+            }
             int choice = this.getCliCommand();
             switch (choice) {
                 case 1:
@@ -43,14 +47,19 @@ public class HomePageCli extends GenericCli{
                     break;
                 case 0:
                     continueRunning = false;
+                default:
+                    Printer.printError("Choice not valid");
             }
         }
     }
 
     private void startDietitian() {
         while (continueRunning){
-            printMenu(Role.DIETITIAN);
-
+            try {
+                printMenu(Role.DIETITIAN);
+            }catch (InformationErrorException e) {
+                Printer.printError(e.getMessage());
+            }
             int choice = this.getCliCommand();
             switch (choice) {
                 case 1:
@@ -60,7 +69,7 @@ public class HomePageCli extends GenericCli{
                     changePersonalInformation();
                     break;
                 case 3:
-                    //goToWriteDiet();
+                    goToWriteDiet();
                     break;
                 case 0:
                     continueRunning = false;
@@ -71,20 +80,23 @@ public class HomePageCli extends GenericCli{
         }
     }
 
-    private void printMenu(Role role) {
+    private void goToWriteDiet() {
+        Printer.print("Not implemented yet");
+    }
+
+    private void printMenu(Role role) throws InformationErrorException {
         Printer.print("\n -------- HOME PAGE --------\n");
-        switch (role) {
-            case DIETITIAN:
-                Printer.print("1: Read Personal Information");
-                Printer.print("2: Modify Personal Information");
-                Printer.print("3: Write diet");
-                Printer.print("0: Logout");
-                break;
-            case PATIENT:
-                Printer.print("1: View request");
-                Printer.print("2: Buy diet");
-                Printer.print("0: Logout");
-                break;
+        if(Role.DIETITIAN.equals(role)) {
+            Printer.print("1: Read Personal Information");
+            Printer.print("2: Modify Personal Information");
+            Printer.print("3: Write diet");
+            Printer.print("0: Logout");
+        }else if(Role.PATIENT.equals(role)) {
+            Printer.print("1: View request");
+            Printer.print("2: Buy diet");
+            Printer.print("0: Logout");
+        }else{
+            throw new InformationErrorException("Invalid role");
         }
     }
 
