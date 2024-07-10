@@ -8,7 +8,6 @@ import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
 
-import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -47,8 +46,9 @@ public class HomePageCli extends GenericCli{
                     break;
                 case 0:
                     continueRunning = false;
+                    break;
                 default:
-                    Printer.printError("Choice not valid");
+                    Printer.printError("Invalid choice");
             }
         }
     }

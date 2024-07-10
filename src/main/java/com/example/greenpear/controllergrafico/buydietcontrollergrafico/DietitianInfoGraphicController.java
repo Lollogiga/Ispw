@@ -4,6 +4,7 @@ import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
+import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
 import javafx.fxml.FXML;
@@ -41,7 +42,7 @@ public class DietitianInfoGraphicController extends GraphicControllerGeneric {
                 textAreaWork.setText(dietitianBean.getWorkExperience());
                 textFieldPrice.setText(dietitianBean.getPrice().toString());
             }
-        }catch (SQLException e){
+        }catch (SQLException | InformationErrorException e){
             Printer.printError(e.getMessage());
         }
     }
