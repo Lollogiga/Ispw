@@ -120,7 +120,7 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric {
             }
             String healthGoal = (String) choiceBoxHealthGoal.getValue();
             if(healthGoal == null || healthGoal.isEmpty()){
-                throw new InformationErrorException("Select HealtGoal");
+                throw new InformationErrorException("Select HealthGoal");
             }
             if(alcohol.getSelectedToggle() == null){
                 throw new InformationErrorException("Select whether you drink alcohol or not");

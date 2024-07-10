@@ -39,7 +39,7 @@ public class HomePageCli extends GenericCli{
                     printRequest();
                     break;
                 case 2:
-                    //goToBuyDiet();
+                    goToBuyDiet();
                     break;
                 case 0:
                     continueRunning = false;
@@ -167,5 +167,9 @@ public class HomePageCli extends GenericCli{
         continueRunning = true;
     }
 
+    private void goToBuyDiet(){
+        BuyDietCli buyDietCli = new BuyDietCli();
+        buyDietCli.start(userBean);
+    }
 
 }

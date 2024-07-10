@@ -3,7 +3,6 @@ package com.example.greenpear;
 import com.example.greenpear.cli_controllergrafico.LoginCli;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
-import com.example.greenpear.utils.Role;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

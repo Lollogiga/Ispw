@@ -25,7 +25,8 @@ public class LifeStyleBean {
     public void setSport(String sport) {
         if(sport != null) {
             this.sport = sport;
-        }
+        };
+
     }
 
     public String getFrequency() {
