@@ -90,7 +90,7 @@ public class BuyDietCli extends GenericCli{
         return userChoice();
     }
 
-    private void fillFormsAndManageRequest() throws SQLException, InformationErrorException {
+    private void fillFormsAndManageRequest() throws SQLException {
         personalInformationForm();
         lifeStyleForm();
         foodPreferenceForm();
