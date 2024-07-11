@@ -1,7 +1,7 @@
 package com.example.greenpear.controllerapplicativo;
 
 import com.example.greenpear.bean.LoginBean;
-import com.example.greenpear.dao.LoginDaoImpl;
+import com.example.greenpear.dao.UserDao;
 import com.example.greenpear.entities.UserProfile;
 import com.example.greenpear.utils.Role;
 
@@ -25,7 +25,7 @@ public class LoginController {
         userProfile = new UserProfile(username, password);
 
         try{
-            LoginDaoImpl loginDao = new LoginDaoImpl();
+            UserDao loginDao = new UserDao();
             loginDao.loginUser(userProfile);
 
             //Se tutto va a buon fine l'utente è loggato e possiamo creare una sessione:

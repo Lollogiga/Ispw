@@ -1,7 +1,7 @@
 package com.example.greenpear.controllerapplicativo;
 
 import com.example.greenpear.bean.RegisterBean;
-import com.example.greenpear.dao.RegisterDaoImpl;
+import com.example.greenpear.dao.UserDao;
 import com.example.greenpear.entities.UserProfile;
 import com.example.greenpear.utils.Role;
 
@@ -27,7 +27,7 @@ public class RegistrationController {
         userProfile = new UserProfile(username, email, password, role);
 
         try{
-            RegisterDaoImpl registerDao = new RegisterDaoImpl();
+            UserDao registerDao = new UserDao();
             registerDao.registerNewUser(userProfile);
         }catch (SQLException e){
             throw new SQLException(e.getMessage());

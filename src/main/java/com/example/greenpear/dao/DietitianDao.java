@@ -1,21 +1,24 @@
 package com.example.greenpear.dao;
 
 import com.example.greenpear.entities.Dietitian;
+import com.example.greenpear.utils.query.BuyDietQuery;
 import com.example.greenpear.utils.query.InfoDietitianQuery;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class InfoDietitianDao {
+public class DietitianDao {
     private Connection connection = null;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
 
-    public InfoDietitianDao() throws SQLException{
+    public DietitianDao() throws SQLException{
         connection = SingletonConnection.getInstance();
     }
+
     public Dietitian getDietitianInfo(Dietitian dietitian) throws SQLException {
         preparedStatement = connection.prepareStatement(InfoDietitianQuery.getDietitianInfo());
         preparedStatement.setString(1, dietitian.getDietitianUsername());
@@ -40,5 +43,17 @@ public class InfoDietitianDao {
         preparedStatement.setString(4, dietitian.getEducation());
         preparedStatement.setString(5, dietitian.getWork());
         preparedStatement.executeUpdate();
+    }
+
+    public void getDietitian(ObservableList<Dietitian> dietitians) throws SQLException{
+        preparedStatement = connection.prepareStatement(BuyDietQuery.getDietitian());
+        resultSet=preparedStatement.executeQuery();
+
+        while (resultSet.next()){
+            String username = resultSet.getString("dietitianUsername");
+            int price = resultSet.getInt("price");
+            dietitians.add(new Dietitian(username, price));
+        }
+
     }
 }

@@ -3,8 +3,8 @@ package com.example.greenpear.controllerapplicativo;
 import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.RequestBean;
-import com.example.greenpear.dao.HomeDao;
-import com.example.greenpear.dao.InfoDietitianDao;
+import com.example.greenpear.dao.DietitianDao;
+import com.example.greenpear.dao.RequestDao;
 import com.example.greenpear.entities.Dietitian;
 import com.example.greenpear.entities.RequestDetails;
 import com.example.greenpear.entities.RequestId;
@@ -25,8 +25,8 @@ public class HomeController {
         List<RequestBean> requestBeans = new ArrayList<RequestBean>();
         String message;
         try{
-            HomeDao homeDao = new HomeDao();
-            requestDetails = homeDao.getRequest(currentUser);
+            RequestDao requestDao = new RequestDao();
+            requestDetails = requestDao.getRequest(currentUser);
             for(RequestDetails request : requestDetails){
                 if(Boolean.TRUE.equals(request.getRequestHandled())){
                     message = "Request Manage";
@@ -47,8 +47,8 @@ public class HomeController {
         DietitianBean dietitianBean;
         dietitian.setDietitianUsername(currentUser.getUsername());
         try{
-            InfoDietitianDao infoDietitianDao = new InfoDietitianDao();
-            dietitian = infoDietitianDao.getDietitianInfo(dietitian);
+            DietitianDao dietitianDao = new DietitianDao();
+            dietitian = dietitianDao.getDietitianInfo(dietitian);
             if(dietitian != null) {
                 dietitianBean = new DietitianBean(dietitian.getDietitianUsername(),
                         dietitian.getPrice(),
@@ -67,8 +67,8 @@ public class HomeController {
     public void storeDietitianInfo(DietitianBean dietitianBean) throws SQLException {
         Dietitian dietitian = new Dietitian(dietitianBean.getDietitianUsername(), dietitianBean.getPrice(),dietitianBean.getAvailable(), dietitianBean.getPersonalEducation(), dietitianBean.getWorkExperience());
         try{
-            InfoDietitianDao infoDietitianDao = new InfoDietitianDao();
-            infoDietitianDao.setDietitianInfo(dietitian);
+            DietitianDao dietitianDao = new DietitianDao();
+            dietitianDao.setDietitianInfo(dietitian);
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }

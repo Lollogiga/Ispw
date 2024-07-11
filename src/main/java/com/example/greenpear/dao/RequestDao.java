@@ -105,4 +105,33 @@ public class RequestDao {
             throw new SQLException(e);
         }
     }
+
+    public List<RequestDetails> getRequest(UserProfile currentUser) throws SQLException {
+        List<RequestDetails> requestList = new ArrayList<RequestDetails>();
+        try {
+            preparedStatement = connection.prepareStatement(RequestQuery.getRequestFromPatient());
+            preparedStatement.setString(1, currentUser.getUsername());
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                RequestDetails requestDetails = new RequestDetails(new FoodPreference());
+                requestDetails.setDietitianUsername(resultSet.getString("dietitianUsername"));
+                requestDetails.setRequestHandled(resultSet.getBoolean("requestStatus"));
+                requestDetails.getFoodPreferenceRequest().setDietType(resultSet.getString("dietType"));
+                requestList.add(requestDetails);
+            }
+            return requestList;
+        }catch (SQLException e){
+            throw new SQLException(e.getMessage());
+        }
+    }
+
+    public void setRequest(RequestId requestId) throws SQLException {
+        preparedStatement = connection.prepareStatement(RequestQuery.setRequest());
+        preparedStatement.setInt(1, requestId.getFoodPreferenceID());
+        preparedStatement.setString(2, requestId.getDietitianUsername());
+        preparedStatement.setString(3, requestId.getPatientUsername());
+        preparedStatement.setInt(4, requestId.getInfoSportId());
+        preparedStatement.executeUpdate();
+    }
+
 }

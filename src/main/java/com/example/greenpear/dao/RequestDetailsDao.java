@@ -2,36 +2,21 @@ package com.example.greenpear.dao;
 
 import com.example.greenpear.entities.*;
 import com.example.greenpear.utils.query.BuyDietQuery;
-import com.example.greenpear.utils.query.RequestQuery;
-import javafx.collections.ObservableList;
 
 import java.sql.*;
 
-public class BuyDietDao {
-
+public class RequestDetailsDao {
     private Connection connection = null;
     private PreparedStatement preparedStatement;
-    //Valore di ritorno query
     private ResultSet resultSet;
 
-    public BuyDietDao() throws SQLException {
-        //Apro una connessione o prendo quella già esistente:
+    public RequestDetailsDao() throws SQLException {
         connection = SingletonConnection.getInstance();
     }
 
-    public void getDietitian(ObservableList<Dietitian> dietitians) throws SQLException{
-        preparedStatement = connection.prepareStatement(BuyDietQuery.getDietitian());
-        resultSet=preparedStatement.executeQuery();
+    public void setUser(UserProfile currentUser, RequestDetails requestDetails) throws SQLException {
+        PersonalInformation personalInformationEntity = requestDetails.getPersonalInformation();
 
-        while (resultSet.next()){
-            String username = resultSet.getString("dietitianUsername");
-            int price = resultSet.getInt("price");
-            dietitians.add(new Dietitian(username, price));
-        }
-
-    }
-
-    public void setUser(UserProfile currentUser, PersonalInformation personalInformationEntity) throws SQLException {
         preparedStatement = connection.prepareStatement(BuyDietQuery.setPatient());
         preparedStatement.setString(1, currentUser.getUsername());
         preparedStatement.setInt(2, Integer.parseInt(personalInformationEntity.getAge()));
@@ -41,7 +26,8 @@ public class BuyDietDao {
         preparedStatement.executeUpdate();
     }
 
-    public void setLifeStyle(LifeStyle lifeStyleEntity, RequestId requestId) throws SQLException {
+    public void setLifeStyle(RequestDetails requestDetails, RequestId requestId) throws SQLException {
+        LifeStyle lifeStyleEntity = requestDetails.getLifeStyle();
         preparedStatement = connection.prepareStatement(BuyDietQuery.setLifeStyle(), Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, lifeStyleEntity.getSport());
         preparedStatement.setString(2, lifeStyleEntity.getFrequency());
@@ -55,7 +41,8 @@ public class BuyDietDao {
         }
     }
 
-    public void setFoodPreference(FoodPreference foodPreferenceEntity, RequestId requestId) throws SQLException {
+    public void setFoodPreference(RequestDetails requestDetails, RequestId requestId) throws SQLException {
+        FoodPreference foodPreferenceEntity = requestDetails.getFoodPreferenceRequest();
         preparedStatement = connection.prepareStatement(BuyDietQuery.setFoodPreference(), Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, foodPreferenceEntity.getDietType());
         preparedStatement.executeUpdate();
@@ -86,26 +73,5 @@ public class BuyDietDao {
             preparedStatement.addBatch();
         }
         preparedStatement.executeBatch(); //Eseguiamo tutte le query nel batch
-    }
-
-    public void setRequest(RequestId requestId) throws SQLException {
-        preparedStatement = connection.prepareStatement(RequestQuery.setRequest());
-        preparedStatement.setInt(1, requestId.getFoodPreferenceID());
-        preparedStatement.setString(2, requestId.getDietitianUsername());
-        preparedStatement.setString(3, requestId.getPatientUsername());
-        preparedStatement.setInt(4, requestId.getInfoSportId());
-        preparedStatement.executeUpdate();
-    }
-
-    public void setTransaction(Transaction transaction) throws SQLException{
-            preparedStatement = connection.prepareStatement(BuyDietQuery.setTransaction());
-            preparedStatement.setString(1, transaction.getName());
-            preparedStatement.setString(2, transaction.getSurname());
-            preparedStatement.setString(3, transaction.getEmail());
-            preparedStatement.setString(4, transaction.getCardNumber());
-            preparedStatement.setString(5, transaction.getCvc());
-            preparedStatement.setString(6, transaction.getTypePayment());
-            preparedStatement.setInt(7, transaction.getPrice());
-            preparedStatement.executeUpdate();
     }
 }

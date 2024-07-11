@@ -41,27 +41,4 @@ public class FoodDao {
         }
     }
 
-    public void setMeal(RequestId requestEntity, Meal meal) throws SQLException {
-        try{
-            preparedStatement = connection.prepareStatement((FoodQuery.setMeal()));
-            insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodBreakfast(), "breakfast");
-            insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodLunch(), "lunch");
-            insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodDinner(), "dinner");
-            insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodSnack(), "snack");
-
-            preparedStatement.executeBatch();
-        } catch (SQLException e) {
-            throw new SQLException(e.getMessage());
-        }
-    }
-
-    private void insertMealFoods(PreparedStatement preparedStatement, int requestId, List<Food> foodList, String typeOfMeal) throws SQLException {
-        preparedStatement.setInt(1, requestId);
-        preparedStatement.setString(2, typeOfMeal);
-        for (Food food : foodList) {
-            preparedStatement.setString(3, food.getFoodName());
-            preparedStatement.addBatch();
-        }
-    }
-
 }

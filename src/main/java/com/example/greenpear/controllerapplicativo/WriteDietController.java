@@ -2,6 +2,7 @@ package com.example.greenpear.controllerapplicativo;
 
 import com.example.greenpear.bean.*;
 import com.example.greenpear.dao.FoodDao;
+import com.example.greenpear.dao.MealDao;
 import com.example.greenpear.dao.RequestDao;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
@@ -166,8 +167,8 @@ public class WriteDietController {
             //Andiamo a salvare i valori dentro un'entità meal:
             Meal meal = new Meal(foodEntityBreakfast, foodEntityLunch, foodEntityDinner, foodEntitySnack);
             try {
-                FoodDao foodDao = new FoodDao();
-                foodDao.setMeal(requestEntity, meal);
+                MealDao mealDao = new MealDao();
+                mealDao.setMeal(requestEntity, meal);
                 //Fatto ciò andiamo ad aggiornare la richiesta, settandola a 1:
                 RequestDao requestDao = new RequestDao();
                 requestDao.requestManage(requestEntity);

@@ -1,8 +1,7 @@
 package com.example.greenpear.controllerapplicativo;
 
 import com.example.greenpear.bean.*;
-import com.example.greenpear.dao.BuyDietDao;
-import com.example.greenpear.dao.InfoDietitianDao;
+import com.example.greenpear.dao.*;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
@@ -36,8 +35,8 @@ public class BuyDietController {
         ObservableList<Dietitian> dietitians = FXCollections.observableArrayList();
 
         try{
-            BuyDietDao buyDietDao = new BuyDietDao();
-            buyDietDao.getDietitian(dietitians);
+            DietitianDao dietitianDao = new DietitianDao();
+            dietitianDao.getDietitian(dietitians);
             for(Dietitian dietitian : dietitians){
                 dietitianBeans.add(new DietitianBean(dietitian.getDietitianUsername(), dietitian.getPrice()));
             }
@@ -58,8 +57,8 @@ public class BuyDietController {
         DietitianBean dietitianBean;
         Dietitian dietitian;
         try{
-            InfoDietitianDao infoDietitianDao = new InfoDietitianDao();
-            dietitian = infoDietitianDao.getDietitianInfo(dietitianEntity);
+            DietitianDao dietitianDao = new DietitianDao();
+            dietitian = dietitianDao.getDietitianInfo(dietitianEntity);
             if(dietitian != null) {
                 dietitianBean = new DietitianBean(dietitian.getDietitianUsername(),
                         dietitian.getPrice(),
@@ -141,12 +140,20 @@ public class BuyDietController {
         requestId = new RequestId(currentUser.getUsername(), dietitianEntity.getDietitianUsername());
         try{
             //Salvo le informazioni nelle varie tabelle:
-            BuyDietDao buyDietDao = new BuyDietDao();
-            buyDietDao.setUser(currentUser, personalInformationEntity);
-            buyDietDao.setLifeStyle(lifeStyleEntity, requestId);
-            buyDietDao.setFoodPreference(foodPreferenceEntity, requestId);
+            RequestDetails requestDetails = new RequestDetails(personalInformationEntity, lifeStyleEntity, foodPreferenceEntity);
+            RequestDetailsDao requestDetailsDao = new RequestDetailsDao();
+            requestDetailsDao.setUser(currentUser, requestDetails);
+            requestDetailsDao.setLifeStyle(requestDetails, requestId);
+            requestDetailsDao.setFoodPreference(requestDetails, requestId);
+
+            //BuyDietDao buyDietDao = new BuyDietDao();
+            //buyDietDao.setUser(currentUser, personalInformationEntity);
+            //buyDietDao.setLifeStyle(lifeStyleEntity, requestId);
+            //buyDietDao.setFoodPreference(foodPreferenceEntity, requestId);
+
             //Infine genero la richiesta:
-            buyDietDao.setRequest(requestId);
+            RequestDao requestDao = new RequestDao();
+            requestDao.setRequest(requestId);
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
@@ -156,8 +163,8 @@ public class BuyDietController {
     public void createTransaction(PaymentBean paymentBean) throws SQLException {
         Transaction transaction = new Transaction(paymentBean,dietitianEntity);
         try{
-            BuyDietDao buyDietDao = new BuyDietDao();
-            buyDietDao.setTransaction(transaction);
+            TransactionDao transactionDao = new TransactionDao();
+            transactionDao.setTransaction(transaction);
 
         }catch (SQLException e){
             throw new SQLException(e.getMessage());
