@@ -1,8 +1,6 @@
 package com.example.greenpear.dao;
 
 import com.example.greenpear.entities.Food;
-import com.example.greenpear.entities.Meal;
-import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.utils.query.FoodQuery;
 
 import java.sql.Connection;

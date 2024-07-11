@@ -146,11 +146,6 @@ public class BuyDietController {
             requestDetailsDao.setLifeStyle(requestDetails, requestId);
             requestDetailsDao.setFoodPreference(requestDetails, requestId);
 
-            //BuyDietDao buyDietDao = new BuyDietDao();
-            //buyDietDao.setUser(currentUser, personalInformationEntity);
-            //buyDietDao.setLifeStyle(lifeStyleEntity, requestId);
-            //buyDietDao.setFoodPreference(foodPreferenceEntity, requestId);
-
             //Infine genero la richiesta:
             RequestDao requestDao = new RequestDao();
             requestDao.setRequest(requestId);
