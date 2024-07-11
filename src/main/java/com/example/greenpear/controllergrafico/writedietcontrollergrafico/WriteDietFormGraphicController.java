@@ -7,6 +7,7 @@ import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
+import com.opencsv.exceptions.CsvValidationException;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +77,7 @@ public class WriteDietFormGraphicController extends GraphicControllerGeneric {
                     }
                 }
             });
-        } catch (SQLException e) {
+        } catch (SQLException | IOException | CsvValidationException e ) {
             Printer.printError(e.getMessage());
         } catch (InformationErrorException e) {
             Printer.printGraphicError(errorLabel, e.getMessage());

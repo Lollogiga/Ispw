@@ -6,6 +6,7 @@ module com.example.login {
             requires com.dlsc.formsfx;
     requires java.sql;
     requires java.desktop;
+    requires com.opencsv;
 
     opens com.example.greenpear to javafx.fxml;
     exports com.example.greenpear;

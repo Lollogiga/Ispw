@@ -1,16 +1,16 @@
 package com.example.greenpear.controllerapplicativo;
 
 import com.example.greenpear.bean.*;
-import com.example.greenpear.dao.FoodDao;
-import com.example.greenpear.dao.MealDao;
-import com.example.greenpear.dao.RequestDao;
+import com.example.greenpear.dao.*;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.observer.DietPublisher;
-import com.example.greenpear.utils.Printer;
+import com.opencsv.exceptions.CsvValidationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,10 +95,12 @@ public class WriteDietController {
 
     }
 
-    public List<FoodBean> getAllFood() throws SQLException, InformationErrorException {
+    public List<FoodBean> getAllFood() throws SQLException, InformationErrorException, FileNotFoundException, CsvValidationException {
         List<FoodBean> foodBeans = new ArrayList<>();
         try{
-            FoodDao foodDao = new FoodDao();
+            //FoodDaoJdbc foodDaoJdbc = new FoodDaoJdbc();
+
+            FoodDao foodDao = new FoodDaoFactory().createFoodDao();
             List<Food> foodList = foodDao.getFoodList();
             //Dobbiamo ora inserirle in una bean:
             for (Food food : foodList) {
@@ -110,6 +112,10 @@ public class WriteDietController {
             throw new SQLException(e.getMessage());
         } catch (InformationErrorException e) {
             throw new InformationErrorException(e.getMessage());
+        } catch (IOException e){
+            throw new FileNotFoundException(e.getMessage());
+        } catch (CsvValidationException e) {
+            throw new CsvValidationException(e.getMessage());
         }
     }
 

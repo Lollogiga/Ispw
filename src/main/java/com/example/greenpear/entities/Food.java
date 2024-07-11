@@ -14,6 +14,7 @@ public class Food {
         this.setFoodName(foodName);
     }
 
+
     public String getMeal() {
         return meal;
     }
