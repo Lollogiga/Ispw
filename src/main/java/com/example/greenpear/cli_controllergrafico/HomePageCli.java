@@ -12,6 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -99,26 +101,6 @@ public class HomePageCli extends GenericCli{
         }
     }
 
-   /* private void printRequest() {
-        try {
-            List<RequestBean> requestBeanList = homeController.getRequest(userBean);
-            Printer.print("\n -------- REQUEST LIST --------\n");
-
-            // Definisci il formato per la stampa
-            String format = "%-20s %-20s %-20s\n";
-            // Stampa l'intestazione con allineamento
-            Printer.print(String.format(format, "Request status", "Type Diet", "Dietitian"));
-            for (RequestBean requestBean : requestBeanList) {
-                // Stampa ogni riga con allineamento
-                Printer.print(String.format(format, requestBean.getRequestStatus(), requestBean.getTypeOfDiet(), requestBean.getDietitian()));
-            }
-        } catch (SQLException e) {
-            Printer.printError(e.getMessage());
-        }
-    }
-
-    */
-
     private void printRequest() {
         try {
             Scanner scanner = new Scanner(System.in);
@@ -164,43 +146,43 @@ public class HomePageCli extends GenericCli{
     private void printDiet(RequestBean selectedRequest) throws SQLException, InformationErrorException {
         Printer.print("\n -------- DIET --------\n");
         List<FoodBean> foodBeans = homeController.restoreDiet(selectedRequest);
-        ObservableList<String> listFoodBreakfast = FXCollections.observableArrayList();
-        ObservableList<String> listFoodLaunch = FXCollections.observableArrayList();
-        ObservableList<String> listFoodDinner = FXCollections.observableArrayList();
-        ObservableList<String> listFoodSnack = FXCollections.observableArrayList();
+        List<String> listBreakfast = new ArrayList<String>();
+        List<String> listLaunch = new ArrayList<>();
+        List<String> listDinner = new ArrayList<>();
+        List<String> listSnack = new ArrayList<>();
 
         for (FoodBean foodBean : foodBeans) {
             switch(foodBean.getMeal()){
                 case "Breakfast":
-                    listFoodBreakfast.add(foodBean.getFoodName());
+                    listBreakfast.add(foodBean.getFoodName());
                     break;
                 case "Launch":
-                    listFoodLaunch.add(foodBean.getFoodName());
+                    listLaunch.add(foodBean.getFoodName());
                     break;
                 case "Dinner":
-                    listFoodDinner.add(foodBean.getFoodName());
+                    listDinner.add(foodBean.getFoodName());
                     break;
                 case "Snack":
-                    listFoodSnack.add(foodBean.getFoodName());
+                    listSnack.add(foodBean.getFoodName());
                     break;
                 default:
-                    throw new InformationErrorException("Meal not found");
+                    throw new InformationErrorException("Meal not recognize");
             }
         }
         Printer.print("\n -------- BREAKFAST --------\n");
-        for (String s : listFoodBreakfast) {
+        for (String s : listBreakfast) {
             Printer.print(s);
         }
         Printer.print("\n -------- LAUNCH --------\n");
-        for (String s : listFoodLaunch) {
+        for (String s : listLaunch) {
             Printer.print(s);
         }
         Printer.print("\n -------- DINNER --------\n");
-        for (String s : listFoodDinner) {
+        for (String s : listDinner) {
             Printer.print(s);
         }
         Printer.print("\n -------- SNACK --------\n");
-        for (String s : listFoodSnack) {
+        for (String s : listSnack) {
             Printer.print(s);
         }
     }
