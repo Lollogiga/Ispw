@@ -8,7 +8,6 @@ import com.opencsv.exceptions.CsvValidationException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class FoodDaoCsv implements FoodDao{
     private final File file;

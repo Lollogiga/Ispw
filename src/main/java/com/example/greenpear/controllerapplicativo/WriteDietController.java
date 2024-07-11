@@ -98,7 +98,6 @@ public class WriteDietController {
     public List<FoodBean> getAllFood() throws SQLException, InformationErrorException, FileNotFoundException, CsvValidationException {
         List<FoodBean> foodBeans = new ArrayList<>();
         try{
-            //FoodDaoJdbc foodDaoJdbc = new FoodDaoJdbc();
 
             FoodDao foodDao = new FoodDaoFactory().createFoodDao();
             List<Food> foodList = foodDao.getFoodList();
