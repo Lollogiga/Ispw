@@ -80,10 +80,6 @@ public class HomePageCli extends GenericCli{
         }
     }
 
-    private void goToWriteDiet() {
-        Printer.print("Not implemented yet");
-    }
-
     private void printMenu(Role role) throws InformationErrorException {
         Printer.print("\n -------- HOME PAGE --------\n");
         if(Role.DIETITIAN.equals(role)) {
@@ -182,6 +178,12 @@ public class HomePageCli extends GenericCli{
     private void goToBuyDiet(){
         BuyDietCli buyDietCli = new BuyDietCli();
         buyDietCli.start(userBean);
+    }
+
+    private void goToWriteDiet() {
+        WriteDietCli writeDietCli = new WriteDietCli();
+        writeDietCli.start(userBean);
+
     }
 
 }

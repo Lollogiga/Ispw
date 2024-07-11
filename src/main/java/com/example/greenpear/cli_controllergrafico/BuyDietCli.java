@@ -15,7 +15,6 @@ public class BuyDietCli extends GenericCli{
     private LoginBean userBean;
     private BuyDietController buyDietController;
 
-
     public void start(LoginBean userBean) {
         this.userBean = userBean;
         buyDietController = new BuyDietController();
