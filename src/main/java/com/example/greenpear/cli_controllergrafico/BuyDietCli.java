@@ -265,24 +265,6 @@ public class BuyDietCli extends GenericCli{
         continueRunning = true;
     }
 
-    private boolean userChoice() {
-        while (continueRunning){
-            Printer.print("1: Yes");
-            Printer.print("2: No");
-            int choice = this.getCliCommand();
-            switch (choice) {
-                case 1:
-                    return true;
-                case 2:
-                    return false;
-                default:
-                    Printer.printError("Choice not valid");
-            }
-        }
-        return false;
-    }
-
-
     private void personalInformationForm() {
         Scanner scanner = new Scanner(System.in);
         String age;

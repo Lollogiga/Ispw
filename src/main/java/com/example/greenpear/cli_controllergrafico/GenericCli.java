@@ -17,4 +17,22 @@ public abstract class GenericCli {
         }
         return scanner.nextInt();
     }
+
+    protected boolean userChoice() {
+        while (continueRunning){
+            Printer.print("1: Yes");
+            Printer.print("2: No");
+            int choice = this.getCliCommand();
+            switch (choice) {
+                case 1:
+                    return true;
+                case 2:
+                    return false;
+                default:
+                    Printer.printError("Choice not valid");
+            }
+        }
+        return false;
+    }
+
 }
