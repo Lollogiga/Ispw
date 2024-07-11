@@ -57,27 +57,6 @@ public class BuyDietCli extends GenericCli{
         }
     }
 
-    private int getUserSelection(Scanner scanner, int maxSize) {
-        int selectedIndex = -1;
-
-        while (selectedIndex < 1 || selectedIndex > maxSize) {
-            Printer.print("Insert number of selected dietitian: ");
-
-            if (scanner.hasNextInt()) {
-                selectedIndex = scanner.nextInt();
-
-                if (selectedIndex < 1 || selectedIndex > maxSize) {
-                    Printer.printError("Index not valid");
-                }
-            } else {
-                Printer.printError("Input not valid.");
-                scanner.next(); // Consuma l'input non valido
-            }
-        }
-
-        return selectedIndex;
-    }
-
     private boolean confirmDietitianChoice() throws SQLException, InformationErrorException {
         DietitianBean dietitianBean = buyDietController.restoreDietitianInfo();
         Printer.print("\n ------- Dietitian Information --------\n");

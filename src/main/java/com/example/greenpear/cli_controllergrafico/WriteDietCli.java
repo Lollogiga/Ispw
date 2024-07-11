@@ -38,7 +38,7 @@ public class WriteDietCli extends  GenericCli{
 
         while (!confirmChoice) {
             printPatientList(patientBeans);
-            Pri
+
             int selectedIndex = getUserSelection(scanner, patientBeans.size());
             PatientBean selectedPatient = patientBeans.get(selectedIndex - 1);
             writeDietController.storePatient(selectedPatient);
@@ -58,27 +58,6 @@ public class WriteDietCli extends  GenericCli{
             Printer.print(String.format(format, count, patientBean.getPatientUsername()));
             count++;
         }
-    }
-
-    private int getUserSelection(Scanner scanner, int maxSize) {
-        int selectedIndex = -1;
-
-        while (selectedIndex < 1 || selectedIndex > maxSize) {
-            Printer.print("Insert number of selected patient: ");
-
-            if (scanner.hasNextInt()) {
-                selectedIndex = scanner.nextInt();
-
-                if (selectedIndex < 1 || selectedIndex > maxSize) {
-                    Printer.printError("Index not valid");
-                }
-            } else {
-                Printer.printError("Input not valid.");
-                scanner.next(); // Consuma l'input non valido
-            }
-        }
-
-        return selectedIndex;
     }
 
     private boolean confirmPatientChoice() throws SQLException, InformationErrorException {

@@ -35,4 +35,26 @@ public abstract class GenericCli {
         return false;
     }
 
+    protected int getUserSelection(Scanner scanner, int maxSize) {
+        int selectedIndex = -1;
+
+        while (selectedIndex < 1 || selectedIndex > maxSize) {
+            Printer.print("Insert number for selection: ");
+
+            if (scanner.hasNextInt()) {
+                selectedIndex = scanner.nextInt();
+
+                if (selectedIndex < 1 || selectedIndex > maxSize) {
+                    Printer.printError("Index not valid");
+                }
+            } else {
+                Printer.printError("Input not valid.");
+                scanner.next(); // Consuma l'input non valido
+            }
+        }
+
+        return selectedIndex;
+    }
+
+
 }
