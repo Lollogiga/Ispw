@@ -38,6 +38,7 @@ public class WriteDietCli extends  GenericCli{
 
         while (!confirmChoice) {
             printPatientList(patientBeans);
+            Pri
             int selectedIndex = getUserSelection(scanner, patientBeans.size());
             PatientBean selectedPatient = patientBeans.get(selectedIndex - 1);
             writeDietController.storePatient(selectedPatient);
