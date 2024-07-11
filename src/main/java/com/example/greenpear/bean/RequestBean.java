@@ -1,6 +1,7 @@
 package com.example.greenpear.bean;
 
 public class RequestBean {
+    private int RequestId;
     private String requestStatus;
     private String link;
     private String typeOfDiet;
@@ -14,6 +15,14 @@ public class RequestBean {
 
     public String getRequestStatus() {
         return requestStatus;
+    }
+
+    public int getRequestId() {
+        return RequestId;
+    }
+
+    public void setRequestId(int requestId) {
+        RequestId = requestId;
     }
 
     public void setRequestStatus(String requestStatus) {

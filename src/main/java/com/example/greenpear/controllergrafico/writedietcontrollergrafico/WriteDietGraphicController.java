@@ -66,9 +66,9 @@ public class WriteDietGraphicController extends GraphicControllerGeneric {
                 String patientUsername = selectedPatient.getPatientUsername();
                 int requestId = selectedPatient.getRequestPatient();
                 try {
-                    PatientBean selectdPatientBean = new PatientBean(patientUsername, requestId);
+                    PatientBean selectedPatientBean = new PatientBean(patientUsername, requestId);
                     writeDietController.storePatient(selectedPatient);
-                    Printer.print("Patient: " + selectdPatientBean.getPatientUsername() + "IdRequest: " + selectdPatientBean.getRequestPatient());
+                    Printer.print("Patient: " + selectedPatientBean.getPatientUsername() + "IdRequest: " + selectedPatientBean.getRequestPatient());
                     this.sceneManager.showWriteDietPatientInfo(userBean, writeDietController);
                 } catch (InformationErrorException |LoadSceneException e) {
                     Printer.printError(e.getMessage());

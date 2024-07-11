@@ -12,7 +12,6 @@ import java.util.List;
 public class FoodDaoCsv implements FoodDao{
     private final File file;
     private static final String CSV_FILE_NAME = "food.csv";
-    private static final int INDEX_FOOD_ID = 0;
     private static final int INDEX_FOOD_NAME = 1;
     private static final int INDEX_FOOD_CALORIES = 2;
     private static final int INDEX_FOOD_PROTEIN = 3;

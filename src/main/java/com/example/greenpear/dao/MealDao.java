@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MealDao {
@@ -24,10 +25,10 @@ public class MealDao {
     public void setMeal(RequestId requestEntity, Meal meal) throws SQLException {
         try{
             preparedStatement = connection.prepareStatement((FoodQuery.setMeal()));
-            insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodBreakfast(), "breakfast");
-            insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodLunch(), "lunch");
-            insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodDinner(), "dinner");
-            insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodSnack(), "snack");
+            insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodBreakfast(), "Breakfast");
+            insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodLunch(), "Launch");
+            insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodDinner(), "Dinner");
+            insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodSnack(), "Snack");
 
             preparedStatement.executeBatch();
         } catch (SQLException e) {
@@ -44,4 +45,40 @@ public class MealDao {
         }
     }
 
+    public Meal getMeal(RequestId requestEntity) throws SQLException {
+        List<Food> foodBreakfast = new ArrayList<>();
+        List<Food> foodLunch = new ArrayList<>();
+        List<Food> foodDinner = new ArrayList<>();
+        List<Food> foodSnack = new ArrayList<>();
+
+        try{
+            preparedStatement = connection.prepareStatement(FoodQuery.getMeal());
+            preparedStatement.setInt(1, requestEntity.getIdRequest());
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Food food = new Food();
+                food.setFoodName(resultSet.getString("foodName"));
+                switch (resultSet.getString("mealType") ){
+                    case "Breakfast":
+                        foodBreakfast.add(food);
+                        break;
+                    case "Launch":
+                        foodLunch.add(food);
+                        break;
+                    case "Dinner":
+                        foodDinner.add(food);
+                        break;
+                    case "Snack":
+                        foodSnack.add(food);
+                        break;
+                    default:
+                        throw new SQLException(resultSet.getString("mealType"));
+                }
+            }
+
+        }catch (SQLException e){
+            throw new SQLException(e.getMessage());
+        }
+        return new Meal(foodBreakfast, foodLunch, foodDinner, foodSnack);
+    }
 }

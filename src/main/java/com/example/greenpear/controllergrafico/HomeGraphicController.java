@@ -6,6 +6,7 @@ import com.example.greenpear.bean.RequestBean;
 import com.example.greenpear.controllerapplicativo.HomeController;
 import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.observer.DietPublisher;
 import com.example.greenpear.observer.Observer;
 import com.example.greenpear.utils.Printer;
@@ -168,8 +169,16 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
             button.setOnAction(event -> {
                 RequestBean request = cellData.getValue();
                 // Azioni da eseguire quando il bottone viene premuto
-                // Ad esempio:
-                Printer.print("Hai cliccato il link per la richiesta: ");
+                if(request.getRequestStatus().equals("Request Manage")){
+                    try {
+                        Printer.print("Request " + request.getRequestId());
+                        this.sceneManager.showDiet(userBean, request);
+                    } catch (LoadSceneException e) {
+                        Printer.printError(e.getMessage());
+                    }
+                }else{
+                    Printer.printGraphic(errorLabel, "Not manage");
+                }
             });
             return new SimpleObjectProperty<>(button);
         });

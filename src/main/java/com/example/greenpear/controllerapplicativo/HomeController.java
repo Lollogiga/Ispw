@@ -1,14 +1,13 @@
 package com.example.greenpear.controllerapplicativo;
 
 import com.example.greenpear.bean.DietitianBean;
+import com.example.greenpear.bean.FoodBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.RequestBean;
 import com.example.greenpear.dao.DietitianDao;
+import com.example.greenpear.dao.MealDao;
 import com.example.greenpear.dao.RequestDao;
-import com.example.greenpear.entities.Dietitian;
-import com.example.greenpear.entities.RequestDetails;
-import com.example.greenpear.entities.RequestId;
-import com.example.greenpear.entities.UserProfile;
+import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
 
@@ -18,6 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class HomeController {
+
     public List<RequestBean> getRequest(LoginBean userBean) throws SQLException {
         //Dobbiamo verificare se ci sono richieste legate all'utente, in caso affermativo andiamo a ritornare un vettore di entity che contiene tutti gli id relativi:
         UserProfile currentUser = new UserProfile(userBean.getUsername());
@@ -33,7 +33,9 @@ public class HomeController {
                 }else{
                     message = "Request not Manage";
                 }
-                requestBeans.add(new RequestBean(message, request.getFoodPreferenceRequest().getDietType(), request.getDietitianUsername()));
+                RequestBean requestBean = new RequestBean(message, request.getFoodPreferenceRequest().getDietType(), request.getDietitianUsername());
+                requestBean.setRequestId(request.getIdRequest());
+                requestBeans.add(requestBean);
             }
             return requestBeans;
         } catch (SQLException e) {
@@ -78,8 +80,58 @@ public class HomeController {
         UserProfile currentUser = new UserProfile(userBean.getUsername());
         //Verifico se la notifica mi riguarda:
         if(Objects.equals(requestId.getPatientUsername(), currentUser.getUsername())){
-            //Se la notifica è relativa a me, vado ad estrarre l'idRichiesta e lo passo alla grafica:
+            //Se la notifica è relativa a me, vado a estrarre l'idRichiesta e lo passo alla grafica:
             Printer.print("Diet write, update page");
         }
+    }
+
+    public List<FoodBean> restoreDiet(RequestBean requestBean) throws SQLException, InformationErrorException {
+        List<FoodBean> foodBeans = new ArrayList<>();
+
+        RequestId requestId= new RequestId();
+        requestId.setIdRequest(requestBean.getRequestId());
+
+        try {
+            MealDao mealDao = new MealDao();
+            Meal meal = mealDao.getMeal(requestId);
+
+            List<Food> foodBreakfast = meal.getFoodBreakfast();
+            List<Food> foodLaunch = meal.getFoodLunch();
+            List<Food> foodDinner = meal.getFoodDinner();
+            List<Food> foodSnack = meal.getFoodDinner();
+
+            for (Food food : foodBreakfast) {
+                FoodBean foodBean = new FoodBean();
+                foodBean.setMeal("Breakfast");
+                foodBean.setFoodName(food.getFoodName());
+                foodBeans.add(foodBean);
+            }
+            for (Food food : foodLaunch) {
+                FoodBean foodBean = new FoodBean();
+                foodBean.setMeal("Launch");
+                foodBean.setFoodName(food.getFoodName());
+                foodBeans.add(foodBean);
+
+            }
+            for (Food food : foodDinner) {
+                FoodBean foodBean = new FoodBean();
+                foodBean.setMeal("Dinner");
+                foodBean.setFoodName(food.getFoodName());
+                foodBeans.add(foodBean);
+            }
+            for (Food food : foodSnack) {
+                FoodBean foodBean = new FoodBean();
+                foodBean.setMeal("Snack");
+                foodBean.setFoodName(food.getFoodName());
+                foodBeans.add(foodBean);
+            }
+
+
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        } catch (InformationErrorException e) {
+            throw new InformationErrorException(e.getMessage());
+        }
+        return foodBeans;
     }
 }

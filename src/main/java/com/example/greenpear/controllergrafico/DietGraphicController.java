@@ -1,23 +1,71 @@
 package com.example.greenpear.controllergrafico;
 
+import com.example.greenpear.bean.FoodBean;
+import com.example.greenpear.bean.LoginBean;
+import com.example.greenpear.bean.RequestBean;
+import com.example.greenpear.controllerapplicativo.HomeController;
+import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.utils.Printer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.ListView;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class DietGraphicController extends GraphicControllerGeneric{
-    @FXML
-    private GridPane gridPane;
 
     @FXML
-    public void initialize() {
-        gridPane.setGridLinesVisible(false); // Disattiva le linee della griglia di default
-        gridPane.setStyle("-fx-grid-lines-visible: true;"); // Riattiva le linee della griglia tramite CSS
+    private ListView<String> listViewBreakfast;
+    @FXML
+    private ListView<String> listViewLaunch;
+    @FXML
+    private ListView<String> listViewDinner;
+    @FXML
+    private ListView<String> listViewSnack;
 
-        // CSS per mostrare solo le linee della griglia orizzontali
-        gridPane.setStyle(
-                "-fx-grid-lines-visible: true;" +
-                        "-fx-grid-line-color: black;" +
-                        "-fx-hgap: 1;" +
-                        "-fx-vgap: 1;"
-        );
+
+    @FXML
+    public void initialize(LoginBean userBean, RequestBean requestBean) {
+        this.userBean = userBean;
+        List<FoodBean> foodBeanList;
+
+        //Devo andare a prendere tutte le informazioni sulla dieta creata:
+        HomeController homeController = new HomeController();
+        ObservableList<String> listFoodBreakfast = FXCollections.observableArrayList();
+        ObservableList<String> listFoodLaunch = FXCollections.observableArrayList();
+        ObservableList<String> listFoodDinner = FXCollections.observableArrayList();
+        ObservableList<String> listFoodSnack = FXCollections.observableArrayList();
+        Printer.print("Request Id: " + requestBean.getRequestId());
+        try {
+            foodBeanList = homeController.restoreDiet(requestBean);
+            for (FoodBean foodBean : foodBeanList) {
+                switch(foodBean.getMeal()){
+                    case "Breakfast":
+                        listFoodBreakfast.add(foodBean.getFoodName());
+                        break;
+                    case "Launch":
+                        listFoodLaunch.add(foodBean.getFoodName());
+                        break;
+                    case "Dinner":
+                        listFoodDinner.add(foodBean.getFoodName());
+                        break;
+                    case "Snack":
+                        listFoodSnack.add(foodBean.getFoodName());
+                        break;
+                    default:
+                        throw new InformationErrorException("Meal not found");
+                }
+            }
+
+            listViewBreakfast.setItems(listFoodBreakfast);
+            listViewLaunch.setItems(listFoodLaunch);
+            listViewDinner.setItems(listFoodDinner);
+            listViewSnack.setItems(listFoodSnack);
+
+        }catch (SQLException | InformationErrorException e){
+            Printer.printError(e.getMessage());
+        }
     }
 }

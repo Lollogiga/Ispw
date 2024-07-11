@@ -1,5 +1,6 @@
 package com.example.greenpear;
 import com.example.greenpear.bean.LoginBean;
+import com.example.greenpear.bean.RequestBean;
 import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllerapplicativo.WriteDietController;
 import com.example.greenpear.controllergrafico.DietGraphicController;
@@ -200,12 +201,12 @@ public class SceneManager {
         }
     }
 
-    public void showDiet() throws LoadSceneException {
+    public void showDiet(LoginBean userBean, RequestBean requestBean) throws LoadSceneException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenpear/fxml/Diet.fxml"));
             Parent root = loader.load();
             DietGraphicController controller = loader.getController();
-            controller.initialize();
+            controller.initialize(userBean, requestBean);
             stage.setScene(new Scene(root));
         }catch (IOException | IllegalStateException e ){
             throw new LoadSceneException(SCENE_ERROR_MESSAGE + e.getMessage());

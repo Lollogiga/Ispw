@@ -117,6 +117,7 @@ public class RequestDao {
                 requestDetails.setDietitianUsername(resultSet.getString("dietitianUsername"));
                 requestDetails.setRequestHandled(resultSet.getBoolean("requestStatus"));
                 requestDetails.getFoodPreferenceRequest().setDietType(resultSet.getString("dietType"));
+                requestDetails.setIdRequest(resultSet.getInt("idRequest"));
                 requestList.add(requestDetails);
             }
             return requestList;
