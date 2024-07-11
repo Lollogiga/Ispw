@@ -177,7 +177,7 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
                         Printer.printError(e.getMessage());
                     }
                 }else{
-                    Printer.printGraphic(errorLabel, "Not manage");
+                    Printer.printGraphic(errorLabel, request.getRequestStatus());
                 }
             });
             return new SimpleObjectProperty<>(button);

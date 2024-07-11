@@ -3,7 +3,6 @@ package com.example.greenpear.bean;
 public class RequestBean {
     private int requestId;
     private String requestStatus;
-    private String link;
     private String typeOfDiet;
     private String dietitian;
 
@@ -29,13 +28,6 @@ public class RequestBean {
         this.requestStatus = requestStatus;
     }
 
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
 
     public String getTypeOfDiet() {
         return typeOfDiet;

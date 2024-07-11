@@ -1,12 +1,15 @@
 package com.example.greenpear.cli_controllergrafico;
 
 import com.example.greenpear.bean.DietitianBean;
+import com.example.greenpear.bean.FoodBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.RequestBean;
 import com.example.greenpear.controllerapplicativo.HomeController;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -96,7 +99,7 @@ public class HomePageCli extends GenericCli{
         }
     }
 
-    private void printRequest() {
+   /* private void printRequest() {
         try {
             List<RequestBean> requestBeanList = homeController.getRequest(userBean);
             Printer.print("\n -------- REQUEST LIST --------\n");
@@ -113,6 +116,95 @@ public class HomePageCli extends GenericCli{
             Printer.printError(e.getMessage());
         }
     }
+
+    */
+
+    private void printRequest() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            List<RequestBean> requestBeanList = homeController.getRequest(userBean);
+            Printer.print("\n -------- REQUEST LIST --------\n");
+
+            // Definisci il formato per la stampa
+            String format = "%-3s %-20s %-20s %-20s\n";
+            // Stampa l'intestazione con allineamento
+            Printer.print(String.format(format, "#", "Request status", "Type Diet", "Dietitian"));
+
+            // Stampa ogni richiesta con un numero di indice
+            int maxSize = requestBeanList.size();
+            for (int i = 0; i < maxSize; i++) {
+                RequestBean requestBean = requestBeanList.get(i);
+                // Stampa ogni riga con allineamento e numero di indice (partendo da 1)
+                Printer.print(String.format(format, (i + 1), requestBean.getRequestStatus(), requestBean.getTypeOfDiet(), requestBean.getDietitian()));
+            }
+
+            int escapeOption = maxSize + 1;
+
+            // Aggiungi opzione per non effettuare una scelta
+            Printer.print(String.format(format, escapeOption, "No choice", "", ""));
+
+            // Ottieni la selezione dell'utente
+            int selectedIndex = getUserSelection(scanner, escapeOption);
+
+            // Gestisci la selezione dell'utente
+            if (selectedIndex == escapeOption) {
+                Printer.print("No choice selected.");
+            } else {
+                RequestBean selectedRequest = requestBeanList.get(selectedIndex - 1);
+                Printer.print("Selected request:");
+                Printer.print(String.format(format, " ", selectedRequest.getRequestStatus(), selectedRequest.getTypeOfDiet(), selectedRequest.getDietitian()));
+                printDiet(selectedRequest);
+            }
+
+        } catch (SQLException | InformationErrorException e) {
+            Printer.printError(e.getMessage());
+        }
+    }
+
+    private void printDiet(RequestBean selectedRequest) throws SQLException, InformationErrorException {
+        Printer.print("\n -------- DIET --------\n");
+        List<FoodBean> foodBeans = homeController.restoreDiet(selectedRequest);
+        ObservableList<String> listFoodBreakfast = FXCollections.observableArrayList();
+        ObservableList<String> listFoodLaunch = FXCollections.observableArrayList();
+        ObservableList<String> listFoodDinner = FXCollections.observableArrayList();
+        ObservableList<String> listFoodSnack = FXCollections.observableArrayList();
+
+        for (FoodBean foodBean : foodBeans) {
+            switch(foodBean.getMeal()){
+                case "Breakfast":
+                    listFoodBreakfast.add(foodBean.getFoodName());
+                    break;
+                case "Launch":
+                    listFoodLaunch.add(foodBean.getFoodName());
+                    break;
+                case "Dinner":
+                    listFoodDinner.add(foodBean.getFoodName());
+                    break;
+                case "Snack":
+                    listFoodSnack.add(foodBean.getFoodName());
+                    break;
+                default:
+                    throw new InformationErrorException("Meal not found");
+            }
+        }
+        Printer.print("\n -------- BREAKFAST --------\n");
+        for (String s : listFoodBreakfast) {
+            Printer.print(s);
+        }
+        Printer.print("\n -------- LAUNCH --------\n");
+        for (String s : listFoodLaunch) {
+            Printer.print(s);
+        }
+        Printer.print("\n -------- DINNER --------\n");
+        for (String s : listFoodDinner) {
+            Printer.print(s);
+        }
+        Printer.print("\n -------- SNACK --------\n");
+        for (String s : listFoodSnack) {
+            Printer.print(s);
+        }
+    }
+
 
     private void printPersonalInformation() {
         try {
