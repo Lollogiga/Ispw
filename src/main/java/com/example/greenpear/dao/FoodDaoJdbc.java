@@ -1,6 +1,7 @@
 package com.example.greenpear.dao;
 
 import com.example.greenpear.entities.Food;
+import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.query.FoodQuery;
 
 import java.sql.Connection;
@@ -20,6 +21,7 @@ public class FoodDaoJdbc implements FoodDao{
     }
 
     public List<Food> getFoodList() throws SQLException {
+        Printer.print("CiaoJdbc");
         List<Food> foodList = new ArrayList<Food>();
         try{
             preparedStatement = connection.prepareStatement(FoodQuery.getAllFood());

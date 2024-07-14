@@ -2,6 +2,7 @@ package com.example.greenpear.dao;
 
 import com.example.greenpear.entities.Food;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.utils.Printer;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
@@ -32,6 +33,7 @@ public class FoodDaoCsv implements FoodDao{
     }
 
     private List<Food> getFood() throws InformationErrorException, CsvValidationException {
+        Printer.print("CiaoCSV");
         List<Food> foodList = new ArrayList<Food>();
 
         try (CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(file)))) {

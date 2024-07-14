@@ -1,5 +1,8 @@
-package com.example.greenpear.dao;
+package com.example.greenpear.abstractfactory;
 
+import com.example.greenpear.dao.FoodDao;
+import com.example.greenpear.dao.FoodDaoCsv;
+import com.example.greenpear.dao.FoodDaoJdbc;
 import com.example.greenpear.exception.InformationErrorException;
 
 import java.io.FileInputStream;
@@ -9,9 +12,9 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class FoodDaoFactory {
+public abstract class DaoFactory {
 
-    public FoodDao createFoodDao() throws IOException, SQLException, InformationErrorException {
+    public static synchronized DaoFactory createFoodDao() throws IOException, SQLException, InformationErrorException {
         InputStream inputStream = null;
         Properties prop = new Properties();
 
@@ -28,11 +31,14 @@ public class FoodDaoFactory {
 
         String daoType = prop.getProperty("FOOD_DAO_TYPE");
         return switch (daoType){
-            case "JDBC" -> new FoodDaoJdbc();
-            case "CSV" -> new FoodDaoCsv();
+            case "JDBC" -> new JdbcDaoFactory();
+            case "CSV" -> new CsvDaoFactory();
             default -> throw new InformationErrorException("Dao type error!");
         };
 
     }
+
+    public abstract FoodDao getTypeDao() throws IOException, SQLException;
+
 
 }

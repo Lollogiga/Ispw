@@ -1,5 +1,6 @@
 package com.example.greenpear.controllerapplicativo;
 
+import com.example.greenpear.abstractfactory.DaoFactory;
 import com.example.greenpear.bean.*;
 import com.example.greenpear.dao.*;
 import com.example.greenpear.entities.*;
@@ -99,7 +100,7 @@ public class WriteDietController {
         List<FoodBean> foodBeans = new ArrayList<>();
         try{
 
-            FoodDao foodDao = new FoodDaoFactory().createFoodDao();
+            FoodDao foodDao = DaoFactory.createFoodDao().getTypeDao();
             List<Food> foodList = foodDao.getFoodList();
             //Dobbiamo ora inserirle in una bean:
             for (Food food : foodList) {
