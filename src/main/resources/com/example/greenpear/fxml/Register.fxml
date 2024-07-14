@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.RegisterGraphicController">
+<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.RegisterGraphicController">
    <children>
       <TilePane alignment="CENTER" layoutX="144.0" layoutY="82.0" prefHeight="536.0" prefWidth="560.0" style="-fx-border-color: #6F8A4A; -fx-border-width: 10;" styleClass="-fx-">
          <children>
@@ -175,12 +175,12 @@
                   <Insets left="15.0" right="-10.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" style="-fx-background-color: #6F8A4A;" text="Home" textFill="WHITE">
+            <Button mnemonicParsing="false" onMouseClicked="#loginBefore" style="-fx-background-color: #6F8A4A;" text="Home" textFill="WHITE">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #6F8A4A;" text="Recipes" textFill="WHITE">
+            <Button mnemonicParsing="false" onMouseClicked="#loginBefore" style="-fx-background-color: #6F8A4A;" text="Recipes" textFill="WHITE">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
@@ -188,12 +188,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #6F8A4A;" text="About" textFill="WHITE">
+            <Button mnemonicParsing="false" onMouseClicked="#loginBefore" style="-fx-background-color: #6F8A4A;" text="About" textFill="WHITE">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #6F8A4A;" text="Buy diet" textFill="WHITE">
+            <Button mnemonicParsing="false" onMouseClicked="#loginBefore" style="-fx-background-color: #6F8A4A;" text="Buy diet" textFill="WHITE">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>

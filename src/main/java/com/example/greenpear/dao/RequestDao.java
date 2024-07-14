@@ -27,7 +27,7 @@ public class RequestDao {
         List<RequestId> requestList = new ArrayList<RequestId>();
         try{
             preparedStatement = connection.prepareStatement(RequestQuery.getRequestFromDietitian());
-            preparedStatement.setString(1, dietitian.getDietitianUsername());
+            preparedStatement.setString(1, dietitian.getUsername());
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 RequestId requestId = new RequestId();

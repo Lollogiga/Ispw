@@ -18,9 +18,10 @@ import javax.security.auth.login.CredentialException;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import static java.lang.System.err;
 import static java.lang.System.exit;
 
-public class LoginGraphicController {
+public class LoginGraphicController extends GraphicControllerGeneric{
     private final SceneManager sceneManager = SceneManager.getInstance(null);
 
     @FXML
@@ -30,17 +31,20 @@ public class LoginGraphicController {
     @FXML
     private Label errorLabel;
 
+    @FXML
+    public void initialize() {
+        this.label = errorLabel;
+    }
 
     public void onLogin() {
         String usernameField = this.txtFieldUsername.getText();
         String passwordField = this.txtFieldPassword.getText();
-
         try {
             LoginBean loginBean = new LoginBean(usernameField, passwordField);
 
             LoginController loginController = new LoginController();
             loginBean = loginController.loginUser(loginBean);
-            //Se tutto è andatoa  buon fine:
+            //Se tutto è andato a buon fine:
 
             errorLabel.setText("logged as: " + loginBean.getRole());
             this.sceneManager.showHome(loginBean);

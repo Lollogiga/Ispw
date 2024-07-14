@@ -18,7 +18,7 @@ import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 import java.util.Timer;
 
-public class RegisterGraphicController {
+public class RegisterGraphicController extends GraphicControllerGeneric{
     private final SceneManager sceneManager = SceneManager.getInstance(null);
 
     @FXML
@@ -39,6 +39,11 @@ public class RegisterGraphicController {
     private Label errorLabel;
 
     private RegisterBean registerBean;
+
+    @FXML
+    public void initialize() {
+        this.label = errorLabel;
+    }
 
     @FXML
     public void onCreateAccount(){

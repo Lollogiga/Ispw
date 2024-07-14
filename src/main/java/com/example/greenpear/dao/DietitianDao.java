@@ -21,7 +21,7 @@ public class DietitianDao {
 
     public Dietitian getDietitianInfo(Dietitian dietitian) throws SQLException {
         preparedStatement = connection.prepareStatement(InfoDietitianQuery.getDietitianInfo());
-        preparedStatement.setString(1, dietitian.getDietitianUsername());
+        preparedStatement.setString(1, dietitian.getUsername());
         resultSet = preparedStatement.executeQuery();
         //Se ci sono risultati, li inserisco all'interno dell'entity:
         if(resultSet.next()){
@@ -29,7 +29,7 @@ public class DietitianDao {
             boolean available = resultSet.getBoolean("available");
             String personalEducation = resultSet.getString("personalEducation");
             String workExperience = resultSet.getString("workExperience");
-            dietitian = new Dietitian(dietitian.getDietitianUsername(), price, available, personalEducation, workExperience);
+            dietitian = new Dietitian(dietitian.getUsername(), price, available, personalEducation, workExperience);
             return dietitian;
         }
         return null;
@@ -37,7 +37,7 @@ public class DietitianDao {
 
     public void setDietitianInfo(Dietitian dietitian) throws SQLException {
         preparedStatement = connection.prepareStatement(InfoDietitianQuery.setDietitianInfo());
-        preparedStatement.setString(1, dietitian.getDietitianUsername());
+        preparedStatement.setString(1, dietitian.getUsername());
         preparedStatement.setInt(2, dietitian.getPrice());
         preparedStatement.setBoolean(3, dietitian.getAvailable());
         preparedStatement.setString(4, dietitian.getEducation());

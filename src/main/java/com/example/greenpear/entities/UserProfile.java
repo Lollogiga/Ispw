@@ -8,6 +8,7 @@ public class UserProfile {
     private String password;
     private Role role;
 
+    public UserProfile() {}
     public UserProfile(String username){
         this.setUsername(username);
     }

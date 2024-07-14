@@ -38,7 +38,7 @@ public class BuyDietController {
             DietitianDao dietitianDao = new DietitianDao();
             dietitianDao.getDietitian(dietitians);
             for(Dietitian dietitian : dietitians){
-                dietitianBeans.add(new DietitianBean(dietitian.getDietitianUsername(), dietitian.getPrice()));
+                dietitianBeans.add(new DietitianBean(dietitian.getUsername(), dietitian.getPrice()));
             }
             return dietitianBeans;
         } catch (SQLException e) {
@@ -60,7 +60,7 @@ public class BuyDietController {
             DietitianDao dietitianDao = new DietitianDao();
             dietitian = dietitianDao.getDietitianInfo(dietitianEntity);
             if(dietitian != null) {
-                dietitianBean = new DietitianBean(dietitian.getDietitianUsername(),
+                dietitianBean = new DietitianBean(dietitian.getUsername(),
                         dietitian.getPrice(),
                         dietitian.getEducation(),
                         dietitian.getWork());
@@ -137,7 +137,7 @@ public class BuyDietController {
         //Dato che la transazione è stata eseguita correttamente, possiamo andare a salvare le varie informazioni sulle diverse tabelle:
         //Salviamo le informazioni sull'utente:
         UserProfile currentUser = new UserProfile(patientBean.getUsername());
-        requestId = new RequestId(currentUser.getUsername(), dietitianEntity.getDietitianUsername());
+        requestId = new RequestId(currentUser.getUsername(), dietitianEntity.getUsername());
         try{
             //Salvo le informazioni nelle varie tabelle:
             RequestDetails requestDetails = new RequestDetails(personalInformationEntity, lifeStyleEntity, foodPreferenceEntity);

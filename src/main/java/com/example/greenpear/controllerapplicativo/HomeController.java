@@ -47,12 +47,12 @@ public class HomeController {
         UserProfile currentUser = new UserProfile(userBean.getUsername());
         Dietitian dietitian = new Dietitian();
         DietitianBean dietitianBean;
-        dietitian.setDietitianUsername(currentUser.getUsername());
+        dietitian.setUsername(currentUser.getUsername());
         try{
             DietitianDao dietitianDao = new DietitianDao();
             dietitian = dietitianDao.getDietitianInfo(dietitian);
             if(dietitian != null) {
-                dietitianBean = new DietitianBean(dietitian.getDietitianUsername(),
+                dietitianBean = new DietitianBean(dietitian.getUsername(),
                         dietitian.getPrice(),
                         dietitian.getAvailable(),
                         dietitian.getEducation(),

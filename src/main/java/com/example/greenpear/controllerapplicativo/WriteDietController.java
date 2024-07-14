@@ -32,7 +32,7 @@ public class WriteDietController {
     //Lista di tutti i pazienti:
     public ObservableList<PatientBean> setListPatient(LoginBean userBean) throws SQLException, InformationErrorException {
         Dietitian dietitian = new Dietitian();
-        dietitian.setDietitianUsername(userBean.getUsername());
+        dietitian.setUsername(userBean.getUsername());
         try{
             ObservableList<PatientBean> patientBeans = FXCollections.observableArrayList();
             RequestDao requestDao = new RequestDao();
