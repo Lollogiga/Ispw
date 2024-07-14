@@ -4,6 +4,7 @@ import com.example.greenpear.bean.*;
 import com.example.greenpear.dao.*;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.observer.DietPublisher;
 import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -149,6 +150,11 @@ public class BuyDietController {
             //Infine genero la richiesta:
             RequestDao requestDao = new RequestDao();
             requestDao.setRequest(requestId);
+
+            //Invio una notifica al dietologo:
+            DietPublisher dietPublisher = DietPublisher.getInstance();
+            dietPublisher.submitRequest(requestId);
+
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }

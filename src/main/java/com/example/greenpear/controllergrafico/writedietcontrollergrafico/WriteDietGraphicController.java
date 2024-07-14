@@ -4,8 +4,11 @@ import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.PatientBean;
 import com.example.greenpear.controllerapplicativo.WriteDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
+import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
+import com.example.greenpear.observer.DietPublisher;
+import com.example.greenpear.observer.Observer;
 import com.example.greenpear.utils.Printer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -18,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
 
-public class WriteDietGraphicController extends GraphicControllerGeneric {
+public class WriteDietGraphicController extends GraphicControllerGeneric implements Observer {
 
     @FXML
     private TableView<PatientBean> tableViewPatient;
@@ -30,10 +33,14 @@ public class WriteDietGraphicController extends GraphicControllerGeneric {
     private WriteDietController writeDietController;
 
     @FXML
-    public void initialize(LoginBean userBean) {
+    public void initialize(LoginBean userBean){
 
         this.userBean = userBean;
         writeDietController = new WriteDietController();
+
+        //Divento Observer:
+        DietPublisher dietPublisher = DietPublisher.getInstance();
+        dietPublisher.attach(this);
 
         //Recuperiamo le informazioni dal controller applicativo:
         try {
@@ -87,4 +94,8 @@ public class WriteDietGraphicController extends GraphicControllerGeneric {
     }
 
 
+    @Override
+    public void update(RequestId requestId) {
+        writeDietController.manageNotify(userBean, requestId);
+    }
 }

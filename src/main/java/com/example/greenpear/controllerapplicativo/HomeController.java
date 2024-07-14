@@ -22,7 +22,7 @@ public class HomeController {
         //Dobbiamo verificare se ci sono richieste legate all'utente, in caso affermativo andiamo a ritornare un vettore di entity che contiene tutti gli id relativi:
         UserProfile currentUser = new UserProfile(userBean.getUsername());
         List<RequestDetails> requestDetails;
-        List<RequestBean> requestBeans = new ArrayList<RequestBean>();
+        List<RequestBean> requestBeans = new ArrayList<>();
         String message;
         try{
             RequestDao requestDao = new RequestDao();
@@ -79,9 +79,11 @@ public class HomeController {
     public void manageUpdate(LoginBean userBean, RequestId requestId) {
         UserProfile currentUser = new UserProfile(userBean.getUsername());
         //Verifico se la notifica mi riguarda:
-        if(Objects.equals(requestId.getPatientUsername(), currentUser.getUsername())){
-            //Se la notifica è relativa a me, vado a estrarre l'idRichiesta e lo passo alla grafica:
-            Printer.print("Diet write, update page");
+        if(requestId != null){
+            if(Objects.equals(requestId.getPatientUsername(), currentUser.getUsername())){
+                //Se la notifica è relativa a me, vado a estrarre l'idRichiesta e lo passo alla grafica:
+                Printer.print("Diet write, update page!");
+            }
         }
     }
 

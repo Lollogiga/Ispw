@@ -42,8 +42,6 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
     @FXML
     private TextArea textAreaWork;
     @FXML
-    private ToggleGroup writeDietToggleGroup;
-    @FXML
     private RadioButton radioButtonAvailable;
     @FXML
     private RadioButton radioButtonUnavailable;
@@ -57,7 +55,6 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
     private HomeController homeController;
     private DietitianBean dietitianBean;
 
-    private RequestBean requestBean;
 
     @FXML
     public void initialize(LoginBean userBean) {
@@ -65,12 +62,11 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
         this.userBean = userBean;
         homeController = new HomeController();
 
-        DietPublisher dietPublisher = DietPublisher.getInstance();
-        dietPublisher.attach(this);
-        Printer.print(dietPublisher.toString());
-
 
         if(userBean.getRole() == Role.PATIENT){
+            //Divento un observer:
+            DietPublisher dietPublisher = DietPublisher.getInstance();
+            dietPublisher.attach(this);
             initializePatient();
         }else{
             initializeDietitian();

@@ -12,7 +12,7 @@ public class DietPublisher extends Subject {
     private DietPublisher() {
     }
 
-    //todo verificare se posso togliere il singleton:
+    //Deve essere singleton, altrimenti perderei informazioni sulla lista di observer, che è unica per tutte le istanze di controller
     public static DietPublisher getInstance() {
         if (instance == null) {
             instance = new DietPublisher();
@@ -20,7 +20,9 @@ public class DietPublisher extends Subject {
         return instance;
     }
 
-    public void submitDiet(RequestId requestId) {
+    public void submitRequest(RequestId requestId) {
         notifyObservers(requestId);
     }
+
+
 }

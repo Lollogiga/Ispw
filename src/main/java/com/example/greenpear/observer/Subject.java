@@ -1,14 +1,13 @@
 package com.example.greenpear.observer;
 
 import com.example.greenpear.entities.RequestId;
-import com.example.greenpear.utils.Printer;
 
 import java.util.ArrayList;
 
 /* Subject è una classe astratta che fornisce interfacce per registrare o rimuovere dinamicamente gli observer.
  * Attach: Aggiunge un ConcreteObserver alla lista delle classi da notificare.
  * detach: rimuove un ConcreteObserver alla lista delle classi da notificare.
- * notify: Notifica un cambiamaneto alle classi ConcreteObserver
+ * notify: Notifica un cambiamento alle classi ConcreteObserver
  */
 public abstract class Subject {
 
@@ -29,10 +28,7 @@ public abstract class Subject {
 
 
     protected void notifyObservers(RequestId requestId){
-        Printer.print("Sono in notify Observer");
-        Printer.print(observers.toString());
         for (Observer observer : observers) {
-            Printer.print("Sono nel for di notifyObserver");
             observer.update(requestId);
         }
     }

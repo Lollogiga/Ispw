@@ -6,6 +6,7 @@ import com.example.greenpear.dao.*;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.observer.DietPublisher;
+import com.example.greenpear.utils.Printer;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -181,13 +182,22 @@ public class WriteDietController {
 
                 //Ora dobbiamo inviare una notifica alla richiesta specifica:
                 DietPublisher dietPublisher = DietPublisher.getInstance();
-                dietPublisher.submitDiet(requestEntity);
+                dietPublisher.submitRequest(requestEntity);
 
             }catch (SQLException e){
                 throw new SQLException(e.getMessage());
             }
         }else{
             throw new InformationErrorException("Must compile every meal");
+        }
+    }
+
+    public void manageNotify(LoginBean userBean, RequestId requestId) {
+        //Dobbiamo vedere se la notifica ci riguarda:
+        if(requestId != null) {
+            if(!requestId.getRequestHandled() && requestId.getDietitianUsername().equals(userBean.getUsername())){
+                Printer.print("Diet request incoming, update page");
+            }
         }
     }
 }
