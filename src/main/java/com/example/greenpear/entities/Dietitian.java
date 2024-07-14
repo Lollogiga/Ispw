@@ -29,13 +29,6 @@ public class Dietitian extends UserProfile {
         this.setWork(work);
     }
 
-    public Dietitian(String username, String email, String password, Role role, int price, Boolean available, String education, String work) {
-        super(username, email, password, role);
-        this.setPrice(price);
-        this.setAvailable(available);
-        this.setEducation(education);
-        this.setWork(work);
-    }
 
     public int getPrice() {
         return this.price;
