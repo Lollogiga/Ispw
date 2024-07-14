@@ -80,7 +80,7 @@ public class HomeController {
         UserProfile currentUser = new UserProfile(userBean.getUsername());
         //Verifico se la notifica mi riguarda:
         if(requestId != null && Objects.equals(requestId.getPatientUsername(), currentUser.getUsername())){
-            if(!requestId.getRequestHandled()){
+            if(Boolean.FALSE.equals(requestId.getRequestHandled())){
                 Printer.print("Diet request send to dietitian");
             }else{
                 Printer.print("Diet write, update page!");
