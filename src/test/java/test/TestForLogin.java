@@ -1,3 +1,5 @@
+package test;
+
 import com.example.greenpear.dao.UserDao;
 import com.example.greenpear.entities.UserProfile;
 import org.junit.jupiter.api.Assertions;
@@ -6,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 
-public class TestForLogin {
+class TestForLogin {
     private final String usernameTest = "test";
     private final String passwordTest = "testing1";
 
