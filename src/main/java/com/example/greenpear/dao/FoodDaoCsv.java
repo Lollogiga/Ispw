@@ -2,7 +2,6 @@ package com.example.greenpear.dao;
 
 import com.example.greenpear.entities.Food;
 import com.example.greenpear.exception.InformationErrorException;
-import com.example.greenpear.utils.Printer;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
