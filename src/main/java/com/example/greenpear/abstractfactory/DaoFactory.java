@@ -12,7 +12,7 @@ import java.util.Properties;
 
 public abstract class DaoFactory {
 
-    public static synchronized DaoFactory createFoodDao() throws IOException, SQLException, InformationErrorException {
+    public static synchronized DaoFactory createFoodDao() throws IOException, InformationErrorException {
         InputStream inputStream = null;
         Properties prop = new Properties();
 
