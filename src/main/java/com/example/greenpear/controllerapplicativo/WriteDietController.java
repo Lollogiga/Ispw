@@ -194,10 +194,8 @@ public class WriteDietController {
 
     public void manageNotify(LoginBean userBean, RequestId requestId) {
         //Dobbiamo vedere se la notifica ci riguarda:
-        if(requestId != null) {
-            if(!requestId.getRequestHandled() && requestId.getDietitianUsername().equals(userBean.getUsername())){
+        if(requestId != null && !requestId.getRequestHandled() && requestId.getDietitianUsername().equals(userBean.getUsername())) {
                 Printer.print("Diet request incoming, update page");
-            }
         }
     }
 }

@@ -79,11 +79,9 @@ public class HomeController {
     public void manageUpdate(LoginBean userBean, RequestId requestId) {
         UserProfile currentUser = new UserProfile(userBean.getUsername());
         //Verifico se la notifica mi riguarda:
-        if(requestId != null){
-            if(Objects.equals(requestId.getPatientUsername(), currentUser.getUsername())){
+        if(requestId != null && Objects.equals(requestId.getPatientUsername(), currentUser.getUsername())){
                 //Se la notifica è relativa a me, vado a estrarre l'idRichiesta e lo passo alla grafica:
                 Printer.print("Diet write, update page!");
-            }
         }
     }
 
