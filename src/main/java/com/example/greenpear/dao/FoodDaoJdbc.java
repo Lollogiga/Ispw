@@ -21,7 +21,6 @@ public class FoodDaoJdbc implements FoodDao{
     }
 
     public List<Food> getFoodList() throws SQLException {
-        Printer.print("CiaoJdbc");
         List<Food> foodList = new ArrayList<Food>();
         try{
             preparedStatement = connection.prepareStatement(FoodQuery.getAllFood());

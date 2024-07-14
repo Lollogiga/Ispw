@@ -33,7 +33,6 @@ public class FoodDaoCsv implements FoodDao{
     }
 
     private List<Food> getFood() throws InformationErrorException, CsvValidationException {
-        Printer.print("CiaoCSV");
         List<Food> foodList = new ArrayList<Food>();
 
         try (CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(file)))) {
