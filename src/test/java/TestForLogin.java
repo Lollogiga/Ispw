@@ -12,7 +12,7 @@ public class TestForLogin {
 
     //Verifichiamo che in caso di utente registrato, il login abbia successo:
     @Test
-    public void testLoginWithValidInput() {
+    void testLoginWithValidInput() {
         int res = 0;
         UserProfile userProfile = new UserProfile(usernameTest, passwordTest);
         try{
@@ -28,7 +28,7 @@ public class TestForLogin {
 
     //Verifichiamo che in caso di utente non registrato, il login abbia insuccesso:
     @Test
-    public void testLoginWithInvalidUsername() {
+    void testLoginWithInvalidUsername() {
         int res = 0;
         String name = usernameTest + "invalid";
         UserProfile userProfile = new UserProfile(name, passwordTest);
