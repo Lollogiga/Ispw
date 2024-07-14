@@ -7,16 +7,16 @@ import org.junit.jupiter.api.Test;
 import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 
-public class TestForRegistration {
-    private final String USERNAMETEST = "test";
-    private final String EMAILTEST = "@gmail.com";
-    private final String PASSWORDTEST = "testing1";
+class TestForRegistration {
+    private final String usernameTest = "test";
+    private final String emailTest = "@gmail.com";
+    private final String passwordTest = "testing1";
 
     //Testiamo che in caso di valori invalidi (username già esistente) venga generata l'eccezione "CredentialException":
     @Test
-    public void testRegistrationWithInvalidUsername() {
+    void testRegistrationWithInvalidUsername() {
         int res = 0;
-        UserProfile userProfile = new UserProfile(USERNAMETEST, generateRandomEmail(), PASSWORDTEST, randomRole());
+        UserProfile userProfile = new UserProfile(usernameTest, generateRandomEmail(), passwordTest, randomRole());
         try{
             UserDao registerDao = new UserDao();
             registerDao.registerNewUser(userProfile);
@@ -31,9 +31,9 @@ public class TestForRegistration {
 
     //Testiamo che per valori validi, la registrazione va a buon fine:
     @Test
-    public void testRegistrationWithValidInput() {
+     void testRegistrationWithValidInput() {
         int res = 0;
-        UserProfile userProfile = new UserProfile(generateRandomUsername(), generateRandomEmail(), PASSWORDTEST, randomRole());
+        UserProfile userProfile = new UserProfile(generateRandomUsername(), generateRandomEmail(), passwordTest, randomRole());
         try{
             UserDao registerDao = new UserDao();
             registerDao.registerNewUser(userProfile);
@@ -55,11 +55,11 @@ public class TestForRegistration {
     }
 
     private String generateRandomUsername(){
-        return USERNAMETEST + System.currentTimeMillis();
+        return usernameTest + System.currentTimeMillis();
     }
 
     private String generateRandomEmail() {
-        return USERNAMETEST + System.currentTimeMillis() + EMAILTEST;
+        return usernameTest + System.currentTimeMillis() + emailTest;
     }
 
 

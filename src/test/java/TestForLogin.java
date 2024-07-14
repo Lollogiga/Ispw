@@ -7,14 +7,14 @@ import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 
 public class TestForLogin {
-    private final String USERNAMETEST = "test";
-    private final String PASSWORDTEST = "testing1";
+    private final String usernameTest = "test";
+    private final String passwordTest = "testing1";
 
     //Verifichiamo che in caso di utente registrato, il login abbia successo:
     @Test
     public void testLoginWithValidInput() {
         int res = 0;
-        UserProfile userProfile = new UserProfile(USERNAMETEST, PASSWORDTEST);
+        UserProfile userProfile = new UserProfile(usernameTest, passwordTest);
         try{
             UserDao loginDao = new UserDao();
             loginDao.loginUser(userProfile);
@@ -30,8 +30,8 @@ public class TestForLogin {
     @Test
     public void testLoginWithInvalidUsername() {
         int res = 0;
-        String name = USERNAMETEST + "invalid";
-        UserProfile userProfile = new UserProfile(name, PASSWORDTEST);
+        String name = usernameTest + "invalid";
+        UserProfile userProfile = new UserProfile(name, passwordTest);
         try{
             UserDao loginDao = new UserDao();
             loginDao.loginUser(userProfile);
