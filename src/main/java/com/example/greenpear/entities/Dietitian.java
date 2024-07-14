@@ -1,7 +1,5 @@
 package com.example.greenpear.entities;
 
-import com.example.greenpear.utils.Role;
-
 public class Dietitian extends UserProfile {
     private int price;
     private Boolean available;
