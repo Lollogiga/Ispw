@@ -1,6 +1,5 @@
 package com.example.greenpear.controllergrafico;
 
-import com.example.greenpear.SceneManager;
 import com.example.greenpear.bean.RegisterBean;
 import com.example.greenpear.controllerapplicativo.RegistrationController;
 import com.example.greenpear.exception.LoadSceneException;
@@ -16,10 +15,8 @@ import javafx.util.Duration;
 
 import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
-import java.util.Timer;
 
 public class RegisterGraphicController extends GraphicControllerGeneric{
-    private final SceneManager sceneManager = SceneManager.getInstance(null);
 
     @FXML
     private TextField txtFieldUsername;

@@ -5,24 +5,15 @@ import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.controllerapplicativo.LoginController;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
-import com.example.greenpear.utils.Role;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.fxml.LoadException;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.util.Duration;
 
 import javax.security.auth.login.CredentialException;
-import java.io.IOException;
 import java.sql.SQLException;
 
-import static java.lang.System.err;
-import static java.lang.System.exit;
 
 public class LoginGraphicController extends GraphicControllerGeneric{
-    private final SceneManager sceneManager = SceneManager.getInstance(null);
 
     @FXML
     private TextField txtFieldUsername;
