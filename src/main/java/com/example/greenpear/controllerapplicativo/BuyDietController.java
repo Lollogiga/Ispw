@@ -152,8 +152,9 @@ public class BuyDietController {
             requestDao.setRequest(requestId);
 
             //Invio una notifica al dietologo:
+            requestId.setRequestHandled(false);
             DietPublisher dietPublisher = DietPublisher.getInstance();
-            dietPublisher.submitRequest(requestId);
+            dietPublisher.submitRequest(requestId, currentUser.getRole());
 
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());

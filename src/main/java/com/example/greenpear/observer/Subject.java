@@ -1,6 +1,7 @@
 package com.example.greenpear.observer;
 
 import com.example.greenpear.entities.RequestId;
+import com.example.greenpear.utils.Role;
 
 import java.util.ArrayList;
 
@@ -27,9 +28,9 @@ public abstract class Subject {
     }
 
 
-    protected void notifyObservers(RequestId requestId){
+    protected void notifyObservers(RequestId requestId, Role role){
         for (Observer observer : observers) {
-            observer.update(requestId);
+            observer.update(requestId, role);
         }
     }
 

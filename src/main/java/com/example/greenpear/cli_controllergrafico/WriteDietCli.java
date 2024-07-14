@@ -15,12 +15,12 @@ import java.util.Scanner;
 
 public class WriteDietCli extends  GenericCli{
     private WriteDietController writeDietController;
-
+    private LoginBean userBean;
 
     public void start(LoginBean userBean) {
         writeDietController = new WriteDietController();
         ObservableList<PatientBean> patientBeans;
-
+        this.userBean = userBean;
         try {
             patientBeans = writeDietController.setListPatient(userBean);
             Printer.print("\n -------Write Diet --------\n");
@@ -41,7 +41,7 @@ public class WriteDietCli extends  GenericCli{
 
             int selectedIndex = getUserSelection(scanner, patientBeans.size());
             PatientBean selectedPatient = patientBeans.get(selectedIndex - 1);
-            writeDietController.storePatient(selectedPatient);
+            writeDietController.storePatient(selectedPatient, userBean);
             confirmChoice = confirmPatientChoice();
         }
     }

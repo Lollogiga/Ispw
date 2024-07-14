@@ -7,6 +7,7 @@ import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.observer.DietPublisher;
 import com.example.greenpear.utils.Printer;
+import com.example.greenpear.utils.Role;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class WriteDietController {
     private RequestId requestEntity;
@@ -50,10 +52,11 @@ public class WriteDietController {
     }
     }
 
-    public void storePatient(PatientBean selectedPatientBean) {
+    public void storePatient(PatientBean selectedPatientBean, LoginBean userBean){
         requestEntity = new RequestId();
         requestEntity.setPatientUsername(selectedPatientBean.getPatientUsername());
         requestEntity.setIdRequest(selectedPatientBean.getRequestPatient());
+        requestEntity.setDietitianUsername(userBean.getUsername());
     }
 
     public PatientBean restorePatientInformation() throws SQLException, InformationErrorException {
@@ -181,8 +184,9 @@ public class WriteDietController {
                 requestDao.requestManage(requestEntity);
 
                 //Ora dobbiamo inviare una notifica alla richiesta specifica:
+                requestEntity.setRequestHandled(true);
                 DietPublisher dietPublisher = DietPublisher.getInstance();
-                dietPublisher.submitRequest(requestEntity);
+                dietPublisher.submitRequest(requestEntity, Role.DIETITIAN);
 
             }catch (SQLException e){
                 throw new SQLException(e.getMessage());
@@ -192,9 +196,12 @@ public class WriteDietController {
         }
     }
 
-    public void manageNotify(LoginBean userBean, RequestId requestId) {
+    public void manageNotify(LoginBean userBean, RequestId requestId, Role role) {
         //Dobbiamo vedere se la notifica ci riguarda:
-        if(requestId != null && !requestId.getRequestHandled() && requestId.getDietitianUsername().equals(userBean.getUsername())) {
+
+        if(role.equals(Role.DIETITIAN) && requestId.getDietitianUsername().equals(userBean.getUsername())){
+            Printer.print("Diet send to Patient");
+        }else if (requestId != null && !requestId.getRequestHandled() && Objects.equals(requestId.getDietitianUsername(), userBean.getUsername())){
                 Printer.print("Diet request incoming, update page");
         }
     }

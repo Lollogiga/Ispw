@@ -10,6 +10,7 @@ import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.observer.DietPublisher;
 import com.example.greenpear.observer.Observer;
 import com.example.greenpear.utils.Printer;
+import com.example.greenpear.utils.Role;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -74,7 +75,7 @@ public class WriteDietGraphicController extends GraphicControllerGeneric impleme
                 int requestId = selectedPatient.getRequestPatient();
                 try {
                     PatientBean selectedPatientBean = new PatientBean(patientUsername, requestId);
-                    writeDietController.storePatient(selectedPatient);
+                    writeDietController.storePatient(selectedPatient, userBean);
                     Printer.print("Patient: " + selectedPatientBean.getPatientUsername() + "IdRequest: " + selectedPatientBean.getRequestPatient());
                     this.sceneManager.showWriteDietPatientInfo(userBean, writeDietController);
                 } catch (InformationErrorException |LoadSceneException e) {
@@ -95,7 +96,7 @@ public class WriteDietGraphicController extends GraphicControllerGeneric impleme
 
 
     @Override
-    public void update(RequestId requestId) {
-        writeDietController.manageNotify(userBean, requestId);
+    public void update(RequestId requestId, Role role) {
+        writeDietController.manageNotify(userBean, requestId, role);
     }
 }
