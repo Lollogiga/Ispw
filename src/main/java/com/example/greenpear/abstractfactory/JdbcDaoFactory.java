@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class JdbcDaoFactory extends DaoFactory{
 
-    public FoodDao getTypeDao() throws IOException, SQLException {
+    public FoodDao getTypeDao() throws SQLException {
         return new FoodDaoJdbc();
     }
 }
