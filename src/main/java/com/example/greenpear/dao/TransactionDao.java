@@ -15,7 +15,7 @@ public class TransactionDao {
 
     public TransactionDao() throws SQLException {
         //Apro una connessione o prendo quella già esistente:
-        connection = Connection.getInstance();
+        connection = ConnectionDb.getInstance();
     }
 
     public void setTransaction(Transaction transaction) throws SQLException{

@@ -18,7 +18,7 @@ public class UserDao {
 
     public UserDao() throws SQLException {
         //Apro una connessione o prendo quella già esistente
-        connection = Connection.getInstance();
+        connection = ConnectionDb.getInstance();
     }
 
     public UserProfile loginUser(UserProfile user) throws SQLException, CredentialException {

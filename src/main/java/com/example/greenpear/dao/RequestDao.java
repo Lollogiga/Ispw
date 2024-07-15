@@ -19,7 +19,7 @@ public class RequestDao {
     private ResultSet resultSet;
 
     public RequestDao() throws SQLException {
-        connection = Connection.getInstance();
+        connection = ConnectionDb.getInstance();
     }
 
     public List<RequestId> getRequest(Dietitian dietitian) throws SQLException {

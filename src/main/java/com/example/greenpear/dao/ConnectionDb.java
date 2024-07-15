@@ -10,10 +10,10 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 
 
-public class Connection {
+public class ConnectionDb {
     private static java.sql.Connection connection;
 
-    private Connection() throws DatabaseConnectionException {
+    private ConnectionDb() throws DatabaseConnectionException {
         databaseConnection();
     }
 
@@ -35,7 +35,7 @@ public class Connection {
     public static java.sql.Connection getInstance() throws SQLException {
         if(connection == null){
             try{
-                new Connection();
+                new ConnectionDb();
             }catch (DatabaseConnectionException e){
                 throw new SQLException("Impossibile connettersi al DB");
             }

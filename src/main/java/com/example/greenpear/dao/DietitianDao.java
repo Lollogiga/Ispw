@@ -15,7 +15,7 @@ public class DietitianDao {
     private ResultSet resultSet;
 
     public DietitianDao() throws SQLException{
-        connection = Connection.getInstance();
+        connection = ConnectionDb.getInstance();
     }
 
     public Dietitian getDietitianInfo(Dietitian dietitian) throws SQLException {

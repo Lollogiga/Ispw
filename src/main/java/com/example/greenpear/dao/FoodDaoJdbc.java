@@ -15,7 +15,7 @@ public class FoodDaoJdbc implements FoodDao{
     private ResultSet resultSet;
 
     public FoodDaoJdbc() throws SQLException {
-        connection = Connection.getInstance();
+        connection = ConnectionDb.getInstance();
     }
 
     public List<Food> getFoodList() throws SQLException {

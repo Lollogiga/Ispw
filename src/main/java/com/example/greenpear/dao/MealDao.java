@@ -17,7 +17,7 @@ public class MealDao {
     private ResultSet resultSet;
 
     public MealDao() throws SQLException {
-        connection = Connection.getInstance();
+        connection = ConnectionDb.getInstance();
     }
 
 

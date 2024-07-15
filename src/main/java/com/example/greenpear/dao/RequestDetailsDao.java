@@ -11,7 +11,7 @@ public class RequestDetailsDao {
     private ResultSet resultSet;
 
     public RequestDetailsDao() throws SQLException {
-        connection = Connection.getInstance();
+        connection = ConnectionDb.getInstance();
     }
 
     public void setUser(UserProfile currentUser, RequestDetails requestDetails) throws SQLException {
