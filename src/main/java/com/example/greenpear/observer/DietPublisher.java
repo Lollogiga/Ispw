@@ -1,7 +1,6 @@
 package com.example.greenpear.observer;
 
 import com.example.greenpear.entities.RequestId;
-import com.example.greenpear.utils.Role;
 
 /* Rappresenta il soggetto da osservare(Il publisher). Quando un dietologo scrive una dieta per un relativo paziente
  * questo deve inviare una notifica a uno specifico observer.
@@ -24,7 +23,7 @@ public class DietPublisher extends Subject {
         return instance;
     }
 
-    public RequestId getRequestState() {
+    public synchronized RequestId getRequestState() {
         return requestState;
     }
 
