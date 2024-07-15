@@ -3,20 +3,19 @@ package com.example.greenpear.dao;
 import com.example.greenpear.entities.Transaction;
 import com.example.greenpear.utils.query.BuyDietQuery;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TransactionDao {
-    private Connection connection = null;
+    private java.sql.Connection connection = null;
     private PreparedStatement preparedStatement;
     //Valore di ritorno query
     private ResultSet resultSet;
 
     public TransactionDao() throws SQLException {
         //Apro una connessione o prendo quella già esistente:
-        connection = SingletonConnection.getInstance();
+        connection = Connection.getInstance();
     }
 
     public void setTransaction(Transaction transaction) throws SQLException{

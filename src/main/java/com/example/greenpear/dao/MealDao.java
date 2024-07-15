@@ -5,7 +5,6 @@ import com.example.greenpear.entities.Meal;
 import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.utils.query.FoodQuery;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MealDao {
-    private Connection connection = null;
+    private java.sql.Connection connection = null;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
 
     public MealDao() throws SQLException {
-        connection = SingletonConnection.getInstance();
+        connection = Connection.getInstance();
     }
 
 

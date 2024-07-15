@@ -6,20 +6,19 @@ import com.example.greenpear.utils.query.LoginQuery;
 import com.example.greenpear.utils.query.RegistrationQuery;
 
 import javax.security.auth.login.CredentialException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDao {
-    private Connection connection = null;
+    private java.sql.Connection connection = null;
     private PreparedStatement preparedStatement;
     //Valore di ritorno query:
     private ResultSet resultSet;
 
     public UserDao() throws SQLException {
         //Apro una connessione o prendo quella già esistente
-        connection = SingletonConnection.getInstance();
+        connection = Connection.getInstance();
     }
 
     public UserProfile loginUser(UserProfile user) throws SQLException, CredentialException {

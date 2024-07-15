@@ -6,12 +6,12 @@ import com.example.greenpear.utils.query.BuyDietQuery;
 import java.sql.*;
 
 public class RequestDetailsDao {
-    private Connection connection = null;
+    private java.sql.Connection connection = null;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
 
     public RequestDetailsDao() throws SQLException {
-        connection = SingletonConnection.getInstance();
+        connection = Connection.getInstance();
     }
 
     public void setUser(UserProfile currentUser, RequestDetails requestDetails) throws SQLException {

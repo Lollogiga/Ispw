@@ -5,7 +5,6 @@ import com.example.greenpear.utils.query.RequestQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,13 +13,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RequestDao {
-    private Connection connection = null;
+    private java.sql.Connection connection = null;
     private PreparedStatement preparedStatement;
     //Valore di ritorno query
     private ResultSet resultSet;
 
     public RequestDao() throws SQLException {
-        connection = SingletonConnection.getInstance();
+        connection = Connection.getInstance();
     }
 
     public List<RequestId> getRequest(Dietitian dietitian) throws SQLException {

@@ -5,18 +5,17 @@ import com.example.greenpear.utils.query.BuyDietQuery;
 import com.example.greenpear.utils.query.InfoDietitianQuery;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DietitianDao {
-    private Connection connection = null;
+    private java.sql.Connection connection = null;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
 
     public DietitianDao() throws SQLException{
-        connection = SingletonConnection.getInstance();
+        connection = Connection.getInstance();
     }
 
     public Dietitian getDietitianInfo(Dietitian dietitian) throws SQLException {

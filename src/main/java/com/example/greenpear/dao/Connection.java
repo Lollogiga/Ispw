@@ -6,17 +6,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 
 
-//TODO verificare che sia singleton
+public class Connection {
+    private static java.sql.Connection connection;
 
-public class SingletonConnection {
-    private static Connection connection;
-
-    private SingletonConnection() throws DatabaseConnectionException {
+    private Connection() throws DatabaseConnectionException {
         databaseConnection();
     }
 
@@ -35,10 +32,10 @@ public class SingletonConnection {
         }
     }
 
-    public static Connection getInstance() throws SQLException {
+    public static java.sql.Connection getInstance() throws SQLException {
         if(connection == null){
             try{
-                new SingletonConnection();
+                new Connection();
             }catch (DatabaseConnectionException e){
                 throw new SQLException("Impossibile connettersi al DB");
             }

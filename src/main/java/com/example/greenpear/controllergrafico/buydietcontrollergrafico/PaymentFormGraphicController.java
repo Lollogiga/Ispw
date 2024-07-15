@@ -64,7 +64,6 @@ public class PaymentFormGraphicController extends GraphicControllerGeneric {
 
 
     public void submitDietRequest() {
-        //TODO controllo transazione eseguita correttamente
         try{
             if(paymentType.equals(CARDTYPE)) {
                 paymentBean = new PaymentBean(nameTextField.getText(),

@@ -3,7 +3,6 @@ package com.example.greenpear.dao;
 import com.example.greenpear.entities.Food;
 import com.example.greenpear.utils.query.FoodQuery;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FoodDaoJdbc implements FoodDao{
-    private Connection connection = null;
+    private java.sql.Connection connection = null;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
 
     public FoodDaoJdbc() throws SQLException {
-        connection = SingletonConnection.getInstance();
+        connection = Connection.getInstance();
     }
 
     public List<Food> getFoodList() throws SQLException {
