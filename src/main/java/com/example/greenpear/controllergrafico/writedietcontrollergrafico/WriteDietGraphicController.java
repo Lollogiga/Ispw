@@ -19,6 +19,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 
+import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 
 public class WriteDietGraphicController extends GraphicControllerGeneric implements Observer {
@@ -45,7 +46,7 @@ public class WriteDietGraphicController extends GraphicControllerGeneric impleme
         //Recuperiamo le informazioni dal controller applicativo:
         try {
             patientBeans = writeDietController.setListPatient(userBean);
-        }catch (SQLException | InformationErrorException e){
+        }catch (SQLException | InformationErrorException | CredentialException e){
             Printer.printError(e.getMessage());
         }
         configureTableColumns();
@@ -56,7 +57,7 @@ public class WriteDietGraphicController extends GraphicControllerGeneric impleme
     private void configureTableColumns() {
         patient.setStyle("-fx-alignment: CENTER");
         patient.setCellValueFactory(cellData -> {
-            String patientUsername = cellData.getValue().getPatientUsername();
+            String patientUsername = cellData.getValue().getUsername();
             return new SimpleStringProperty(patientUsername);
         });
     }
@@ -70,14 +71,14 @@ public class WriteDietGraphicController extends GraphicControllerGeneric impleme
         if (event.getClickCount() == 2 && !row.isEmpty()) {
            PatientBean selectedPatient = row.getItem();
             if (selectedPatient != null) {
-                String patientUsername = selectedPatient.getPatientUsername();
+                String patientUsername = selectedPatient.getUsername();
                 int requestId = selectedPatient.getRequestPatient();
                 try {
                     PatientBean selectedPatientBean = new PatientBean(patientUsername, requestId);
                     writeDietController.storePatient(selectedPatient, userBean);
-                    Printer.print("Patient: " + selectedPatientBean.getPatientUsername() + "IdRequest: " + selectedPatientBean.getRequestPatient());
+                    Printer.print("Patient: " + selectedPatientBean.getUsername() + "IdRequest: " + selectedPatientBean.getRequestPatient());
                     this.sceneManager.showWriteDietPatientInfo(userBean, writeDietController);
-                } catch (InformationErrorException |LoadSceneException e) {
+                } catch (InformationErrorException | LoadSceneException | CredentialException e) {
                     Printer.printError(e.getMessage());
                 }
             }

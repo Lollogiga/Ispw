@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
+import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 
 public class WriteDietPatientInfoGraphicController extends GraphicControllerGeneric {
@@ -55,7 +56,7 @@ public class WriteDietPatientInfoGraphicController extends GraphicControllerGene
             //Andiamo a popolare con le informazioni relative al paziente selezionato:
             //Estraiamo le bean:
 
-            patientName.setText(patientBean.getPatientUsername());
+            patientName.setText(patientBean.getUsername());
 
             //Personal Information:
             PersonalInformationBean personalInformationBean = patientBean.getPersonalInformationBean();
@@ -81,7 +82,7 @@ public class WriteDietPatientInfoGraphicController extends GraphicControllerGene
             if(foodPreferenceBean.getAllergies() != null) {
                 listViewAllergies.setItems(foodPreferenceBean.getAllergies());
             }
-        }catch (SQLException | InformationErrorException e){
+        }catch (SQLException | InformationErrorException | CredentialException e){
             Printer.printGraphicError(errorLabel, e.getMessage());
         }
 

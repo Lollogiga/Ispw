@@ -11,6 +11,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.security.auth.login.CredentialException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ public class WriteDietController {
 
 
     //Lista di tutti i pazienti:
-    public ObservableList<PatientBean> setListPatient(LoginBean userBean) throws SQLException, InformationErrorException {
+    public ObservableList<PatientBean> setListPatient(LoginBean userBean) throws SQLException, InformationErrorException, CredentialException {
         Dietitian dietitian = new Dietitian();
         dietitian.setUsername(userBean.getUsername());
         try{
@@ -46,19 +47,21 @@ public class WriteDietController {
             return patientBeans;
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
-        }catch (InformationErrorException e){
+        }catch (InformationErrorException e) {
             throw new InformationErrorException(e.getMessage());
+        }catch (CredentialException e){
+            throw new CredentialException(e.getMessage());
     }
     }
 
     public void storePatient(PatientBean selectedPatientBean, LoginBean userBean){
         requestEntity = new RequestId();
-        requestEntity.setPatientUsername(selectedPatientBean.getPatientUsername());
+        requestEntity.setPatientUsername(selectedPatientBean.getUsername());
         requestEntity.setIdRequest(selectedPatientBean.getRequestPatient());
         requestEntity.setDietitianUsername(userBean.getUsername());
     }
 
-    public PatientBean restorePatientInformation() throws SQLException, InformationErrorException {
+    public PatientBean restorePatientInformation() throws SQLException, InformationErrorException, CredentialException {
         //A partire dal paziente selezionato, salvato all'interno di requestEntity, dobbiamo andare a prendere tutte le informazioni del paziente:
 
         ObservableList<String> foodDislikedList;
@@ -95,6 +98,8 @@ public class WriteDietController {
             throw new SQLException(e.getMessage());
         } catch (InformationErrorException e) {
             throw new InformationErrorException(e.getMessage());
+        }catch (CredentialException e){
+            throw new CredentialException(e.getMessage());
         }
 
     }

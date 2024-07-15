@@ -1,13 +1,12 @@
 package com.example.greenpear.cli_controllergrafico;
 
 import com.example.greenpear.bean.*;
-import com.example.greenpear.controllerapplicativo.BuyDietController;
 import com.example.greenpear.controllerapplicativo.WriteDietController;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ public class WriteDietCli extends  GenericCli{
             processPatientSelection(patientBeans);
             fillFormsAndSubmitDiet();
             Printer.print("\n --------Diet Submit --------\n");
-        } catch (SQLException | InformationErrorException e) {
+        } catch (SQLException | InformationErrorException | CredentialException e) {
             Printer.printError(e.getMessage());
         }
     }
@@ -55,45 +54,49 @@ public class WriteDietCli extends  GenericCli{
         format = "%d. %-20s%n";
 
         for (PatientBean patientBean : patientBeans) {
-            Printer.print(String.format(format, count, patientBean.getPatientUsername()));
+            Printer.print(String.format(format, count, patientBean.getUsername()));
             count++;
         }
     }
 
     private boolean confirmPatientChoice() throws SQLException, InformationErrorException {
-        PatientBean patientBean = writeDietController.restorePatientInformation();
+        try {
+            PatientBean patientBean = writeDietController.restorePatientInformation();
 
-        Printer.print("\n ------- Patient Information --------\n");
-        Printer.print("Patient: " + patientBean.getPatientUsername());
-        //Personal Information:
+            Printer.print("\n ------- Patient Information --------\n");
+            Printer.print("Patient: " + patientBean.getUsername());
+            //Personal Information:
 
-        Printer.print("\n ------- Personal Information --------\n");
-        PersonalInformationBean personalInformationBean = patientBean.getPersonalInformationBean();
-        Printer.print("Age: " + personalInformationBean.getAge());
-        Printer.print("Gender: " + personalInformationBean.getGender());
-        Printer.print("Weight: " + personalInformationBean.getWeight());
-        Printer.print("Height: " + personalInformationBean.getHeight());
+            Printer.print("\n ------- Personal Information --------\n");
+            PersonalInformationBean personalInformationBean = patientBean.getPersonalInformationBean();
+            Printer.print("Age: " + personalInformationBean.getAge());
+            Printer.print("Gender: " + personalInformationBean.getGender());
+            Printer.print("Weight: " + personalInformationBean.getWeight());
+            Printer.print("Height: " + personalInformationBean.getHeight());
 
-        Printer.print("\n ------- Life styleInformation --------\n");
-        LifeStyleBean lifeStyleBean = patientBean.getLifeStyleBean();
-        Printer.print("Sport: " + lifeStyleBean.getSport());
-        Printer.print("Training frequency: " + lifeStyleBean.getFrequency());
-        Printer.print("Health goal: " + lifeStyleBean.getHealthGoal());
-        Printer.print("Smoker" + lifeStyleBean.getSmoker());
-        Printer.print("alcohol drinker: " + lifeStyleBean.getDrunker());
+            Printer.print("\n ------- Life styleInformation --------\n");
+            LifeStyleBean lifeStyleBean = patientBean.getLifeStyleBean();
+            Printer.print("Sport: " + lifeStyleBean.getSport());
+            Printer.print("Training frequency: " + lifeStyleBean.getFrequency());
+            Printer.print("Health goal: " + lifeStyleBean.getHealthGoal());
+            Printer.print("Smoker" + lifeStyleBean.getSmoker());
+            Printer.print("alcohol drinker: " + lifeStyleBean.getDrunker());
 
-        Printer.print("\n ------- Food Preference Information --------\n");
-        FoodPreferenceBean foodPreferenceBean = patientBean.getFoodPreferenceBean();
-        Printer.print("Type of diet: " + foodPreferenceBean.getDietType());
-        Printer.print("Disliked Food: ");
-        for(String foodDisliked : foodPreferenceBean.getFoodPreference()){
-            Printer.print(foodDisliked);
+            Printer.print("\n ------- Food Preference Information --------\n");
+            FoodPreferenceBean foodPreferenceBean = patientBean.getFoodPreferenceBean();
+            Printer.print("Type of diet: " + foodPreferenceBean.getDietType());
+            Printer.print("Disliked Food: ");
+            for (String foodDisliked : foodPreferenceBean.getFoodPreference()) {
+                Printer.print(foodDisliked);
+            }
+            Printer.print("Allergies: ");
+            for (String allergies : foodPreferenceBean.getAllergies()) {
+                Printer.print(allergies);
+            }
+            Printer.print("\nConfirm choice?");
+        }catch (CredentialException e){
+            Printer.printError(e.getMessage());
         }
-        Printer.print("Allergies: ");
-        for(String allergies : foodPreferenceBean.getAllergies()){
-            Printer.print(allergies);
-        }
-        Printer.print("\nConfirm choice?");
         return userChoice();
     }
 

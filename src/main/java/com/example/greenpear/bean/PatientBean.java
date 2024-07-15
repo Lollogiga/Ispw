@@ -2,35 +2,24 @@ package com.example.greenpear.bean;
 
 import com.example.greenpear.exception.InformationErrorException;
 
-public class PatientBean {
+import javax.security.auth.login.CredentialException;
 
-    private String patientUsername;
+public class PatientBean extends LoginBean {
     private int requestPatient;
     private PersonalInformationBean personalInformationBean;
     private LifeStyleBean lifeStyleBean;
     private FoodPreferenceBean foodPreferenceBean;
 
-
-    public PatientBean(String patientUsername, PersonalInformationBean personalInformationBean, LifeStyleBean lifeStyleBean, FoodPreferenceBean foodPreferenceBean) throws InformationErrorException {
-        this.setPatientUsername(patientUsername);
+    public PatientBean(String patientUsername, PersonalInformationBean personalInformationBean, LifeStyleBean lifeStyleBean, FoodPreferenceBean foodPreferenceBean) throws InformationErrorException, CredentialException {
+        super(patientUsername);
         this.setPersonalInformationBean(personalInformationBean);
         this.setLifeStyleBean(lifeStyleBean);
         this.setFoodPreferenceBean(foodPreferenceBean);
     }
-    public PatientBean(String patientUsername, int requestId) throws InformationErrorException {
-        this.setPatientUsername(patientUsername);
+
+    public PatientBean(String patientUsername, int requestId) throws InformationErrorException, CredentialException {
+        super(patientUsername);
         this.setRequestPatient(requestId);
-    }
-
-    public String getPatientUsername() {
-        return patientUsername;
-    }
-
-    public void setPatientUsername(String patientUsername) throws InformationErrorException {
-    if( !patientUsername.isEmpty()) {
-            this.patientUsername = patientUsername;
-        }else throw new InformationErrorException("Username can't be null");
-
     }
 
     public int getRequestPatient() {
@@ -38,9 +27,11 @@ public class PatientBean {
     }
 
     public void setRequestPatient(int requestPatient) throws InformationErrorException {
-        if(requestPatient > 0) {
+        if (requestPatient > 0) {
             this.requestPatient = requestPatient;
-        }else throw new InformationErrorException("Request id must be specified");
+        } else {
+            throw new InformationErrorException("Request id must be specified");
+        }
     }
 
     public PersonalInformationBean getPersonalInformationBean() {
@@ -48,9 +39,11 @@ public class PatientBean {
     }
 
     public void setPersonalInformationBean(PersonalInformationBean personalInformationBean) throws InformationErrorException {
-        if(personalInformationBean != null) {
+        if (personalInformationBean != null) {
             this.personalInformationBean = personalInformationBean;
-        }else throw new InformationErrorException("Personal information can't be null");
+        } else {
+            throw new InformationErrorException("Personal information can't be null");
+        }
     }
 
     public LifeStyleBean getLifeStyleBean() {
@@ -58,9 +51,11 @@ public class PatientBean {
     }
 
     public void setLifeStyleBean(LifeStyleBean lifeStyleBean) throws InformationErrorException {
-        if(personalInformationBean != null){
+        if (lifeStyleBean != null) {
             this.lifeStyleBean = lifeStyleBean;
-        }else throw new InformationErrorException("Life style information can't be null!");
+        } else {
+            throw new InformationErrorException("Life style information can't be null!");
+        }
     }
 
     public FoodPreferenceBean getFoodPreferenceBean() {
@@ -68,8 +63,10 @@ public class PatientBean {
     }
 
     public void setFoodPreferenceBean(FoodPreferenceBean foodPreferenceBean) throws InformationErrorException {
-        if(foodPreferenceBean != null){
-            this.foodPreferenceBean = foodPreferenceBean;}
-        else throw new InformationErrorException("Food Preference information can't be null");
+        if (foodPreferenceBean != null) {
+            this.foodPreferenceBean = foodPreferenceBean;
+        } else {
+            throw new InformationErrorException("Food Preference information can't be null");
+        }
     }
 }

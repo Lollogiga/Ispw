@@ -1,5 +1,4 @@
 package com.example.greenpear.entities;
-
 public class Dietitian extends UserProfile {
     private int price;
     private Boolean available;
