@@ -170,7 +170,7 @@ public class WriteDietController {
             default -> throw new InformationErrorException("Meal not recognized");
         }
     }
-    //Todo chiedere parere sulla logica:
+
     public void storeDiet() throws InformationErrorException, SQLException {
         //Per prima cosa verifichiamo che in tutte le schermate ci siano dati:
         if(foodEntityBreakfast != null && foodEntityLunch != null && foodEntityDinner != null && foodEntitySnack != null) {
@@ -186,7 +186,7 @@ public class WriteDietController {
                 //Ora dobbiamo inviare una notifica alla richiesta specifica:
                 requestEntity.setRequestHandled(true);
                 DietPublisher dietPublisher = DietPublisher.getInstance();
-                dietPublisher.submitRequest(requestEntity, Role.DIETITIAN);
+                dietPublisher.setRequestState(requestEntity);
 
             }catch (SQLException e){
                 throw new SQLException(e.getMessage());
@@ -196,10 +196,10 @@ public class WriteDietController {
         }
     }
 
-    public void manageNotify(LoginBean userBean, RequestId requestId, Role role) {
+    public void manageNotify(LoginBean userBean, RequestId requestId) {
         //Dobbiamo vedere se la notifica ci riguarda:
 
-        if(role.equals(Role.DIETITIAN) && requestId.getDietitianUsername().equals(userBean.getUsername())){
+        if(requestId != null && requestId.getDietitianUsername().equals(userBean.getUsername()) && requestId.getRequestHandled()){
             Printer.print("Diet send to Patient");
         }else if (requestId != null && !requestId.getRequestHandled() && Objects.equals(requestId.getDietitianUsername(), userBean.getUsername())){
                 Printer.print("Diet request incoming, update page");

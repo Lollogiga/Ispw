@@ -1,8 +1,5 @@
 package com.example.greenpear.observer;
 
-import com.example.greenpear.entities.RequestId;
-import com.example.greenpear.utils.Role;
-
 import java.util.ArrayList;
 
 /* Subject è una classe astratta che fornisce interfacce per registrare o rimuovere dinamicamente gli observer.
@@ -28,9 +25,9 @@ public abstract class Subject {
     }
 
 
-    protected void notifyObservers(RequestId requestId, Role role){
+    protected void notifyObservers(){
         for (Observer observer : observers) {
-            observer.update(requestId, role);
+            observer.update();
         }
     }
 

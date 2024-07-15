@@ -13,6 +13,9 @@ public class DietPublisher extends Subject {
     private DietPublisher() {
     }
 
+    //Stato del subject:
+    private RequestId requestState;
+
     //Deve essere singleton, altrimenti perderei informazioni sulla lista di observer, che è unica per tutte le istanze di controller
     public static DietPublisher getInstance() {
         if (instance == null) {
@@ -21,8 +24,17 @@ public class DietPublisher extends Subject {
         return instance;
     }
 
-    public void submitRequest(RequestId requestId, Role role) {
-        notifyObservers(requestId, role);
+    public RequestId getRequestState() {
+        return requestState;
+    }
+
+    public synchronized void setRequestState(RequestId requestState) {
+        this.requestState = requestState;
+        submitRequest();
+    }
+
+    private void submitRequest() {
+        notifyObservers();
     }
 
 

@@ -192,10 +192,12 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
 
 
     @Override
-    public void update(RequestId requestId, Role role) {
+    public void update() {
         //Ricevo una richiesta gestista dal dietologo. RequestId è un model, la invio all'applicativo per una traduzione da model a bean
         //Passerò requestId al controller applicativo, che si occuperà di gestire la notifica:
-        homeController.manageUpdate(this.userBean, requestId);
+        DietPublisher dietPublisher = DietPublisher.getInstance();
+        RequestId requestUpdate = dietPublisher.getRequestState();
+        homeController.manageUpdate(this.userBean, requestUpdate);
     }
 }
 

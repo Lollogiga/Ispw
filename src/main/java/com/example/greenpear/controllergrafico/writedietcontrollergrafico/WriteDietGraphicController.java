@@ -10,7 +10,6 @@ import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.observer.DietPublisher;
 import com.example.greenpear.observer.Observer;
 import com.example.greenpear.utils.Printer;
-import com.example.greenpear.utils.Role;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -96,7 +95,10 @@ public class WriteDietGraphicController extends GraphicControllerGeneric impleme
 
 
     @Override
-    public void update(RequestId requestId, Role role) {
-        writeDietController.manageNotify(userBean, requestId, role);
+    public void update() {
+        //Andiamo a prendere lo stato modificato:
+        DietPublisher dietPublisher = DietPublisher.getInstance();
+        RequestId requestUpdate = dietPublisher.getRequestState();
+        writeDietController.manageNotify(userBean, requestUpdate);
     }
 }
