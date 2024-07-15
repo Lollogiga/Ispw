@@ -8,12 +8,10 @@ import com.example.greenpear.controllerapplicativo.HomeController;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
+import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -146,7 +144,7 @@ public class HomePageCli extends GenericCli{
     private void printDiet(RequestBean selectedRequest) throws SQLException, InformationErrorException {
         Printer.print("\n -------- DIET --------\n");
         List<FoodBean> foodBeans = homeController.restoreDiet(selectedRequest);
-        List<String> listBreakfast = new ArrayList<String>();
+        List<String> listBreakfast = new ArrayList<>();
         List<String> listLaunch = new ArrayList<>();
         List<String> listDinner = new ArrayList<>();
         List<String> listSnack = new ArrayList<>();
@@ -197,7 +195,7 @@ public class HomePageCli extends GenericCli{
                 Printer.print("Available to write diet:" + dietitianBean.getAvailable());
                 Printer.print("Price: " + dietitianBean.getPrice());
             }
-        }catch (SQLException | InformationErrorException e){
+        }catch (SQLException | InformationErrorException | CredentialException e){
             Printer.printError(e.getMessage());
         }
     }
@@ -242,7 +240,7 @@ public class HomePageCli extends GenericCli{
                 homeController.storeDietitianInfo(dietitianBean);
                 Printer.print("\n -------- STORED --------\n");
 
-            } catch (SQLException | InformationErrorException e) {
+            } catch (SQLException | InformationErrorException | CredentialException e) {
                 Printer.printError(e.getMessage());
             }
         }

@@ -7,7 +7,6 @@ import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -18,6 +17,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 
+import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 
 public class BuyDietGraphicController extends GraphicControllerGeneric {
@@ -39,7 +39,7 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
         //Recuperiamo le informazioni dal controller applicativo:
         try {
             dietitianBeans = buyDietController.setListDietitian(dietitianBeans);
-        }catch (SQLException | InformationErrorException e){
+        }catch (SQLException | InformationErrorException | CredentialException e){
             Printer.printError(e.getMessage());
         }
         configureTableColumns();
@@ -50,7 +50,7 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
     private void configureTableColumns() {
         dietitian.setStyle("-fx-alignment: CENTER");
         dietitian.setCellValueFactory(cellData -> {
-            String dietitianUsername = cellData.getValue().getDietitianUsername();
+            String dietitianUsername = cellData.getValue().getUsername();
             return new SimpleStringProperty(dietitianUsername);
         });
         price.setCellValueFactory(cellData -> {
@@ -68,14 +68,14 @@ public class BuyDietGraphicController extends GraphicControllerGeneric {
         if (event.getClickCount() == 2 && !row.isEmpty()) {
             DietitianBean selectedDietitian = row.getItem();
             if (selectedDietitian != null) {
-                String dietitianUsername = selectedDietitian.getDietitianUsername();
+                String dietitianUsername = selectedDietitian.getUsername();
                 int dietitianPrice = selectedDietitian.getPrice();
-                DietitianBean selectedDietitianBean = new DietitianBean(dietitianUsername, dietitianPrice);
-                buyDietController.storeDietitian(selectedDietitianBean);
                 try {
-                    Printer.print("Dietologo: " + selectedDietitianBean.getDietitianUsername() + " Costo " + selectedDietitianBean.getPrice());
+                    DietitianBean selectedDietitianBean = new DietitianBean(dietitianUsername, dietitianPrice);
+                    buyDietController.storeDietitian(selectedDietitianBean);
+                    Printer.print("Dietologo: " + selectedDietitianBean.getUsername() + " Costo " + selectedDietitianBean.getPrice());
                     goToDietitianInformation();
-                } catch (LoadSceneException e) {
+                } catch (LoadSceneException | CredentialException e) {
                     Printer.printError(e.getMessage());
                 }
             }

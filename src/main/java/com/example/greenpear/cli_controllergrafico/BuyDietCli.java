@@ -7,6 +7,7 @@ import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -25,7 +26,7 @@ public class BuyDietCli extends GenericCli{
             Printer.print("\n -------BuyDiet --------\n");
             processDietitianSelection(dietitianBeans);
             fillFormsAndManageRequest();
-        } catch (SQLException | InformationErrorException e) {
+        } catch (SQLException | InformationErrorException | CredentialException e) {
             Printer.printError(e.getMessage());
         }
     }
@@ -52,19 +53,24 @@ public class BuyDietCli extends GenericCli{
         format = "%d. %-20s %-10d%n";
 
         for (DietitianBean dietitianBean : dietitianBeans) {
-            Printer.print(String.format(format, count, dietitianBean.getDietitianUsername(), dietitianBean.getPrice()));
+            Printer.print(String.format(format, count, dietitianBean.getUsername(), dietitianBean.getPrice()));
             count++;
         }
     }
 
     private boolean confirmDietitianChoice() throws SQLException, InformationErrorException {
-        DietitianBean dietitianBean = buyDietController.restoreDietitianInfo();
-        Printer.print("\n ------- Dietitian Information --------\n");
-        Printer.print("Dietitian: " + dietitianBean.getDietitianUsername());
-        Printer.print("Education and training: " + dietitianBean.getPersonalEducation());
-        Printer.print("Work experience: " + dietitianBean.getWorkExperience());
-        Printer.print("Price: " + dietitianBean.getPrice());
-        Printer.print("\nConfirm choice?");
+        DietitianBean dietitianBean;
+        try {
+            dietitianBean = buyDietController.restoreDietitianInfo();
+            Printer.print("\n ------- Dietitian Information --------\n");
+            Printer.print("Dietitian: " + dietitianBean.getUsername());
+            Printer.print("Education and training: " + dietitianBean.getPersonalEducation());
+            Printer.print("Work experience: " + dietitianBean.getWorkExperience());
+            Printer.print("Price: " + dietitianBean.getPrice());
+            Printer.print("\nConfirm choice?");
+        }catch (CredentialException e){
+            Printer.printError(e.getMessage());
+        }
         return userChoice();
     }
 

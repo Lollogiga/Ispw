@@ -7,12 +7,15 @@ import javax.security.auth.login.CredentialException;
 public class LoginBean {
     private String username;
     private String password;
-
     private Role role;
 
     public LoginBean(String usernameField, String passwordField) throws CredentialException {
         this.setUsername(usernameField);
         this.setPassword(passwordField);
+    }
+
+    public LoginBean(String usernameField) throws CredentialException {
+        this.setUsername(usernameField);
     }
 
     public String getUsername() {

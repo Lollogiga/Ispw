@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 
 public class DietitianInfoGraphicController extends GraphicControllerGeneric {
@@ -37,12 +38,12 @@ public class DietitianInfoGraphicController extends GraphicControllerGeneric {
         try {
             dietitianBean = buyDietController.restoreDietitianInfo();
             if(dietitianBean != null){
-                textFieldName.setText(dietitianBean.getDietitianUsername());
+                textFieldName.setText(dietitianBean.getUsername());
                 textAreaEducational.setText(dietitianBean.getPersonalEducation());
                 textAreaWork.setText(dietitianBean.getWorkExperience());
                 textFieldPrice.setText(dietitianBean.getPrice().toString());
             }
-        }catch (SQLException | InformationErrorException e){
+        }catch (SQLException | InformationErrorException | CredentialException e){
             Printer.printError(e.getMessage());
         }
     }

@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -90,7 +91,7 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
                     radioButtonUnavailable.setSelected(true);
                 }
             }
-        }catch (SQLException | InformationErrorException e){
+        }catch (SQLException | InformationErrorException | CredentialException e){
             Printer.printError(e.getMessage());
         }
 
@@ -120,7 +121,7 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
             dietitianBean = new DietitianBean(userBean.getUsername(), priceNumber, available, educational, work);
             homeController.storeDietitianInfo(dietitianBean);
             Printer.printGraphic(errorLabel, "Saved");
-        }catch (InformationErrorException | NumberFormatException e){
+        }catch (InformationErrorException | NumberFormatException | CredentialException e){
             Printer.printGraphicError(errorLabel, e.getMessage());
         } catch (SQLException e) {
             Printer.printError(e.getMessage());

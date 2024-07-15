@@ -11,6 +11,7 @@ import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
 
+import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class HomeController {
         }
     }
 
-    public DietitianBean restoreDietitianInfo(LoginBean userBean) throws SQLException, InformationErrorException {
+    public DietitianBean restoreDietitianInfo(LoginBean userBean) throws SQLException, InformationErrorException, CredentialException {
         UserProfile currentUser = new UserProfile(userBean.getUsername());
         Dietitian dietitian = new Dietitian();
         DietitianBean dietitianBean;
@@ -63,11 +64,13 @@ public class HomeController {
             throw new SQLException(e.getMessage());
         } catch (InformationErrorException e) {
             throw new InformationErrorException(e.getMessage());
+        } catch (CredentialException e){
+            throw new CredentialException(e.getMessage());
         }
     }
 
     public void storeDietitianInfo(DietitianBean dietitianBean) throws SQLException {
-        Dietitian dietitian = new Dietitian(dietitianBean.getDietitianUsername(), dietitianBean.getPrice(),dietitianBean.getAvailable(), dietitianBean.getPersonalEducation(), dietitianBean.getWorkExperience());
+        Dietitian dietitian = new Dietitian(dietitianBean.getUsername(), dietitianBean.getPrice(),dietitianBean.getAvailable(), dietitianBean.getPersonalEducation(), dietitianBean.getWorkExperience());
         try{
             DietitianDao dietitianDao = new DietitianDao();
             dietitianDao.setDietitianInfo(dietitian);

@@ -9,6 +9,7 @@ import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 
 public class BuyDietController {
@@ -32,7 +33,7 @@ public class BuyDietController {
 
 
     //Lista di tutti i dietologi:
-    public ObservableList<DietitianBean> setListDietitian(ObservableList<DietitianBean> dietitianBeans) throws SQLException, InformationErrorException {
+    public ObservableList<DietitianBean> setListDietitian(ObservableList<DietitianBean> dietitianBeans) throws SQLException, InformationErrorException, CredentialException {
         ObservableList<Dietitian> dietitians = FXCollections.observableArrayList();
 
         try{
@@ -46,15 +47,17 @@ public class BuyDietController {
             throw new SQLException(e.getMessage());
         } catch (InformationErrorException e) {
             throw new InformationErrorException(e.getMessage());
+        } catch (CredentialException e){
+            throw new CredentialException(e.getMessage());
         }
     }
 
     public void storeDietitian(DietitianBean selectedDietitianBean) {
-        dietitianEntity = new Dietitian(selectedDietitianBean.getDietitianUsername(), selectedDietitianBean.getPrice());
+        dietitianEntity = new Dietitian(selectedDietitianBean.getUsername(), selectedDietitianBean.getPrice());
     }
 
 
-    public DietitianBean restoreDietitianInfo() throws SQLException, InformationErrorException {
+    public DietitianBean restoreDietitianInfo() throws SQLException, InformationErrorException, CredentialException {
         DietitianBean dietitianBean;
         Dietitian dietitian;
         try{
@@ -71,6 +74,8 @@ public class BuyDietController {
             throw new SQLException(e.getMessage());
         } catch (InformationErrorException e) {
             throw new InformationErrorException(e.getMessage());
+        } catch (CredentialException e){
+            throw new CredentialException(e.getMessage());
         }
     }
 
