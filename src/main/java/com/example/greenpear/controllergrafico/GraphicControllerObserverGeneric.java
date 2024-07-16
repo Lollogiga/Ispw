@@ -6,7 +6,7 @@ import com.example.greenpear.observer.Observer;
 import com.example.greenpear.utils.Printer;
 
 public class GraphicControllerObserverGeneric extends GraphicControllerGeneric implements Observer {
-    DietPublisher dietPublisher = DietPublisher.getInstance();
+    protected DietPublisher dietPublisher = DietPublisher.getInstance();
 
     @Override
     public void goToRecipes() throws LoadSceneException {

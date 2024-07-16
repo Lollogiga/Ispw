@@ -7,7 +7,6 @@ import com.example.greenpear.controllerapplicativo.HomeController;
 import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
-import com.example.greenpear.observer.DietPublisher;
 import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
 import javafx.beans.property.SimpleObjectProperty;
@@ -54,7 +53,6 @@ public class HomeGraphicController extends GraphicControllerObserverGeneric{
 
     private HomeController homeController;
     private DietitianBean dietitianBean;
-    private DietPublisher dietPublisher;
 
     @FXML
     public void initialize(LoginBean userBean) {
@@ -65,8 +63,7 @@ public class HomeGraphicController extends GraphicControllerObserverGeneric{
 
         if(userBean.getRole() == Role.PATIENT){
             //Divento un observer:
-            dietPublisher = DietPublisher.getInstance();
-            dietPublisher.attach(this);
+            this.dietPublisher.attach(this);
             initializePatient();
         }else{
             initializeDietitian();
@@ -195,7 +192,7 @@ public class HomeGraphicController extends GraphicControllerObserverGeneric{
     public void update() {
         //Ricevo una richiesta gestista dal dietologo. RequestId è un model, la invio all'applicativo per una traduzione da model a bean
         //Passerò requestId al controller applicativo, che si occuperà di gestire la notifica:
-        RequestId requestUpdate = dietPublisher.getRequestState();
+        RequestId requestUpdate = this.dietPublisher.getRequestState();
         RequestBean requestBean = homeController.manageUpdate(this.userBean, requestUpdate);
         if(requestBean.getRequestStatus().equals("Request Manage")){
             initialize(userBean);

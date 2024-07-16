@@ -23,5 +23,5 @@ module com.example.login {
     exports com.example.greenpear.dao;
     exports com.example.greenpear.bean;
     exports com.example.greenpear.controllerapplicativo;
-
+    exports com.example.greenpear.observer;
 }

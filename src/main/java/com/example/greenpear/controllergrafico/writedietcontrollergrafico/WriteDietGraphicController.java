@@ -8,7 +8,6 @@ import com.example.greenpear.controllergrafico.GraphicControllerObserverGeneric;
 import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
-import com.example.greenpear.observer.DietPublisher;
 import com.example.greenpear.utils.Printer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -33,7 +32,6 @@ public class WriteDietGraphicController extends GraphicControllerObserverGeneric
     private ObservableList<PatientBean> patientBeans= FXCollections.observableArrayList();
 
     private WriteDietController writeDietController;
-    private DietPublisher dietPublisher;
     @FXML
     public void initialize(LoginBean userBean){
 
@@ -41,8 +39,7 @@ public class WriteDietGraphicController extends GraphicControllerObserverGeneric
         writeDietController = new WriteDietController();
 
         //Divento Observer:
-         dietPublisher = DietPublisher.getInstance();
-        dietPublisher.attach(this);
+        this.dietPublisher.attach(this);
 
         //Recuperiamo le informazioni dal controller applicativo:
         try {
@@ -99,7 +96,7 @@ public class WriteDietGraphicController extends GraphicControllerObserverGeneric
     @Override
     public void update() {
         //Andiamo a prendere lo stato modificato:
-        RequestId requestUpdate = dietPublisher.getRequestState();
+        RequestId requestUpdate = this.dietPublisher.getRequestState();
         RequestBean requestBean =  writeDietController.manageNotify(userBean, requestUpdate);
         if(requestBean.getRequestStatus().equals("Diet request incoming")){
             this.initialize(userBean);
