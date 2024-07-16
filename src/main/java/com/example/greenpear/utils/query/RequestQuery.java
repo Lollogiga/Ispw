@@ -70,7 +70,7 @@ public class RequestQuery {
         return QUERIES_GET_REQUEST_FROM_DIETITIAN;
     }
 
-    public static String getRequestDetails(){
+    public static String getPatientDetails(){
         return QUERIES_GET_REQUEST_DETAILS;
     }
 

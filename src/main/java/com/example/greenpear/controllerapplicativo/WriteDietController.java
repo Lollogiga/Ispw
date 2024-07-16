@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class WriteDietController {
-    private RequestId requestEntity;
-    private RequestDetails requestDetails;
+    private Request requestEntity;
+    private Patient patientDetails;
     //Breakfast:
     private List<Food> foodEntityBreakfast;
     //Launch:
@@ -40,9 +40,9 @@ public class WriteDietController {
         try{
             ObservableList<PatientBean> patientBeans = FXCollections.observableArrayList();
             RequestDao requestDao = new RequestDao();
-            List<RequestId> requests = requestDao.getRequest(dietitian);
-            for(RequestId requestId : requests){
-                patientBeans.add(new PatientBean(requestId.getPatientUsername(), requestId.getIdRequest()));
+            List<Request> requests = requestDao.getRequest(dietitian);
+            for(Request request : requests){
+                patientBeans.add(new PatientBean(request.getPatient().getUsername(), request.getIdRequest()));
             }
             return patientBeans;
         } catch (SQLException e) {
@@ -55,10 +55,8 @@ public class WriteDietController {
     }
 
     public void storePatient(PatientBean selectedPatientBean, LoginBean userBean){
-        requestEntity = new RequestId();
-        requestEntity.setPatientUsername(selectedPatientBean.getUsername());
+        requestEntity = new Request(new Patient(selectedPatientBean.getUsername()), new Dietitian(userBean.getUsername()));
         requestEntity.setIdRequest(selectedPatientBean.getRequestPatient());
-        requestEntity.setDietitianUsername(userBean.getUsername());
     }
 
     public PatientBean restorePatientInformation() throws SQLException, InformationErrorException, CredentialException {
@@ -68,31 +66,30 @@ public class WriteDietController {
         ObservableList<String> allergiesList;
         try{
             RequestDao requestDao = new RequestDao();
-            if(requestDetails == null) {
-                requestDetails = requestDao.getRequestDetails(requestEntity);
+            if(patientDetails == null) {
+                patientDetails = requestDao.getPatientDetails(requestEntity);
             }
+
             //Dobbiamo ora inserire le informazioni nella bean:
             //Personal Information:
-            String age = requestDetails.getPersonalInformation().getAge();
-            String gender = requestDetails.getPersonalInformation().getGender();
-            String weight = requestDetails.getPersonalInformation().getWeight();
-            String height = requestDetails.getPersonalInformation().getHeight();
-            PersonalInformationBean personalInformationBean = new PersonalInformationBean(age, gender, weight, height);
+            PersonalInformationBean personalInformationBean = setPersonalInformationBean();
 
             //LifeStyle
-            String sport = requestDetails.getLifeStyle().getSport();
-            String frequency = requestDetails.getLifeStyle().getFrequency();
-            String healthGoal = requestDetails.getLifeStyle().getHealthGoal();
-            boolean drunker = requestDetails.getLifeStyle().isDrunker();
-            boolean smoker = requestDetails.getLifeStyle().isSmoker();
+            LifeStyle lifeStyle = patientDetails.getLifeStyle();
+            String sport =lifeStyle.getSport();
+            String frequency = lifeStyle.getFrequency();
+            String healthGoal = lifeStyle.getHealthGoal();
+            boolean drunker =lifeStyle.isDrunker();
+            boolean smoker = lifeStyle.isSmoker();
             LifeStyleBean lifeStyleBean = new LifeStyleBean(sport, frequency, healthGoal, drunker, smoker);
 
             //FoodPreference
-            String dietType = requestDetails.getFoodPreferenceRequest().getDietType();
-            foodDislikedList = requestDetails.getFoodPreferenceRequest().getFoodDisliked();
-            allergiesList = requestDetails.getFoodPreferenceRequest().getAllergies();
+            FoodPreference foodPreference = patientDetails.getFoodPreference();
+            String dietType = foodPreference.getDietType();
+            foodDislikedList = foodPreference.getFoodDisliked();
+            allergiesList = foodPreference.getAllergies();
             FoodPreferenceBean foodPreferenceBean = new FoodPreferenceBean(dietType, foodDislikedList, allergiesList);
-            return new PatientBean(requestEntity.getPatientUsername(), personalInformationBean, lifeStyleBean, foodPreferenceBean);
+            return new PatientBean(requestEntity.getPatient().getUsername(), personalInformationBean, lifeStyleBean, foodPreferenceBean);
 
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
@@ -102,6 +99,15 @@ public class WriteDietController {
             throw new CredentialException(e.getMessage());
         }
 
+    }
+
+    private PersonalInformationBean setPersonalInformationBean() throws InformationErrorException {
+        PersonalInformation personalInformation = patientDetails.getPersonalInformation();
+        String age = personalInformation.getAge();
+        String gender =personalInformation.getGender();
+        String weight = personalInformation.getWeight();
+        String height =personalInformation.getHeight();
+        return new PersonalInformationBean(age, gender, weight, height);
     }
 
     public List<FoodBean> getAllFood() throws SQLException, InformationErrorException, FileNotFoundException, CsvValidationException {
@@ -203,14 +209,14 @@ public class WriteDietController {
     public RequestBean manageNotify(LoginBean userBean) {
         //Dobbiamo vedere se la notifica ci riguarda:
         DietPublisher dietPublisher = DietPublisher.getInstance();
-        RequestId requestId = dietPublisher.getRequestState();
+        Request request = dietPublisher.getRequestState();
         RequestBean requestBean = new RequestBean();
         //Se la notifica è dell'invio della richiesta al paziente:
-        if(requestId != null && requestId.getDietitianUsername().equals(userBean.getUsername()) && Boolean.TRUE.equals(requestId.getRequestHandled())){
+        if(request != null && request.getDietitian().getUsername().equals(userBean.getUsername()) && Boolean.TRUE.equals(request.getRequestHandled())){
             Printer.print("Manage request handled");
             requestBean.setRequestStatus("");
             //Se la notifica mi arriva dal paziente:
-        }else if (requestId != null && !requestId.getRequestHandled() && Objects.equals(requestId.getDietitianUsername(), userBean.getUsername())){
+        }else if (request != null && !request.getRequestHandled() && Objects.equals(request.getDietitian().getUsername(), userBean.getUsername())){
             requestBean.setRequestStatus("Diet request incoming");
         }
         return requestBean;

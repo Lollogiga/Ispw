@@ -2,7 +2,7 @@ package com.example.greenpear.dao;
 
 import com.example.greenpear.entities.Food;
 import com.example.greenpear.entities.Meal;
-import com.example.greenpear.entities.RequestId;
+import com.example.greenpear.entities.Request;
 import com.example.greenpear.utils.query.FoodQuery;
 
 import java.sql.PreparedStatement;
@@ -21,7 +21,7 @@ public class MealDao {
     }
 
 
-    public void setMeal(RequestId requestEntity, Meal meal) throws SQLException {
+    public void setMeal(Request requestEntity, Meal meal) throws SQLException {
         try{
             preparedStatement = connection.prepareStatement((FoodQuery.setMeal()));
             insertMealFoods(preparedStatement, requestEntity.getIdRequest(), meal.getFoodBreakfast(), "Breakfast");
@@ -44,7 +44,7 @@ public class MealDao {
         }
     }
 
-    public Meal getMeal(RequestId requestEntity) throws SQLException {
+    public Meal getMeal(Request requestEntity) throws SQLException {
         List<Food> foodBreakfast = new ArrayList<>();
         List<Food> foodLunch = new ArrayList<>();
         List<Food> foodDinner = new ArrayList<>();

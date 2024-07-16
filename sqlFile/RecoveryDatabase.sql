@@ -64,6 +64,7 @@ CREATE TABLE `dietitian` (
 
 LOCK TABLES `dietitian` WRITE;
 /*!40000 ALTER TABLE `dietitian` DISABLE KEYS */;
+INSERT INTO `dietitian` VALUES ('AntonioD',10,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mauris mattis, bibendum erat vestibulum, elementum mi. Curabitur at lorem nec nibh sollicitudin semper. Vivamus varius nibh et urna tristique, scelerisque dictum ante scelerisque. Duis ut consequat eros. Cras erat.','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mauris mattis, bibendum erat vestibulum, elementum mi. Curabitur at lorem nec nibh sollicitudin semper. Vivamus varius nibh et urna tristique, scelerisque dictum ante scelerisque. Duis ut consequat eros. Cras erat.'),('BeatriceD',15,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mauris mattis, bibendum erat vestibulum, elementum mi. Curabitur at lorem nec nibh sollicitudin semper. Vivamus varius nibh et urna tristique, scelerisque dictum ante scelerisque. Duis ut consequat eros. Cras erat.','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mauris mattis, bibendum erat vestibulum, elementum mi. Curabitur at lorem nec nibh sollicitudin semper. Vivamus varius nibh et urna tristique, scelerisque dictum ante scelerisque. Duis ut consequat eros. Cras erat.'),('FabrizioD',20,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mauris mattis, bibendum erat vestibulum, elementum mi. Curabitur at lorem nec nibh sollicitudin semper. Vivamus varius nibh et urna tristique, scelerisque dictum ante scelerisque. Duis ut consequat eros. Cras erat.','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mauris mattis, bibendum erat vestibulum, elementum mi. Curabitur at lorem nec nibh sollicitudin semper. Vivamus varius nibh et urna tristique, scelerisque dictum ante scelerisque. Duis ut consequat eros. Cras erat.'),('LollogigaD',25,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mauris mattis, bibendum erat vestibulum, elementum mi. Curabitur at lorem nec nibh sollicitudin semper. Vivamus varius nibh et urna tristique, scelerisque dictum ante scelerisque. Duis ut consequat eros. Cras erat.','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mauris mattis, bibendum erat vestibulum, elementum mi. Curabitur at lorem nec nibh sollicitudin semper. Vivamus varius nibh et urna tristique, scelerisque dictum ante scelerisque. Duis ut consequat eros. Cras erat.'),('RaffaD',30,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mauris mattis, bibendum erat vestibulum, elementum mi. Curabitur at lorem nec nibh sollicitudin semper. Vivamus varius nibh et urna tristique, scelerisque dictum ante scelerisque. Duis ut consequat eros. Cras erat.','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mauris mattis, bibendum erat vestibulum, elementum mi. Curabitur at lorem nec nibh sollicitudin semper. Vivamus varius nibh et urna tristique, scelerisque dictum ante scelerisque. Duis ut consequat eros. Cras erat.');
 /*!40000 ALTER TABLE `dietitian` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,7 +82,7 @@ CREATE TABLE `dislikedfood` (
   PRIMARY KEY (`idDislikedFood`),
   KEY `fk_DislikedFood_foodPreference1_idx` (`foodPreference_idFoodPreference`),
   CONSTRAINT `fk_DislikedFood_foodPreference1` FOREIGN KEY (`foodPreference_idFoodPreference`) REFERENCES `foodpreference` (`idFoodPreference`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,6 +91,7 @@ CREATE TABLE `dislikedfood` (
 
 LOCK TABLES `dislikedfood` WRITE;
 /*!40000 ALTER TABLE `dislikedfood` DISABLE KEYS */;
+INSERT INTO `dislikedfood` VALUES (12,'Pesce',34);
 /*!40000 ALTER TABLE `dislikedfood` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +134,7 @@ CREATE TABLE `foodpreference` (
   `idFoodPreference` int NOT NULL AUTO_INCREMENT,
   `dietType` varchar(45) NOT NULL,
   PRIMARY KEY (`idFoodPreference`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,6 +143,7 @@ CREATE TABLE `foodpreference` (
 
 LOCK TABLES `foodpreference` WRITE;
 /*!40000 ALTER TABLE `foodpreference` DISABLE KEYS */;
+INSERT INTO `foodpreference` VALUES (34,'Omnivore');
 /*!40000 ALTER TABLE `foodpreference` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +162,7 @@ CREATE TABLE `infosport` (
   `alcoholDrinker` tinyint NOT NULL,
   `smoker` tinyint NOT NULL,
   PRIMARY KEY (`idSport`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,6 +171,7 @@ CREATE TABLE `infosport` (
 
 LOCK TABLES `infosport` WRITE;
 /*!40000 ALTER TABLE `infosport` DISABLE KEYS */;
+INSERT INTO `infosport` VALUES (34,'Swimming','2 times a week','Lose weight',0,0);
 /*!40000 ALTER TABLE `infosport` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,6 +204,35 @@ LOCK TABLES `meal` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `meal1`
+--
+
+DROP TABLE IF EXISTS `meal1`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `meal1` (
+  `idMeal` int NOT NULL AUTO_INCREMENT,
+  `mealType` varchar(45) NOT NULL,
+  `request_idRequest` int NOT NULL,
+  `food_idfood` int NOT NULL,
+  PRIMARY KEY (`idMeal`),
+  KEY `fk_meal_request1_idx` (`request_idRequest`),
+  KEY `fk_meal_food1_idx` (`food_idfood`),
+  CONSTRAINT `fk_meal_food1` FOREIGN KEY (`food_idfood`) REFERENCES `food` (`idfood`),
+  CONSTRAINT `fk_meal_request1` FOREIGN KEY (`request_idRequest`) REFERENCES `request` (`idRequest`)
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `meal1`
+--
+
+LOCK TABLES `meal1` WRITE;
+/*!40000 ALTER TABLE `meal1` DISABLE KEYS */;
+/*!40000 ALTER TABLE `meal1` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `patient`
 --
 
@@ -222,6 +255,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
+INSERT INTO `patient` VALUES ('lollogigaP',23,185,85,'Male');
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,7 +282,7 @@ CREATE TABLE `request` (
   CONSTRAINT `fk_request_foodPreference1` FOREIGN KEY (`foodPreference_idFoodPreference`) REFERENCES `foodpreference` (`idFoodPreference`),
   CONSTRAINT `fk_request_infoSport1` FOREIGN KEY (`infoSport_idSport`) REFERENCES `infosport` (`idSport`),
   CONSTRAINT `fk_request_patient1` FOREIGN KEY (`patient_patientUsername`) REFERENCES `patient` (`patientUsername`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,6 +291,7 @@ CREATE TABLE `request` (
 
 LOCK TABLES `request` WRITE;
 /*!40000 ALTER TABLE `request` DISABLE KEYS */;
+INSERT INTO `request` VALUES (34,34,'AntonioD','lollogigaP',34,0);
 /*!40000 ALTER TABLE `request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +312,7 @@ CREATE TABLE `transaction` (
   `typePayment` enum('CreditCard','PayPal') NOT NULL,
   `price` int NOT NULL,
   PRIMARY KEY (`idtransaction`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,6 +321,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
+INSERT INTO `transaction` VALUES (26,NULL,NULL,'lollogiga@gmail.com',NULL,NULL,'PayPal',10);
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,7 +347,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('test','test@gmail.com','testing1','DIETITIAN');
+INSERT INTO `user` VALUES ('antonioD','antonioD@gmail.com','testing1','DIETITIAN'),('beatriceD','beatriceD@gmail.com','testing1','DIETITIAN'),('beatriceP','beatriceP@gmail.com','testing1','PATIENT'),('FabrzioD','fabrizioD@gmail.com','testing1','DIETITIAN'),('lollogigaD','lollogigaD@gmail.com','testing1','DIETITIAN'),('lollogigaP','lollogigaP@gmail.com','testing1','PATIENT'),('RaffaD','raffaD@gmail.com','testing1','DIETITIAN'),('test','test@gmail.com','testing1','DIETITIAN');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -324,4 +360,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-16 17:10:29
+-- Dump completed on 2024-07-16 18:45:30

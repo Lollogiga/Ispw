@@ -23,19 +23,19 @@ public class HomeController {
     public List<RequestBean> getRequest(LoginBean userBean) throws SQLException {
         //Dobbiamo verificare se ci sono richieste legate all'utente, in caso affermativo andiamo a ritornare un vettore di entity che contiene tutti gli id relativi:
         UserProfile currentUser = new UserProfile(userBean.getUsername());
-        List<RequestDetails> requestDetails;
+        List<Request> requestDetails;
         List<RequestBean> requestBeans = new ArrayList<>();
         String message;
         try{
             RequestDao requestDao = new RequestDao();
             requestDetails = requestDao.getRequest(currentUser);
-            for(RequestDetails request : requestDetails){
+            for(Request request : requestDetails){
                 if(Boolean.TRUE.equals(request.getRequestHandled())){
                     message = "Request Manage";
                 }else{
                     message = "Request not Manage";
                 }
-                RequestBean requestBean = new RequestBean(message, request.getFoodPreferenceRequest().getDietType(), request.getDietitianUsername());
+                RequestBean requestBean = new RequestBean(message, request.getPatient().getFoodPreference().getDietType(), request.getDietitian().getUsername());
                 requestBean.setRequestId(request.getIdRequest());
                 requestBeans.add(requestBean);
             }
@@ -82,12 +82,12 @@ public class HomeController {
 
     public RequestBean manageUpdate(LoginBean userBean) {
         DietPublisher dietPublisher = DietPublisher.getInstance();
-        RequestId requestId = dietPublisher.getRequestState();
+        Request request = dietPublisher.getRequestState();
         UserProfile currentUser = new UserProfile(userBean.getUsername());
         RequestBean requestBean = new RequestBean();
         //Verifico se la notifica mi riguarda:
-        if(requestId != null && Objects.equals(requestId.getPatientUsername(), currentUser.getUsername())){
-            if(Boolean.FALSE.equals(requestId.getRequestHandled())){
+        if(request != null && Objects.equals(request.getPatient().getUsername(), currentUser.getUsername())){
+            if(Boolean.FALSE.equals(request.getRequestHandled())){
                 Printer.print("Diet request send to dietitian");
                 requestBean.setRequestStatus("");
             }else{
@@ -100,12 +100,12 @@ public class HomeController {
     public List<FoodBean> restoreDiet(RequestBean requestBean) throws SQLException, InformationErrorException {
         List<FoodBean> foodBeans = new ArrayList<>();
 
-        RequestId requestId= new RequestId();
-        requestId.setIdRequest(requestBean.getRequestId());
+        Request request = new Request();
+        request.setIdRequest(requestBean.getRequestId());
 
         try {
             MealDao mealDao = new MealDao();
-            Meal meal = mealDao.getMeal(requestId);
+            Meal meal = mealDao.getMeal(request);
 
             List<Food> foodBreakfast = meal.getFoodBreakfast();
             List<Food> foodLaunch = meal.getFoodLunch();

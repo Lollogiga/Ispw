@@ -7,6 +7,12 @@ public class FoodPreference {
     private ObservableList<String> foodDisliked;
     private ObservableList<String> allergies;
 
+    public FoodPreference() {}
+
+    public FoodPreference(String dietType) {
+        this.setDietType(dietType);
+    }
+
     public String getDietType() {
         return dietType;
     }

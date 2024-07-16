@@ -29,7 +29,7 @@ public class BuyDietController {
     private boolean initializeFoodPreference = false;
 
     //Generate Request:
-    private RequestId requestId;
+    private Request request;
 
 
     //Lista di tutti i dietologi:
@@ -142,24 +142,24 @@ public class BuyDietController {
     public void manageRequest(LoginBean patientBean) throws SQLException {
         //Dato che la transazione è stata eseguita correttamente, possiamo andare a salvare le varie informazioni sulle diverse tabelle:
         //Salviamo le informazioni sull'utente:
-        UserProfile currentUser = new UserProfile(patientBean.getUsername());
-        requestId = new RequestId(currentUser.getUsername(), dietitianEntity.getUsername());
+        Patient currentPatient = new Patient(patientBean.getUsername(), personalInformationEntity, lifeStyleEntity, foodPreferenceEntity);
+        request = new Request(currentPatient, dietitianEntity);
         try{
             //Salvo le informazioni nelle varie tabelle:
-            RequestDetails requestDetails = new RequestDetails(personalInformationEntity, lifeStyleEntity, foodPreferenceEntity);
-            RequestDetailsDao requestDetailsDao = new RequestDetailsDao();
-            requestDetailsDao.setUser(currentUser, requestDetails);
-            requestDetailsDao.setLifeStyle(requestDetails, requestId);
-            requestDetailsDao.setFoodPreference(requestDetails, requestId);
+
+            RequestDao requestDetailsDao = new RequestDao();
+            requestDetailsDao.setUser(request);
+            requestDetailsDao.setLifeStyle(request);
+            requestDetailsDao.setFoodPreference(request);
 
             //Infine genero la richiesta:
             RequestDao requestDao = new RequestDao();
-            requestDao.setRequest(requestId);
+            requestDao.setRequest(request);
 
             //Invio una notifica al dietologo:
-            requestId.setRequestHandled(false);
+            request.setRequestHandled(false);
             DietPublisher dietPublisher = DietPublisher.getInstance();
-            dietPublisher.setRequestState(requestId);
+            dietPublisher.setRequestState(request);
 
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
