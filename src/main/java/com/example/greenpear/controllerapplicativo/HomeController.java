@@ -79,16 +79,19 @@ public class HomeController {
         }
     }
 
-    public void manageUpdate(LoginBean userBean, RequestId requestId) {
+    public RequestBean manageUpdate(LoginBean userBean, RequestId requestId) {
         UserProfile currentUser = new UserProfile(userBean.getUsername());
+        RequestBean requestBean = new RequestBean();
         //Verifico se la notifica mi riguarda:
         if(requestId != null && Objects.equals(requestId.getPatientUsername(), currentUser.getUsername())){
             if(Boolean.FALSE.equals(requestId.getRequestHandled())){
                 Printer.print("Diet request send to dietitian");
+                requestBean.setRequestStatus("");
             }else{
-                Printer.print("Diet ready to be read, update page!");
+                requestBean.setRequestStatus("New request manage");
             }
         }
+        return requestBean;
     }
 
     public List<FoodBean> restoreDiet(RequestBean requestBean) throws SQLException, InformationErrorException {

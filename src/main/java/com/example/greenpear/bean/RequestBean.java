@@ -6,6 +6,9 @@ public class RequestBean {
     private String typeOfDiet;
     private String dietitian;
 
+
+    public  RequestBean(){}
+
     public RequestBean(String requestHandled, String typeOfDiet, String dietitianUsername) {
         this.setRequestStatus(requestHandled);
         this.setTypeOfDiet(typeOfDiet);
