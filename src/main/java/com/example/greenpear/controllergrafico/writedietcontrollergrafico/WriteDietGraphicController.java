@@ -30,8 +30,7 @@ public class WriteDietGraphicController extends GraphicControllerGeneric impleme
     private TableView<PatientBean> tableViewPatient;
     @FXML
     private TableColumn<PatientBean, String> patient;
-    @FXML
-    private Label errorLabel;
+
 
     private ObservableList<PatientBean> patientBeans= FXCollections.observableArrayList();
 
@@ -102,13 +101,41 @@ public class WriteDietGraphicController extends GraphicControllerGeneric impleme
     @Override
     public void update() {
         //Andiamo a prendere lo stato modificato:
-        DietPublisher dietPublisher = DietPublisher.getInstance();
         RequestId requestUpdate = dietPublisher.getRequestState();
         RequestBean requestBean =  writeDietController.manageNotify(userBean, requestUpdate);
         if(requestBean.getRequestStatus().equals("Diet request incoming")){
             this.initialize(userBean);
-        }else if(requestBean.getRequestStatus().equals("Diet request outgoing")){
-            Printer.printGraphicError(errorLabel, "Diet request outgoing");
         }
     }
+
+    @Override
+    public void goToRecipes() throws LoadSceneException{
+        try {
+            dietPublisher.detach(this);
+            this.sceneManager.showRecipes(userBean);
+        }catch (LoadSceneException e){
+            throw new LoadSceneException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void goToWriteDiet() throws LoadSceneException{
+        try {
+            dietPublisher.detach(this);
+            this.sceneManager.showBuyDiet(userBean);
+        }catch (LoadSceneException e){
+            throw new LoadSceneException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void goToHome() throws LoadSceneException{
+        try {
+            dietPublisher.detach(this);
+            this.sceneManager.showHome(userBean);
+        }catch (LoadSceneException e){
+            throw new LoadSceneException(e.getMessage());
+        }
+    }
+
 }

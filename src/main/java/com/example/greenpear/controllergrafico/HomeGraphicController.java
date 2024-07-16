@@ -196,7 +196,6 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
     public void update() {
         //Ricevo una richiesta gestista dal dietologo. RequestId è un model, la invio all'applicativo per una traduzione da model a bean
         //Passerò requestId al controller applicativo, che si occuperà di gestire la notifica:
-        DietPublisher dietPublisher = DietPublisher.getInstance();
         RequestId requestUpdate = dietPublisher.getRequestState();
         RequestBean requestBean = homeController.manageUpdate(this.userBean, requestUpdate);
         if(requestBean.getRequestStatus().equals("Request Manage")){
