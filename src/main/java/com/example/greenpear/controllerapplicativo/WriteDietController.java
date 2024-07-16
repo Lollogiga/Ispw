@@ -6,7 +6,6 @@ import com.example.greenpear.dao.*;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.observer.DietPublisher;
-import com.example.greenpear.utils.Printer;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -200,13 +199,16 @@ public class WriteDietController {
         }
     }
 
-    public void manageNotify(LoginBean userBean, RequestId requestId) {
+    public RequestBean manageNotify(LoginBean userBean, RequestId requestId) {
         //Dobbiamo vedere se la notifica ci riguarda:
-
+        RequestBean requestBean = new RequestBean();
+        //Se la notifica è dell'invio della richiesta al paziente:
         if(requestId != null && requestId.getDietitianUsername().equals(userBean.getUsername()) && Boolean.TRUE.equals(requestId.getRequestHandled())){
-            Printer.print("Diet send to Patient");
+            requestBean.setRequestStatus("Diet request outgoing");
+            //Se la notifica mi arriva dal paziente:
         }else if (requestId != null && !requestId.getRequestHandled() && Objects.equals(requestId.getDietitianUsername(), userBean.getUsername())){
-                Printer.print("Diet request incoming, update page");
+            requestBean.setRequestStatus("Diet request incoming");
         }
+        return requestBean;
     }
 }

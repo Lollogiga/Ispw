@@ -2,6 +2,7 @@ package com.example.greenpear.controllergrafico.writedietcontrollergrafico;
 
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.PatientBean;
+import com.example.greenpear.bean.RequestBean;
 import com.example.greenpear.controllerapplicativo.WriteDietController;
 import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
 import com.example.greenpear.entities.RequestId;
@@ -14,6 +15,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -28,11 +30,13 @@ public class WriteDietGraphicController extends GraphicControllerGeneric impleme
     private TableView<PatientBean> tableViewPatient;
     @FXML
     private TableColumn<PatientBean, String> patient;
+    @FXML
+    private Label errorLabel;
 
     private ObservableList<PatientBean> patientBeans= FXCollections.observableArrayList();
 
     private WriteDietController writeDietController;
-
+    private DietPublisher dietPublisher;
     @FXML
     public void initialize(LoginBean userBean){
 
@@ -40,7 +44,7 @@ public class WriteDietGraphicController extends GraphicControllerGeneric impleme
         writeDietController = new WriteDietController();
 
         //Divento Observer:
-        DietPublisher dietPublisher = DietPublisher.getInstance();
+         dietPublisher = DietPublisher.getInstance();
         dietPublisher.attach(this);
 
         //Recuperiamo le informazioni dal controller applicativo:
@@ -100,6 +104,11 @@ public class WriteDietGraphicController extends GraphicControllerGeneric impleme
         //Andiamo a prendere lo stato modificato:
         DietPublisher dietPublisher = DietPublisher.getInstance();
         RequestId requestUpdate = dietPublisher.getRequestState();
-        writeDietController.manageNotify(userBean, requestUpdate);
+        RequestBean requestBean =  writeDietController.manageNotify(userBean, requestUpdate);
+        if(requestBean.getRequestStatus().equals("Diet request incoming")){
+            this.initialize(userBean);
+        }else if(requestBean.getRequestStatus().equals("Diet request outgoing")){
+            Printer.printGraphicError(errorLabel, "Diet request outgoing");
+        }
     }
 }

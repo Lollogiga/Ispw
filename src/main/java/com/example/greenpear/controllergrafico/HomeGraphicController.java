@@ -55,7 +55,7 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
 
     private HomeController homeController;
     private DietitianBean dietitianBean;
-
+    private DietPublisher dietPublisher;
 
     @FXML
     public void initialize(LoginBean userBean) {
@@ -66,7 +66,7 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
 
         if(userBean.getRole() == Role.PATIENT){
             //Divento un observer:
-            DietPublisher dietPublisher = DietPublisher.getInstance();
+            dietPublisher = DietPublisher.getInstance();
             dietPublisher.attach(this);
             initializePatient();
         }else{
@@ -201,6 +201,36 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
         RequestBean requestBean = homeController.manageUpdate(this.userBean, requestUpdate);
         if(requestBean.getRequestStatus().equals("Request Manage")){
             initialize(userBean);
+        }
+    }
+
+    @Override
+    public void goToRecipes() throws LoadSceneException{
+        try {
+            dietPublisher.detach(this);
+            this.sceneManager.showRecipes(userBean);
+        }catch (LoadSceneException e){
+            throw new LoadSceneException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void goToBuyDiet() throws LoadSceneException{
+        try {
+            dietPublisher.detach(this);
+            this.sceneManager.showBuyDiet(userBean);
+        }catch (LoadSceneException e){
+            throw new LoadSceneException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void goToHome() throws LoadSceneException{
+        try {
+            dietPublisher.detach(this);
+            this.sceneManager.showHome(userBean);
+        }catch (LoadSceneException e){
+            throw new LoadSceneException(e.getMessage());
         }
     }
 }
