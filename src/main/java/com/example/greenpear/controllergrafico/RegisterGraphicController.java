@@ -7,10 +7,7 @@ import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.util.Duration;
 
 import javax.security.auth.login.CredentialException;
@@ -34,6 +31,7 @@ public class RegisterGraphicController extends GraphicControllerGeneric{
     private ToggleGroup role;
     @FXML
     private Label errorLabel;
+
 
     private RegisterBean registerBean;
 

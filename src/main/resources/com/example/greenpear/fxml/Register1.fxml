@@ -13,15 +13,58 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.RegisterGraphicController">
+<StackPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.RegisterGraphicController">
    <children>
-      <TilePane alignment="CENTER" layoutX="144.0" layoutY="82.0" prefHeight="536.0" prefWidth="560.0" style="-fx-border-color: #6F8A4A; -fx-border-width: 10;" styleClass="-fx-">
+      <AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;">
          <children>
-            <VBox alignment="CENTER_LEFT" prefHeight="510.0" prefWidth="206.0">
+            <HBox accessibleRole="CONTEXT_MENU" alignment="CENTER_LEFT" layoutX="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="850.0" style="-fx-background-color: #6F8A4A;">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" rotate="25.06">
+                     <image>
+                        <Image url="@../images/logo.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="15.0" right="-10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Button mnemonicParsing="false" onMouseClicked="#loginBefore" style="-fx-background-color: #6F8A4A;" text="Home" textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#loginBefore" style="-fx-background-color: #6F8A4A;" text="Recipes" textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#loginBefore" style="-fx-background-color: #6F8A4A;" text="About" textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b343b" height="543.0" layoutX="151.0" layoutY="99.0" stroke="#6f8a4a" strokeType="INSIDE" strokeWidth="10.0" width="560.0" />
+            <HBox layoutX="325.0" layoutY="109.0" />
+            <Label fx:id="loginButton" accessibleRole="HYPERLINK" layoutX="10.0" layoutY="10.0" onMouseClicked="#goToLogin" text="Log In" textFill="#6f8a4a">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <HBox layoutX="335.0" layoutY="169.0" />
+            <VBox alignment="CENTER_LEFT" layoutX="335.0" layoutY="121.0" prefHeight="433.0" prefWidth="206.0">
                <children>
                   <HBox>
                      <children>
@@ -53,7 +96,7 @@
                               <Font name="System Italic" size="13.0" />
                            </font>
                         </Label>
-                        <Label fx:id="loginButton" accessibleRole="HYPERLINK" onMouseClicked="#goToLogin" text="Log In" textFill="#6f8a4a">
+                        <Label fx:id="loginButton1" accessibleRole="HYPERLINK" onMouseClicked="#goToLogin" text="Log In" textFill="#6f8a4a">
                            <font>
                               <Font name="System Italic" size="13.0" />
                            </font>
@@ -147,62 +190,45 @@
                         </RadioButton>
                      </children>
                   </HBox>
-                  <VBox alignment="CENTER">
+                  <VBox alignment="CENTER" prefHeight="35.0" prefWidth="206.0">
                      <VBox.margin>
                         <Insets bottom="20.0" top="20.0" />
                      </VBox.margin>
                      <children>
-                        <Button alignment="CENTER" centerShape="false" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onCreateAccount" prefHeight="27.0" prefWidth="205.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Create Account" textAlignment="CENTER" textFill="WHITE" />
-                        <Label contentDisplay="CENTER" text="-------or-------" textFill="WHITE" />
-                        <Button fx:id="buttonGoogle" mnemonicParsing="false" prefHeight="16.0" prefWidth="205.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0.5;" text="Continue with Google">
-                           <font>
-                              <Font name="Arial" size="12.0" />
-                           </font>
-                        </Button>
+                        <VBox alignment="CENTER">
+                           <children>
+                              <Button alignment="CENTER" centerShape="false" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onCreateAccount" prefHeight="27.0" prefWidth="205.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Create Account" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Label contentDisplay="CENTER" text="-------or-------" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets top="2.5" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="206.0" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="System Italic" size="10.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
+                  <HBox alignment="CENTER" />
                </children>
             </VBox>
+            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="603.0" prefHeight="17.0" prefWidth="206.0" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="10.0" />
+               </font>
+            </Label>
+            <Button layoutX="335.0" layoutY="555.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" style="-fx-background-color: white; -fx-border-color: black;" text="Continue with Google">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Button>
+            <SVGPath content="M14.9 8.161c0-.476-.039-.954-.121-1.422h-6.64v2.695h3.802a3.24 3.24 0 01-1.407 2.127v1.75h2.269c1.332-1.22 2.097-3.02 2.097-5.15z" fill="#4285f4" layoutX="356.0" layoutY="560.0" />
+            <SVGPath content="M8.14 15c1.898 0 3.499-.62 4.665-1.69l-2.268-1.749c-.631.427-1.446.669-2.395.669-1.836 0-3.393-1.232-3.952-2.888H1.85v1.803A7.044 7.044 0 008.14 15z" fill="#34a853" layoutX="354.0" layoutY="561.0" />
+            <SVGPath content="M4.187 9.342a4.17 4.17 0 010-2.68V4.859H1.849a6.97 6.97 0 000 6.286l2.338-1.803z" fill="#fbbc04" layoutX="352.0" layoutY="560.0" />
+            <SVGPath content="M8.14 3.77a3.837 3.837 0 012.7 1.05l2.01-1.999a6.786 6.786 0 00-4.71-1.82 7.042 7.042 0 00-6.29 3.858L4.186 6.66c.556-1.658 2.116-2.89 3.952-2.89z" fill="#ea4335" layoutX="354.0" layoutY="558.0" />
          </children>
-      </TilePane>
-      <HBox accessibleRole="CONTEXT_MENU" alignment="CENTER_LEFT" layoutX="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="850.0" style="-fx-background-color: #6F8A4A;">
-         <children>
-            <ImageView fitHeight="48.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" rotate="25.06">
-               <image>
-                  <Image url="@../images/logo.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="15.0" right="-10.0" />
-               </HBox.margin>
-            </ImageView>
-            <Button mnemonicParsing="false" onMouseClicked="#loginBefore" style="-fx-background-color: #6F8A4A;" text="Home" textFill="WHITE">
-               <font>
-                  <Font name="System Italic" size="15.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#loginBefore" style="-fx-background-color: #6F8A4A;" text="Recipes" textFill="WHITE">
-               <font>
-                  <Font name="System Italic" size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#loginBefore" style="-fx-background-color: #6F8A4A;" text="About" textFill="WHITE">
-               <font>
-                  <Font name="System Italic" size="15.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>
