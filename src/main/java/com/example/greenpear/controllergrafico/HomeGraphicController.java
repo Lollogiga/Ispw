@@ -8,7 +8,6 @@ import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.observer.DietPublisher;
-import com.example.greenpear.observer.Observer;
 import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
 import javafx.beans.property.SimpleObjectProperty;
@@ -22,7 +21,7 @@ import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class HomeGraphicController extends GraphicControllerGeneric implements Observer {
+public class HomeGraphicController extends GraphicControllerObserverGeneric{
     //Home paziente:
     @FXML
     private TableView<RequestBean> tableViewRequestDiet;
@@ -203,34 +202,5 @@ public class HomeGraphicController extends GraphicControllerGeneric implements O
         }
     }
 
-    @Override
-    public void goToRecipes() throws LoadSceneException{
-        try {
-            dietPublisher.detach(this);
-            this.sceneManager.showRecipes(userBean);
-        }catch (LoadSceneException e){
-            throw new LoadSceneException(e.getMessage());
-        }
-    }
-
-    @Override
-    public void goToBuyDiet() throws LoadSceneException{
-        try {
-            dietPublisher.detach(this);
-            this.sceneManager.showBuyDiet(userBean);
-        }catch (LoadSceneException e){
-            throw new LoadSceneException(e.getMessage());
-        }
-    }
-
-    @Override
-    public void goToHome() throws LoadSceneException{
-        try {
-            dietPublisher.detach(this);
-            this.sceneManager.showHome(userBean);
-        }catch (LoadSceneException e){
-            throw new LoadSceneException(e.getMessage());
-        }
-    }
 }
 

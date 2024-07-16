@@ -4,18 +4,16 @@ import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.PatientBean;
 import com.example.greenpear.bean.RequestBean;
 import com.example.greenpear.controllerapplicativo.WriteDietController;
-import com.example.greenpear.controllergrafico.GraphicControllerGeneric;
+import com.example.greenpear.controllergrafico.GraphicControllerObserverGeneric;
 import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.observer.DietPublisher;
-import com.example.greenpear.observer.Observer;
 import com.example.greenpear.utils.Printer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -24,7 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 
-public class WriteDietGraphicController extends GraphicControllerGeneric implements Observer {
+public class WriteDietGraphicController extends GraphicControllerObserverGeneric {
 
     @FXML
     private TableView<PatientBean> tableViewPatient;
@@ -105,36 +103,6 @@ public class WriteDietGraphicController extends GraphicControllerGeneric impleme
         RequestBean requestBean =  writeDietController.manageNotify(userBean, requestUpdate);
         if(requestBean.getRequestStatus().equals("Diet request incoming")){
             this.initialize(userBean);
-        }
-    }
-
-    @Override
-    public void goToRecipes() throws LoadSceneException{
-        try {
-            dietPublisher.detach(this);
-            this.sceneManager.showRecipes(userBean);
-        }catch (LoadSceneException e){
-            throw new LoadSceneException(e.getMessage());
-        }
-    }
-
-    @Override
-    public void goToWriteDiet() throws LoadSceneException{
-        try {
-            dietPublisher.detach(this);
-            this.sceneManager.showBuyDiet(userBean);
-        }catch (LoadSceneException e){
-            throw new LoadSceneException(e.getMessage());
-        }
-    }
-
-    @Override
-    public void goToHome() throws LoadSceneException{
-        try {
-            dietPublisher.detach(this);
-            this.sceneManager.showHome(userBean);
-        }catch (LoadSceneException e){
-            throw new LoadSceneException(e.getMessage());
         }
     }
 

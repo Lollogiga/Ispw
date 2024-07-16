@@ -1,60 +1,57 @@
 package com.example.greenpear.controllergrafico;
 
-import com.example.greenpear.SceneManager;
-import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.exception.LoadSceneException;
+import com.example.greenpear.observer.DietPublisher;
+import com.example.greenpear.observer.Observer;
 import com.example.greenpear.utils.Printer;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
-public abstract class GraphicControllerGeneric {
-    protected SceneManager sceneManager = SceneManager.getInstance(null);
-    protected LoginBean userBean;
+public class GraphicControllerObserverGeneric extends GraphicControllerGeneric implements Observer {
+    DietPublisher dietPublisher = DietPublisher.getInstance();
 
-    @FXML
-    protected Label label;
-
-    public void goToRecipes() throws LoadSceneException{
-        Printer.print("CiaoPadre");
-
+    @Override
+    public void goToRecipes() throws LoadSceneException {
         try {
+            Printer.print("Ciao");
+            dietPublisher.detach(this);
             this.sceneManager.showRecipes(userBean);
         }catch (LoadSceneException e){
             throw new LoadSceneException(e.getMessage());
         }
     }
 
+    @Override
     public void goToBuyDiet() throws LoadSceneException{
-        Printer.print("CiaoPadre");
-
+        Printer.print("Ciao");
         try {
+            dietPublisher.detach(this);
             this.sceneManager.showBuyDiet(userBean);
         }catch (LoadSceneException e){
             throw new LoadSceneException(e.getMessage());
         }
     }
 
+    @Override
     public void goToHome() throws LoadSceneException{
-        Printer.print("CiaoPadre");
-
+        Printer.print("Ciao");
         try {
+            dietPublisher.detach(this);
             this.sceneManager.showHome(userBean);
         }catch (LoadSceneException e){
             throw new LoadSceneException(e.getMessage());
         }
     }
 
+    @Override
     public void goToWriteDiet() throws LoadSceneException{
-        Printer.print("CiaoPadre");
+        Printer.print("Ciao");
         try{
+            dietPublisher.detach(this);
             this.sceneManager.showWriteDiet(userBean);
         }catch (LoadSceneException e){
             throw new LoadSceneException(e.getMessage());
         }
     }
 
-    public void loginBefore() {
-        Printer.printGraphic(label, "You must log in first");
-    }
-
+    @Override
+    public void update(){}
 }
