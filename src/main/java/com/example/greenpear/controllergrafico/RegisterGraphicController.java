@@ -1,7 +1,7 @@
 package com.example.greenpear.controllergrafico;
 
 import com.example.greenpear.bean.RegisterBean;
-import com.example.greenpear.controllerapplicativo.RegistrationController;
+import com.example.greenpear.controllerapplicativo.LoginController;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
@@ -60,9 +60,9 @@ public class RegisterGraphicController extends GraphicControllerGeneric{
                 this.registerBean = new RegisterBean(usernameField, emailField, passwordField, Role.PATIENT);
             }
 
-            RegistrationController registrationController = new RegistrationController();
+            LoginController registrationController = new LoginController();
 
-            //Invio le bean al contoller applicativo che gestirà la registrazione:
+            //Invio le bean al controller applicativo che gestirà la registrazione:
             registrationController.registerNewUser(registerBean);
             Printer.printGraphic(errorLabel, "Registration complete");
             PauseTransition pause = new PauseTransition(Duration.seconds(1));

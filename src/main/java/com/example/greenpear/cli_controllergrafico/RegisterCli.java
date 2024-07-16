@@ -1,7 +1,7 @@
 package com.example.greenpear.cli_controllergrafico;
 
 import com.example.greenpear.bean.RegisterBean;
-import com.example.greenpear.controllerapplicativo.RegistrationController;
+import com.example.greenpear.controllerapplicativo.LoginController;
 import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
 
@@ -15,7 +15,7 @@ public class RegisterCli extends GenericCli{
 
     public void start(){
         Scanner scanner = new Scanner(System.in);
-        RegistrationController registrationController = new RegistrationController();
+        LoginController registrationController = new LoginController();
         RegisterBean registerBean;
 
         Printer.print("\n -------- Registration --------- //");

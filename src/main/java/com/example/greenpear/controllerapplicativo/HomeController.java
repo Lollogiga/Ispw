@@ -86,7 +86,7 @@ public class HomeController {
             if(Boolean.FALSE.equals(requestId.getRequestHandled())){
                 Printer.print("Diet request send to dietitian");
             }else{
-                Printer.print("Diet write, update page!");
+                Printer.print("Diet ready to be read, update page!");
             }
         }
     }
