@@ -23,26 +23,32 @@ public class WriteDietCli extends  GenericCli{
         try {
             patientBeans = writeDietController.setListPatient(userBean);
             Printer.print("\n -------Write Diet --------\n");
-            processPatientSelection(patientBeans);
-            fillFormsAndSubmitDiet();
-            Printer.print("\n --------Diet Submit --------\n");
+            if(processPatientSelection(patientBeans)){
+                fillFormsAndSubmitDiet();
+                Printer.print("\n --------Diet Submit --------\n");
+            }
         } catch (SQLException | InformationErrorException | CredentialException e) {
             Printer.printError(e.getMessage());
         }
     }
 
-    private void processPatientSelection(ObservableList<PatientBean> patientBeans) throws SQLException, InformationErrorException {
+    private Boolean processPatientSelection(ObservableList<PatientBean> patientBeans) throws SQLException, InformationErrorException {
         boolean confirmChoice = false;
         Scanner scanner = new Scanner(System.in);
-
         while (!confirmChoice) {
             printPatientList(patientBeans);
 
-            int selectedIndex = getUserSelection(scanner, patientBeans.size());
-            PatientBean selectedPatient = patientBeans.get(selectedIndex - 1);
-            writeDietController.storePatient(selectedPatient, userBean);
-            confirmChoice = confirmPatientChoice();
+            int selectedIndex = getUserSelection(scanner, patientBeans.size() + 1);
+            if(selectedIndex != patientBeans.size() + 1){
+                PatientBean selectedPatient = patientBeans.get(selectedIndex - 1);
+                writeDietController.storePatient(selectedPatient, userBean);
+                confirmChoice = confirmPatientChoice();
+                return true;
+            }else{
+                confirmChoice = true;
+            }
         }
+        return false;
     }
 
     private void printPatientList(ObservableList<PatientBean> patientBeans) {
@@ -57,6 +63,8 @@ public class WriteDietCli extends  GenericCli{
             Printer.print(String.format(format, count, patientBean.getUsername()));
             count++;
         }
+        Printer.print(String.format(format, count, "Return to home"));
+
     }
 
     private boolean confirmPatientChoice() throws SQLException, InformationErrorException {
@@ -89,6 +97,7 @@ public class WriteDietCli extends  GenericCli{
             for (String foodDisliked : foodPreferenceBean.getFoodPreference()) {
                 Printer.print(foodDisliked);
             }
+
             Printer.print("Allergies: ");
             for (String allergies : foodPreferenceBean.getAllergies()) {
                 Printer.print(allergies);
