@@ -37,18 +37,17 @@ public class WriteDietCli extends  GenericCli{
         Scanner scanner = new Scanner(System.in);
         while (!confirmChoice) {
             printPatientList(patientBeans);
-
-            int selectedIndex = getUserSelection(scanner, patientBeans.size() + 1);
-            if(selectedIndex != patientBeans.size() + 1){
+            int maxIndex = patientBeans.size() + 1;
+            int selectedIndex = getUserSelection(scanner, maxIndex);
+            if(selectedIndex != maxIndex){
                 PatientBean selectedPatient = patientBeans.get(selectedIndex - 1);
                 writeDietController.storePatient(selectedPatient, userBean);
                 confirmChoice = confirmPatientChoice();
-                return true;
             }else{
-                confirmChoice = true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     private void printPatientList(ObservableList<PatientBean> patientBeans) {
