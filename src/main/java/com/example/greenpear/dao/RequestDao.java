@@ -1,6 +1,7 @@
 package com.example.greenpear.dao;
 
 import com.example.greenpear.entities.*;
+import com.example.greenpear.utils.query.BuyDietQuery;
 import com.example.greenpear.utils.query.RequestQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +9,7 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,17 +24,17 @@ public class RequestDao {
         connection = ConnectionDb.getInstance();
     }
 
-    public List<RequestId> getRequest(Dietitian dietitian) throws SQLException {
-        List<RequestId> requestList = new ArrayList<RequestId>();
+    public List<Request> getRequest(Dietitian dietitian) throws SQLException {
+        List<Request> requestList = new ArrayList<Request>();
         try{
             preparedStatement = connection.prepareStatement(RequestQuery.getRequestFromDietitian());
             preparedStatement.setString(1, dietitian.getUsername());
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                RequestId requestId = new RequestId();
-                requestId.setPatientUsername(resultSet.getString("patient_patientUsername"));
-                requestId.setIdRequest(resultSet.getInt("idRequest"));
-                requestList.add(requestId);
+                Request request = new Request();
+                request.setPatient(new Patient(resultSet.getString("patient_patientUsername")));
+                request.setIdRequest(resultSet.getInt("idRequest"));
+                requestList.add(request);
             }
             return requestList;
         }catch (SQLException e){
@@ -40,13 +42,13 @@ public class RequestDao {
         }
     }
 
-    public RequestDetails getRequestDetails(RequestId requestEntity) throws SQLException {
+    public Patient getPatientDetails(Request requestEntity) throws SQLException {
         try{
-            preparedStatement = connection.prepareStatement(RequestQuery.getRequestDetails());
+            preparedStatement = connection.prepareStatement(RequestQuery.getPatientDetails());
             preparedStatement.setInt(1, requestEntity.getIdRequest());
             resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
-                //Estraiamo le informazioni perosnali:
+                //Estraiamo le informazioni personali:
                 String age = resultSet.getString("age");
                 String gender = resultSet.getString("gender");
                 String weight = resultSet.getString("weight");
@@ -85,7 +87,7 @@ public class RequestDao {
                 }
                 foodPreference.setAllergies(allergiesList);
 
-                return new RequestDetails(personalInformation, lifeStyle, foodPreference);
+                return new Patient(personalInformation, lifeStyle, foodPreference);
             }else{
                 throw new SQLException("No request found");
             }
@@ -95,7 +97,7 @@ public class RequestDao {
         }
     }
 
-    public void requestManage(RequestId requestEntity) throws SQLException {
+    public void requestManage(Request requestEntity) throws SQLException {
         try{
             preparedStatement = connection.prepareStatement(RequestQuery.requestManage());
             preparedStatement.setInt(1, requestEntity.getIdRequest());
@@ -105,17 +107,19 @@ public class RequestDao {
         }
     }
 
-    public List<RequestDetails> getRequest(UserProfile currentUser) throws SQLException {
-        List<RequestDetails> requestList = new ArrayList<RequestDetails>();
+    public List<Request> getRequest(UserProfile currentUser) throws SQLException {
+        List<Request> requestList = new ArrayList<Request>();
+        String dietitianUsername;
         try {
             preparedStatement = connection.prepareStatement(RequestQuery.getRequestFromPatient());
             preparedStatement.setString(1, currentUser.getUsername());
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                RequestDetails requestDetails = new RequestDetails(new FoodPreference());
-                requestDetails.setDietitianUsername(resultSet.getString("dietitianUsername"));
+                Request requestDetails = new Request();
+                dietitianUsername = resultSet.getString("dietitianUsername");
+                requestDetails.setDietitian(new Dietitian(dietitianUsername));
                 requestDetails.setRequestHandled(resultSet.getBoolean("requestStatus"));
-                requestDetails.getFoodPreferenceRequest().setDietType(resultSet.getString("dietType"));
+                requestDetails.setPatient(new Patient(new FoodPreference(resultSet.getString("dietType"))));
                 requestDetails.setIdRequest(resultSet.getInt("idRequest"));
                 requestList.add(requestDetails);
             }
@@ -125,13 +129,76 @@ public class RequestDao {
         }
     }
 
-    public void setRequest(RequestId requestId) throws SQLException {
+    public void setRequest(Request request) throws SQLException {
+        Patient patient = request.getPatient();
+        Dietitian dietitian = request.getDietitian();
         preparedStatement = connection.prepareStatement(RequestQuery.setRequest());
-        preparedStatement.setInt(1, requestId.getFoodPreferenceID());
-        preparedStatement.setString(2, requestId.getDietitianUsername());
-        preparedStatement.setString(3, requestId.getPatientUsername());
-        preparedStatement.setInt(4, requestId.getInfoSportId());
+        preparedStatement.setInt(1, request.getFoodPreferenceID());
+        preparedStatement.setString(2, dietitian.getUsername());
+        preparedStatement.setString(3, patient.getUsername());
+        preparedStatement.setInt(4, request.getInfoSportId());
         preparedStatement.executeUpdate();
+    }
+
+    public void setUser(Request request) throws SQLException {
+        PersonalInformation personalInformationEntity = request.getPatient().getPersonalInformation();
+        Patient patient = request.getPatient();
+        preparedStatement = connection.prepareStatement(BuyDietQuery.setPatient());
+        preparedStatement.setString(1, patient.getUsername());
+        preparedStatement.setInt(2, Integer.parseInt(personalInformationEntity.getAge()));
+        preparedStatement.setInt(3, Integer.parseInt(personalInformationEntity.getHeight()));
+        preparedStatement.setInt(4, Integer.parseInt(personalInformationEntity.getWeight()));
+        preparedStatement.setString(5, personalInformationEntity.getGender());
+        preparedStatement.executeUpdate();
+    }
+
+    public void setLifeStyle(Request request) throws SQLException {
+        LifeStyle lifeStyleEntity = request.getPatient().getLifeStyle();
+        preparedStatement = connection.prepareStatement(BuyDietQuery.setLifeStyle(), Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setString(1, lifeStyleEntity.getSport());
+        preparedStatement.setString(2, lifeStyleEntity.getFrequency());
+        preparedStatement.setString(3, lifeStyleEntity.getHealthGoal());
+        preparedStatement.setBoolean(4, lifeStyleEntity.isDrunker());
+        preparedStatement.setBoolean(5, lifeStyleEntity.isSmoker());
+        preparedStatement.executeUpdate();
+        resultSet = preparedStatement.getGeneratedKeys();
+        if(resultSet.next()){
+            request.setInfoSportId(resultSet.getInt(1));
+        }
+    }
+
+    public void setFoodPreference(Request request) throws SQLException {
+        FoodPreference foodPreferenceEntity = request.getPatient().getFoodPreference();
+        preparedStatement = connection.prepareStatement(BuyDietQuery.setFoodPreference(), Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setString(1, foodPreferenceEntity.getDietType());
+        preparedStatement.executeUpdate();
+        resultSet = preparedStatement.getGeneratedKeys();
+        if(resultSet.next()){
+            //Salvo il valore dell'Id nella richiesta:
+            request.setFoodPreferenceID(resultSet.getInt(1));
+            setDislikedFood(request, foodPreferenceEntity);
+            this.setAllergies(request, foodPreferenceEntity);
+        }
+    }
+
+    private void setDislikedFood(Request request, FoodPreference foodPreferenceEntity) throws SQLException {
+        preparedStatement = connection.prepareStatement(BuyDietQuery.setDislikeDFood());
+        preparedStatement.setInt(2, request.getFoodPreferenceID());
+        for(String food : foodPreferenceEntity.getFoodDisliked()){
+            preparedStatement.setString(1, food);
+            preparedStatement.addBatch();
+        }
+        preparedStatement.executeBatch();
+    }
+
+    private void setAllergies(Request request, FoodPreference foodPreferenceEntity) throws SQLException {
+        preparedStatement = connection.prepareStatement(BuyDietQuery.setAllergies());
+        preparedStatement.setInt(2, request.getFoodPreferenceID());
+        for(String allergies : foodPreferenceEntity.getAllergies()){
+            preparedStatement.setString(1, allergies);
+            preparedStatement.addBatch();
+        }
+        preparedStatement.executeBatch(); //Eseguiamo tutte le query nel batch
     }
 
 }
