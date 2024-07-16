@@ -15,8 +15,6 @@ public abstract class GraphicControllerGeneric {
     protected Label label;
 
     public void goToRecipes() throws LoadSceneException{
-        Printer.print("CiaoPadre");
-
         try {
             this.sceneManager.showRecipes(userBean);
         }catch (LoadSceneException e){
@@ -25,8 +23,6 @@ public abstract class GraphicControllerGeneric {
     }
 
     public void goToBuyDiet() throws LoadSceneException{
-        Printer.print("CiaoPadre");
-
         try {
             this.sceneManager.showBuyDiet(userBean);
         }catch (LoadSceneException e){
@@ -35,8 +31,6 @@ public abstract class GraphicControllerGeneric {
     }
 
     public void goToHome() throws LoadSceneException{
-        Printer.print("CiaoPadre");
-
         try {
             this.sceneManager.showHome(userBean);
         }catch (LoadSceneException e){
@@ -45,7 +39,6 @@ public abstract class GraphicControllerGeneric {
     }
 
     public void goToWriteDiet() throws LoadSceneException{
-        Printer.print("CiaoPadre");
         try{
             this.sceneManager.showWriteDiet(userBean);
         }catch (LoadSceneException e){
