@@ -141,10 +141,10 @@ public class RequestDao {
     }
 
     public void setUser(Request request) throws SQLException {
-        PersonalInformation personalInformationEntity = request.getPatient().getPersonalInformation(); ;
+        PersonalInformation personalInformationEntity = request.getPatient().getPersonalInformation();
         Patient patient = request.getPatient();
         preparedStatement = connection.prepareStatement(BuyDietQuery.setPatient());
-        preparedStatement.setString(1, patient.getUsername() );
+        preparedStatement.setString(1, patient.getUsername());
         preparedStatement.setInt(2, Integer.parseInt(personalInformationEntity.getAge()));
         preparedStatement.setInt(3, Integer.parseInt(personalInformationEntity.getHeight()));
         preparedStatement.setInt(4, Integer.parseInt(personalInformationEntity.getWeight()));
