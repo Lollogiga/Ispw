@@ -9,6 +9,7 @@ import com.example.greenpear.dao.MealDao;
 import com.example.greenpear.dao.RequestDao;
 import com.example.greenpear.entities.*;
 import com.example.greenpear.exception.InformationErrorException;
+import com.example.greenpear.observer.DietPublisher;
 import com.example.greenpear.utils.Printer;
 
 import javax.security.auth.login.CredentialException;
@@ -79,7 +80,9 @@ public class HomeController {
         }
     }
 
-    public RequestBean manageUpdate(LoginBean userBean, RequestId requestId) {
+    public RequestBean manageUpdate(LoginBean userBean) {
+        DietPublisher dietPublisher = DietPublisher.getInstance();
+        RequestId requestId = dietPublisher.getRequestState();
         UserProfile currentUser = new UserProfile(userBean.getUsername());
         RequestBean requestBean = new RequestBean();
         //Verifico se la notifica mi riguarda:

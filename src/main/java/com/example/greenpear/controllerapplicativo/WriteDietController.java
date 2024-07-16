@@ -200,8 +200,10 @@ public class WriteDietController {
         }
     }
 
-    public RequestBean manageNotify(LoginBean userBean, RequestId requestId) {
+    public RequestBean manageNotify(LoginBean userBean) {
         //Dobbiamo vedere se la notifica ci riguarda:
+        DietPublisher dietPublisher = DietPublisher.getInstance();
+        RequestId requestId = dietPublisher.getRequestState();
         RequestBean requestBean = new RequestBean();
         //Se la notifica è dell'invio della richiesta al paziente:
         if(requestId != null && requestId.getDietitianUsername().equals(userBean.getUsername()) && Boolean.TRUE.equals(requestId.getRequestHandled())){

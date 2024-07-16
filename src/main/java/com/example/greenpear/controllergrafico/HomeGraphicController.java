@@ -4,7 +4,6 @@ import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.RequestBean;
 import com.example.greenpear.controllerapplicativo.HomeController;
-import com.example.greenpear.entities.RequestId;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
@@ -190,10 +189,7 @@ public class HomeGraphicController extends GraphicControllerObserverGeneric{
 
     @Override
     public void update() {
-        //Ricevo una richiesta gestista dal dietologo. RequestId è un model, la invio all'applicativo per una traduzione da model a bean
-        //Passerò requestId al controller applicativo, che si occuperà di gestire la notifica:
-        RequestId requestUpdate = this.dietPublisher.getRequestState();
-        RequestBean requestBean = homeController.manageUpdate(this.userBean, requestUpdate);
+        RequestBean requestBean = homeController.manageUpdate(this.userBean);
         if(requestBean.getRequestStatus().equals("Request Manage")){
             initialize(userBean);
         }
