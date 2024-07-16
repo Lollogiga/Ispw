@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.buydietcontrollergrafico.DietitianInfoGraphicController">
+<AnchorPane minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" style="-fx-background-color: #2B343B;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.greenpear.controllergrafico.buydietcontrollergrafico.DietitianInfoGraphicController">
    <children>
       <HBox accessibleRole="CONTEXT_MENU" alignment="CENTER_LEFT" layoutX="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="850.0" style="-fx-background-color: #6F8A4A;">
          <children>
@@ -85,7 +85,7 @@
                   <Font name="System Italic" size="15.0" />
                </font>
             </Label>
-            <VBox layoutX="83.0" layoutY="138.0" prefHeight="305.0" prefWidth="473.0">
+            <VBox layoutX="83.0" layoutY="138.0" prefHeight="244.0" prefWidth="473.0">
                <children>
                   <HBox />
                   <GridPane prefHeight="241.0" prefWidth="451.0">
@@ -97,7 +97,6 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label prefHeight="21.0" prefWidth="201.0" text="Education and training:" textFill="WHITE">
@@ -105,13 +104,13 @@
                               <Font name="System Italic" size="15.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="textAreaEducational" editable="false" prefHeight="61.0" prefWidth="224.0" style="-fx-border-color: black;" text="&#10;" GridPane.columnIndex="1" />
+                        <TextArea fx:id="textAreaEducational" editable="false" prefHeight="61.0" prefWidth="224.0" style="-fx-border-color: black;" text="&#10;" wrapText="true" GridPane.columnIndex="1" />
                         <Label layoutX="10.0" layoutY="37.0" prefHeight="21.0" prefWidth="154.0" text="Work experience:" textFill="WHITE" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Italic" size="15.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="textAreaWork" editable="false" prefHeight="61.0" prefWidth="224.0" style="-fx-background-color: black;" text="&#10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextArea fx:id="textAreaWork" editable="false" prefHeight="61.0" prefWidth="224.0" style="-fx-background-color: black;" text="&#10;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets />
@@ -123,21 +122,6 @@
                            </font>
                         </Label>
                         <TextField fx:id="textFieldPrice" editable="false" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="249.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <children>
-                              <Region prefHeight="61.0" prefWidth="137.0" />
-                              <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#goToPersonalInformation" prefHeight="27.0" prefWidth="98.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Confirm choice" textFill="WHITE">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                           </children>
-                        </HBox>
-                        <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#goToBuyDiet" prefHeight="27.0" prefWidth="98.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Prev" textFill="WHITE" GridPane.rowIndex="3">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
                      </children>
                   </GridPane>
                </children>
@@ -152,6 +136,16 @@
                </children>
             </HBox>
             <Region layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="165.0" />
+            <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" layoutX="15.0" layoutY="414.0" mnemonicParsing="false" onMouseClicked="#goToBuyDiet" prefHeight="27.0" prefWidth="98.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Prev" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button alignment="BASELINE_RIGHT" centerShape="false" contentDisplay="RIGHT" layoutX="482.0" layoutY="414.0" mnemonicParsing="false" onMouseClicked="#goToPersonalInformation" prefHeight="27.0" prefWidth="98.0" style="-fx-background-color: #6F8A4A; -fx-alignment: center;" text="Confirm choice" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </Pane>
    </children>

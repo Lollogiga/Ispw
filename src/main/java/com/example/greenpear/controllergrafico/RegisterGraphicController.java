@@ -86,4 +86,8 @@ public class RegisterGraphicController extends GraphicControllerGeneric{
         }
     }
 
+    public void googleLogin(){
+        Printer.printGraphicError(errorLabel, "Google Login not implemented");
+    }
+
 }

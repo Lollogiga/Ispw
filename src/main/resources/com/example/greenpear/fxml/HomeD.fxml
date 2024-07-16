@@ -106,13 +106,13 @@
                               <Font name="System Italic" size="15.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="textAreaEducational" prefHeight="75.0" prefWidth="213.0" promptText="Enter your education" style="-fx-border-color: black;" text="&#10;" GridPane.columnIndex="1" />
+                        <TextArea fx:id="textAreaEducational" prefHeight="75.0" prefWidth="213.0" promptText="Enter your education" style="-fx-border-color: black;" text="&#10;" wrapText="true" GridPane.columnIndex="1" />
                         <Label layoutX="10.0" layoutY="37.0" prefHeight="21.0" prefWidth="154.0" text="Work experience:" textFill="WHITE" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Italic" size="15.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="textAreaWork" prefHeight="75.0" prefWidth="213.0" promptText="Enter your education" style="-fx-background-color: black;" text="&#10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextArea fx:id="textAreaWork" prefHeight="75.0" prefWidth="213.0" promptText="Enter your education" style="-fx-background-color: black;" text="&#10;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label layoutX="10.0" layoutY="111.0" prefHeight="21.0" prefWidth="184.0" text="Avaible to write dietes:" textFill="WHITE" GridPane.rowIndex="2">
                            <font>
                               <Font name="System Italic" size="15.0" />
