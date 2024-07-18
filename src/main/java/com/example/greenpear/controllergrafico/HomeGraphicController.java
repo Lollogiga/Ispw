@@ -3,7 +3,8 @@ package com.example.greenpear.controllergrafico;
 import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.RequestBean;
-import com.example.greenpear.controllerapplicativo.HomeController;
+import com.example.greenpear.controllerapplicativo.DietitianInformationController;
+import com.example.greenpear.controllerapplicativo.ReadDietController;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.exception.LoadSceneException;
 import com.example.greenpear.utils.Printer;
@@ -50,21 +51,23 @@ public class HomeGraphicController extends GraphicControllerObserverGeneric{
 
     private ObservableList<RequestBean> observableList;
 
-    private HomeController homeController;
+    private ReadDietController readDietController;
+
+    private DietitianInformationController dietitianInformationController;
+
     private DietitianBean dietitianBean;
 
     @FXML
     public void initialize(LoginBean userBean) {
         //Gestiamo la view dell
         this.userBean = userBean;
-        homeController = new HomeController();
-
-
         if(userBean.getRole() == Role.PATIENT){
             //Divento un observer:
             this.dietPublisher.attach(this);
+            this.readDietController = new ReadDietController();
             initializePatient();
         }else{
+            this.dietitianInformationController = new DietitianInformationController();
             initializeDietitian();
         }
         
@@ -75,7 +78,7 @@ public class HomeGraphicController extends GraphicControllerObserverGeneric{
         textFieldName.setText(userBean.getUsername());
         //Ora, dobbiamo recuperare le informazioni relative al paziente riguardante il profilo:
         try {
-            dietitianBean = homeController.restoreDietitianInfo(userBean);
+            dietitianBean = dietitianInformationController.restoreDietitianInfo(userBean);
             if(dietitianBean != null){
                 textAreaEducational.setText(dietitianBean.getPersonalEducation());
                 textAreaWork.setText(dietitianBean.getWorkExperience());
@@ -114,7 +117,7 @@ public class HomeGraphicController extends GraphicControllerObserverGeneric{
                 priceNumber = 0;
             }
             dietitianBean = new DietitianBean(userBean.getUsername(), priceNumber, available, educational, work);
-            homeController.storeDietitianInfo(dietitianBean);
+            dietitianInformationController.storeDietitianInfo(dietitianBean);
             Printer.printGraphic(errorLabel, "Saved");
         }catch (InformationErrorException | NumberFormatException | CredentialException e){
             Printer.printGraphicError(errorLabel, e.getMessage());
@@ -178,7 +181,7 @@ public class HomeGraphicController extends GraphicControllerObserverGeneric{
 
     private void getRequest() {
         try {
-            List<RequestBean> requests = homeController.getRequest(userBean);
+            List<RequestBean> requests = readDietController.getRequest(userBean);
             observableList = FXCollections.observableArrayList(requests);
             tableViewRequestDiet.setItems(observableList);
         } catch (SQLException e) {
@@ -189,7 +192,7 @@ public class HomeGraphicController extends GraphicControllerObserverGeneric{
 
     @Override
     public void update() {
-        RequestBean requestBean = homeController.manageUpdate(this.userBean);
+        RequestBean requestBean = readDietController.manageUpdate(this.userBean);
         if(requestBean.getRequestStatus().equals("Request Manage")){
             initialize(userBean);
         }

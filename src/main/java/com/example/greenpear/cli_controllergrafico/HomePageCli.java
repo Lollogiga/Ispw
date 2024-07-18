@@ -4,7 +4,8 @@ import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.bean.FoodBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.RequestBean;
-import com.example.greenpear.controllerapplicativo.HomeController;
+import com.example.greenpear.controllerapplicativo.DietitianInformationController;
+import com.example.greenpear.controllerapplicativo.ReadDietController;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
 import com.example.greenpear.utils.Role;
@@ -17,16 +18,18 @@ import java.util.Scanner;
 
 public class HomePageCli extends GenericCli{
     private LoginBean userBean;
-    private HomeController homeController;
+    private ReadDietController readDietController;
+    private DietitianInformationController dietitianInformationController;
 
     public void start(LoginBean loginBean) {
-        homeController = new HomeController();
         //Settiamo l'utente
         this.userBean = loginBean;
         //A seconda del ruolo lanciamo due starter:
         if(userBean.getRole().equals(Role.DIETITIAN)) {
+            dietitianInformationController = new DietitianInformationController();
             startDietitian();
         }else{
+            readDietController = new ReadDietController();
             startPatient();
         }
         
@@ -102,7 +105,7 @@ public class HomePageCli extends GenericCli{
     private void printRequest() {
         try {
             Scanner scanner = new Scanner(System.in);
-            List<RequestBean> requestBeanList = homeController.getRequest(userBean);
+            List<RequestBean> requestBeanList = readDietController.getRequest(userBean);
             Printer.print("\n -------- REQUEST LIST --------\n");
 
             // Definisci il formato per la stampa
@@ -143,7 +146,7 @@ public class HomePageCli extends GenericCli{
 
     private void printDiet(RequestBean selectedRequest) throws SQLException, InformationErrorException {
         Printer.print("\n -------- DIET --------\n");
-        List<FoodBean> foodBeans = homeController.restoreDiet(selectedRequest);
+        List<FoodBean> foodBeans = readDietController.restoreDiet(selectedRequest);
         List<String> listBreakfast = new ArrayList<>();
         List<String> listLaunch = new ArrayList<>();
         List<String> listDinner = new ArrayList<>();
@@ -188,7 +191,7 @@ public class HomePageCli extends GenericCli{
 
     private void printPersonalInformation() {
         try {
-            DietitianBean dietitianBean = homeController.restoreDietitianInfo(userBean);
+            DietitianBean dietitianBean = dietitianInformationController.restoreDietitianInfo(userBean);
             if(dietitianBean != null){
                 Printer.print("Education and training: " + dietitianBean.getPersonalEducation());
                 Printer.print("Work experience: " + dietitianBean.getWorkExperience());
@@ -237,7 +240,7 @@ public class HomePageCli extends GenericCli{
                     }
                 }
                 DietitianBean dietitianBean = new DietitianBean(userBean.getUsername(), price, available, education, workExperience);
-                homeController.storeDietitianInfo(dietitianBean);
+                dietitianInformationController.storeDietitianInfo(dietitianBean);
                 Printer.print("\n -------- STORED --------\n");
 
             } catch (SQLException | InformationErrorException | CredentialException e) {

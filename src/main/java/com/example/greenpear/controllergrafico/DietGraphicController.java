@@ -3,7 +3,7 @@ package com.example.greenpear.controllergrafico;
 import com.example.greenpear.bean.FoodBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.RequestBean;
-import com.example.greenpear.controllerapplicativo.HomeController;
+import com.example.greenpear.controllerapplicativo.ReadDietController;
 import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.utils.Printer;
 import javafx.collections.FXCollections;
@@ -32,14 +32,14 @@ public class DietGraphicController extends GraphicControllerGeneric{
         List<FoodBean> foodBeanList;
 
         //Devo andare a prendere tutte le informazioni sulla dieta creata:
-        HomeController homeController = new HomeController();
+        ReadDietController readDietController = new ReadDietController();
         ObservableList<String> listFoodBreakfast = FXCollections.observableArrayList();
         ObservableList<String> listFoodLaunch = FXCollections.observableArrayList();
         ObservableList<String> listFoodDinner = FXCollections.observableArrayList();
         ObservableList<String> listFoodSnack = FXCollections.observableArrayList();
         Printer.print("Request Id: " + requestBean.getRequestId());
         try {
-            foodBeanList = homeController.restoreDiet(requestBean);
+            foodBeanList = readDietController.restoreDiet(requestBean);
             for (FoodBean foodBean : foodBeanList) {
                 switch(foodBean.getMeal()){
                     case "Breakfast":

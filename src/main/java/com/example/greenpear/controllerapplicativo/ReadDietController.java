@@ -1,10 +1,8 @@
 package com.example.greenpear.controllerapplicativo;
 
-import com.example.greenpear.bean.DietitianBean;
 import com.example.greenpear.bean.FoodBean;
 import com.example.greenpear.bean.LoginBean;
 import com.example.greenpear.bean.RequestBean;
-import com.example.greenpear.dao.DietitianDao;
 import com.example.greenpear.dao.MealDao;
 import com.example.greenpear.dao.RequestDao;
 import com.example.greenpear.entities.*;
@@ -12,13 +10,12 @@ import com.example.greenpear.exception.InformationErrorException;
 import com.example.greenpear.observer.DietPublisher;
 import com.example.greenpear.utils.Printer;
 
-import javax.security.auth.login.CredentialException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class HomeController {
+public class ReadDietController {
 
     public List<RequestBean> getRequest(LoginBean userBean) throws SQLException {
         //Dobbiamo verificare se ci sono richieste legate all'utente, in caso affermativo andiamo a ritornare un vettore di entity che contiene tutti gli id relativi:
@@ -45,7 +42,7 @@ public class HomeController {
         }
     }
 
-    public DietitianBean restoreDietitianInfo(LoginBean userBean) throws SQLException, InformationErrorException, CredentialException {
+    /*public DietitianBean restoreDietitianInfo(LoginBean userBean) throws SQLException, InformationErrorException, CredentialException {
         UserProfile currentUser = new UserProfile(userBean.getUsername());
         Dietitian dietitian = new Dietitian();
         DietitianBean dietitianBean;
@@ -78,7 +75,7 @@ public class HomeController {
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
-    }
+    }*/
 
     public RequestBean manageUpdate(LoginBean userBean) {
         DietPublisher dietPublisher = DietPublisher.getInstance();
