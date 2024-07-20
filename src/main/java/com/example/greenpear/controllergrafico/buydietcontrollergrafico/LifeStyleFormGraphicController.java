@@ -20,7 +20,7 @@ public class LifeStyleFormGraphicController extends GraphicControllerGeneric {
 
     //Lifestyle
     ObservableList<String> sportList = FXCollections.
-            observableArrayList("No sport", "Walking", "Cycling", "Yoga", "Jogging", "Gym", "Swimming", "Pilates");
+            observableArrayList("No sport", "Walking", "Cycling", "Yoga", "Jogging", "Basket", "Gym", "Swimming", "Pilates");
     ObservableList<String> trainingFrequency = FXCollections.observableArrayList();
 
     ObservableList<String> healthGoalList = FXCollections.
